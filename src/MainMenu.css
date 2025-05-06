@@ -1,0 +1,15 @@
+.mainMenu-header {
+  background-color: #e5ccff;
+  color: black;
+  font: bolder;
+  font-size: 48px;
+}
+
+.generate-btn {
+  /* color: rgb(177, 239, 180); */
+  /* background-color: rgb(66, 66, 66); */
+  font-size: 24px;
+  border-radius: 12px;
+  position: relative;
+  left: -300px;
+}
