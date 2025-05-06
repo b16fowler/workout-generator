@@ -1,16 +1,33 @@
 import GenerateWorkout from "./GenerateWorkout";
+import AddExercise from "./AddExercise";
+import ViewExercises from "./ViewExercises";
 import "./MainMenu.css";
 
 export default function MainMenu() {
   return (
     <>
       <div className="mainMenu-header">
-        <h>MainMenu component of the Workout Generator app</h>
+        <h3>MainMenu component of the Workout Generator app</h3>
       </div>
-      <br />
-      <br />
-      <div className="generate-btn">
-        <GenerateWorkout />
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div className="mainMenu-btn">
+          <GenerateWorkout />
+        </div>
+        <br />
+        <br />
+        <div className="mainMenu-btn">
+          <AddExercise />
+        </div>
+        <br />
+        <br />
+        <div className="mainMenu-btn">
+          <ViewExercises />
+        </div>
       </div>
     </>
   );
