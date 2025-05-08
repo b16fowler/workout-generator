@@ -1,7 +1,5 @@
-import GenerateWorkout from "./GenerateWorkout";
-import AddExercise from "./AddExercise";
-import ViewExercises from "./ViewExercises";
 import "./MainMenu.css";
+import { Link } from "react-router-dom";
 
 export default function MainMenu() {
   return (
@@ -10,24 +8,13 @@ export default function MainMenu() {
         <h3>MainMenu component of the Workout Generator app</h3>
       </div>
       <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div className="mainMenu-btn">
-          <GenerateWorkout />
-        </div>
-        <br />
-        <br />
-        <div className="mainMenu-btn">
-          <AddExercise />
-        </div>
-        <br />
-        <br />
-        <div className="mainMenu-btn">
-          <ViewExercises />
-        </div>
+        <Link to="/generate-workout">Generate workout</Link>
+      </div>
+      <div>
+        <Link to="/add-exercise">Add exercise</Link>
+      </div>
+      <div>
+        <Link to="/view-exercises">View exercises</Link>
       </div>
     </>
   );
