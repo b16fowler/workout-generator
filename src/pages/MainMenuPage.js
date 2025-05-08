@@ -8,13 +8,13 @@ export default function MainMenu() {
         <h3>MainMenu component of the Workout Generator app</h3>
       </div>
       <div>
-        <Link to="/generate-workout">Generate workout</Link>
+        <Link to="/generate-workout">Generate workout link</Link>
       </div>
       <div>
-        <Link to="/add-exercise">Add exercise</Link>
+        <Link to="/add-exercise">Add exercise link</Link>
       </div>
       <div>
-        <Link to="/view-exercises">View exercises</Link>
+        <Link to="/view-exercises">View exercises link</Link>
       </div>
     </>
   );
