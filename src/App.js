@@ -1,16 +1,16 @@
-import MainMenu from "./MainMenu";
+import MainMenuPage from "./pages/MainMenuPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./App.css";
-import GenerateWorkoutPage from "./GenerateWorkoutPage";
-import ViewExercisesPage from "./ViewExercisesPage";
-import AddExercisePage from "./AddExercisePage";
-import NotFoundPage from "./NotFoundPage";
+import GenerateWorkoutPage from "./pages/GenerateWorkoutPage";
+import ViewExercisesPage from "./pages/ViewExercisesPage";
+import AddExercisePage from "./pages/AddExercisePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainMenu />,
+    element: <MainMenuPage />,
     errorElement: <NotFoundPage />,
   },
   {
