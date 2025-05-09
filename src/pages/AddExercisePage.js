@@ -9,6 +9,7 @@
  **************************************************************************/
 
 import { userExercises } from "../App";
+import ReturnHome from "../ReturnHome";
 
 export default function AddExercise(props) {
   return (
@@ -70,6 +71,7 @@ export default function AddExercise(props) {
           <strong>*</strong> indicates required field
         </p>
       </form>
+      <ReturnHome />
     </>
   );
 }

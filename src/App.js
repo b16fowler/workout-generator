@@ -52,7 +52,7 @@ const userExercises = [
   },
 ];
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <RouterProvider router={router} />
@@ -60,5 +60,4 @@ function App() {
   );
 }
 
-export default App;
 export { userExercises };

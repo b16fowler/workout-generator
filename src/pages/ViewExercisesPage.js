@@ -1,4 +1,5 @@
 import ExerciseChart from "../ExerciseTable";
+import ReturnHome from "../ReturnHome";
 
 export default function ViewExercises() {
   return (
@@ -9,6 +10,7 @@ export default function ViewExercises() {
       <br />
       <br />
       <ExerciseChart />
+      <ReturnHome />
     </div>
   );
 }
