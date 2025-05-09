@@ -27,6 +27,31 @@ const router = createBrowserRouter([
   },
 ]);
 
+// Hardcoding test data
+const userExercises = [
+  {
+    name: "Push-ups",
+    type: "Arms",
+    reps: 10,
+    sets: 3,
+    pic: "",
+  },
+  {
+    name: "Sit-ups",
+    type: "Core",
+    reps: 20,
+    sets: 5,
+    pic: "",
+  },
+  {
+    name: "Squats",
+    type: "Legs",
+    reps: 15,
+    sets: 3,
+    pic: "",
+  },
+];
+
 function App() {
   return (
     <div className="App">
@@ -36,3 +61,4 @@ function App() {
 }
 
 export default App;
+export { userExercises };

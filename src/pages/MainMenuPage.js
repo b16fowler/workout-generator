@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function MainMenu() {
   return (
     <>
-      <div className="mainMenu-header">
+      <div className="main-menu-header">
         <h3>MainMenu component of the Workout Generator app</h3>
       </div>
       <div>
