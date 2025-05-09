@@ -1,4 +1,4 @@
-import "../MainMenuPage.css";
+import "../../MainMenuPage.css";
 import { Link } from "react-router-dom";
 
 export default function MainMenu() {
@@ -9,12 +9,18 @@ export default function MainMenu() {
       </div>
       <div>
         <Link to="/generate-workout">Generate workout link</Link>
+        <br />
+        <br />
       </div>
       <div>
         <Link to="/add-exercise">Add exercise link</Link>
+        <br />
+        <br />
       </div>
       <div>
         <Link to="/view-exercises">View exercises link</Link>
+        <br />
+        <br />
       </div>
     </>
   );
