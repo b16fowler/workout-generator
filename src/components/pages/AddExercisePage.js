@@ -87,17 +87,6 @@ function handleSubmit(e) {
   let setsInput = document.querySelector("#exercise-sets").value;
   let picInput = document.querySelector("#exercise-pic").value;
 
-  const currentInput = {
-    name: nameInput,
-    type: typeInput,
-    reps: repsInput,
-    sets: setsInput,
-    pic: picInput,
-  };
-
-  // Push input onto master list
-  userExercises.push(currentInput);
-
   // Check for empty mandatory fields
   if (!nameInput || typeInput === "Please select" || !repsInput || !setsInput) {
     alert("Invalid user inputs found. Please try again");
@@ -110,7 +99,16 @@ function handleSubmit(e) {
   } else {
     // All fields valid, reset form and inform user
     document.getElementById("add-exercise-form").reset();
+    alert("New exercise logged successfully");
   }
 
-  console.log(userExercises);
+  const currentInput = {
+    name: nameInput,
+    type: typeInput,
+    reps: repsInput,
+    sets: setsInput,
+    pic: picInput,
+  };
+  // Push input onto master list
+  userExercises.push(currentInput);
 }
