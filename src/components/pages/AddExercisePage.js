@@ -68,7 +68,7 @@ export default function AddExercise(props) {
         <br />
         <br />
         <p>
-          <strong>*</strong> indicates required field
+          <strong>*</strong> Indicates required field
         </p>
       </form>
       <ReturnHome />

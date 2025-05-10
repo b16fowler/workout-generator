@@ -49,6 +49,13 @@ const userExercises = [
     sets: 3,
     pic: "",
   },
+  {
+    name: "Back Extensions",
+    type: "Back",
+    reps: 25,
+    sets: 3,
+    pic: "",
+  },
 ];
 
 export default function App() {
