@@ -1,11 +1,6 @@
 /**************************************************************************
  * AddExercisePage component contains a form that allows user to add a new
  * exercise to their pool.
- *
- * TODO:
- * Use mins/maxs from input field to limit hard-coding
- * Add snackbar for better user alerts
- * Implement API/DB to store user info
  **************************************************************************/
 
 import { userExercises } from "../App";

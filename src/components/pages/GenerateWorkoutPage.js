@@ -1,7 +1,5 @@
 /**************************************************************************
- * TODO:
- * Fix 'value prop' error on form render
- * Fix
+ * GenerateWorkoutPage component
  **************************************************************************/
 
 import ReturnHome from "../ReturnHome";

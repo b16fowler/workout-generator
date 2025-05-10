@@ -1,6 +1,5 @@
 /**************************************************************************
- * TODO:
- * Fix 'unique key prop' error during table render
+ * ExerciseTable component
  **************************************************************************/
 import { userExercises } from "./App";
 import "../css/ExerciseTable.css";

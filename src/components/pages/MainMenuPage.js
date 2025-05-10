@@ -1,6 +1,5 @@
 /**************************************************************************
- * TODO:
- * Change router links to buttons
+ * MainMenuPage component
  **************************************************************************/
 import "../../MainMenuPage.css";
 import { Link } from "react-router-dom";

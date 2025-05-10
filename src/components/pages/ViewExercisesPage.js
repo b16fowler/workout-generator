@@ -1,3 +1,7 @@
+/**************************************************************************
+ * ViewExercisesPage component
+ **************************************************************************/
+
 import ExerciseChart from "../ExerciseTable";
 import ReturnHome from "../ReturnHome";
 

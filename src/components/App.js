@@ -1,3 +1,21 @@
+/**************************************************************************
+ * TODO:
+ *
+ * AddExercisePage
+ * Use mins/maxs from input field to limit hard-coding
+ * Add snackbar for better user alerts
+ * Implement API/DB to store user info
+ *
+ * MainMenuPage
+ * Change router links to buttons
+ *
+ * ExerciseTable
+ * Fix 'unique key prop' error during table render
+ *
+ * MainMenuPage
+ * Change router links to buttons
+ **************************************************************************/
+
 import "../css/App.css";
 import MainMenuPage from "./pages/MainMenuPage";
 import GenerateWorkoutPage from "./pages/GenerateWorkoutPage";
