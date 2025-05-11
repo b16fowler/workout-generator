@@ -46,7 +46,7 @@ function handleSubmit(e) {
   // Prevent page of reloading on submission
   e.preventDefault();
 
-  // Pull form values
+  // Pull boolean form values
   const formValues = {
     arms: document.querySelector("#arms").checked,
     back: document.querySelector("#back").checked,
@@ -67,8 +67,12 @@ function handleSubmit(e) {
 }
 
 function displayWorkout(workout) {
+  // Hide rest of page to display image
+  const form = document.querySelector("#add-exercise-form");
+  form.setAttribute("hidden", "true");
+
   workout.forEach((exer) => {
-    showImage(exer.pic, 300, 200, exer.name);
+    showImage(exer.pic, 800, 500, exer.name);
   });
 }
 

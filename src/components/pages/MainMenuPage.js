@@ -1,7 +1,7 @@
 /**************************************************************************
  * MainMenuPage component
  **************************************************************************/
-import "../../MainMenuPage.css";
+import "../../css/MainMenuPage.css";
 import { Link } from "react-router-dom";
 
 export default function MainMenu() {

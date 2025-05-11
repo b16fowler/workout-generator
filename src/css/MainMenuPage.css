@@ -1,0 +1,15 @@
+.main-menu-header {
+  background-color: #f2ffcc;
+  color: black;
+  font: bolder;
+  font-size: 48px;
+}
+
+body {
+  background-color: #0097ca;
+}
+
+img {
+  position: relative;
+  left: 613px;
+}

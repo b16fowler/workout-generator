@@ -2,7 +2,6 @@
  * ExerciseTable component
  **************************************************************************/
 import { userExercises } from "./App";
-import "../css/ExerciseTable.css";
 
 export default function ExerciseTable() {
   return userExercises.map((exercise, index) => {
