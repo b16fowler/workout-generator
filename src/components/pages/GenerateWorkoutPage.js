@@ -41,7 +41,7 @@ export default function GenerateWorkout() {
 }
 
 // handleSubmit called when form submitted
-// workout array will contain all exercises based on which types were checked
+// workout will contain all exercises based on which types were checked
 function handleSubmit(e) {
   // Prevent page of reloading on submission
   e.preventDefault();
@@ -62,5 +62,22 @@ function handleSubmit(e) {
     // Return current exercise if type was checked
     return formValues[type];
   });
-  console.log(workout);
+
+  displayWorkout(workout);
+}
+
+function displayWorkout(workout) {
+  workout.forEach((exer) => {
+    showImage(exer.pic, 300, 200, exer.name);
+  });
+}
+
+function showImage(src, width, height, alt) {
+  let img = document.createElement("img");
+  img.src = src;
+  img.width = width;
+  img.height = height;
+  img.alt = alt;
+
+  document.body.appendChild(img);
 }

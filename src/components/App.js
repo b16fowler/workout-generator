@@ -1,10 +1,13 @@
 /**************************************************************************
- * TODO:
+ * App component
+ *
+ * Master TODO list:
  *
  * AddExercisePage
  * Use mins/maxs from input field to limit hard-coding
  * Add snackbar for better user alerts
  * Implement API/DB to store user info
+ *
  *
  * MainMenuPage
  * Change router links to buttons
@@ -44,35 +47,35 @@ const router = createBrowserRouter([
   },
 ]);
 
-// Hardcoding test data
+// Hardcoded test data
 const userExercises = [
   {
     name: "Push-ups",
     type: "Arms",
     reps: 10,
     sets: 3,
-    pic: "",
+    pic: "https://www.fitnesseducation.edu.au/wp-content/uploads/2020/10/Pushups.jpg",
   },
   {
     name: "Sit-ups",
     type: "Core",
     reps: 20,
     sets: 5,
-    pic: "",
+    pic: "https://samarpanphysioclinic.com/wp-content/uploads/2022/03/Partial-sits-up-1200x675.jpg",
   },
   {
     name: "Squats",
     type: "Legs",
     reps: 15,
     sets: 3,
-    pic: "",
+    pic: "https://hips.hearstapps.com/hmg-prod/images/goblet-squat-1662030233.jpg",
   },
   {
     name: "Back Extensions",
     type: "Back",
     reps: 25,
     sets: 3,
-    pic: "",
+    pic: "https://www.inspireusafoundation.org/wp-content/uploads/2022/05/back-extension-benefits.jpg",
   },
 ];
 
