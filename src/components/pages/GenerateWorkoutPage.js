@@ -11,7 +11,7 @@ export default function GenerateWorkout() {
       <h1 className="main-menu-header">GenerateWorkoutPage component</h1>
       <br />
       <h3 id="generate-page">
-        Select all exercise types to be included in workout
+        Select all target muscles to be included in workout
       </h3>
       <form id="generate-page" onSubmit={handleSubmit}>
         <input type="checkbox" id="arms" name="arms" />
@@ -73,33 +73,43 @@ function handleSubmit(e) {
 function displayWorkout(workout) {
   // Hide rest of page to display image
   const toHide = document.querySelectorAll("#generate-page");
-  toHide.forEach((item) => {
-    item.setAttribute("hidden", "true");
+  toHide.forEach((exer) => {
+    exer.setAttribute("hidden", "true");
   });
 
   workout.forEach((exer, index) => {
-    showImage(exer.pic, 800, 500, exer.name, index);
+    showExercise(exer, index, 800, 500);
   });
 }
 
-function showImage(src, width, height, alt, index) {
+function showExercise(exer, index, width, height) {
+  // Create div to hold elements to be displayed
+  let div = document.createElement("div");
+  div.className = "displayed-exercise";
+
+  // Create image element
   let img = document.createElement("img");
-  img.src = src;
+  img.src = exer.pic;
   img.width = width;
   img.height = height;
-  img.alt = alt;
-  img.className = "center";
-
+  img.alt = exer.name;
   // Show first image, hide rest
   img.style.display = "none";
   if (index === 0) {
     img.style.display = "block";
   }
 
+  // Create exercise number label
   let execNum = document.createElement("h2");
   execNum.innerText = `Exercise #${index + 1}`;
-  execNum.className = "center";
 
-  document.body.appendChild(execNum);
-  document.body.appendChild(img);
+  // Create reps/sets/label
+  let execInfo = document.createElement("h4");
+  execInfo.innerText = `${exer.reps} reps for ${exer.sets} sets`;
+
+  // Add newly created elements to div
+  div.appendChild(execNum);
+  div.appendChild(img);
+  div.appendChild(execInfo);
+  document.body.appendChild(div);
 }

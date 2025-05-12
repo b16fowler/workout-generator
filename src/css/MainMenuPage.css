@@ -13,9 +13,8 @@ img {
   position: relative;
 }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.displayed-exercise {
+  display: grid;
+  place-items: center;
+  height: 1vh;
 }
