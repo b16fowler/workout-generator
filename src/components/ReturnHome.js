@@ -11,7 +11,9 @@ export default function ReturnHome() {
       <br />
       <br />
       <br />
-      <Link to="/">Return to homepage</Link>
+      <Link to="/" id="generate-page">
+        Return to homepage
+      </Link>
     </>
   );
 }

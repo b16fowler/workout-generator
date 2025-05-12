@@ -10,8 +10,10 @@ export default function GenerateWorkout() {
     <>
       <h1 className="main-menu-header">GenerateWorkoutPage component</h1>
       <br />
-      <h3>Select all exercise types to be included in workout</h3>
-      <form id="add-exercise-form" onSubmit={handleSubmit}>
+      <h3 id="generate-page">
+        Select all exercise types to be included in workout
+      </h3>
+      <form id="generate-page" onSubmit={handleSubmit}>
         <input type="checkbox" id="arms" name="arms" />
         <label htmlFor="arms">Arms </label>
         <input type="checkbox" id="back" name="back" />
@@ -33,7 +35,9 @@ export default function GenerateWorkout() {
         <input type="Submit" value="Generate workout" onChange={handleSubmit} />
         <br />
         <br />
-        <h4>To select all types, select none (feature coming soon!)</h4>
+        <h4 id="generate-page">
+          To select all types, select none (feature coming soon!)
+        </h4>
       </form>
       <ReturnHome />
     </>
@@ -68,20 +72,34 @@ function handleSubmit(e) {
 
 function displayWorkout(workout) {
   // Hide rest of page to display image
-  const form = document.querySelector("#add-exercise-form");
-  form.setAttribute("hidden", "true");
+  const toHide = document.querySelectorAll("#generate-page");
+  toHide.forEach((item) => {
+    item.setAttribute("hidden", "true");
+  });
 
-  workout.forEach((exer) => {
-    showImage(exer.pic, 800, 500, exer.name);
+  workout.forEach((exer, index) => {
+    showImage(exer.pic, 800, 500, exer.name, index);
   });
 }
 
-function showImage(src, width, height, alt) {
+function showImage(src, width, height, alt, index) {
   let img = document.createElement("img");
   img.src = src;
   img.width = width;
   img.height = height;
   img.alt = alt;
+  img.className = "center";
 
+  // Show first image, hide rest
+  img.style.display = "none";
+  if (index === 0) {
+    img.style.display = "block";
+  }
+
+  let execNum = document.createElement("h2");
+  execNum.innerText = `Exercise #${index + 1}`;
+  execNum.className = "center";
+
+  document.body.appendChild(execNum);
   document.body.appendChild(img);
 }
