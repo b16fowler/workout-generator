@@ -16,5 +16,23 @@ img {
 .displayed-exercise {
   display: grid;
   place-items: center;
-  height: 1vh;
+  height: 10vh;
+}
+
+.hidden-exercise {
+  display: none;
+}
+
+.next-button {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  right: 125px;
+}
+
+.previous-button {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 125px;
 }

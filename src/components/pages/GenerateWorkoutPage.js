@@ -28,16 +28,14 @@ export default function GenerateWorkout() {
         <input
           type="number"
           id="numExercises"
-          placeholder="Leave blank for all"
+          placeholder="Check none for all types"
         ></input>
         <br />
         <br />
         <input type="Submit" value="Generate workout" onChange={handleSubmit} />
         <br />
         <br />
-        <h4 id="generate-page">
-          To select all types, select none (feature coming soon!)
-        </h4>
+        <h4 id="generate-page">To select all types, select none</h4>
       </form>
       <ReturnHome />
     </>
@@ -51,7 +49,7 @@ function handleSubmit(e) {
   e.preventDefault();
 
   // Pull boolean form values
-  const formValues = {
+  let formValues = {
     arms: document.querySelector("#arms").checked,
     back: document.querySelector("#back").checked,
     legs: document.querySelector("#legs").checked,
@@ -59,12 +57,20 @@ function handleSubmit(e) {
     num: document.querySelector("#numExercises").value,
   };
 
-  const workout = userExercises.filter((exercise) => {
-    // Save type
-    let type = exercise.type.toLowerCase();
+  // If all checkboxes left blank, select all
+  const noneChecked = Object.values(formValues).every((value) => !value);
+  if (noneChecked) {
+    formValues = {
+      arms: true,
+      back: true,
+      legs: true,
+      core: true,
+    };
+  }
 
-    // Return current exercise if type was checked
-    return formValues[type];
+  const workout = userExercises.filter((exercise) => {
+    // Add exercise if type was checked
+    return formValues[exercise.type.toLowerCase()];
   });
 
   displayWorkout(workout);
@@ -83,9 +89,17 @@ function displayWorkout(workout) {
 }
 
 function showExercise(exer, index, width, height) {
+  ///////////////////////////////////
+  // TODO: Refactor this nightmare //
+  ///////////////////////////////////
+
   // Create div to hold elements to be displayed
   let div = document.createElement("div");
-  div.className = "displayed-exercise";
+  div.className = "hidden-exercise";
+  // Show div only if first index
+  if (index === 0) {
+    div.className = "displayed-exercise";
+  }
 
   // Create image element
   let img = document.createElement("img");
@@ -93,23 +107,31 @@ function showExercise(exer, index, width, height) {
   img.width = width;
   img.height = height;
   img.alt = exer.name;
-  // Show first image, hide rest
-  img.style.display = "none";
-  if (index === 0) {
-    img.style.display = "block";
-  }
+  img.style.display = "block";
 
   // Create exercise number label
-  let execNum = document.createElement("h2");
-  execNum.innerText = `Exercise #${index + 1}`;
+  let execNum = document.createElement("h1");
+  execNum.innerText = `Exercise #${index + 1}: ${exer.name}`;
 
   // Create reps/sets/label
-  let execInfo = document.createElement("h4");
+  let execInfo = document.createElement("h1");
   execInfo.innerText = `${exer.reps} reps for ${exer.sets} sets`;
+
+  // Create 'next exercise' button
+  let nextButton = document.createElement("button");
+  nextButton.className = "next-button";
+  nextButton.textContent = "Next exercise ->";
+
+  // Create 'next exercise' button
+  let previousButton = document.createElement("button");
+  previousButton.className = "previous-button";
+  previousButton.textContent = "<- Previous exercise";
 
   // Add newly created elements to div
   div.appendChild(execNum);
   div.appendChild(img);
   div.appendChild(execInfo);
+  div.appendChild(nextButton);
+  div.appendChild(previousButton);
   document.body.appendChild(div);
 }
