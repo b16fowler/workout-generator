@@ -3,7 +3,9 @@
  **************************************************************************/
 
 import ReturnHome from "../ReturnHome";
+import Workout from "../Workout";
 import { userExercises } from "../App";
+import { root } from "../../index.js";
 
 export default function GenerateWorkout() {
   return (
@@ -28,7 +30,7 @@ export default function GenerateWorkout() {
         <input
           type="number"
           id="numExercises"
-          placeholder="Check none for all types"
+          placeholder="Leave blank for all"
         ></input>
         <br />
         <br />
@@ -45,6 +47,8 @@ export default function GenerateWorkout() {
 // handleSubmit called when form submitted
 // workout will contain all exercises based on which types were checked
 function handleSubmit(e) {
+  // TODO: import FormData ?
+
   // Prevent page of reloading on submission
   e.preventDefault();
 
@@ -77,61 +81,52 @@ function handleSubmit(e) {
 }
 
 function displayWorkout(workout) {
-  // Hide rest of page to display image
+  // Hide rest of page to display image(s)
   const toHide = document.querySelectorAll("#generate-page");
-  toHide.forEach((exer) => {
-    exer.setAttribute("hidden", "true");
+  toHide.forEach((exercise) => {
+    exercise.setAttribute("hidden", "true");
   });
 
-  workout.forEach((exer, index) => {
-    showExercise(exer, index, 800, 500);
-  });
+  root.render(<Workout workout={workout} />);
+
+  // workout.forEach((exer, index) => {
+  //   // Create HTML element for each exercise in workout
+  //   showExercise(exer, index, 800, 500);
+  // });
 }
 
-function showExercise(exer, index, width, height) {
-  ///////////////////////////////////
-  // TODO: Refactor this nightmare //
-  ///////////////////////////////////
+// function showExercise(exer, index, width, height) {
+//   // Create div to hold elements to be displayed
+//   let div = document.createElement("div");
+//   div.className = "hidden-exercise";
+//   div.id = index;
+//   // Show div only if first index
+//   if (index === 0) {
+//     div.className = "displayed-exercise";
+//   }
 
-  // Create div to hold elements to be displayed
-  let div = document.createElement("div");
-  div.className = "hidden-exercise";
-  // Show div only if first index
-  if (index === 0) {
-    div.className = "displayed-exercise";
-  }
+//   // Create image element
+//   let img = document.createElement("img");
+//   img.src = exer.pic;
+//   img.width = width;
+//   img.height = height;
+//   img.alt = exer.name;
+//   img.style.display = "block";
 
-  // Create image element
-  let img = document.createElement("img");
-  img.src = exer.pic;
-  img.width = width;
-  img.height = height;
-  img.alt = exer.name;
-  img.style.display = "block";
+//   // Create exercise number label
+//   let execNum = document.createElement("h1");
+//   execNum.innerText = `Exercise #${index + 1}: ${exer.name}`;
 
-  // Create exercise number label
-  let execNum = document.createElement("h1");
-  execNum.innerText = `Exercise #${index + 1}: ${exer.name}`;
+//   // Create reps/sets/label
+//   let execInfo = document.createElement("h1");
+//   execInfo.innerText = `${exer.reps} reps for ${exer.sets} sets`;
 
-  // Create reps/sets/label
-  let execInfo = document.createElement("h1");
-  execInfo.innerText = `${exer.reps} reps for ${exer.sets} sets`;
+//   // Add newly created elements to div
+//   div.appendChild(execNum);
+//   div.appendChild(img);
+//   div.appendChild(execInfo);
 
-  // Create 'next exercise' button
-  let nextButton = document.createElement("button");
-  nextButton.className = "next-button";
-  nextButton.textContent = "Next exercise ->";
-
-  // Create 'next exercise' button
-  let previousButton = document.createElement("button");
-  previousButton.className = "previous-button";
-  previousButton.textContent = "<- Previous exercise";
-
-  // Add newly created elements to div
-  div.appendChild(execNum);
-  div.appendChild(img);
-  div.appendChild(execInfo);
-  div.appendChild(nextButton);
-  div.appendChild(previousButton);
-  document.body.appendChild(div);
-}
+//   const root = ReactDOM.createRoot(document.getElementById("root"));
+//   root.render(<Workout />);
+//   document.body.appendChild(div);
+// }
