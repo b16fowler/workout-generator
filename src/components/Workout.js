@@ -14,7 +14,7 @@ export default function Workout({ workout }) {
       <PreviousButton index={index} setIndex={setIndex} />
       <NextButton index={index} setIndex={setIndex} length={workout.length} />
       <Exercise workout={workout} index={index} />
-      <FinishButton />
+      <FinishButton index={index} length={workout.length} />
     </>
   );
 }

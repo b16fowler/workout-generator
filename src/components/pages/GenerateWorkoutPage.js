@@ -30,7 +30,7 @@ export default function GenerateWorkout() {
         <input
           type="number"
           id="numExercises"
-          placeholder="Leave blank for all types"
+          placeholder="Leave blank for all"
         ></input>
         <br />
         <br />
@@ -88,45 +88,4 @@ function displayWorkout(workout) {
   });
 
   root.render(<Workout workout={workout} />);
-
-  // workout.forEach((exer, index) => {
-  //   // Create HTML element for each exercise in workout
-  //   showExercise(exer, index, 800, 500);
-  // });
 }
-
-// function showExercise(exer, index, width, height) {
-//   // Create div to hold elements to be displayed
-//   let div = document.createElement("div");
-//   div.className = "hidden-exercise";
-//   div.id = index;
-//   // Show div only if first index
-//   if (index === 0) {
-//     div.className = "displayed-exercise";
-//   }
-
-//   // Create image element
-//   let img = document.createElement("img");
-//   img.src = exer.pic;
-//   img.width = width;
-//   img.height = height;
-//   img.alt = exer.name;
-//   img.style.display = "block";
-
-//   // Create exercise number label
-//   let execNum = document.createElement("h1");
-//   execNum.innerText = `Exercise #${index + 1}: ${exer.name}`;
-
-//   // Create reps/sets/label
-//   let execInfo = document.createElement("h1");
-//   execInfo.innerText = `${exer.reps} reps for ${exer.sets} sets`;
-
-//   // Add newly created elements to div
-//   div.appendChild(execNum);
-//   div.appendChild(img);
-//   div.appendChild(execInfo);
-
-//   const root = ReactDOM.createRoot(document.getElementById("root"));
-//   root.render(<Workout />);
-//   document.body.appendChild(div);
-// }

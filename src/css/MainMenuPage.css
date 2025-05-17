@@ -35,8 +35,9 @@ img {
 }
 
 .finish-button {
-  top: 50%;
-  left: 50%;
+  position: absolute;
+  right: 47%;
+  bottom: 3%;
 }
 
 .exercise-table {
