@@ -61,7 +61,7 @@ const userExercises = [
     type: "Core",
     reps: 20,
     sets: 5,
-    pic: "https://samarpanphysioclinic.com/wp-content/uploads/2022/03/Partial-sits-up-1200x675.jpg",
+    pic: "https://kinxlearning.com/cdn/shop/files/exercise-18_800x.jpg?v=1613154703",
   },
   {
     name: "Squats",

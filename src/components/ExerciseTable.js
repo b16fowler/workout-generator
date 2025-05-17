@@ -6,7 +6,7 @@ import { userExercises } from "./App";
 export default function ExerciseTable() {
   return userExercises.map((exercise, index) => {
     return (
-      <>
+      <div className="exercise-table">
         {index === 0 && (
           <table id="exercise-table-head" className="cell-border">
             <thead>
@@ -15,23 +15,21 @@ export default function ExerciseTable() {
                 <th>Type</th>
                 <th>Reps</th>
                 <th>Sets</th>
-                <th>Pic</th>
               </tr>
             </thead>
           </table>
         )}
-        <table id="exercise-table-body" className="cell-border">
+        <table id="exercise-table" className="cell-border">
           <tbody>
             <tr>
               <td>{exercise.name}</td>
               <td>{exercise.type}</td>
               <td>{exercise.reps}</td>
               <td>{exercise.sets}</td>
-              <td>{exercise.pic}</td>
             </tr>
           </tbody>
         </table>
-      </>
+      </div>
     );
   });
 }

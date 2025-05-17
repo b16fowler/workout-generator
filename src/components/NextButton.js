@@ -1,11 +1,18 @@
-export default function NextButton() {
+export default function NextButton({ index, setIndex, length }) {
   return (
-    <button className="next-button" onClick={nextClick}>
+    <button
+      className="next-button"
+      onClick={handleClick}
+      disabled={index === length - 1 ? true : false}
+    >
       Next exercise
     </button>
   );
-}
 
-function nextClick() {
-  console.log("Next button clicked");
+  function handleClick() {
+    // Remove current image before next one is displayed
+    document.body.removeChild(document.querySelector(".exercise-div"));
+
+    setIndex(index + 1);
+  }
 }

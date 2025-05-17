@@ -30,7 +30,7 @@ export default function GenerateWorkout() {
         <input
           type="number"
           id="numExercises"
-          placeholder="Leave blank for all"
+          placeholder="Leave blank for all types"
         ></input>
         <br />
         <br />

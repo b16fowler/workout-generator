@@ -14,14 +14,10 @@ img {
   position: relative;
 }
 
-.displayed-exercise {
+.exercise-div {
   display: grid;
   place-items: center;
   height: 10vh;
-}
-
-.hidden-exercise {
-  display: none;
 }
 
 .next-button {
@@ -36,4 +32,16 @@ img {
   margin: 0;
   top: 50%;
   left: 125px;
+}
+
+.exercise-table {
+  place-items: center;
+  border: thick solid #f2ffcc;
+  border-collapse: separate;
+  border-spacing: 150px;
+}
+
+.exercise-image {
+  width: 800px;
+  height: 500px;
 }

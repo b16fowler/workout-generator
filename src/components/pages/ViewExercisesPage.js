@@ -2,7 +2,7 @@
  * ViewExercisesPage component
  **************************************************************************/
 
-import ExerciseChart from "../ExerciseTable";
+import ExerciseTable from "../ExerciseTable";
 import ReturnHome from "../ReturnHome";
 
 export default function ViewExercisesPage() {
@@ -12,8 +12,7 @@ export default function ViewExercisesPage() {
       <br />
       <br />
       <br />
-      <br />
-      <ExerciseChart />
+      <ExerciseTable />
       <ReturnHome />
     </div>
   );

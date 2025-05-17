@@ -1,28 +1,18 @@
-export default function Exercises(prop) {
-  // Use map function instead?
-  prop.workout.forEach((exer, index) => {
-    // Create HTML element for each exercise in workout
-    showExercise(exer, index, 800, 500);
-  });
-
-  return;
+export default function Exercise({ workout, index }) {
+  // Create HTML element for current exercise
+  showExercise(workout[index], index);
 }
 
-function showExercise(exercise, index, width, height) {
+function showExercise(exercise, index) {
   // Create div to hold elements to be displayed
   let div = document.createElement("div");
-  div.className = "hidden-exercise";
   div.id = index;
-  // Show div only if first index
-  if (index === 0) {
-    div.className = "displayed-exercise";
-  }
+  div.className = "exercise-div";
 
   // Create image element
   let img = document.createElement("img");
+  img.className = "exercise-image";
   img.src = exercise.pic;
-  img.width = width;
-  img.height = height;
   img.alt = exercise.name;
   img.style.display = "block";
 
