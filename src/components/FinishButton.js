@@ -4,7 +4,7 @@ import App from "./App.js";
 export default function FinishButton({ index, length }) {
   return (
     <button
-      className="next button"
+      className="finish button"
       onClick={handleClick}
       hidden={index === length - 1 ? false : true}
     >
@@ -13,9 +13,6 @@ export default function FinishButton({ index, length }) {
   );
 
   function handleClick() {
-    const disabledButtons = document.querySelector(".previous-button");
-    console.log(disabledButtons);
-
     // Remove exercise photo and render generate workout page
     document.body.removeChild(document.querySelector(".exercise-div"));
     root.render(<App />);
