@@ -43,6 +43,14 @@ img {
   left: 5%;
 }
 
+.finish {
+  background-color: #5cd672;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  right: 5%;
+}
+
 .exercise-table {
   place-items: center;
   border: thick solid #f2ffcc;
