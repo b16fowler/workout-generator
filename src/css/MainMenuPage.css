@@ -20,24 +20,27 @@ img {
   height: 10vh;
 }
 
-.next-button {
+.button {
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  color: black;
+  font-size: x-large;
+  padding: 12px 24px;
+  border-radius: 24px;
+}
+
+.next {
   position: absolute;
   margin: 0;
   top: 50%;
-  right: 125px;
+  right: 5%;
 }
 
-.previous-button {
+.previous {
   position: absolute;
   margin: 0;
   top: 50%;
-  left: 125px;
-}
-
-.finish-button {
-  position: absolute;
-  right: 47%;
-  bottom: 3%;
+  left: 5%;
 }
 
 .exercise-table {
@@ -50,4 +53,5 @@ img {
 .exercise-image {
   width: 800px;
   height: 500px;
+  margin: auto;
 }

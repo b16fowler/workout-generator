@@ -34,7 +34,12 @@ export default function GenerateWorkout() {
         ></input>
         <br />
         <br />
-        <input type="Submit" value="Generate workout" onChange={handleSubmit} />
+        <input
+          className="button"
+          type="Submit"
+          value="Generate workout"
+          onChange={handleSubmit}
+        />
         <br />
         <br />
         <h4 id="generate-page">To select all types, select none</h4>

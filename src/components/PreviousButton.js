@@ -1,7 +1,7 @@
 export default function PreviousButton({ index, setIndex }) {
   return (
     <button
-      className="previous-button"
+      className="previous button"
       onClick={handleClick}
       disabled={index === 0 ? true : false}
     >

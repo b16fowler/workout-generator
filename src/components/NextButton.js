@@ -1,9 +1,9 @@
 export default function NextButton({ index, setIndex, length }) {
   return (
     <button
-      className="next-button"
+      className="next button"
       onClick={handleClick}
-      disabled={index === length - 1 ? true : false}
+      hidden={index === length - 1 ? true : false}
     >
       Next exercise
     </button>

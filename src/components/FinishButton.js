@@ -4,7 +4,7 @@ import App from "./App.js";
 export default function FinishButton({ index, length }) {
   return (
     <button
-      className="finish-button"
+      className="next button"
       onClick={handleClick}
       hidden={index === length - 1 ? false : true}
     >

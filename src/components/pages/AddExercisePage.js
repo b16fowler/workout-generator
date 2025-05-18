@@ -14,7 +14,11 @@ export default function AddExercise(props) {
         <label htmlFor="exercise-name">
           Enter name of exercise<strong>*</strong>:{" "}
         </label>
-        <input id="exercise-name" type="text" placeholder=""></input>
+        <input
+          id="exercise-name"
+          type="text"
+          placeholder="Example: Push ups"
+        ></input>
         <br />
         <br />
         <label htmlFor="exercise-type">
@@ -57,7 +61,8 @@ export default function AddExercise(props) {
         <input id="exercise-pic" type="file"></input>
         <br />
         <br />
-        <input type="submit" value="Add exercise" />
+        <br />
+        <input className="button" type="submit" value="Add exercise" />
         <br />
         <br />
         <br />
