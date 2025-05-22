@@ -9,7 +9,9 @@ import ReturnHome from "../ReturnHome";
 export default function AddExercise(props) {
   return (
     <>
-      <h1 className="main-menu-header">AddExercisePage component</h1>
+      <h1 className="main-menu-header">Add New Exercise</h1>
+      <br />
+      <br />
       <form id="add-exercise-form" onSubmit={handleSubmit}>
         <label htmlFor="exercise-name">
           Enter name of exercise<strong>*</strong>:{" "}

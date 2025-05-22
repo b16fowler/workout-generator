@@ -4,6 +4,8 @@
   color: black;
   font: bolder;
   font-size: 48px;
+  margin: 0%;
+  padding: 0%;
 }
 
 body {
@@ -29,6 +31,16 @@ img {
   border-radius: 24px;
 }
 
+.button:hover {
+  background-color: #d6f281;
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: #f2ffcc;
+  cursor: not-allowed;
+}
+
 .next {
   position: absolute;
   margin: 0;
@@ -49,6 +61,10 @@ img {
   margin: 0;
   top: 50%;
   right: 5%;
+}
+
+.finish:hover {
+  background-color: #14b531;
 }
 
 .exercise-table {

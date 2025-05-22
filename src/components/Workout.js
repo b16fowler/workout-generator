@@ -11,9 +11,9 @@ export default function Workout({ workout }) {
   return (
     <>
       <h1 className="main-menu-header">Workout component</h1>
+      <Exercise workout={workout} index={index} />
       <PreviousButton index={index} setIndex={setIndex} />
       <NextButton index={index} setIndex={setIndex} length={workout.length} />
-      <Exercise workout={workout} index={index} />
       <FinishButton index={index} length={workout.length} />
     </>
   );

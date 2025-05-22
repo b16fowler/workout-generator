@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function ReturnHome() {
   return (
-    <div id="generate-page">
+    <div>
       <br />
       <br />
       <br />
