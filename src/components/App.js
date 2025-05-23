@@ -1,22 +1,16 @@
 /**************************************************************************
  * App component
  *
- * Master TODO list:
+ * Features to create/implement:
  *
- * AddExercisePage
- * Use mins/maxs from input field to limit hard-coding
- * Add snackbar for better user alerts
- * Implement API/DB to store user info
+ * Create API for user data
+ * Log in page
+ * # of exercises when generating workout
+ * Remove exercise from pool
+ * Edit exercise already in pool
+ * Revisit previous workouts
+ * Save current/previous workout as 'favorite'
  *
- *
- * MainMenuPage
- * Change router links to buttons
- *
- * ExerciseTable
- * Fix 'unique key prop' error during table render
- *
- * MainMenuPage
- * Change router links to buttons
  **************************************************************************/
 
 import "../css/App.css";
