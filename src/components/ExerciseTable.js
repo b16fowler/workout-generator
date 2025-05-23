@@ -2,34 +2,59 @@
  * ExerciseTable component
  **************************************************************************/
 import { userExercises } from "./App";
+import { CompactTable } from "@table-library/react-table-library/compact";
+import { useTheme } from "@table-library/react-table-library/theme";
+import { getTheme } from "@table-library/react-table-library/baseline";
 
 export default function ExerciseTable() {
-  return userExercises.map((exercise, index) => {
-    return (
-      <div className="exercise-table">
-        {index === 0 && (
-          <table id="exercise-table-head" className="cell-border">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Reps</th>
-                <th>Sets</th>
-              </tr>
-            </thead>
-          </table>
-        )}
-        <table id="exercise-table" className="cell-border">
-          <tbody>
-            <tr>
-              <td>{exercise.name}</td>
-              <td>{exercise.type}</td>
-              <td>{exercise.reps}</td>
-              <td>{exercise.sets}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
+  const nodes = [];
+  userExercises.forEach((exercise, index) => {
+    nodes.push({
+      id: index,
+      ...exercise,
+    });
   });
+
+  const COLUMNS = [
+    { label: "Name", renderCell: (item) => item.name },
+    {
+      label: "Type",
+      renderCell: (item) => item.type,
+    },
+    { label: "Reps", renderCell: (item) => item.reps },
+    {
+      label: "Sets",
+      renderCell: (item) => item.sets,
+    },
+    { label: "Picture", renderCell: (item) => item.pic },
+  ];
+
+  const Component = () => {
+    const data = { nodes };
+
+    const theme = useTheme([
+      getTheme(),
+      {
+        HeaderRow: `
+        background-color: #f2ffcc;
+        color:rgb(0, 0, 0);
+      `,
+        Row: `
+        &:nth-of-type(odd) {
+          background-color: #d2e9fb;
+          color:rgb(22, 22, 22);
+        }
+
+        &:nth-of-type(even) {
+          background-color: #eaf5fd;
+          color:rgb(22, 22, 22);
+        }
+      `,
+      },
+    ]);
+
+    return <CompactTable columns={COLUMNS} data={data} theme={theme} />;
+  };
+
+  return <Component />;
 }
