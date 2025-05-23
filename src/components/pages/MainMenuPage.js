@@ -3,13 +3,12 @@
  **************************************************************************/
 import "../../css/MainMenuPage.css";
 import { Link } from "react-router-dom";
+import Header from "../Header";
 
 export default function MainMenu() {
   return (
     <>
-      <div>
-        <h3 className="main-menu-header">Workout Generator App</h3>
-      </div>
+      <Header heading="Workout Generator App" />
       <div>
         <br />
         <br />

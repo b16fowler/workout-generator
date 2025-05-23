@@ -6,11 +6,12 @@ import ReturnHome from "../ReturnHome";
 import Workout from "../Workout";
 import { userExercises } from "../App";
 import { root } from "../../index.js";
+import Header from "../Header.js";
 
 export default function GenerateWorkout() {
   return (
     <>
-      <h1 className="main-menu-header">Generate New Workout</h1>
+      <Header heading="Generate New Workout" />
       <br />
       <br />
       <div id="generate-page">

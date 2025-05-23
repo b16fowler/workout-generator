@@ -4,12 +4,13 @@
  **************************************************************************/
 
 import { userExercises } from "../App";
+import Header from "../Header";
 import ReturnHome from "../ReturnHome";
 
 export default function AddExercise(props) {
   return (
     <>
-      <h1 className="main-menu-header">Add New Exercise</h1>
+      <Header heading="Add New Exercise" />
       <br />
       <br />
       <form id="add-exercise-form" onSubmit={handleSubmit}>

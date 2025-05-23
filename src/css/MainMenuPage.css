@@ -79,3 +79,13 @@ img {
   height: 500px;
   margin: auto;
 }
+
+#clock {
+  font-size: large;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  text-align: right;
+  position: absolute;
+  right: 7px;
+  top: 25px;
+}
