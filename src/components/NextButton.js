@@ -1,3 +1,7 @@
+/**************************************************************************
+ * NextButton component
+ **************************************************************************/
+
 export default function NextButton({ index, setIndex, length }) {
   return (
     <button

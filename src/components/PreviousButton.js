@@ -1,3 +1,7 @@
+/**************************************************************************
+ * PreviousButton component
+ **************************************************************************/
+
 export default function PreviousButton({ index, setIndex }) {
   return (
     <button
