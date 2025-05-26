@@ -9,7 +9,7 @@ export default function Header({ heading }) {
     <>
       <div>
         <Clock />
-        <h3 className="main-menu-header">{heading}</h3>
+        <h3 className="header">{heading}</h3>
       </div>
     </>
   );

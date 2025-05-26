@@ -1,35 +1,37 @@
 /**************************************************************************
  * MainMenuPage component
  **************************************************************************/
+import Footer from "../Footer";
 import "../../css/MainMenuPage.css";
-import { Link } from "react-router-dom";
 import Header from "../Header";
 
-export default function MainMenu() {
+export default function MainMenuPage() {
   return (
     <>
       <Header heading="Workout Generator App" />
-      <div>
-        <br />
-        <br />
-        <br />
-        <Link to="/generate-workout">Generate workout</Link>
-        <br />
-        <br />
-        <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div className="main-menu">
+        <button className="main-menu-button" onClick={handleClick}>
+          Generate Workout
+        </button>
+        <button className="main-menu-button" onClick={handleClick}>
+          Add Exercise
+        </button>
+        <button className="main-menu-button" onClick={handleClick}>
+          View Exercises
+        </button>
       </div>
-      <div>
-        <Link to="/add-exercise">Add exercise</Link>
-        <br />
-        <br />
-        <br />
-      </div>
-      <div>
-        <Link to="/view-exercises">View exercises</Link>
-        <br />
-        <br />
-        <br />
-      </div>
+      <Footer />
     </>
   );
+}
+
+function handleClick() {
+  return;
 }

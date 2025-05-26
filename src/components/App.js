@@ -14,32 +14,7 @@
  **************************************************************************/
 
 import "../css/App.css";
-import MainMenuPage from "./pages/MainMenuPage";
-import GenerateWorkoutPage from "./pages/GenerateWorkoutPage";
-import ViewExercisesPage from "./pages/ViewExercisesPage";
-import AddExercisePage from "./pages/AddExercisePage";
-import NotFoundPage from "./pages/NotFoundPage";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <MainMenuPage />,
-    errorElement: <NotFoundPage />,
-  },
-  {
-    path: "/generate-workout",
-    element: <GenerateWorkoutPage />,
-  },
-  {
-    path: "/add-exercise",
-    element: <AddExercisePage />,
-  },
-  {
-    path: "/view-exercises",
-    element: <ViewExercisesPage />,
-  },
-]);
+import LoginPage from "./pages/LoginPage";
 
 // Hardcoded test data
 const userExercises = [
@@ -104,7 +79,7 @@ const userExercises = [
 export default function App() {
   return (
     <div className="App">
-      <RouterProvider router={router} />
+      <LoginPage />
     </div>
   );
 }
