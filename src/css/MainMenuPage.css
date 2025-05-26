@@ -1,4 +1,4 @@
-.main-menu-header {
+.header {
   background-color: #f2ffcc;
   text-align: center;
   color: black;
@@ -6,6 +6,38 @@
   font-size: 48px;
   margin: 0%;
   padding: 0%;
+}
+
+.footer {
+  background-color: #282826;
+  color: whitesmoke;
+  position: absolute;
+  width: 100%;
+  bottom: 0%;
+  margin: auto;
+}
+
+.author-info {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.main-menu {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 100%;
+}
+
+.main-menu-button {
+  font: bolder;
+  font-size: larger;
+  background-color: #f2ffcc;
+  margin: 2px 4px;
+  padding: 16px 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 body {
@@ -39,6 +71,7 @@ img {
 .button:disabled {
   background-color: #f2ffcc;
   cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .next {
@@ -88,4 +121,8 @@ img {
   position: absolute;
   right: 7px;
   top: 25px;
+}
+
+.login-button {
+  margin: 4px 2px;
 }
