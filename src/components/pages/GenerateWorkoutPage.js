@@ -2,11 +2,12 @@
  * GenerateWorkoutPage component
  **************************************************************************/
 
-import ReturnHome from "../ReturnHome";
 import Workout from "../Workout";
 import { userExercises } from "../App";
 import { root } from "../../index.js";
 import Header from "../Header.js";
+import Footer from "../Footer.js";
+import ReturnHome from "../ReturnHome.js";
 
 export default function GenerateWorkout() {
   return (
@@ -45,8 +46,9 @@ export default function GenerateWorkout() {
           <br />
           <h4>To select all types, select none</h4>
         </form>
-        <ReturnHome />
       </div>
+      <ReturnHome />
+      <Footer />
     </>
   );
 }

@@ -1,3 +1,7 @@
+body {
+  background-color: #0097ca;
+}
+
 .header {
   background-color: #f2ffcc;
   text-align: center;
@@ -40,8 +44,14 @@
   cursor: pointer;
 }
 
-body {
-  background-color: #0097ca;
+#generate-page {
+  margin: auto;
+  text-align: center;
+}
+
+#add-exercise-form {
+  margin: auto;
+  text-align: center;
 }
 
 img {
@@ -98,6 +108,29 @@ img {
 
 .finish:hover {
   background-color: #14b531;
+}
+
+.return-div {
+  margin: 0;
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.return-button {
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  color: black;
+  font-size: large;
+  padding: 6px 12px;
+  border-radius: 24px;
+}
+
+.return-button:hover {
+  background-color: #d6f281;
+  cursor: pointer;
 }
 
 .exercise-table {

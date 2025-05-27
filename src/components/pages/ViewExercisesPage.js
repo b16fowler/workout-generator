@@ -3,18 +3,22 @@
  **************************************************************************/
 
 import ExerciseTable from "../ExerciseTable";
-import ReturnHome from "../ReturnHome";
 import Header from "../Header";
+import Footer from "../Footer";
+import ReturnHome from "../ReturnHome";
 
-export default function ViewExercisesPage() {
+export default function ViewExercises() {
   return (
-    <div>
-      <Header heading="All Exercises" />
-      <br />
-      <br />
-      <br />
-      <ExerciseTable />
+    <>
+      <div>
+        <Header heading="All Exercises" />
+        <br />
+        <br />
+        <br />
+        <ExerciseTable />
+      </div>
       <ReturnHome />
-    </div>
+      <Footer />
+    </>
   );
 }

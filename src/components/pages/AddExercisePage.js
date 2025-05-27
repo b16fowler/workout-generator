@@ -4,10 +4,11 @@
  **************************************************************************/
 
 import { userExercises } from "../App";
+import Footer from "../Footer";
 import Header from "../Header";
 import ReturnHome from "../ReturnHome";
 
-export default function AddExercise(props) {
+export default function AddExercise() {
   return (
     <>
       <Header heading="Add New Exercise" />
@@ -63,18 +64,13 @@ export default function AddExercise(props) {
         <label htmlFor="exercise-pic">Exercise photo: </label>
         <input id="exercise-pic" type="file"></input>
         <br />
-        <br />
-        <br />
-        <input className="button" type="submit" value="Add exercise" />
-        <br />
-        <br />
-        <br />
-        <br />
         <p>
           <strong>*</strong> Indicates required field
         </p>
+        <input className="button" type="submit" value="Add exercise" />
       </form>
       <ReturnHome />
+      <Footer />
     </>
   );
 }

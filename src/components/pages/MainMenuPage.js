@@ -4,6 +4,10 @@
 import Footer from "../Footer";
 import "../../css/MainMenuPage.css";
 import Header from "../Header";
+import GenerateWorkout from "./GenerateWorkoutPage";
+import AddExercise from "./AddExercisePage";
+import ViewExercises from "./ViewExercisesPage";
+import { root } from "../..";
 
 export default function MainMenuPage() {
   return (
@@ -17,13 +21,22 @@ export default function MainMenuPage() {
       <br />
       <br />
       <div className="main-menu">
-        <button className="main-menu-button" onClick={handleClick}>
+        <button
+          className="main-menu-button"
+          onClick={() => handleClick(<GenerateWorkout />)}
+        >
           Generate Workout
         </button>
-        <button className="main-menu-button" onClick={handleClick}>
+        <button
+          className="main-menu-button"
+          onClick={() => handleClick(<AddExercise />)}
+        >
           Add Exercise
         </button>
-        <button className="main-menu-button" onClick={handleClick}>
+        <button
+          className="main-menu-button"
+          onClick={() => handleClick(<ViewExercises />)}
+        >
           View Exercises
         </button>
       </div>
@@ -32,6 +45,8 @@ export default function MainMenuPage() {
   );
 }
 
-function handleClick() {
+function handleClick(component) {
+  root.render(component);
+
   return;
 }
