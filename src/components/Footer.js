@@ -7,10 +7,9 @@ export default function Footer() {
     <>
       <footer className="footer">
         <p className="author-info">
-          Author: Brett Fowler
+          Brett Fowler
           <br />
-          Website:{" "}
-          <a href="https://b16fowler.github.io/">https://b16fowler.github.io</a>
+          <a href="https://b16fowler.github.io/">Website</a>
         </p>
       </footer>
     </>

@@ -3,7 +3,7 @@
  **************************************************************************/
 
 import { root } from "../index.js";
-import App from "./App.js";
+import MainMenuPage from "./pages/MainMenuPage.js";
 
 export default function FinishButton({ index, length }) {
   return (
@@ -19,6 +19,6 @@ export default function FinishButton({ index, length }) {
   function handleClick() {
     // Remove exercise photo and render generate workout page
     document.body.removeChild(document.querySelector(".exercise-div"));
-    root.render(<App />);
+    root.render(<MainMenuPage />);
   }
 }

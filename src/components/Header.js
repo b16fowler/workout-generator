@@ -3,13 +3,15 @@
  **************************************************************************/
 
 import Clock from "./Clock";
+import LogOutButton from "./LogOutButton";
 
-export default function Header({ heading }) {
+export default function Header({ heading, notLoggedIn }) {
   return (
     <>
       <div>
         <Clock />
         <h3 className="header">{heading}</h3>
+        <LogOutButton notLoggedIn={notLoggedIn} />
       </div>
     </>
   );
