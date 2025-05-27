@@ -8,6 +8,7 @@ import GenerateWorkout from "./GenerateWorkoutPage";
 import AddExercise from "./AddExercisePage";
 import ViewExercises from "./ViewExercisesPage";
 import { root } from "../..";
+import DailyWord from "../DailyWord";
 
 export default function MainMenuPage() {
   return (
@@ -40,6 +41,7 @@ export default function MainMenuPage() {
           View Exercises
         </button>
       </div>
+      <DailyWord />
       <Footer />
     </>
   );
