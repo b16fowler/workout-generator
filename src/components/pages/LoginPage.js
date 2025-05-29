@@ -6,6 +6,7 @@ import MainMenu from "./MainMenuPage";
 import Header from "../Header";
 import Footer from "../Footer";
 import { root } from "../../index";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function LoginPage() {
   return (
@@ -44,10 +45,20 @@ export default function LoginPage() {
   );
 }
 
-function handleSubmit() {
-  root.render(<MainMenu />);
+const queryClient = new QueryClient();
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  root.render(
+    <QueryClientProvider client={queryClient}>
+      <MainMenu />
+    </QueryClientProvider>
+  );
 }
 
 function handleForgot() {
   alert("Get rekt, nerd");
 }
+
+export { queryClient };
