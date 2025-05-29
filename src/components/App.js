@@ -3,7 +3,7 @@
  **************************************************************************/
 
 import "../css/App.css";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./LoginPage";
 
 // Hardcoded test data
 const userExercises = [

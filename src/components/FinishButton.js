@@ -3,9 +3,9 @@
  **************************************************************************/
 
 import { root } from "../index.js";
-import MainMenuPage from "./pages/MainMenuPage.js";
+import MainMenuPage from "./MainMenuPage.js";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./pages/LoginPage.js";
+import { queryClient } from "./LoginPage.js";
 
 export default function FinishButton({ index, length }) {
   return (

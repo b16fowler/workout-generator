@@ -1,14 +1,14 @@
 /**************************************************************************
  * MainMenuPage component
  **************************************************************************/
-import Footer from "../Footer";
-import "../../css/MainMenuPage.css";
-import Header from "../Header";
+import Footer from "./Footer";
+import "../css/MainMenuPage.css";
+import Header from "./Header";
 import GenerateWorkout from "./GenerateWorkoutPage";
 import AddExercise from "./AddExercisePage";
 import ViewExercises from "./ViewExercisesPage";
-import { root } from "../..";
-import DailyWord from "../DailyWord";
+import { root } from "..";
+import DailyWord from "./DailyWord";
 
 export default function MainMenuPage() {
   return (

@@ -3,10 +3,10 @@
  * exercise to their pool.
  **************************************************************************/
 
-import { userExercises } from "../App";
-import Footer from "../Footer";
-import Header from "../Header";
-import ReturnHome from "../ReturnHome";
+import { userExercises } from "./App";
+import Footer from "./Footer";
+import Header from "./Header";
+import ReturnHome from "./ReturnHome";
 
 export default function AddExercise() {
   return (

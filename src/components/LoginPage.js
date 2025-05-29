@@ -3,9 +3,9 @@
  **************************************************************************/
 
 import MainMenu from "./MainMenuPage";
-import Header from "../Header";
-import Footer from "../Footer";
-import { root } from "../../index";
+import Header from "./Header";
+import Footer from "./Footer";
+import { root } from "../index";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function LoginPage() {
