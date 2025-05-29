@@ -189,3 +189,24 @@ img {
   left: 7px;
   top: 3%;
 }
+
+#wotd-div {
+  margin: auto;
+  text-align: center;
+}
+
+#word {
+  font-size: large;
+  font-weight: 600;
+  color: #f2ffcc;
+}
+
+#pos {
+  font-size: medium;
+  font-weight: 400;
+  color: black;
+}
+
+#def {
+  font-size: large;
+}
