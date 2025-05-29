@@ -1,5 +1,16 @@
 /**************************************************************************
  * index.js
+ **************************************************************************
+ *
+ * Features to create/implement:
+ *
+ * Create API for user data
+ * # of exercises when generating workout
+ * Remove exercise from pool
+ * Edit exercise already in pool
+ * Revisit previous workouts
+ * Save current/previous workout as 'favorite'
+ *
  **************************************************************************/
 
 import React from "react";

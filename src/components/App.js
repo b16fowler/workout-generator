@@ -1,16 +1,5 @@
 /**************************************************************************
  * App component
- *
- * Features to create/implement:
- *
- * Create API for user data
- * Log in page
- * # of exercises when generating workout
- * Remove exercise from pool
- * Edit exercise already in pool
- * Revisit previous workouts
- * Save current/previous workout as 'favorite'
- *
  **************************************************************************/
 
 import "../css/App.css";
