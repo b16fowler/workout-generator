@@ -2,10 +2,11 @@
  * index.js
  **************************************************************************
  *
- * Features to create/implement:
+ * TODO:
  *
+ * Fix ViewExercises scroll issue
+ * Make uploading exercise photo mandatory
  * Create API for user data
- * # of exercises when generating workout
  * Remove exercise from pool
  * Edit exercise already in pool
  * Revisit previous workouts
