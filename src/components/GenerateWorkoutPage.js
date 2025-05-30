@@ -64,7 +64,7 @@ function handleSubmit(e) {
     typeCheckboxes[value.id] = value.checked;
   });
 
-  // If all checkboxes left blank, select all
+  // If all checkboxes left blank, check all
   const noneChecked = Object.values(typeCheckboxes).every((value) => !value);
   if (noneChecked) {
     Object.keys(typeCheckboxes).forEach((key) => {
@@ -72,9 +72,21 @@ function handleSubmit(e) {
     });
   }
 
-  const workout = userExercises.filter((exercise) => {
+  // Keep exercises of muscle types that were checked off
+  let workout = userExercises.filter((exercise) => {
     return typeCheckboxes[exercise.type.toLowerCase()];
   });
+
+  // Check for number of exercises desired in workout
+  const numExercises = document.querySelector("#numExercises").value;
+  // Inform user if there are not enough logged exercises to generate workout of desired length
+  if (workout.length < numExercises) {
+    alert(
+      `Desired number of exercises (${numExercises})\nexceeds number of logged exercises of selected type(s) (${workout.length})\nGenerating workout of max possible length (${workout.length})`
+    );
+  }
+  // Randomize and trim workout
+  workout = jumbleWorkout(workout, numExercises);
 
   displayWorkout(workout);
 }
@@ -87,4 +99,22 @@ function displayWorkout(workout) {
   });
 
   root.render(<Workout workout={workout} />);
+}
+
+function jumbleWorkout(workout, numExercises) {
+  /* Shuffle exercises with Fisher-Yates shuffle algorithm
+   * Iterate through array of exercises backwards, swapping it's index
+   * with a randomly generated number */
+  for (let i = workout.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [workout[i], workout[j]] = [workout[j], workout[i]];
+  }
+
+  // Check if a number of exercises was entered
+  if (numExercises) {
+    // Trim workout to fit number of exercises
+    workout = workout.slice(0, numExercises);
+  }
+
+  return workout;
 }
