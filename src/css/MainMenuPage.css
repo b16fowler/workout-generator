@@ -177,14 +177,17 @@ img {
   margin: auto;
 }
 
+.header-div {
+  position: relative;
+}
+
 #clock {
   font-size: large;
   font-weight: bolder;
   letter-spacing: 1px;
-  text-align: right;
   position: absolute;
-  left: 7px;
-  top: 3%;
+  left: 0;
+  bottom: 0;
 }
 
 #wotd-div {
