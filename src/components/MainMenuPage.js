@@ -41,7 +41,6 @@ export default function MainMenuPage() {
           View Exercises
         </button>
       </div>
-
       <Footer />
     </>
   );
