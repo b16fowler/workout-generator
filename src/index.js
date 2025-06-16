@@ -6,11 +6,10 @@
  *
  * Fix ViewExercises scroll issue
  * Make uploading exercise photo mandatory
- * Create API for user data
  * Remove exercise from pool
  * Edit exercise already in pool
  * Revisit previous workouts
- * Save current/previous workout as 'favorite'
+ * Save current/previous workout
  *
  **************************************************************************/
 
