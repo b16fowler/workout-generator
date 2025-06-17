@@ -2,7 +2,7 @@
  * App component
  **************************************************************************/
 
-import "../css/App.css";
+import "../css/index.css";
 import LoginPage from "./LoginPage";
 
 // Hardcoded test data

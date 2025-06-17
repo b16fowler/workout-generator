@@ -4,6 +4,9 @@
  *
  * TODO:
  *
+ * Change LogOutButton to clear page before log out
+ * Change AddExercisePage to not add invalid entries to table
+ * Fix Clock position in Header
  * Fix ViewExercises scroll issue
  * Make uploading exercise photo mandatory
  * Remove exercise from pool

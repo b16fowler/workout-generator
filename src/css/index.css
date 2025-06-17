@@ -1,13 +1,262 @@
 body {
+  background-color: #0097ca;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.header {
+  background-color: #f2ffcc;
+  text-align: center;
+  color: black;
+  font: bolder;
+  font-size: 48px;
+  margin: 0%;
+  padding: 0%;
+}
+
+.footer {
+  background-color: #282826;
+  color: whitesmoke;
+  position: absolute;
+  width: 100%;
+  bottom: 0%;
+  margin: auto;
+}
+
+.author-info {
+  text-align: right;
+  padding-right: 5px;
+}
+
+a {
+  color: #0097ca;
+}
+
+.main-menu {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 100%;
+}
+
+.main-menu-button {
+  font: bolder;
+  font-size: larger;
+  background-color: #f2ffcc;
+  margin: 2px 4px;
+  padding: 16px 12px;
+  border: none;
+  border-radius: 10px;
+}
+
+.main-menu-button:hover {
+  background-color: #d6f281;
+  cursor: pointer;
+}
+
+#generate-page {
+  margin: auto;
+  text-align: center;
+}
+
+#add-exercise-form {
+  margin: auto;
+  text-align: center;
+}
+
+img {
+  position: relative;
+}
+
+.exercise-div {
+  display: grid;
+  place-items: center;
+  height: 10vh;
+}
+
+.button {
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  color: black;
+  font-size: x-large;
+  padding: 12px 24px;
+  border-radius: 24px;
+}
+
+.button:hover {
+  background-color: #d6f281;
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: #f2ffcc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.login-button {
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  color: black;
+  margin: 4px 2px;
+}
+
+.login-button:hover {
+  cursor: pointer;
+}
+
+.logOut {
+  color: black;
+  background-color: #f2ffcc;
+  font-size: large;
+  font-weight: bolder;
+  position: absolute;
+  top: 41px;
+  right: 0%;
+  border: none;
+}
+
+.logOut:hover {
+  cursor: pointer;
+}
+
+.next {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  right: 5%;
+}
+
+.previous {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 5%;
+}
+
+.finish {
+  background-color: #5cd672;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  right: 5%;
+}
+
+.finish:hover {
+  background-color: #14b531;
+}
+
+.return-div {
+  position: relative;
+}
+
+.return-button {
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  color: black;
+  font-size: large;
+  padding: 6px 12px;
+  border-radius: 24px;
+  margin: auto;
+  display: block;
+}
+
+.return-button:hover {
+  background-color: #d6f281;
+  cursor: pointer;
+}
+
+.exercise-table {
+  place-items: center;
+  border: thick solid #f2ffcc;
+  border-collapse: separate;
+  border-spacing: 150px;
+}
+
+.exercise-image {
+  width: 800px;
+  height: 500px;
+  margin: auto;
+}
+
+.header-div {
+  position: relative;
+}
+
+#clock {
+  font-size: large;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+#wotd-div {
+  margin: auto;
+  text-align: center;
+}
+
+#word {
+  font-size: xx-large;
+  font-weight: 600;
+  color: #f2ffcc;
+}
+
+#pos {
+  font-size: medium;
+  font-weight: 400;
+  color: black;
+}
+
+#def {
+  font-size: large;
 }

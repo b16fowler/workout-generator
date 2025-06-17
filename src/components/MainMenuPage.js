@@ -2,7 +2,7 @@
  * MainMenuPage component
  **************************************************************************/
 import Footer from "./Footer";
-import "../css/MainMenuPage.css";
+import "../css/index.css";
 import Header from "./Header";
 import GenerateWorkout from "./GenerateWorkoutPage";
 import AddExercise from "./AddExercisePage";
