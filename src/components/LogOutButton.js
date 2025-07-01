@@ -18,5 +18,10 @@ export default function LogOutButton({ notLoggedIn }) {
 }
 
 function handleLogOut() {
+  // Remove exercise-div, if user has generated workout
+  if (document.querySelector(".exercise-div")) {
+    document.body.removeChild(document.querySelector(".exercise-div"));
+  }
+
   root.render(<App />);
 }
