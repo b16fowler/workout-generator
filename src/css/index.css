@@ -237,7 +237,7 @@ img {
   letter-spacing: 1px;
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -18px;
 }
 
 #wotd-div {
