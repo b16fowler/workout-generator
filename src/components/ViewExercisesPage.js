@@ -12,12 +12,10 @@ export default function ViewExercises() {
     <>
       <div>
         <Header heading="All Exercises" />
-        <br />
-        <br />
+        <ReturnHome />
         <br />
         <ExerciseTable />
       </div>
-      <ReturnHome />
       <Footer />
     </>
   );
