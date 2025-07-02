@@ -6,11 +6,9 @@
  *
  * Change AddExercisePage to not add invalid entries to table
  * Fix Clock position in Header
- * Fix ViewExercises scroll issue
  * Make uploading exercise photo mandatory
  * Remove exercise from pool
  * Edit exercise already in pool
- * Revisit previous workouts
  * Save current/previous workout
  *
  **************************************************************************/
