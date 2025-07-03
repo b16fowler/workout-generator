@@ -15,9 +15,7 @@ export default function AddExercise() {
       <br />
       <br />
       <form id="add-exercise-form" onSubmit={handleSubmit}>
-        <label htmlFor="exercise-name">
-          Enter name of exercise<strong>*</strong>:{" "}
-        </label>
+        <label htmlFor="exercise-name">Enter name of exercise: </label>
         <input
           id="exercise-name"
           type="text"
@@ -25,9 +23,7 @@ export default function AddExercise() {
         ></input>
         <br />
         <br />
-        <label htmlFor="exercise-type">
-          Select type of exercise<strong>*</strong>:{" "}
-        </label>
+        <label htmlFor="exercise-type">Select type of exercise: </label>
         <select id="exercise-type">
           <option>Please select</option>
           <option>Arms</option>
@@ -37,9 +33,7 @@ export default function AddExercise() {
         </select>
         <br />
         <br />
-        <label htmlFor="exercise-reps">
-          Enter number of reps per set<strong>*</strong>:{" "}
-        </label>
+        <label htmlFor="exercise-reps">Enter number of reps per set: </label>
         <input
           id="exercise-reps"
           input="number"
@@ -49,9 +43,7 @@ export default function AddExercise() {
         ></input>
         <br />
         <br />
-        <label htmlFor="exercise-sets">
-          Enter number of sets in workout<strong>*</strong>:{" "}
-        </label>
+        <label htmlFor="exercise-sets">Enter number of sets in workout: </label>
         <input
           id="exercise-sets"
           input="number"
@@ -64,9 +56,7 @@ export default function AddExercise() {
         <label htmlFor="exercise-pic">Exercise photo: </label>
         <input id="exercise-pic" type="file"></input>
         <br />
-        <p>
-          <strong>*</strong> Indicates required field
-        </p>
+        <br />
         <input className="button" type="submit" value="Add exercise" />
       </form>
       <ReturnHome />
@@ -87,7 +77,13 @@ function handleSubmit(e) {
   let picInput = document.querySelector("#exercise-pic").value;
 
   // Check for empty mandatory fields
-  if (!nameInput || typeInput === "Please select" || !repsInput || !setsInput) {
+  if (
+    typeInput === "Please select" ||
+    !nameInput ||
+    !repsInput ||
+    !setsInput ||
+    !picInput
+  ) {
     alert("Invalid user inputs found. Please try again");
   }
   // Check that entered reps/sets are in range
