@@ -4,7 +4,6 @@
  *
  * TODO:
  *
- * Change AddExercisePage to not add invalid entries to table
  * Make uploading exercise photo mandatory
  * Remove exercise from pool
  * Edit exercise already in pool
