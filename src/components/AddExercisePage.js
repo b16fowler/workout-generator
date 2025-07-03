@@ -99,15 +99,16 @@ function handleSubmit(e) {
     // All fields valid, reset form and inform user
     document.getElementById("add-exercise-form").reset();
     alert("New exercise logged successfully");
-  }
 
-  const currentInput = {
-    name: nameInput,
-    type: typeInput,
-    reps: repsInput,
-    sets: setsInput,
-    pic: picInput,
-  };
-  // Push input onto master list
-  userExercises.push(currentInput);
+    const currentInput = {
+      name: nameInput,
+      type: typeInput,
+      reps: repsInput,
+      sets: setsInput,
+      pic: picInput,
+    };
+
+    // Push input onto master list
+    userExercises.push(currentInput);
+  }
 }
