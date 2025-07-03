@@ -47,6 +47,7 @@ export default function LoginPage() {
 
 const queryClient = new QueryClient();
 
+// Called when user clicks "Login" button
 function handleSubmit(event) {
   event.preventDefault();
 
@@ -57,6 +58,7 @@ function handleSubmit(event) {
   );
 }
 
+// Called when user clicks "Forgot password" button
 function handleForgot() {
   alert("Get rekt, nerd");
 }

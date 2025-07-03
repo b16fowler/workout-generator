@@ -2,8 +2,8 @@
  * App component
  **************************************************************************/
 
-import "../css/index.css";
 import LoginPage from "./LoginPage";
+import "../css/index.css";
 
 // Hardcoded test data
 const userExercises = [

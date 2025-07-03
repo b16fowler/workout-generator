@@ -1,5 +1,6 @@
 /**************************************************************************
- * AddExercisePage component contains a form that allows user to add a new
+ * AddExercisePage component
+ * Contains a form that allows user to add a new
  * exercise to their pool.
  **************************************************************************/
 
@@ -57,6 +58,7 @@ export default function AddExercise() {
         <input id="exercise-pic" type="file"></input>
         <br />
         <br />
+        <br />
         <input className="button" type="submit" value="Add exercise" />
       </form>
       <ReturnHome />
@@ -84,7 +86,7 @@ function handleSubmit(e) {
     !setsInput ||
     !picInput
   ) {
-    alert("Invalid user inputs found. Please try again");
+    alert("All fields are required.");
   }
   // Check that entered reps/sets are in range
   else if (0 >= repsInput || 50 < repsInput) {

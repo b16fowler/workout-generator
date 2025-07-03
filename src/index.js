@@ -4,17 +4,19 @@
  *
  * TODO:
  *
- * Make uploading exercise photo mandatory
+ * Use Snackbar for user alerts
+ * Implement some type of API
+ * Visual of exercise picture on ViewExercisesPage
  * Remove exercise from pool
  * Edit exercise already in pool
  * Save current/previous workout
  *
  **************************************************************************/
 
-import React from "react";
 import ReactDOM from "react-dom/client";
-import "./css/index.css";
 import App from "./components/App";
+import React from "react";
+import "./css/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
