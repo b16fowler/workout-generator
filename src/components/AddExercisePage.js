@@ -7,6 +7,7 @@
 import { userExercises } from "./App";
 import Footer from "./Footer";
 import Header from "./Header";
+import { showSnackbar } from "..";
 import ReturnHome from "./ReturnHome";
 
 export default function AddExercise() {
@@ -61,6 +62,10 @@ export default function AddExercise() {
         <br />
         <input className="button" type="submit" value="Add exercise" />
       </form>
+      <div id="snackbar">"All fields are required."</div>
+      <div id="snackbar">
+        "Reps or sets input field(s) not in acceptable range. Please try again."
+      </div>
       <ReturnHome />
       <Footer />
     </>
@@ -86,17 +91,20 @@ function handleSubmit(e) {
     !setsInput ||
     !picInput
   ) {
-    alert("All fields are required.");
+    showSnackbar("All fields are required, please try again");
   }
   // Check that entered reps/sets are in range
-  else if (0 >= repsInput || 50 < repsInput) {
-    alert("Reps input field not in acceptable range. Please try again");
-  } else if (0 >= setsInput || 10 < setsInput) {
-    alert("Sets input field not in acceptable range. Please try again");
+  else if (
+    0 >= repsInput ||
+    50 < repsInput ||
+    0 >= setsInput ||
+    10 < setsInput
+  ) {
+    showSnackbar("Sets or reps outside of acceptable range, please try again");
   } else {
     // All fields valid, reset form and inform user
     document.getElementById("add-exercise-form").reset();
-    alert("New exercise logged successfully");
+    showSnackbar("New exercise logged successfully");
 
     const currentInput = {
       name: nameInput,

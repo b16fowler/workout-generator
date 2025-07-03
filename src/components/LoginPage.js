@@ -5,7 +5,7 @@
 import MainMenu from "./MainMenuPage";
 import Header from "./Header";
 import Footer from "./Footer";
-import { root } from "../index";
+import { root, showSnackbar } from "../index";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function LoginPage() {
@@ -40,7 +40,7 @@ export default function LoginPage() {
           onChange={handleForgot}
         />
       </form>
-      <div id="snackbar">You hit the forgot password button</div>
+      <div id="snackbar">This is the original message</div>
       <Footer />
     </>
   );
@@ -61,12 +61,8 @@ function handleSubmit(event) {
 
 // Called when user clicks "Forgot password" button
 function handleForgot() {
-  const sb = document.querySelector("#snackbar");
-  sb.className = "show";
-
-  setTimeout(function () {
-    sb.className = sb.className.replace("show", "");
-  }, 3000);
+  // TODO: Make this do something
+  showSnackbar("You hit the forgot password button");
 }
 
 export { queryClient };
