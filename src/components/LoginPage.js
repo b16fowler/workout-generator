@@ -40,6 +40,7 @@ export default function LoginPage() {
           onChange={handleForgot}
         />
       </form>
+      <div id="snackbar">You hit the forgot password button</div>
       <Footer />
     </>
   );
@@ -60,7 +61,12 @@ function handleSubmit(event) {
 
 // Called when user clicks "Forgot password" button
 function handleForgot() {
-  alert("Get rekt, nerd");
+  const sb = document.querySelector("#snackbar");
+  sb.className = "show";
+
+  setTimeout(function () {
+    sb.className = sb.className.replace("show", "");
+  }, 3000);
 }
 
 export { queryClient };
