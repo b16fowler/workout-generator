@@ -4,6 +4,7 @@
  *
  * TODO:
  *
+ * Connect AWS RDS to EC2 instance
  * Change snackbar CSS
  * Center snackbar for longer alerts
  * Implement some type of API
