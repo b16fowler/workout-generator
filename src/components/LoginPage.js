@@ -2,11 +2,12 @@
  * LoginPage component
  **************************************************************************/
 
-import MainMenu from "./MainMenuPage";
-import Header from "./Header";
-import Footer from "./Footer";
-import { root, showSnackbar } from "../index";
+import MainMenu from "./MainMenuPage.js";
+import Header from "./Header.js";
+import Footer from "./Footer.js";
+import { root, showSnackbar } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import check_login from "../server.js";
 
 export default function LoginPage() {
   return (
@@ -18,7 +19,7 @@ export default function LoginPage() {
       <br />
       <form className="form" onSubmit={handleSubmit}>
         <label htmlFor="userName">Username: </label>
-        <input type="string" id="userName" placeholder="" autoFocus></input>
+        <input type="string" id="username" placeholder="" autoFocus></input>
         <br />
         <br />
         <label htmlFor="password">Password: </label>
@@ -46,11 +47,14 @@ export default function LoginPage() {
   );
 }
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 // Called when user clicks "Login" button
 function handleSubmit(event) {
   event.preventDefault();
+
+  // Check username and password
+  // check_login();
 
   root.render(
     <QueryClientProvider client={queryClient}>
@@ -64,5 +68,3 @@ function handleForgot() {
   // TODO: Make this do something
   showSnackbar("You hit the forgot password button");
 }
-
-export { queryClient };
