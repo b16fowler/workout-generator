@@ -1,10 +1,10 @@
 /**************************************************************************
  * ExerciseTable component
  **************************************************************************/
-import { userExercises } from "./App";
-import { CompactTable } from "@table-library/react-table-library/compact";
-import { useTheme } from "@table-library/react-table-library/theme";
-import { getTheme } from "@table-library/react-table-library/baseline";
+import { userExercises } from "./App.js";
+import { CompactTable } from "@table-library/react-table-library/compact.js";
+import { useTheme } from "@table-library/react-table-library/theme.js";
+import { getTheme } from "@table-library/react-table-library/baseline.js";
 
 export default function ExerciseTable() {
   const nodes = [];

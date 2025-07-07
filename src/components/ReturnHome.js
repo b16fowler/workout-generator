@@ -2,10 +2,10 @@
  * ReturnHome component
  **************************************************************************/
 
-import { root } from "..";
-import MainMenuPage from "./MainMenuPage";
+import { root } from "../index.js";
+import MainMenuPage from "./MainMenuPage.js";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./LoginPage";
+import { queryClient } from "./LoginPage.js";
 
 export default function ReturnHome() {
   return (

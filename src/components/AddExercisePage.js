@@ -4,11 +4,11 @@
  * exercise to their pool.
  **************************************************************************/
 
-import { userExercises } from "./App";
-import Footer from "./Footer";
-import Header from "./Header";
-import { showSnackbar } from "..";
-import ReturnHome from "./ReturnHome";
+import { userExercises } from "./App.js";
+import Footer from "./Footer.js";
+import Header from "./Header.js";
+import { showSnackbar } from "../index.js";
+import ReturnHome from "./ReturnHome.js";
 
 export default function AddExercise() {
   return (

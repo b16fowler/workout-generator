@@ -2,8 +2,8 @@
  * Header component
  **************************************************************************/
 
-import Clock from "./Clock";
-import LogOutButton from "./LogOutButton";
+import Clock from "./Clock.js";
+import LogOutButton from "./LogOutButton.js";
 
 export default function Header({ heading, notLoggedIn }) {
   return (

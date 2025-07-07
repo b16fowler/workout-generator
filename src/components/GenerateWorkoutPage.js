@@ -2,8 +2,8 @@
  * GenerateWorkoutPage component
  **************************************************************************/
 
-import Workout from "./Workout";
-import { userExercises } from "./App";
+import Workout from "./Workout.js";
+import { userExercises } from "./App.js";
 import { root } from "../index.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";

@@ -2,10 +2,10 @@
  * ViewExercisesPage component
  **************************************************************************/
 
-import ExerciseTable from "./ExerciseTable";
-import Header from "./Header";
-import Footer from "./Footer";
-import ReturnHome from "./ReturnHome";
+import ExerciseTable from "./ExerciseTable.js";
+import Header from "./Header.js";
+import Footer from "./Footer.js";
+import ReturnHome from "./ReturnHome.js";
 
 export default function ViewExercises() {
   return (

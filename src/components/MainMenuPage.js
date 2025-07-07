@@ -1,13 +1,13 @@
 /**************************************************************************
  * MainMenuPage component
  **************************************************************************/
-import Footer from "./Footer";
+import Footer from "./Footer.js";
 import "../css/index.css";
-import Header from "./Header";
-import GenerateWorkout from "./GenerateWorkoutPage";
-import AddExercise from "./AddExercisePage";
-import ViewExercises from "./ViewExercisesPage";
-import { root } from "..";
+import Header from "./Header.js";
+import GenerateWorkout from "./GenerateWorkoutPage.js";
+import AddExercise from "./AddExercisePage.js";
+import ViewExercises from "./ViewExercisesPage.js";
+import { root } from "../index.js";
 
 export default function MainMenuPage() {
   return (

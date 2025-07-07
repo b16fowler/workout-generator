@@ -2,8 +2,8 @@
  * LogOutButton component
  **************************************************************************/
 
-import { root } from "../index";
-import App from "./App";
+import { root } from "../index.js";
+import App from "./App.js";
 
 export default function LogOutButton({ notLoggedIn }) {
   return (
