@@ -2,10 +2,12 @@
  * server.js
  **************************************************************************/
 
-require("dotenv").config();
-const mysql = require("mysql2");
+import "dotenv/config";
+import mysql from "mysql2/promise";
 
-const connection = mysql.createConnection({
+const query = "SELECT * FROM table1";
+
+const connection = await mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
@@ -15,8 +17,24 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) {
-    console.error("Error connecting to RDS:", err.code, err.message);
+    console.error("Error connecting to RDS:\n", err.code, "\n", err.message);
     return;
   }
-  console.log("Connected to AWS RDS MySQL!");
+  console.log("Connection successful...");
+});
+
+console.log("Testing query\n");
+try {
+  const [results] = await connection.query(query);
+  console.log(results[0]);
+} catch (err) {
+  console.log(err);
+}
+
+console.log("\nQuery finished. Closing connection...");
+connection.end((err) => {
+  if (err) {
+    console.log("Error closing connection: ", err);
+  }
+  console.log("Connection closing successfully");
 });
