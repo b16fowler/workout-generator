@@ -14,12 +14,12 @@ app.use(express.json());
 app.use(cors());
 
 // Test query
-const query = "SELECT * FROM table1";
+const query = "SELECT * FROM logins";
 
 app.get("/api/hello", async (req, res) => {
   try {
     const result = await connection.query(query);
-    res.json(result[0][0]);
+    res.json(result[0]);
   } catch (err) {
     console.log("Error found: \n" + err);
   }

@@ -8,7 +8,6 @@ import Footer from "./Footer.js";
 import { root, showSnackbar } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { useEffect } from "react";
-// import check_login from "../server.js";
 
 export default function LoginPage() {
   return (
@@ -19,7 +18,7 @@ export default function LoginPage() {
       <h4>Enter login information:</h4>
       <br />
       <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="userName">Username: </label>
+        <label htmlFor="username">Username: </label>
         <input type="string" id="username" placeholder="" autoFocus></input>
         <br />
         <br />
@@ -54,9 +53,24 @@ export const queryClient = new QueryClient();
 function handleSubmit(event) {
   event.preventDefault();
 
+  // Pull login info entered by user
+  const username_input = document.querySelector("#username").value;
+  const password_input = document.querySelector("#password").value;
+
   fetch("http://localhost:5000/api/hello")
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      if (
+        username_input === data[1].username &&
+        password_input === data[1].password
+      ) {
+        alert(`Login information matches!\n`);
+      } else {
+        alert(
+          "Username or password entered does not match records. Please try again"
+        );
+      }
+    });
 
   root.render(
     <QueryClientProvider client={queryClient}>
