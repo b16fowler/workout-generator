@@ -56,7 +56,7 @@ function handleSubmit(event) {
 
   fetch("http://localhost:5000/api/hello")
     .then((res) => res.json())
-    .then((data) => console.log(data.message));
+    .then((data) => console.log(data));
 
   root.render(
     <QueryClientProvider client={queryClient}>
