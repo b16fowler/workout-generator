@@ -4,6 +4,22 @@
 
 import "dotenv/config";
 import mysql from "mysql2/promise";
+import express from "express";
+import cors from "cors";
+
+// Set up server
+const app = express();
+const PORT = 5000;
+app.use(express.json());
+app.use(cors());
+
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Hello from server\n" });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
+});
 
 // Test query
 const query = "SELECT * FROM table1";
@@ -27,23 +43,19 @@ connection.connect((err) => {
 });
 
 // Run query
-console.log("Testing query\n");
-try {
-  const [results] = await connection.query(query);
-  console.log(results[0]);
-} catch (err) {
-  console.log("Query error:\n", err);
-}
+// console.log("Testing query\n");
+// try {
+//   const [results] = await connection.query(query);
+//   console.log(results[0]);
+// } catch (err) {
+//   console.log("Query error:\n", err);
+// }
 
 // Close connection
-console.log("\nQuery finished. Closing connection...");
-connection.end((err) => {
-  if (err) {
-    console.log("Error closing connection:\n", err);
-  }
-  console.log("Connection closing successfully");
-});
-
-export default function check_login() {
-  console.log("Function here");
-}
+// console.log("\nQuery finished. Closing connection...");
+// connection.end((err) => {
+//   if (err) {
+//     console.log("Error closing connection:\n", err);
+//   }
+//   console.log("Connection closing successfully");
+// });
