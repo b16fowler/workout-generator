@@ -7,6 +7,7 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import { root, showSnackbar } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// import { useEffect } from "react";
 // import check_login from "../server.js";
 
 export default function LoginPage() {
@@ -53,8 +54,9 @@ export const queryClient = new QueryClient();
 function handleSubmit(event) {
   event.preventDefault();
 
-  // Check username and password
-  // check_login();
+  fetch("http://localhost:5000/api/hello")
+    .then((res) => res.json())
+    .then((data) => console.log(data.message));
 
   root.render(
     <QueryClientProvider client={queryClient}>
