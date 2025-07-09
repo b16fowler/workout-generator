@@ -153,6 +153,28 @@ img {
   cursor: pointer;
 }
 
+.open-account-button {
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  color: black;
+  margin: 4px 2px;
+}
+
+.open-account-button:hover {
+  cursor: pointer;
+}
+
+.create-account-button {
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  color: black;
+  margin: 4px 2px;
+}
+
+.create-account-button:hover {
+  cursor: pointer;
+}
+
 .logOut {
   color: black;
   background-color: #f2ffcc;
