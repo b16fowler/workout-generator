@@ -56,27 +56,30 @@ function handleSubmit(event) {
   // Pull login info entered by user
   const username_input = document.querySelector("#username").value;
   const password_input = document.querySelector("#password").value;
+  let correct = false;
 
+  // Fetch information from server to check for login
   fetch("http://localhost:5000/api/hello")
     .then((res) => res.json())
     .then((data) => {
-      if (
-        username_input === data[1].username &&
-        password_input === data[1].password
-      ) {
-        alert(`Login information matches!\n`);
-      } else {
-        alert(
-          "Username or password entered does not match records. Please try again"
-        );
+      data.forEach((entry) => {
+        if (
+          username_input === entry.username &&
+          password_input === entry.password
+        ) {
+          correct = true;
+          root.render(
+            <QueryClientProvider client={queryClient}>
+              <MainMenu />
+            </QueryClientProvider>
+          );
+        }
+      });
+      if (!correct) {
+        // Login information does not match
+        alert("Login information does not match records");
       }
     });
-
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <MainMenu />
-    </QueryClientProvider>
-  );
 }
 
 // Called when user clicks "Forgot password" button
