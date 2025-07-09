@@ -13,12 +13,12 @@ const PORT = 5000;
 app.use(express.json());
 app.use(cors());
 
-// Test query
-const query = "SELECT * FROM logins";
+// Query options
+const login_query = "SELECT * FROM logins";
 
-app.get("/api/hello", async (req, res) => {
+app.get("/api/login", async (req, res) => {
   try {
-    const result = await connection.query(query);
+    const result = await connection.query(login_query);
     res.json(result[0]);
   } catch (err) {
     console.log("Error found: \n" + err);
@@ -37,23 +37,3 @@ const connection = await mysql.createConnection({
   database: process.env.DB_NAME,
   port: 3306,
 });
-
-function get_handle() {
-  // Run query
-  console.log("Testing query\n");
-  try {
-    const results = connection.query(query);
-    return results;
-  } catch (err) {
-    console.log("Query error:\n", err);
-  }
-}
-
-// Close connection
-// console.log("\nQuery finished. Closing connection...");
-// connection.end((err) => {
-//   if (err) {
-//     console.log("Error closing connection:\n", err);
-//   }
-//   console.log("Connection closing successfully");
-// });
