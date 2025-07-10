@@ -16,6 +16,7 @@ app.use(cors());
 // Query options
 const login_query = "SELECT * FROM logins";
 
+// Handles requests of users attempting to login
 app.get("/api/login", async (req, res) => {
   try {
     const result = await connection.query(login_query);
