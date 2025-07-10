@@ -19,8 +19,8 @@ export default function LoginPage() {
       <br />
       <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username: </label>
-          <input type="string" id="username" placeholder="" autoFocus></input>
+          <label htmlFor="email">Email address: </label>
+          <input type="string" id="email" placeholder="" autoFocus></input>
         </div>
         <div className="form-group">
           <label htmlFor="password">Password: </label>
@@ -60,13 +60,6 @@ export default function LoginPage() {
       <form className="create-account-form" hidden={true}>
         <br />
         <div className="form-group">
-          <label htmlFor="create-account-username">Username: </label>
-          <input
-            className="create-account-username"
-            id="create-account-username"
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="create-account-email">Email address: </label>
           <input className="create-account-email" id="create-account-email" />
         </div>
@@ -82,6 +75,7 @@ export default function LoginPage() {
           className="login-button"
           type="button"
           value="Create new account"
+          onClick={handle_create_account}
         />
       </form>
       <div id="snackbar">This is the original message</div>
@@ -97,7 +91,7 @@ function handleSubmit(event) {
   event.preventDefault();
 
   // Pull login info entered by user
-  const username_input = document.querySelector("#username").value;
+  const email_input = document.querySelector("#email").value;
   const password_input = document.querySelector("#password").value;
   let correct = false;
 
@@ -107,12 +101,9 @@ function handleSubmit(event) {
     .then((data) => {
       // Check each row for user's enter information
       data.forEach((entry) => {
-        // Username and password exist and are correct
-        if (
-          username_input === entry.username &&
-          password_input === entry.password
-        ) {
-          correct = true; // Flip to stop alert
+        // Email and password exist and are correct
+        if (email_input === entry.email && password_input === entry.password) {
+          correct = true;
           // Login to MainMenuPage.js
           root.render(
             <QueryClientProvider client={queryClient}>
@@ -135,6 +126,26 @@ function handleForgot() {
 }
 
 function handle_open_create_account() {
+  // Hide 'Yes, please!' button and show create account form
   document.querySelector(".open-account-button").toggleAttribute("hidden");
   document.querySelector(".create-account-form").toggleAttribute("hidden");
+}
+
+function handle_create_account() {
+  const desired_email = document.querySelector(".create-account-email").value;
+  let taken = false;
+
+  fetch("http://localhost:5000/api/login")
+    .then((res) => res.json())
+    .then((data) => {
+      data.forEach((entry) => {
+        if (desired_email === entry.email) {
+          alert("There is already an account made for that email address");
+          taken = true;
+        }
+      });
+      if (!taken) {
+        alert("Account created! Logging in now");
+      }
+    });
 }
