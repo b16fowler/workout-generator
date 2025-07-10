@@ -15,17 +15,17 @@ export default function LoginPage() {
       <Header heading="Workout Generator Login" notLoggedIn={true} />
       <br />
       <br />
-      <h4>Enter login information:</h4>
+      <h2>Enter login information:</h2>
       <br />
       <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="username">Username: </label>
-        <input type="string" id="username" placeholder="" autoFocus></input>
-        <br />
-        <br />
-        <label htmlFor="password">Password: </label>
-        <input type="password" id="password" placeholder=""></input>
-        <br />
-        <br />
+        <div className="form-group">
+          <label htmlFor="username">Username: </label>
+          <input type="string" id="username" placeholder="" autoFocus></input>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password: </label>
+          <input type="password" id="password" placeholder=""></input>
+        </div>
         <input
           className="login-button"
           type="submit"
@@ -47,7 +47,7 @@ export default function LoginPage() {
       <br />
       <br />
       <br />
-      <h4>New here? Make a free account!</h4>
+      <h3>New here? Make a free account!</h3>
       <button
         className="open-account-button"
         value="Yes, please!"
@@ -59,27 +59,27 @@ export default function LoginPage() {
       </button>
       <form className="create-account-form" hidden={true}>
         <br />
-        <label htmlFor="create-account-username">Username: </label>
+        <div className="form-group">
+          <label htmlFor="create-account-username">Username: </label>
+          <input
+            className="create-account-username"
+            id="create-account-username"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="create-account-email">Email address: </label>
+          <input className="create-account-email" id="create-account-email" />
+        </div>
+        <div className="form-group">
+          <label htmlFor="create-account-password">Password: </label>
+          <input
+            className="create-account-password"
+            id="create-account-password"
+            type="password"
+          />
+        </div>
         <input
-          className="create-account-username"
-          id="create-account-username"
-        />
-        <br />
-        <br />
-        <label htmlFor="create-account-email">Email address: </label>
-        <input className="create-account-email" id="create-account-email" />
-        <br />
-        <br />
-        <label htmlFor="create-account-password">Password: </label>
-        <input
-          className="create-account-password"
-          id="create-account-password"
-          type="password"
-        />
-        <br />
-        <br />
-        <input
-          className="create-account-button"
+          className="login-button"
           type="button"
           value="Create new account"
         />
