@@ -25,20 +25,21 @@ export default function LoginPage() {
         <div className="form-group">
           <label htmlFor="password">Password: </label>
           <input type="password" id="password" placeholder=""></input>
+          <button className="show-password" onClick={handle_show_password}>
+            But
+          </button>
         </div>
         <input
           className="login-button"
           type="submit"
           value="Login"
           onClick={handleSubmit}
-          onChange={handleSubmit}
         />
         <input
           className="login-button"
           type="button"
           value="Forgot Password"
           onClick={handleForgot}
-          onChange={handleForgot}
         />
       </form>
       <br />
@@ -85,6 +86,10 @@ export default function LoginPage() {
 }
 
 export const queryClient = new QueryClient();
+
+function handle_show_password() {
+  document.querySelector("#password").setAttribute("type", "string");
+}
 
 // Called when user clicks "Login" button
 function handleSubmit(event) {
