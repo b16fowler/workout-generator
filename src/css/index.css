@@ -80,6 +80,14 @@ a {
   color: #0097ca;
 }
 
+h2 {
+  margin: 10px;
+}
+
+h3 {
+  margin: 10px;
+}
+
 .main-menu {
   display: flex;
   justify-content: center;
@@ -147,9 +155,11 @@ img {
   border: #f2ffcc;
   color: black;
   margin: 4px 2px;
+  padding: 4px 5px;
 }
 
 .login-button:hover {
+  background-color: #d6f281;
   cursor: pointer;
 }
 
@@ -158,21 +168,44 @@ img {
   border: #f2ffcc;
   color: black;
   margin: 4px 2px;
+  padding: 4px 5px;
 }
 
 .open-account-button:hover {
+  background-color: #d6f281;
   cursor: pointer;
 }
 
-.create-account-button {
-  background-color: #f2ffcc;
-  border: #f2ffcc;
-  color: black;
-  margin: 4px 2px;
+.create-account-form {
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-.create-account-button:hover {
-  cursor: pointer;
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.form-group label {
+  width: 175px;
+}
+
+.form-group input {
+  width: 175px;
+  padding: 5px;
+}
+
+label {
+  font-size: large;
+}
+
+input {
+  font-size: large;
 }
 
 .logOut {
