@@ -163,6 +163,10 @@ img {
   cursor: pointer;
 }
 
+.show-password {
+  border-radius: 50%;
+}
+
 .open-account-button {
   background-color: #f2ffcc;
   border: #f2ffcc;
