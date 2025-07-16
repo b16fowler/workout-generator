@@ -26,7 +26,7 @@ export default function LoginPage() {
           <label htmlFor="password">Password: </label>
           <input type="password" id="password" placeholder=""></input>
           <button className="show-password" onClick={handleShowPassword}>
-            But
+            <img src="pw-icon.png" alt="buttonpng" border="0" />
           </button>
         </div>
         <input
