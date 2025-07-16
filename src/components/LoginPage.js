@@ -17,7 +17,7 @@ export default function LoginPage() {
       <br />
       <h2>Enter login information:</h2>
       <br />
-      <form className="login-form" onSubmit={handleSubmit}>
+      <form className="login-form">
         <div className="form-group">
           <label htmlFor="email">Email address: </label>
           <input type="string" id="email" placeholder="" autoFocus></input>
@@ -25,7 +25,7 @@ export default function LoginPage() {
         <div className="form-group">
           <label htmlFor="password">Password: </label>
           <input type="password" id="password" placeholder=""></input>
-          <button className="show-password" onClick={handle_show_password}>
+          <button className="show-password" onClick={handleShowPassword}>
             But
           </button>
         </div>
@@ -54,8 +54,7 @@ export default function LoginPage() {
         value="Yes, please!"
         type="button"
         hidden={false}
-        onClick={handle_open_create_account}
-      >
+        onClick={handleOpenCreateAccount}>
         Yes, please!
       </button>
       <form className="create-account-form" hidden={true}>
@@ -76,7 +75,7 @@ export default function LoginPage() {
           className="login-button"
           type="button"
           value="Create new account"
-          onClick={handle_create_account}
+          onClick={handleCreateAccount}
         />
       </form>
       <div id="snackbar">This is the original message</div>
@@ -87,8 +86,16 @@ export default function LoginPage() {
 
 export const queryClient = new QueryClient();
 
-function handle_show_password() {
-  document.querySelector("#password").setAttribute("type", "string");
+function handleShowPassword(e) {
+  e.preventDefault();
+
+  // Toggle type attribute between password and string
+  const passwordEle = document.querySelector("#password");
+  if (passwordEle.getAttribute("type") === "password") {
+    passwordEle.setAttribute("type", "string");
+  } else {
+    passwordEle.setAttribute("type", "password");
+  }
 }
 
 // Called when user clicks "Login" button
@@ -102,10 +109,10 @@ function handleSubmit(event) {
 
   // Fetch information from server to check for login
   fetch("http://localhost:5000/api/login")
-    .then((res) => res.json())
-    .then((data) => {
+    .then(res => res.json())
+    .then(data => {
       // Check each row for user's enter information
-      data.forEach((entry) => {
+      data.forEach(entry => {
         // Email and password exist and are correct
         if (email_input === entry.email && password_input === entry.password) {
           correct = true;
@@ -130,20 +137,20 @@ function handleForgot() {
   showSnackbar("You hit the forgot password button");
 }
 
-function handle_open_create_account() {
+function handleOpenCreateAccount() {
   // Hide 'Yes, please!' button and show create account form
   document.querySelector(".open-account-button").toggleAttribute("hidden");
   document.querySelector(".create-account-form").toggleAttribute("hidden");
 }
 
-function handle_create_account() {
+function handleCreateAccount() {
   const desired_email = document.querySelector(".create-account-email").value;
   let taken = false;
 
   fetch("http://localhost:5000/api/login")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((entry) => {
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(entry => {
         if (desired_email === entry.email) {
           alert("There is already an account made for that email address");
           taken = true;
