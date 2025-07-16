@@ -86,6 +86,7 @@ export default function LoginPage() {
 
 export const queryClient = new QueryClient();
 
+// Called when user clicks "eye" button next to password
 function handleShowPassword(e) {
   e.preventDefault();
 
