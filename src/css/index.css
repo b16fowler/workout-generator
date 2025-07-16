@@ -165,6 +165,12 @@ img {
 
 .show-password {
   border-radius: 50%;
+  border: black;
+}
+
+img {
+  border-radius: 50%;
+  width: 20px;
 }
 
 .open-account-button {
