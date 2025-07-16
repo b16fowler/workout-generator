@@ -168,6 +168,17 @@ img {
   border: black;
 }
 
+.show-password:hover {
+  cursor: pointer;
+  background-color: #a1a1a0;
+}
+
+.show-password:active {
+  background-color: #a1a1a0;
+  box-shadow: 0 5px #000000;
+  transform: translateY(4px);
+}
+
 img {
   border-radius: 50%;
   width: 20px;
