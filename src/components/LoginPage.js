@@ -33,7 +33,7 @@ export default function LoginPage() {
           className="login-button"
           type="submit"
           value="Login"
-          onClick={handleSubmit}
+          onClick={handleLogin}
         />
         <input
           className="login-button"
@@ -99,7 +99,7 @@ function handleShowPassword(e) {
 }
 
 // Called when user clicks "Login" button
-function handleSubmit(event) {
+function handleLogin(event) {
   event.preventDefault();
 
   // Pull login info entered by user
@@ -144,20 +144,32 @@ function handleOpenCreateAccount() {
 }
 
 function handleCreateAccount() {
-  const desired_email = document.querySelector(".create-account-email").value;
-  let taken = false;
+  const new_email = document.querySelector(".create-account-email").value;
+  const new_password = document.querySelector(".create-account-password").value;
 
-  fetch("http://localhost:5000/api/login")
+  fetch("http://localhost:5000/api/create", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({
+      email: new_email,
+      password: new_password,
+    }),
+  })
     .then(res => res.json())
     .then(data => {
-      data.forEach(entry => {
-        if (desired_email === entry.email) {
-          alert("There is already an account made for that email address");
-          taken = true;
-        }
-      });
-      if (!taken) {
-        alert("Account created! Logging in now");
+      if (data.success) {
+        root.render(
+          <QueryClientProvider client={queryClient}>
+            <MainMenu />
+          </QueryClientProvider>
+        );
+      }
+      // Clear form
+      else {
+        document.querySelector(".create-account-email").value = "";
+        document.querySelector(".create-account-password").value = "";
       }
     });
 }
