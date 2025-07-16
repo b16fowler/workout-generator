@@ -5,9 +5,9 @@
 import MainMenu from "./MainMenuPage.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
+import FetchWrapper from "../fetchWrapper.js";
 import { root, showSnackbar } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// import { useEffect } from "react";
 
 export default function LoginPage() {
   return (
@@ -107,28 +107,22 @@ function handleLogin(event) {
   const password_input = document.querySelector("#password").value;
   let correct = false;
 
-  // Fetch information from server to check for login
-  fetch("http://localhost:5000/api/login")
-    .then(res => res.json())
-    .then(data => {
-      // Check each row for user's enter information
-      data.forEach(entry => {
-        // Email and password exist and are correct
-        if (email_input === entry.email && password_input === entry.password) {
-          correct = true;
-          // Login to MainMenuPage.js
-          root.render(
-            <QueryClientProvider client={queryClient}>
-              <MainMenu />
-            </QueryClientProvider>
-          );
-        }
-      });
-      if (!correct) {
-        // Login information does not match
-        showSnackbar("Login information does not match records");
+  // Get request
+  const API = new FetchWrapper("http://localhost:5000/api/login");
+  API.get("").then(data => {
+    // Check each row for user's enter information
+    data.forEach(entry => {
+      // Email and password exist and are correct
+      if (email_input === entry.email && password_input === entry.password) {
+        correct = true;
+        login();
       }
     });
+    if (!correct) {
+      // Login information does not match
+      showSnackbar("Login information does not match records");
+    }
+  });
 }
 
 // Called when user clicks "Forgot password" button
@@ -147,29 +141,24 @@ function handleCreateAccount() {
   const new_email = document.querySelector(".create-account-email").value;
   const new_password = document.querySelector(".create-account-password").value;
 
-  fetch("http://localhost:5000/api/create", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({
-      email: new_email,
-      password: new_password,
-    }),
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        root.render(
-          <QueryClientProvider client={queryClient}>
-            <MainMenu />
-          </QueryClientProvider>
-        );
-      }
-      // Clear form
-      else {
-        document.querySelector(".create-account-email").value = "";
-        document.querySelector(".create-account-password").value = "";
-      }
-    });
+  // Post request
+  const API = new FetchWrapper("http://localhost:5000/api/create");
+  API.post("", new_email, new_password).then(data => {
+    if (data.success) {
+      login();
+    }
+    // Clear form
+    else {
+      document.querySelector(".create-account-email").value = "";
+      document.querySelector(".create-account-password").value = "";
+    }
+  });
+}
+
+function login() {
+  root.render(
+    <QueryClientProvider client={queryClient}>
+      <MainMenu />
+    </QueryClientProvider>
+  );
 }
