@@ -151,7 +151,8 @@ function handleCreateAccount() {
 
   // Post request
   const API = new FetchWrapper("http://localhost:5000/api/create");
-  API.post("", new_username, new_password).then(data => {
+  const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
+  API.post("", create_query).then(data => {
     if (data.success) {
       login(new_username);
     }
