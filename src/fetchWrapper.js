@@ -14,15 +14,14 @@ export default class FetchWrapper {
     }).then(res => res.json());
   }
 
-  async post(endpoint, new_username, new_password) {
+  async post(endpoint, query) {
     return fetch(this.URL + endpoint, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        username: new_username,
-        password: new_password,
+        query: query,
       }),
     }).then(res => res.json());
   }
