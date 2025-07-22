@@ -25,7 +25,7 @@ const connection = await mysql.createConnection({
 // Query options
 const login_query = "SELECT * FROM logins;";
 
-// Handles (get) requests of users attempting to login
+// Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
   try {
     const result = await connection.query(login_query);
@@ -35,17 +35,27 @@ app.get("/api/login", async (req, res) => {
   }
 });
 
-// Handles posts request of users attempting to create accounts
-app.post("/api/create", async (req, res) => {
-  const { username, password } = req.body;
-  const create_query = `INSERT INTO logins VALUES ("${username}", "${password}");`;
-
+// Handles get requests of users trying to add a new exercise
+app.post("/api/add", async (req, res) => {
   try {
-    // Creates new entry in logins if username is unique
-    await connection.query(create_query);
+    await connection.query(req.body.query);
     res.json({
       success: true,
-      message: "Account created, you will now be logged in",
+      message: "New exercise added successfully",
+    });
+  } catch (err) {
+    console.log("Error found:\n" + err);
+    res.json({ success: false });
+  }
+});
+
+// Handles posts request of users attempting to create accounts
+app.post("/api/create", async (req, res) => {
+  try {
+    // Creates new entry in logins if username is unique
+    await connection.query(req.body.query);
+    res.json({
+      success: true,
     });
   } catch (err) {
     // username already exists
