@@ -21,8 +21,7 @@ export default function AddExercise() {
         <input
           id="exercise-name"
           type="text"
-          placeholder="Example: Push ups"
-        ></input>
+          placeholder="Example: Push ups"></input>
         <br />
         <br />
         <label htmlFor="exercise-type">Select type of exercise: </label>
@@ -41,8 +40,7 @@ export default function AddExercise() {
           input="number"
           min="1"
           max="50"
-          placeholder="1-50"
-        ></input>
+          placeholder="1-50"></input>
         <br />
         <br />
         <label htmlFor="exercise-sets">Enter number of sets in workout: </label>
@@ -51,8 +49,7 @@ export default function AddExercise() {
           input="number"
           min="1"
           max="10"
-          placeholder="1-10"
-        ></input>
+          placeholder="1-10"></input>
         <br />
         <br />
         <label htmlFor="exercise-pic">Exercise photo: </label>

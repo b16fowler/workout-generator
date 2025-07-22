@@ -16,17 +16,17 @@ export default function ExerciseTable() {
   });
 
   const COLUMNS = [
-    { label: "Name", renderCell: (item) => item.name },
+    { label: "Name", renderCell: item => item.name },
     {
       label: "Type",
-      renderCell: (item) => item.type,
+      renderCell: item => item.type,
     },
-    { label: "Reps", renderCell: (item) => item.reps },
+    { label: "Reps", renderCell: item => item.reps },
     {
       label: "Sets",
-      renderCell: (item) => item.sets,
+      renderCell: item => item.sets,
     },
-    { label: "Picture", renderCell: (item) => item.pic },
+    { label: "Picture", renderCell: item => item.pic },
   ];
 
   const Component = () => {

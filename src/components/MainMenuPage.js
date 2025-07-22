@@ -8,6 +8,7 @@ import GenerateWorkout from "./GenerateWorkoutPage.js";
 import AddExercise from "./AddExercisePage.js";
 import ViewExercises from "./ViewExercisesPage.js";
 import { root } from "../index.js";
+import { user } from "./App.js";
 
 export default function MainMenuPage() {
   return (
@@ -23,20 +24,17 @@ export default function MainMenuPage() {
       <div className="main-menu">
         <button
           className="main-menu-button"
-          onClick={() => handleClick(<GenerateWorkout />)}
-        >
+          onClick={() => handleClick(<GenerateWorkout />)}>
           Generate Workout
         </button>
         <button
           className="main-menu-button"
-          onClick={() => handleClick(<AddExercise />)}
-        >
+          onClick={() => handleClick(<AddExercise />)}>
           Add Exercise
         </button>
         <button
           className="main-menu-button"
-          onClick={() => handleClick(<ViewExercises />)}
-        >
+          onClick={() => handleClick(<ViewExercises />)}>
           View Exercises
         </button>
       </div>
