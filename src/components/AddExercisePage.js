@@ -4,11 +4,12 @@
  * exercise to their pool.
  **************************************************************************/
 
-import { userExercises } from "./App.js";
+import { userExercises, user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
 import { showSnackbar } from "../index.js";
 import ReturnHome from "./ReturnHome.js";
+import FetchWrapper from "../fetchWrapper.js";
 
 export default function AddExercise() {
   return (
@@ -101,17 +102,12 @@ function handleSubmit(e) {
   } else {
     // All fields valid, reset form and inform user
     document.getElementById("add-exercise-form").reset();
-    showSnackbar("New exercise logged successfully");
 
-    const currentInput = {
-      name: nameInput,
-      type: typeInput,
-      reps: repsInput,
-      sets: setsInput,
-      pic: picInput,
-    };
+    const add_exercise = `INSERT INTO user_exercises VALUES ("${user.name}", "${nameInput}", "${typeInput}", "${repsInput}", "${setsInput}", "${picInput}");`;
 
-    // Push input onto master list
-    userExercises.push(currentInput);
+    const API = new FetchWrapper("http://localhost:5000/api/add");
+    API.post("", add_exercise).then(data => {
+      showSnackbar(data.message);
+    });
   }
 }
