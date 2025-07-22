@@ -2,6 +2,7 @@
  * LoginPage component
  **************************************************************************/
 
+import { user } from "./App.js";
 import MainMenu from "./MainMenuPage.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
@@ -19,8 +20,8 @@ export default function LoginPage() {
       <br />
       <form className="login-form">
         <div className="form-group">
-          <label htmlFor="email">Email address: </label>
-          <input type="string" id="email" placeholder="" autoFocus></input>
+          <label htmlFor="username">Username: </label>
+          <input type="string" id="username" placeholder="" autoFocus></input>
         </div>
         <div className="form-group">
           <label htmlFor="password">Password: </label>
@@ -60,8 +61,11 @@ export default function LoginPage() {
       <form className="create-account-form" hidden={true}>
         <br />
         <div className="form-group">
-          <label htmlFor="create-account-email">Email address: </label>
-          <input className="create-account-email" id="create-account-email" />
+          <label htmlFor="create-account-username">Username: </label>
+          <input
+            className="create-account-username"
+            id="create-account-username"
+          />
         </div>
         <div className="form-group">
           <label htmlFor="create-account-password">Password: </label>
@@ -104,7 +108,7 @@ function handleLogin(event) {
   event.preventDefault();
 
   // Pull login info entered by user
-  const email_input = document.querySelector("#email").value;
+  const username_input = document.querySelector("#username").value;
   const password_input = document.querySelector("#password").value;
   let correct = false;
 
@@ -113,10 +117,13 @@ function handleLogin(event) {
   API.get("").then(data => {
     // Check each row for user's enter information
     data.forEach(entry => {
-      // Email and password exist and are correct
-      if (email_input === entry.email && password_input === entry.password) {
+      // username and password exist and are correct
+      if (
+        username_input === entry.username &&
+        password_input === entry.password
+      ) {
         correct = true;
-        login();
+        login(username_input);
       }
     });
     if (!correct) {
@@ -139,24 +146,26 @@ function handleOpenCreateAccount() {
 }
 
 function handleCreateAccount() {
-  const new_email = document.querySelector(".create-account-email").value;
+  const new_username = document.querySelector(".create-account-username").value;
   const new_password = document.querySelector(".create-account-password").value;
 
   // Post request
   const API = new FetchWrapper("http://localhost:5000/api/create");
-  API.post("", new_email, new_password).then(data => {
+  API.post("", new_username, new_password).then(data => {
     if (data.success) {
-      login();
+      login(new_username);
     }
-    // Clear form
+    // Alert user that username is taken and clear form
     else {
-      document.querySelector(".create-account-email").value = "";
+      showSnackbar(data.message);
+      document.querySelector(".create-account-username").value = "";
       document.querySelector(".create-account-password").value = "";
     }
   });
 }
 
-function login() {
+function login(username) {
+  user.name = username;
   root.render(
     <QueryClientProvider client={queryClient}>
       <MainMenu />
