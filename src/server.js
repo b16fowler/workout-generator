@@ -23,7 +23,7 @@ const connection = await mysql.createConnection({
 });
 
 // Query options
-const login_query = "SELECT * FROM logins";
+const login_query = "SELECT * FROM logins;";
 
 // Handles (get) requests of users attempting to login
 app.get("/api/login", async (req, res) => {
@@ -37,25 +37,25 @@ app.get("/api/login", async (req, res) => {
 
 // Handles posts request of users attempting to create accounts
 app.post("/api/create", async (req, res) => {
-  const { email, password } = req.body;
-  const create_query = `INSERT INTO logins VALUES ("${email}", "${password}")`;
+  const { username, password } = req.body;
+  const create_query = `INSERT INTO logins VALUES ("${username}", "${password}");`;
 
   try {
+    // Creates new entry in logins if username is unique
     await connection.query(create_query);
     res.json({
       success: true,
       message: "Account created, you will now be logged in",
     });
   } catch (err) {
-    // Email already exists
+    // username already exists
     if (err.code === "ER_DUP_ENTRY") {
       res.json({
         success: false,
-        message: "An account with that email already exists",
+        message: "An account with that username already exists",
       });
     }
-
-    console.log("Error found: \n" + err);
+    console.log("Error found:\n" + err);
   }
 });
 
