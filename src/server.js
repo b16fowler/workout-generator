@@ -35,22 +35,8 @@ app.get("/api/login", async (req, res) => {
   }
 });
 
-// Handles get requests of users trying to add a new exercise
-app.post("/api/add", async (req, res) => {
-  try {
-    await connection.query(req.body.query);
-    res.json({
-      success: true,
-      message: "New exercise added successfully",
-    });
-  } catch (err) {
-    console.log("Error found:\n" + err);
-    res.json({ success: false });
-  }
-});
-
 // Handles posts request of users attempting to create accounts
-app.post("/api/create", async (req, res) => {
+app.post("/api/create-account", async (req, res) => {
   try {
     // Creates new entry in logins if username is unique
     await connection.query(req.body.query);
@@ -66,6 +52,35 @@ app.post("/api/create", async (req, res) => {
       });
     }
     console.log("Error found:\n" + err);
+  }
+});
+
+// Handles post requests of users loading their exercise table
+app.post("/api/create-table", async (req, res) => {
+  const create_table_query = `SELECT * FROM user_exercises WHERE user = "${req.body.user}"`;
+  try {
+    const result = await connection.query(create_table_query);
+    console.log(result);
+    res.json({
+      success: true,
+      exercises: result,
+    });
+  } catch (err) {
+    console.error("Error fetching data:\n", err);
+  }
+});
+
+// Handles post requests of users trying to add a new exercise
+app.post("/api/add", async (req, res) => {
+  try {
+    await connection.query(req.body.query);
+    res.json({
+      success: true,
+      message: "New exercise added successfully",
+    });
+  } catch (err) {
+    console.log("Error found:\n" + err);
+    res.json({ success: false });
   }
 });
 
