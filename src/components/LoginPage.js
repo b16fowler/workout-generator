@@ -150,7 +150,7 @@ function handleCreateAccount() {
   const new_password = document.querySelector(".create-account-password").value;
 
   // Post request
-  const API = new FetchWrapper("http://localhost:5000/api/create");
+  const API = new FetchWrapper("http://localhost:5000/api/create-account");
   const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
   API.post("", create_query).then(data => {
     if (data.success) {
