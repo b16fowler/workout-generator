@@ -1,12 +1,34 @@
 /**************************************************************************
  * ExerciseTable component
  **************************************************************************/
-import { userExercises } from "./App.js";
+import { useEffect, useState } from "react";
+import { userExercises, user } from "./App.js";
 import { CompactTable } from "@table-library/react-table-library/compact.js";
 import { useTheme } from "@table-library/react-table-library/theme.js";
 import { getTheme } from "@table-library/react-table-library/baseline.js";
 
 export default function ExerciseTable() {
+  // Fetch user's excerise data
+  const [exercises, setExercises] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/create-table", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: user._name }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        setExercises(data);
+      })
+      .catch(err => console.error("Error fetching data: \n", err));
+  }, []);
+
+  console.log(exercises);
+  console.log();
+
   const nodes = [];
   userExercises.forEach((exercise, index) => {
     nodes.push({
