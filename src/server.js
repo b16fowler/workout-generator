@@ -60,7 +60,6 @@ app.post("/api/create-table", async (req, res) => {
   const create_table_query = `SELECT * FROM user_exercises WHERE user = "${req.body.user}"`;
   try {
     const result = await connection.query(create_table_query);
-    console.log(result);
     res.json({
       success: true,
       exercises: result,
