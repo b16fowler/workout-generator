@@ -10,6 +10,7 @@ import { getTheme } from "@table-library/react-table-library/baseline.js";
 export default function ExerciseTable() {
   // Fetch user's excerise data
   const [exercises, setExercises] = useState(null);
+  const nodes = [];
 
   useEffect(() => {
     fetch("http://localhost:5000/api/create-table", {
@@ -21,15 +22,23 @@ export default function ExerciseTable() {
     })
       .then(res => res.json())
       .then(data => {
-        setExercises(data);
+        setExercises(data.exercises[0]);
       })
       .catch(err => console.error("Error fetching data: \n", err));
   }, []);
 
-  console.log(exercises);
-  console.log();
+  // Does not work yet
+  // useEffect(() => {
+  //   if (exercises) {
+  //     exercises.forEach((entry, index) => {
+  //       nodes.push({
+  //         id: index,
+  //         ...entry,
+  //       });
+  //     });
+  //   }
+  // }, [exercises]);
 
-  const nodes = [];
   userExercises.forEach((exercise, index) => {
     nodes.push({
       id: index,
