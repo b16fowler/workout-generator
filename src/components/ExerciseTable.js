@@ -2,90 +2,57 @@
  * ExerciseTable component
  **************************************************************************/
 import { useEffect, useState } from "react";
-import { userExercises, user } from "./App.js";
-import { CompactTable } from "@table-library/react-table-library/compact.js";
-import { useTheme } from "@table-library/react-table-library/theme.js";
-import { getTheme } from "@table-library/react-table-library/baseline.js";
+import { user } from "./App.js";
+import { Table } from "antd";
+import axios from "axios";
+
+const columns = [
+  { title: "Name", dataIndex: "name", key: "name" },
+  { title: "Type", dataIndex: "type", key: "type" },
+  { title: "Reps", dataIndex: "reps", key: "reps" },
+  { title: "Sets", dataIndex: "sets", key: "sets" },
+  { title: "Pic", dataIndex: "pic", key: "pic" },
+];
+const exercises = [];
 
 export default function ExerciseTable() {
-  // Fetch user's excerise data
-  const [exercises, setExercises] = useState(null);
-  const nodes = [];
+  const [tableData, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/create-table", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: user._name }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        setExercises(data.exercises[0]);
-      })
-      .catch(err => console.error("Error fetching data: \n", err));
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/create-table",
+          { user: user._name }
+        );
+        setData(response.data.exercises[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  // Does not work yet
-  // useEffect(() => {
-  //   if (exercises) {
-  //     exercises.forEach((entry, index) => {
-  //       nodes.push({
-  //         id: index,
-  //         ...entry,
-  //       });
-  //     });
-  //   }
-  // }, [exercises]);
+  useEffect(() => {
+    if (exercises) {
+      exercises.forEach((entry, index) => {
+        let temp = {
+          key: index + 1,
+          name: entry.name,
+          type: entry.type,
+          reps: entry.reps,
+          sets: entry.sets,
+          pic: entry.pic,
+        };
+        tableData.push(temp);
+      });
+    }
+  }, [exercises]);
 
-  userExercises.forEach((exercise, index) => {
-    nodes.push({
-      id: index,
-      ...exercise,
-    });
-  });
-
-  const COLUMNS = [
-    { label: "Name", renderCell: item => item.name },
-    {
-      label: "Type",
-      renderCell: item => item.type,
-    },
-    { label: "Reps", renderCell: item => item.reps },
-    {
-      label: "Sets",
-      renderCell: item => item.sets,
-    },
-    { label: "Picture", renderCell: item => item.pic },
-  ];
-
-  const Component = () => {
-    const data = { nodes };
-
-    const theme = useTheme([
-      getTheme(),
-      {
-        HeaderRow: `
-        background-color: #f2ffcc;
-        color:rgb(0, 0, 0);
-      `,
-        Row: `
-        &:nth-of-type(odd) {
-          background-color: #d2e9fb;
-          color:rgb(22, 22, 22);
-        }
-
-        &:nth-of-type(even) {
-          background-color: #eaf5fd;
-          color:rgb(22, 22, 22);
-        }
-      `,
-      },
-    ]);
-
-    return <CompactTable columns={COLUMNS} data={data} theme={theme} />;
-  };
-
-  return <Component />;
+  return <Table columns={columns} dataSource={tableData} loading={loading} />;
 }
