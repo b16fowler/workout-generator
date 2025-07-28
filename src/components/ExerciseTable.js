@@ -6,6 +6,7 @@ import { user } from "./App.js";
 import { Table } from "antd";
 import axios from "axios";
 
+// Columns for exercise table
 const columns = [
   { title: "Name", dataIndex: "name", key: "name" },
   { title: "Type", dataIndex: "type", key: "type" },
@@ -18,6 +19,7 @@ export default function ExerciseTable() {
   const [tableData, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch user's exercises from db
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -37,6 +39,7 @@ export default function ExerciseTable() {
     fetchData();
   }, []);
 
+  // Once data is fetched, load each exercise into tableData
   useEffect(() => {
     if (exercises) {
       exercises.forEach((entry, index) => {
