@@ -11,7 +11,6 @@ const columns = [
   { title: "Type", dataIndex: "type", key: "type" },
   { title: "Reps", dataIndex: "reps", key: "reps" },
   { title: "Sets", dataIndex: "sets", key: "sets" },
-  { title: "Pic", dataIndex: "pic", key: "pic" },
 ];
 const exercises = [];
 
@@ -47,7 +46,6 @@ export default function ExerciseTable() {
           type: entry.type,
           reps: entry.reps,
           sets: entry.sets,
-          pic: entry.pic,
         };
         tableData.push(temp);
       });
