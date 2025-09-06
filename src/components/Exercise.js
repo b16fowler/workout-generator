@@ -12,7 +12,7 @@ function showExercise(exercise, index) {
   const existingDiv = document.getElementById(index);
 
   // Not sure why this is needed. For some reason after the API call is added
-  // in Workout.js, this div is rendering twice
+  // in Workout.js, this div is rendered twice
   if (!existingDiv) {
     console.log("Div for given index does not exist yet");
     // Create div to hold elements to be displayed
