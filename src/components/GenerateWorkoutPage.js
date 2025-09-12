@@ -3,15 +3,43 @@
  **************************************************************************/
 
 import ReturnHome from "./ReturnHome.js";
-import Workout from "./WorkoutPage.js";
+import Workout from "./Workout.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
-import { root } from "../index.js";
 import { user } from "./App.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function GenerateWorkout() {
-  let [workout, setWorkout] = useState([]);
+  const [workout, setWorkout] = useState(null);
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  // useEffect fetchs exercises from DB and then renders Workout component once
+  // workout object has been updated
+  //
+  useEffect(() => {
+    if (!shouldFetch) return;
+
+    const fetchExercises = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/generate", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user: user._name }),
+        });
+        const result = await response.json();
+        setWorkout(result.exercises[0]);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        document.getElementById("generate-page").hidden = true;
+        setShouldFetch(false);
+      }
+    };
+
+    fetchExercises();
+  }, [shouldFetch]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,68 +63,40 @@ export default function GenerateWorkout() {
     let numExercises = document.querySelector("#numExercises").value;
 
     // If number of exercises field left blank, assign 1 to it
-    // TODO: Fix
-    numExercises = numExercises ? numExercises : 1;
-    //////////////////////////////////////////////////////////
-
-    // Fetch user's exercises from db
-    fetch("http://localhost:5000/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ user: user._name }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        setWorkout(data.exercises[0]);
-      });
+    // TODO: FIX
+    // numExercises = numExercises ? numExercises : 1;
 
     // Separate loop of fetch calls for user's exercise photos
-    for (let i = 0; i < numExercises; i++) {
-      fetch("http://localhost:5000/api/photos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user: user._name, offset: i }),
-      })
-        .then(response => response.blob())
-        .then(blob => {
-          // Create img + div
-          const url = URL.createObjectURL(blob);
-          const img = document.createElement("img");
-          const div = document.createElement("div");
+    // for (let i = 0; i < numExercises; i++) {
+    //   fetch("http://localhost:5000/api/photos", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ user: user._name, offset: i }),
+    //   })
+    //     .then(response => response.blob())
+    //     .then(blob => {
+    //       // Create img
+    //       const img = document.createElement("img");
+    //       img.className = "exercise-image";
+    //       img.src = URL.createObjectURL(blob);
+    //       img.id = i;
+    //       // Show first img, hide rest
+    //       img.hidden = true;
+    //       img.hidden = img.id === "0" ? false : true;
 
-          //////////////////////// CHANGE THIS IN CSS ////////////////////////
-          // Style img
-          img.src = url;
-          img.style.width = "45%";
-          img.style.height = "auto";
-          img.style.borderRadius = "0";
-          img.style.padding = "100px";
+    //       // Create div
+    //       const div = document.createElement("div");
+    //       div.className = "exercise-div";
 
-          // Style div
-          div.style.display = "flex";
-          div.style.justifyContent = "center";
-          div.style.alignItems = "center";
+    //       // Append
+    //       div.appendChild(img);
+    //       document.body.appendChild(div);
+    //     });
+    // }
 
-          div.className = "exercise-pic";
-
-          //////////////////////// CHANGE THIS IN CSS ////////////////////////
-
-          // Hide + append img
-          img.id = i;
-          img.hidden = true;
-          // Show first img, hide rest
-          img.hidden = img.id === "0" ? false : true;
-          // Append
-          div.appendChild(img);
-          document.body.appendChild(div);
-        });
-    }
-
-    root.render(<Workout workout={workout} />);
+    setShouldFetch(true);
   }
 
   return (
@@ -136,7 +136,8 @@ export default function GenerateWorkout() {
           <br />
         </form>
       </div>
-      <ReturnHome />
+      {workout && <Workout workout={workout} />}
+      {!workout && <ReturnHome />}
       <Footer />
     </>
   );
