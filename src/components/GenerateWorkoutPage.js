@@ -2,15 +2,103 @@
  * GenerateWorkoutPage component
  **************************************************************************/
 
-import Workout from "./Workout.js";
-// import { userExercises } from "./App.js";
-import { root } from "../index.js";
+import ReturnHome from "./ReturnHome.js";
+import Workout from "./WorkoutPage.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
-import ReturnHome from "./ReturnHome.js";
-import axios from "axios";
+import { root } from "../index.js";
+import { user } from "./App.js";
+import { useState } from "react";
 
 export default function GenerateWorkout() {
+  let [workout, setWorkout] = useState([]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // Pull checkbox boolean values and assign to new object typeCheckboxes
+    const formValues = document.getElementsByName("box");
+    const checkboxes = {};
+    formValues.forEach(value => {
+      checkboxes[value.id] = value.checked;
+    });
+
+    // If all checkboxes left blank, check all
+    const noneChecked = Object.values(checkboxes).every(value => !value);
+    if (noneChecked) {
+      Object.keys(checkboxes).forEach(key => {
+        checkboxes[key] = true;
+      });
+    }
+
+    // Get number of desired exercises
+    let numExercises = document.querySelector("#numExercises").value;
+
+    // If number of exercises field left blank, assign 1 to it
+    // TODO: Fix
+    numExercises = numExercises ? numExercises : 1;
+    //////////////////////////////////////////////////////////
+
+    // Fetch user's exercises from db
+    fetch("http://localhost:5000/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ user: user._name }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        setWorkout(data.exercises[0]);
+      });
+
+    // Separate loop of fetch calls for user's exercise photos
+    for (let i = 0; i < numExercises; i++) {
+      fetch("http://localhost:5000/api/photos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: user._name, offset: i }),
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          // Create img + div
+          const url = URL.createObjectURL(blob);
+          const img = document.createElement("img");
+          const div = document.createElement("div");
+
+          //////////////////////// CHANGE THIS IN CSS ////////////////////////
+          // Style img
+          img.src = url;
+          img.style.width = "45%";
+          img.style.height = "auto";
+          img.style.borderRadius = "0";
+          img.style.padding = "100px";
+
+          // Style div
+          div.style.display = "flex";
+          div.style.justifyContent = "center";
+          div.style.alignItems = "center";
+
+          div.className = "exercise-pic";
+
+          //////////////////////// CHANGE THIS IN CSS ////////////////////////
+
+          // Hide + append img
+          img.id = i;
+          img.hidden = true;
+          // Show first img, hide rest
+          img.hidden = img.id === "0" ? false : true;
+          // Append
+          div.appendChild(img);
+          document.body.appendChild(div);
+        });
+    }
+
+    root.render(<Workout workout={workout} />);
+  }
+
   return (
     <>
       <Header heading="Generate New Workout" />
@@ -52,33 +140,6 @@ export default function GenerateWorkout() {
       <Footer />
     </>
   );
-}
-
-function handleSubmit(e) {
-  e.preventDefault();
-
-  // Pull checkbox boolean values and assign to new object typeCheckboxes
-  const formValues = document.getElementsByName("box");
-  const checkboxes = {};
-  formValues.forEach(value => {
-    checkboxes[value.id] = value.checked;
-  });
-
-  // If all checkboxes left blank, check all
-  const noneChecked = Object.values(checkboxes).every(value => !value);
-  if (noneChecked) {
-    Object.keys(checkboxes).forEach(key => {
-      checkboxes[key] = true;
-    });
-  }
-
-  // Get number of desired exercises
-  let numExercises = document.querySelector("#numExercises").value;
-  // If number of exercises field left blank, assign 1 to it
-  // TODO: Fix
-  numExercises = numExercises ? numExercises : 1;
-
-  root.render(<Workout numExercises={numExercises} checkboxes={checkboxes} />);
 }
 
 // workout will contain all exercises based on which types were checked
