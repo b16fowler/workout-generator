@@ -1,5 +1,11 @@
 /**************************************************************************
  * LogOutButton component
+ *
+ * LogOutButton shows in the bottom right-hand corner of the Header. This
+ * component is hidden when the user is not logged in. When clicked,
+ * removes any divs that may have been on display if workout was generated,
+ * then renders App component.
+ *
  **************************************************************************/
 
 import { root } from "../index.js";
