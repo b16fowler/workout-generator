@@ -15,7 +15,7 @@ export default function GenerateWorkout() {
 
   // useEffect fetchs exercises from DB and then renders Workout component once
   // workout object has been updated
-  //
+  //TODO: CHANGE SQL QUERY FOR ACCURATE CHECKBOX CALL
   useEffect(() => {
     if (!shouldFetch) return;
 
@@ -63,7 +63,7 @@ export default function GenerateWorkout() {
     let numExercises = document.querySelector("#numExercises").value;
 
     // If number of exercises field left blank, assign 1 to it
-    // TODO: FIX
+    // TODO: FIX HOW NUMEXERCISES WORKS FOR FETCH CALL
     // numExercises = numExercises ? numExercises : 1;
 
     // Separate loop of fetch calls for user's exercise photos
