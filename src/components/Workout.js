@@ -10,7 +10,6 @@ import Footer from "./Footer.js";
 
 export default function Workout({ workout }) {
   // Tracks index of given exercise in generated workout
-  // let [exercises, setExercises] = useState([]);
   let [index, setIndex] = useState(0);
 
   return (
