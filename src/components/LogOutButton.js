@@ -10,8 +10,7 @@ export default function LogOutButton({ notLoggedIn }) {
     <button
       className="logOut"
       onClick={handleLogOut}
-      hidden={notLoggedIn ? true : false}
-    >
+      hidden={notLoggedIn ? true : false}>
       Log out
     </button>
   );
@@ -19,8 +18,8 @@ export default function LogOutButton({ notLoggedIn }) {
 
 function handleLogOut() {
   // Remove exercise-div, if user has generated workout
-  if (document.querySelector(".exercise-div")) {
-    document.body.removeChild(document.querySelector(".exercise-div"));
+  while (document.querySelector(".exercise-pic")) {
+    document.body.removeChild(document.querySelector(".exercise-pic"));
   }
 
   root.render(<App />);
