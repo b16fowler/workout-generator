@@ -124,12 +124,6 @@ img {
   position: relative;
 }
 
-.exercise-div {
-  display: grid;
-  place-items: center;
-  height: 10vh;
-}
-
 .button {
   background-color: #f2ffcc;
   border: #f2ffcc;
@@ -291,16 +285,23 @@ input {
 }
 
 .exercise-table {
-  place-items: center;
   border: thick solid #f2ffcc;
   border-collapse: separate;
   border-spacing: 150px;
+  place-items: center;
+}
+
+.exercise-div {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 .exercise-image {
-  width: 800px;
-  height: 500px;
-  margin: auto;
+  border-radius: 0;
+  height: auto;
+  padding: 10%;
+  width: 45%;
 }
 
 .header-div {
