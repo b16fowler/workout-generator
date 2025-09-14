@@ -22,6 +22,11 @@ export default function ReturnHome() {
 }
 
 function handleClick() {
+  // Remove exercise-div, if user has generated workout
+  while (document.querySelector(".exercise-pic")) {
+    document.body.removeChild(document.querySelector(".exercise-pic"));
+  }
+
   root.render(
     <QueryClientProvider client={queryClient}>
       <MainMenuPage />
