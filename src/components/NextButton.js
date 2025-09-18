@@ -13,8 +13,9 @@ export default function NextButton({ index, setIndex, length }) {
   );
 
   function handleClick() {
-    // Hide current image before displaying next
+    // Hide current image
     document.getElementById(index).toggleAttribute("hidden");
+    // Display next image
     document.getElementById(index + 1).toggleAttribute("hidden");
 
     // Update index
