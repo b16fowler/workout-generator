@@ -84,7 +84,7 @@ export default function GenerateWorkout() {
           img.id = i;
           // Show first img, hide rest
           img.hidden = true;
-          img.hidden = img.id === "0" ? false : true;
+          // img.hidden = img.id === "0" ? false : true;
 
           // Create div
           const div = document.createElement("div");
