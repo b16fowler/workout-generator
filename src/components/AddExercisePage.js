@@ -7,10 +7,9 @@
 import { user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
-import { showSnackbar } from "../index.js";
+import { showSnackbar } from "./App.js";
 import ReturnHome from "./ReturnHome.js";
-import FetchWrapper from "../fetchWrapper.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function AddExercise() {
   const [preview, setPreview] = useState(null);
@@ -187,32 +186,7 @@ export default function AddExercise() {
         "Reps or sets input field(s) not in acceptable range. Please try again."
       </div>
       <ReturnHome />
-
-      <form
-        action="/api/add"
-        method="post"
-        encType="multipart/form-data"
-        onSubmit={handleTest}>
-        <label>
-          Test form:
-          <br />
-        </label>
-        <input
-          id="testPhoto"
-          type="file"
-          name="image"
-          onChange={handlePic}></input>
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
-
-      <br />
-      <br />
-      <button type="button" onClick={handleLoadImage}>
-        Load image
-      </button>
-
+      <div id="snackbar"></div>
       <Footer />
     </>
   );
