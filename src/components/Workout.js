@@ -6,22 +6,44 @@ import Exercise from "./Exercise.js";
 import FinishButton from "./FinishButton.js";
 import NextButton from "./NextButton.js";
 import PreviousButton from "./PreviousButton.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Workout({ workout }) {
   // Tracks index of given exercise in generated workout
-  let [index, setIndex] = useState(0);
+  let [index, setIndex] = useState(-1);
+  let [started, setStarted] = useState(false);
+
+  // useEffect displays first exercise image after begin button is clicked
+  useEffect(() => {
+    if (!started) return;
+    document.getElementById(0).toggleAttribute("hidden");
+  }, [started]);
+
+  // Called when begin-button is clicked, sets index to 0
+  const startWorkout = () => {
+    setIndex(0);
+    setStarted(true);
+  };
 
   return (
     <>
-      <Exercise
-        name={workout[index].name}
-        sets={workout[index].sets}
-        reps={workout[index].reps}
-      />
-      <PreviousButton index={index} setIndex={setIndex} />
-      <NextButton index={index} setIndex={setIndex} length={workout.length} />
-      <FinishButton index={index} length={workout.length} />
+      {!started && (
+        <button className="start-button" onClick={startWorkout}>
+          Begin workout
+        </button>
+      )}
+      {started && (
+        <Exercise
+          name={workout[index].name}
+          sets={workout[index].sets}
+          reps={workout[index].reps}
+        />
+      )}
+      {started && <PreviousButton index={index} setIndex={setIndex} />}
+      {started && (
+        <NextButton index={index} setIndex={setIndex} length={workout.length} />
+      )}
+      {started && <FinishButton index={index} length={workout.length} />}
     </>
   );
 }
