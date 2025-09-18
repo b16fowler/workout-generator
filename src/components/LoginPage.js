@@ -2,12 +2,12 @@
  * LoginPage component
  **************************************************************************/
 
-import { user } from "./App.js";
+import { user, showSnackbar } from "./App.js";
 import MainMenu from "./MainMenuPage.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 import FetchWrapper from "../fetchWrapper.js";
-import { root, showSnackbar } from "../index.js";
+import { root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function LoginPage() {
