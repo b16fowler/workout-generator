@@ -38,6 +38,7 @@ export default function MainMenuPage() {
           View Exercises
         </button>
       </div>
+      <div id="snackbar"></div>
       <Footer />
     </>
   );
