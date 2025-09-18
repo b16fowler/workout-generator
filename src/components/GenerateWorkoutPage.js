@@ -67,34 +67,34 @@ export default function GenerateWorkout() {
     // numExercises = numExercises ? numExercises : 1;
 
     // Separate loop of fetch calls for user's exercise photos
-    // for (let i = 0; i < numExercises; i++) {
-    //   fetch("http://localhost:5000/api/photos", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ user: user._name, offset: i }),
-    //   })
-    //     .then(response => response.blob())
-    //     .then(blob => {
-    //       // Create img
-    //       const img = document.createElement("img");
-    //       img.className = "exercise-image";
-    //       img.src = URL.createObjectURL(blob);
-    //       img.id = i;
-    //       // Show first img, hide rest
-    //       img.hidden = true;
-    //       img.hidden = img.id === "0" ? false : true;
+    for (let i = 0; i < numExercises; i++) {
+      fetch("http://localhost:5000/api/photos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: user._name, offset: i }),
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          // Create img
+          const img = document.createElement("img");
+          img.className = "exercise-image";
+          img.src = URL.createObjectURL(blob);
+          img.id = i;
+          // Show first img, hide rest
+          img.hidden = true;
+          img.hidden = img.id === "0" ? false : true;
 
-    //       // Create div
-    //       const div = document.createElement("div");
-    //       div.className = "exercise-div";
+          // Create div
+          const div = document.createElement("div");
+          div.className = "exercise-div";
 
-    //       // Append
-    //       div.appendChild(img);
-    //       document.body.appendChild(div);
-    //     });
-    // }
+          // Append
+          div.appendChild(img);
+          document.body.appendChild(div);
+        });
+    }
 
     setShouldFetch(true);
   }
@@ -138,6 +138,7 @@ export default function GenerateWorkout() {
       </div>
       {workout && <Workout workout={workout} />}
       {!workout && <ReturnHome />}
+      <div id="snackbar"></div>
       <Footer />
     </>
   );
