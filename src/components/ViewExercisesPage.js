@@ -16,6 +16,7 @@ export default function ViewExercises() {
         <br />
         <ExerciseTable />
       </div>
+      <div id="snackbar"></div>
       <Footer />
     </>
   );
