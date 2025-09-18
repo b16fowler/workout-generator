@@ -9,7 +9,7 @@
  **************************************************************************/
 
 import { root } from "../index.js";
-import App from "./App.js";
+import App, { showSnackbar } from "./App.js";
 
 export default function LogOutButton({ notLoggedIn }) {
   return (
@@ -23,10 +23,14 @@ export default function LogOutButton({ notLoggedIn }) {
 }
 
 function handleLogOut() {
-  // Remove exercise-div, if user has generated workout
-  while (document.querySelector(".exercise-div")) {
-    document.body.removeChild(document.querySelector(".exercise-div"));
-  }
+  showSnackbar("Logging out...");
 
-  root.render(<App />);
+  setTimeout(() => {
+    // Remove exercise-div, if user has generated workout
+    while (document.querySelector(".exercise-div")) {
+      document.body.removeChild(document.querySelector(".exercise-div"));
+    }
+
+    root.render(<App />);
+  }, 2000);
 }
