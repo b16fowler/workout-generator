@@ -241,7 +241,7 @@ input {
   font-size: large;
   font-weight: bolder;
   position: absolute;
-  top: 41px;
+  top: 62%;
   right: 0%;
   border: none;
 }
@@ -340,7 +340,7 @@ input {
   font-weight: bolder;
   letter-spacing: 1px;
   position: absolute;
-  left: 0;
+  left: 5px;
   bottom: -18px;
 }
 
