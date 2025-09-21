@@ -54,17 +54,19 @@ export default function GenerateWorkout() {
     // If all checkboxes left blank, check all
     const noneChecked = Object.values(checkboxes).every(value => !value);
     if (noneChecked) {
-      Object.keys(checkboxes).forEach(key => {
-        checkboxes[key] = true;
+      Object.keys(checkboxes).forEach(box => {
+        checkboxes[box] = true;
       });
     }
+
+    console.log(checkboxes);
 
     // Get number of desired exercises
     let numExercises = document.querySelector("#numExercises").value;
 
     // If number of exercises field left blank, assign 1 to it
     // TODO: FIX HOW NUMEXERCISES WORKS FOR FETCH CALL
-    // numExercises = numExercises ? numExercises : 1;
+    numExercises = numExercises ? numExercises : 1;
 
     // Separate loop of fetch calls for user's exercise photos
     for (let i = 0; i < numExercises; i++) {
@@ -82,9 +84,8 @@ export default function GenerateWorkout() {
           img.className = "exercise-image";
           img.src = URL.createObjectURL(blob);
           img.id = i;
-          // Show first img, hide rest
+          // Hide all to start
           img.hidden = true;
-          // img.hidden = img.id === "0" ? false : true;
 
           // Create div
           const div = document.createElement("div");
