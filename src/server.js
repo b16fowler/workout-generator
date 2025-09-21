@@ -82,7 +82,7 @@ app.post("/api/create-account", async (req, res) => {
 
 // Handles post requests of users generating a workout
 app.post("/api/generate", async (req, res) => {
-  const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE user = "${req.body.user}"`;
+  const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE user = "${req.body.user}" AND type IN (${req.body.selectedTypes})`;
 
   try {
     const result = await connection.query(create_table_query);
