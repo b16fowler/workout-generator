@@ -22,7 +22,7 @@ export default function FinishButton({ index, length }) {
   );
 
   function handleClick() {
-    showSnackbar("Exercise completed!");
+    showSnackbar("Workout completed!");
 
     // Rerender MainMenuPage once snackbar is finished
     setTimeout(() => {
