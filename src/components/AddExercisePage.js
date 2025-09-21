@@ -12,53 +12,7 @@ import ReturnHome from "./ReturnHome.js";
 import { useState } from "react";
 
 export default function AddExercise() {
-  const [preview, setPreview] = useState(null);
   const [photo, setPhoto] = useState(null);
-
-  const handleTest = e => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    const input = document.querySelector("#testPhoto");
-    formData.append("image", input.files[0]);
-
-    fetch("http://localhost:5000/upload", {
-      method: "POST",
-      body: formData,
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-      })
-      .then(data => {
-        console.log(`data: `);
-        console.log(data);
-      })
-      .catch(err => {
-        console.error("Fetch failed:\n", err);
-      });
-  };
-
-  const handleLoadImage = e => {
-    e.preventDefault();
-
-    fetch("http://localhost:5000/load")
-      .then(response => response.blob())
-      .then(blob => {
-        const url = URL.createObjectURL(blob);
-        const img = document.createElement("img");
-
-        img.src = url;
-        img.style.width = "300px";
-        img.style.height = "auto";
-        img.style.borderRadius = "0";
-        document.body.appendChild(img);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  };
 
   const handlePic = e => {
     // Prevent page of reloading on submission
@@ -78,32 +32,11 @@ export default function AddExercise() {
     formData.append("user", user.name);
     formData.append("name", document.querySelector("#exercise-name").value);
     formData.append("type", document.querySelector("#exercise-type").value);
-    formData.append("sets", document.querySelector("#exercise-reps").value);
-    formData.append("reps", document.querySelector("#exercise-sets").value);
+    formData.append("reps", document.querySelector("#exercise-reps").value);
+    formData.append("sets", document.querySelector("#exercise-sets").value);
     formData.append("image", photoInput.files[0]);
 
-    // Check for empty mandatory fields
-    // if (
-    //   typeInput === "Please select" ||
-    //   !nameInput ||
-    //   !repsInput ||
-    //   !setsInput ||
-    //   !photoInput
-    // ) {
-    //   showSnackbar("All fields are required, please try again");
-    // }
-    // Check that entered reps/sets are in range
-    // else if (
-    //   0 >= repsInput ||
-    //   50 < repsInput ||
-    //   0 >= setsInput ||
-    //   10 < setsInput
-    // ) {
-    //   showSnackbar(
-    //     "Sets or reps outside of acceptable range, please try again"
-    //   );
-    // } else {
-    // All fields valid, reset form and inform user
+    // Reset form
     document.getElementById("add-exercise-form").reset();
 
     fetch("http://localhost:5000/api/add", {
@@ -173,21 +106,14 @@ export default function AddExercise() {
           name="uploaded-photo"
           onChange={handlePic}
         />
-        {preview && (
-          <img src="{preview}" alt="preview" style={{ maxWidth: "300px" }} />
-        )}
         <br />
         <br />
         <br />
         <input className="button" type="submit" value="Add exercise" />
       </form>
-      <div id="snackbar">"All fields are required."</div>
-      <div id="snackbar">
-        "Reps or sets input field(s) not in acceptable range. Please try again."
-      </div>
       <ReturnHome />
-      <div id="snackbar"></div>
       <Footer />
+      <div id="snackbar"></div>
     </>
   );
 }
