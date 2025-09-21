@@ -13,11 +13,24 @@ export default function GenerateWorkout() {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
-  // useEffect fetchs exercises from DB and then renders Workout component once
+  // useEffect fetches exercises from DB and then renders Workout component once
   // workout object has been updated
   //TODO: CHANGE SQL QUERY FOR ACCURATE CHECKBOX CALL
   useEffect(() => {
     if (!shouldFetch) return;
+
+    // Pull checkbox boolean values
+    const formValues = document.getElementsByName("box");
+
+    // Keep array of selected types for SQL query
+    let selectedTypes = [];
+    formValues.forEach(type => {
+      if (type.checked) selectedTypes.push("'" + type.id + "'");
+    });
+
+    // If user selected no types, select all
+    if (selectedTypes.length === 0)
+      selectedTypes = ['"arms"', '"back"', '"legs"', '"core"'];
 
     const fetchExercises = async () => {
       try {
@@ -26,9 +39,13 @@ export default function GenerateWorkout() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ user: user._name }),
+          body: JSON.stringify({
+            user: user._name,
+            selectedTypes: selectedTypes,
+          }),
         });
         const result = await response.json();
+        cleanUpResult(result.exercises[0]);
         setWorkout(result.exercises[0]);
       } catch (err) {
         console.error(err);
@@ -41,61 +58,65 @@ export default function GenerateWorkout() {
     fetchExercises();
   }, [shouldFetch]);
 
+  // This useEffect hook fetches the corresponding images for each exercise
+  // Triggered after the exercise name(s)/type(s) have been retrieved
+  useEffect(() => {
+    if (!workout) return;
+
+    // console.log("Workout object set...");
+    // console.log(workout);
+  }, [workout]);
+
+  const cleanUpResult = fetchedData => {
+    console.log("fetchedData: ");
+    console.log(fetchedData);
+
+    // Get number of desired exercises
+    const numExercises = document.querySelector("#numExercises").value;
+
+    // Verify that user has enough logged exercises to fill workout of size numExercises
+    const validSize = fetchedData.length >= Number(numExercises);
+    // console.log(validSize);
+
+    //TODO: JUMBLE WORKOUT
+
+    //TODO: TRIM WORKOUT
+  };
   function handleSubmit(e) {
     e.preventDefault();
 
-    // Pull checkbox boolean values and assign to new object typeCheckboxes
-    const formValues = document.getElementsByName("box");
-    const checkboxes = {};
-    formValues.forEach(value => {
-      checkboxes[value.id] = value.checked;
-    });
-
-    // If all checkboxes left blank, check all
-    const noneChecked = Object.values(checkboxes).every(value => !value);
-    if (noneChecked) {
-      Object.keys(checkboxes).forEach(box => {
-        checkboxes[box] = true;
-      });
-    }
-
-    console.log(checkboxes);
-
-    // Get number of desired exercises
-    let numExercises = document.querySelector("#numExercises").value;
-
     // If number of exercises field left blank, assign 1 to it
     // TODO: FIX HOW NUMEXERCISES WORKS FOR FETCH CALL
-    numExercises = numExercises ? numExercises : 1;
+    // const numExercises = numExercises ? numExercises : 1;
 
     // Separate loop of fetch calls for user's exercise photos
-    for (let i = 0; i < numExercises; i++) {
-      fetch("http://localhost:5000/api/photos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user: user._name, offset: i }),
-      })
-        .then(response => response.blob())
-        .then(blob => {
-          // Create img
-          const img = document.createElement("img");
-          img.className = "exercise-image";
-          img.src = URL.createObjectURL(blob);
-          img.id = i;
-          // Hide all to start
-          img.hidden = true;
+    // for (let i = 0; i < numExercises; i++) {
+    //   fetch("http://localhost:5000/api/photos", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ user: user._name, offset: i }),
+    //   })
+    //     .then(response => response.blob())
+    //     .then(blob => {
+    //       // Create img
+    //       const img = document.createElement("img");
+    //       img.className = "exercise-image";
+    //       img.src = URL.createObjectURL(blob);
+    //       img.id = i;
+    //       // Hide all to start
+    //       img.hidden = true;
 
-          // Create div
-          const div = document.createElement("div");
-          div.className = "exercise-div";
+    //       // Create div
+    //       const div = document.createElement("div");
+    //       div.className = "exercise-div";
 
-          // Append
-          div.appendChild(img);
-          document.body.appendChild(div);
-        });
-    }
+    //       // Append
+    //       div.appendChild(img);
+    //       document.body.appendChild(div);
+    //     });
+    // }
 
     setShouldFetch(true);
   }
@@ -137,7 +158,7 @@ export default function GenerateWorkout() {
           <br />
         </form>
       </div>
-      {workout && <Workout workout={workout} />}
+      {/*{workout && <Workout workout={workout} />}*/}
       {!workout && <ReturnHome />}
       <div id="snackbar"></div>
       <Footer />
