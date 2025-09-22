@@ -5,6 +5,7 @@
  * TODO:
  *
  * FIX SERVER AND APP TIMEOUT ERROR
+ *
  * Change snackbar CSS
  * Center snackbar for longer alerts
  * Visual of exercise picture on ViewExercisesPage

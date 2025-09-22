@@ -44,6 +44,7 @@ export default function GenerateWorkout() {
           }),
         });
         const result = await response.json();
+
         const finalWorkout = cleanUpResult(result.exercises[0]);
         setWorkout(finalWorkout);
       } catch (err) {
@@ -64,9 +65,6 @@ export default function GenerateWorkout() {
 
     // Separate loop of fetch calls for user's exercise photos
     for (let i = 0; i < workout.length; i++) {
-      console.log("workout[i].name");
-      console.log(workout[i].name);
-
       fetch("http://34.227.25.166:5000/api/photos", {
         method: "POST",
         headers: {
@@ -123,7 +121,7 @@ export default function GenerateWorkout() {
     }
 
     // If user did not input desired number of exercises, do not slice
-    if (numExercises === 0) return fetchedData;
+    if (!numExercises) return fetchedData;
 
     // Trim workout to desired number of exercises
     return fetchedData.slice(0, numExercises);
