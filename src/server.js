@@ -140,9 +140,3 @@ app.post("/api/add", async (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`\nServer is running at http://localhost:${PORT}`);
 });
-
-app._router.stack.forEach(r => {
-  if (r.route && r.route.path) {
-    console.log(r.route.path);
-  }
-});
