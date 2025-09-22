@@ -137,6 +137,10 @@ app.post("/api/add", async (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Server is running...");
+});
+
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`\nServer is running at http://localhost:${PORT}`);
 });
