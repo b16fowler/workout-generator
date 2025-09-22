@@ -114,7 +114,7 @@ function handleLogin(event) {
   // Get request
   /* http://localhost:5000/api/login */
   const API = new FetchWrapper(
-    "34.227.25.166:5000/api/login" // FOR HOSTING EC2
+    "http://34.227.25.166:5000/api/login" // FOR HOSTING EC2
   );
   API.get("").then(data => {
     // Check each row for user's enter information
