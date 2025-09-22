@@ -7,21 +7,9 @@
 import { user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
-import { showSnackbar } from "./App.js";
 import ReturnHome from "./ReturnHome.js";
-import { useState } from "react";
 
 export default function AddExercise() {
-  const [photo, setPhoto] = useState(null);
-
-  const handlePic = e => {
-    // Prevent page of reloading on submission
-    e.preventDefault();
-
-    // set photo to file thats been queued for upload
-    setPhoto(e.target.files[0]);
-  };
-
   const handleSubmit = e => {
     // Prevent page of reloading on submission
     e.preventDefault();
@@ -100,12 +88,7 @@ export default function AddExercise() {
         <br />
         <br />
         <label htmlFor="exercise-pic">Exercise photo: </label>
-        <input
-          id="exercise-pic"
-          type="file"
-          name="uploaded-photo"
-          onChange={handlePic}
-        />
+        <input id="exercise-pic" type="file" name="uploaded-photo" />
         <br />
         <br />
         <br />
