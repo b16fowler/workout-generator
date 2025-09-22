@@ -8,8 +8,6 @@ import express, { response } from "express";
 import cors from "cors";
 import multer from "multer";
 
-import fs from "fs";
-
 // Set up server
 const app = express();
 const PORT = 5000;
@@ -139,6 +137,6 @@ app.post("/api/add", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`\nServer is running at http://localhost:${PORT}`);
 });
