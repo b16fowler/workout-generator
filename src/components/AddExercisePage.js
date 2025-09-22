@@ -33,7 +33,6 @@ export default function AddExercise() {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(`data: `);
         console.log(data);
         showSnackbar("New exercise logged successfully!");
       })
