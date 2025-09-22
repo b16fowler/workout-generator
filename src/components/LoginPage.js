@@ -112,7 +112,10 @@ function handleLogin(event) {
   const password_input = document.querySelector("#password").value;
 
   // Get request
-  const API = new FetchWrapper("http://localhost:5000/api/login");
+  const API = new FetchWrapper("http://localhost:5000/api/login"); // FOR LOCAL
+  const API = new FetchWrapper(
+    "database1.cq3g0w0yukfw.us-east-1.rds.amazonaws.com/api/login" // FOR HOSTING EC2
+  );
   API.get("").then(data => {
     // Check each row for user's enter information
     data.forEach(entry => {
