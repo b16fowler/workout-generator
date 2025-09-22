@@ -110,7 +110,6 @@ function handleLogin(event) {
   // Pull login info entered by user
   const username_input = document.querySelector("#username").value;
   const password_input = document.querySelector("#password").value;
-  let correct = false;
 
   // Get request
   const API = new FetchWrapper("http://localhost:5000/api/login");
@@ -122,14 +121,12 @@ function handleLogin(event) {
         username_input === entry.username &&
         password_input === entry.password
       ) {
-        correct = true;
         login(username_input);
+        return;
       }
     });
-    if (!correct) {
-      // Login information does not match
-      showSnackbar("Login information does not match records");
-    }
+    // Login information does not match
+    showSnackbar("Login information does not match records");
   });
 }
 
