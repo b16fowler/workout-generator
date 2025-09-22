@@ -33,7 +33,7 @@ export default function GenerateWorkout() {
 
     const fetchExercises = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/generate", {
+        const response = await fetch("http://34.227.25.166:5000/api/generate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export default function GenerateWorkout() {
       console.log("workout[i].name");
       console.log(workout[i].name);
 
-      fetch("http://localhost:5000/api/photos", {
+      fetch("http://34.227.25.166:5000/api/photos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

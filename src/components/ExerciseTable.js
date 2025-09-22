@@ -25,7 +25,7 @@ export default function ExerciseTable() {
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/create-table",
+          "http://34.227.25.166:5000/api/create-table",
           { user: user._name }
         );
         setData(response.data.exercises[0]);

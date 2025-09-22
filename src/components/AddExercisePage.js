@@ -27,7 +27,7 @@ export default function AddExercise() {
     // Reset form
     document.getElementById("add-exercise-form").reset();
 
-    fetch("http://localhost:5000/api/add", {
+    fetch("http://34.227.25.166:5000/api/add", {
       method: "POST",
       body: formData,
     })
