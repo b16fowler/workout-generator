@@ -4,7 +4,7 @@
  * exercise to their pool.
  **************************************************************************/
 
-import { user } from "./App.js";
+import { showSnackbar, user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
 import ReturnHome from "./ReturnHome.js";
@@ -14,7 +14,7 @@ export default function AddExercise() {
     // Prevent page of reloading on submission
     e.preventDefault();
 
-    // TODO: Make cleaner
+    // Add user's input to FormData for fetch call body
     const formData = new FormData();
     const photoInput = document.querySelector("#exercise-pic");
     formData.append("user", user.name);
@@ -35,6 +35,7 @@ export default function AddExercise() {
       .then(data => {
         console.log(`data: `);
         console.log(data);
+        showSnackbar("New exercise logged successfully!");
       })
       .catch(err => {
         console.error("Fetch failed:\n", err);
