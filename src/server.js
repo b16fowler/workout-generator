@@ -98,7 +98,7 @@ app.post("/api/generate", async (req, res) => {
 // Handles post requests of users generating a workout (retrieves images)
 app.post("/api/photos", async (req, res) => {
   try {
-    const picQuery = `SELECT pic FROM user_exercises WHERE user = "${req.body.user}" LIMIT 1 OFFSET ${req.body.offset};`;
+    const picQuery = `SELECT pic FROM user_exercises WHERE user = "${req.body.user}" AND name = "${req.body.exerciseName}";`;
     const response = await connection.query(picQuery);
     const buffer = response[0][0].pic;
     const blob = new Blob([buffer], { type: "image/png" });
