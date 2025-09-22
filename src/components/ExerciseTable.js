@@ -41,19 +41,19 @@ export default function ExerciseTable() {
 
   // Once data is fetched, load each exercise into tableData
   useEffect(() => {
-    if (exercises) {
-      exercises.forEach((entry, index) => {
-        let temp = {
-          key: index + 1,
-          name: entry.name,
-          type: entry.type,
-          reps: entry.reps,
-          sets: entry.sets,
-        };
-        tableData.push(temp);
-      });
-    }
-  }, [exercises]);
+    if (!exercises) return;
+
+    exercises.forEach((entry, index) => {
+      let temp = {
+        key: index + 1,
+        name: entry.name,
+        type: entry.type,
+        reps: entry.reps,
+        sets: entry.sets,
+      };
+      tableData.push(temp);
+    });
+  }, [tableData]);
 
   return <Table columns={columns} dataSource={tableData} loading={loading} />;
 }
