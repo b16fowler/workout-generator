@@ -4,10 +4,9 @@
  *
  * TODO:
  *
- * Connect AWS RDS to EC2 instance
+ * FIX SERVER AND APP TIMEOUT ERROR
  * Change snackbar CSS
  * Center snackbar for longer alerts
- * Implement some type of API
  * Visual of exercise picture on ViewExercisesPage
  * Remove exercise from pool
  * Edit exercise already in pool
