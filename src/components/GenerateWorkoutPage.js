@@ -122,6 +122,9 @@ export default function GenerateWorkout() {
       [fetchedData[i], fetchedData[j]] = [fetchedData[j], fetchedData[i]];
     }
 
+    // If user did not input desired number of exercises, do not slice
+    if (numExercises === 0) return fetchedData;
+
     // Trim workout to desired number of exercises
     return fetchedData.slice(0, numExercises);
   };
