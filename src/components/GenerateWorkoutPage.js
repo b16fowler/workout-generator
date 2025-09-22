@@ -6,16 +6,14 @@ import ReturnHome from "./ReturnHome.js";
 import Workout from "./Workout.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
-import { user } from "./App.js";
+import { showSnackbar, user } from "./App.js";
 import { useEffect, useState } from "react";
 
 export default function GenerateWorkout() {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
-  // useEffect fetches exercises from DB and then renders Workout component once
-  // workout object has been updated
-  //TODO: CHANGE SQL QUERY FOR ACCURATE CHECKBOX CALL
+  // useEffect fetches exercise names, sets, and reps from DB after user attempts to generate workout
   useEffect(() => {
     if (!shouldFetch) return;
 
@@ -30,6 +28,7 @@ export default function GenerateWorkout() {
 
     // If user selected no types, select all
     if (selectedTypes.length === 0)
+      // Double quotes are here so text can be inserted directly in query
       selectedTypes = ['"arms"', '"back"', '"legs"', '"core"'];
 
     const fetchExercises = async () => {
@@ -45,8 +44,8 @@ export default function GenerateWorkout() {
           }),
         });
         const result = await response.json();
-        cleanUpResult(result.exercises[0]);
-        setWorkout(result.exercises[0]);
+        const finalWorkout = cleanUpResult(result.exercises[0]);
+        setWorkout(finalWorkout);
       } catch (err) {
         console.error(err);
       } finally {
@@ -63,63 +62,74 @@ export default function GenerateWorkout() {
   useEffect(() => {
     if (!workout) return;
 
-    // console.log("Workout object set...");
-    // console.log(workout);
+    // Separate loop of fetch calls for user's exercise photos
+    for (let i = 0; i < workout.length; i++) {
+      console.log("workout[i].name");
+      console.log(workout[i].name);
+
+      fetch("http://localhost:5000/api/photos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: user._name,
+          exerciseName: workout[i].name,
+        }),
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          // Create img
+          const img = document.createElement("img");
+          img.className = "exercise-image";
+          img.src = URL.createObjectURL(blob);
+          img.id = i;
+          // Hide all to start
+          img.hidden = true;
+
+          // Create div
+          const div = document.createElement("div");
+          div.className = "exercise-div";
+
+          // Append
+          div.appendChild(img);
+          document.body.appendChild(div);
+        });
+    }
   }, [workout]);
 
   const cleanUpResult = fetchedData => {
-    console.log("fetchedData: ");
-    console.log(fetchedData);
+    /* cleanUpResult will take all of the fetched exercises from user's account.
+       It starts by checking that user has enough logged exercises to make a 
+       workout of that size. Then the order of exercises is randomized and 
+       trimmed to the appropriate length */
 
     // Get number of desired exercises
     const numExercises = document.querySelector("#numExercises").value;
 
     // Verify that user has enough logged exercises to fill workout of size numExercises
     const validSize = fetchedData.length >= Number(numExercises);
-    // console.log(validSize);
+    if (!validSize)
+      showSnackbar(
+        `Number of desired exercises too large. Generating workout with ${fetchedData.length} exercises.`
+      );
 
-    //TODO: JUMBLE WORKOUT
+    /* Shuffle exercises with Fisher-Yates shuffle algorithm
+     * Iterate through array of exercises backwards, swapping it's index
+     * with a randomly generated number */
+    for (let i = fetchedData.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [fetchedData[i], fetchedData[j]] = [fetchedData[j], fetchedData[i]];
+    }
 
-    //TODO: TRIM WORKOUT
+    // Trim workout to desired number of exercises
+    return fetchedData.slice(0, numExercises);
   };
-  function handleSubmit(e) {
+
+  const handleSubmit = e => {
     e.preventDefault();
-
-    // If number of exercises field left blank, assign 1 to it
-    // TODO: FIX HOW NUMEXERCISES WORKS FOR FETCH CALL
-    // const numExercises = numExercises ? numExercises : 1;
-
-    // Separate loop of fetch calls for user's exercise photos
-    // for (let i = 0; i < numExercises; i++) {
-    //   fetch("http://localhost:5000/api/photos", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ user: user._name, offset: i }),
-    //   })
-    //     .then(response => response.blob())
-    //     .then(blob => {
-    //       // Create img
-    //       const img = document.createElement("img");
-    //       img.className = "exercise-image";
-    //       img.src = URL.createObjectURL(blob);
-    //       img.id = i;
-    //       // Hide all to start
-    //       img.hidden = true;
-
-    //       // Create div
-    //       const div = document.createElement("div");
-    //       div.className = "exercise-div";
-
-    //       // Append
-    //       div.appendChild(img);
-    //       document.body.appendChild(div);
-    //     });
-    // }
-
     setShouldFetch(true);
-  }
+  };
 
   return (
     <>
@@ -158,76 +168,10 @@ export default function GenerateWorkout() {
           <br />
         </form>
       </div>
-      {/*{workout && <Workout workout={workout} />}*/}
+      {workout && <Workout workout={workout} />}
       {!workout && <ReturnHome />}
       <div id="snackbar"></div>
       <Footer />
     </>
   );
 }
-
-// workout will contain all exercises based on which types were checked
-// function handleSubmit(e) {
-//   e.preventDefault();
-
-//   // Pull checkbox boolean values and assign to new object typeCheckboxes
-//   const formValues = document.getElementsByName("box");
-//   const typeCheckboxes = {};
-//   formValues.forEach(value => {
-//     typeCheckboxes[value.id] = value.checked;
-//   });
-
-//   // If all checkboxes left blank, check all
-//   const noneChecked = Object.values(typeCheckboxes).every(value => !value);
-//   if (noneChecked) {
-//     Object.keys(typeCheckboxes).forEach(key => {
-//       typeCheckboxes[key] = true;
-//     });
-//   }
-
-//   // Keep exercises of muscle types that were checked off
-//   let workout = userExercises.filter(exercise => {
-//     return typeCheckboxes[exercise.type.toLowerCase()];
-//   });
-
-//   // Check for number of exercises desired in workout
-//   const numExercises = document.querySelector("#numExercises").value;
-//   // Inform user if there are not enough logged exercises to generate workout of desired length
-//   if (workout.length < numExercises) {
-//     alert(
-//       `Desired number of exercises (${numExercises})\nexceeds number of logged exercises of selected type(s) (${workout.length})\nGenerating workout of max possible length (${workout.length})`
-//     );
-//   }
-//   // Randomize and trim workout
-//   workout = jumbleWorkout(workout, numExercises);
-
-//   displayWorkout(workout);
-// }
-
-// function displayWorkout(workout) {
-//   // Hide rest of page to display image(s)
-//   const toHide = document.querySelectorAll("#generate-page");
-//   toHide.forEach(exercise => {
-//     exercise.setAttribute("hidden", "true");
-//   });
-
-//   root.render(<Workout workout={workout} />);
-// }
-
-// function jumbleWorkout(workout, numExercises) {
-//   /* Shuffle exercises with Fisher-Yates shuffle algorithm
-//    * Iterate through array of exercises backwards, swapping it's index
-//    * with a randomly generated number */
-//   for (let i = workout.length - 1; i > 0; i--) {
-//     const j = Math.floor(Math.random() * (i + 1));
-//     [workout[i], workout[j]] = [workout[j], workout[i]];
-//   }
-
-//   // Check if a number of exercises was entered
-//   if (numExercises) {
-//     // Trim workout to fit number of exercises
-//     workout = workout.slice(0, numExercises);
-//   }
-
-//   return workout;
-// }
