@@ -4,6 +4,7 @@
  * exercise to their pool.
  **************************************************************************/
 
+import { EC2_URL } from "../index.js";
 import { showSnackbar, user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
@@ -40,7 +41,7 @@ export default function AddExercise() {
 
     // If user filled out all fields, post exercise in DB
     if (readyToFetch) {
-      fetch(`${process.env.EC2_IP}:${process.env.DB_PORT}/api/add`, {
+      fetch(`${EC2_URL}/api/add`, {
         method: "POST",
         body: formData,
       })

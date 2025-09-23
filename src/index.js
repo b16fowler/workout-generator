@@ -3,6 +3,8 @@
  **************************************************************************
  * TODO:
  *
+ * Change AWS security rules to limit IP access
+ *
  * Update comments for all components
  * Add thorough server logs
  *
@@ -19,6 +21,8 @@ import App from "./components/App.js";
 import React from "react";
 import "./css/index.css";
 
+const EC2_URL = "http://18.204.215.132:5000";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -26,4 +30,4 @@ root.render(
   </React.StrictMode>
 );
 
-export { root };
+export { root, EC2_URL };

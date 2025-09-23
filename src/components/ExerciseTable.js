@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { user } from "./App.js";
 import { Table } from "antd";
 import axios from "axios";
+import { EC2_URL } from "../index.js";
 
 // Columns for exercise table
 const columns = [
@@ -24,10 +25,9 @@ export default function ExerciseTable() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.post(
-          `${process.env.EC2_IP}:${process.env.DB_PORT}/api/create-table`,
-          { user: user._name }
-        );
+        const response = await axios.post(`${EC2_URL}/api/create-table`, {
+          user: user._name,
+        });
         setData(response.data.exercises[0]);
       } catch (error) {
         console.error("Error fetching data:", error);

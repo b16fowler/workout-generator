@@ -8,6 +8,7 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import { showSnackbar, user } from "./App.js";
 import { useEffect, useState } from "react";
+import { EC2_URL } from "../index.js";
 
 export default function GenerateWorkout() {
   const [workout, setWorkout] = useState(null);
@@ -33,19 +34,16 @@ export default function GenerateWorkout() {
 
     const fetchExercises = async () => {
       try {
-        const response = await fetch(
-          `${process.env.EC2_IP}:${process.env.DB_PORT}/api/generate`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              user: user._name,
-              selectedTypes: selectedTypes,
-            }),
-          }
-        );
+        const response = await fetch(`${EC2_URL}/api/generate`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user: user._name,
+            selectedTypes: selectedTypes,
+          }),
+        });
         const result = await response.json();
 
         const finalWorkout = cleanUpResult(result.exercises[0]);
@@ -68,7 +66,7 @@ export default function GenerateWorkout() {
 
     // Separate loop of fetch calls for user's exercise photos
     for (let i = 0; i < workout.length; i++) {
-      fetch(`${process.env.EC2_IP}:${process.env.DB_PORT}/api/photos`, {
+      fetch(`${EC2_URL}/api/photos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

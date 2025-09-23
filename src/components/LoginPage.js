@@ -7,7 +7,7 @@ import MainMenu from "./MainMenuPage.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
 import FetchWrapper from "../fetchWrapper.js";
-import { root } from "../index.js";
+import { EC2_URL, root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function LoginPage() {
@@ -33,10 +33,10 @@ export default function LoginPage() {
     const password_input = document.querySelector("#password").value;
 
     // Get request
-    /* http://localhost:5000/api/login */
     const API = new FetchWrapper(
-      `${process.env.EC2_IP}:${process.env.DB_PORT}/api/login` // FOR HOSTING EC2
+      `${EC2_URL}/api/login` // FOR HOSTING EC2
     );
+
     API.get("").then(data => {
       // Check each row for user's enter information
       data.forEach(entry => {
@@ -75,9 +75,7 @@ export default function LoginPage() {
     ).value;
 
     // Post request
-    const API = new FetchWrapper(
-      `${process.env.EC2_IP}:${process.env.DB_PORT}/api/create-account`
-    );
+    const API = new FetchWrapper(`${EC2_URL}/api/create-account`);
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
     API.post("", create_query).then(data => {
       if (data.success) {
