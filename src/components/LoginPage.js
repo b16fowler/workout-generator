@@ -35,7 +35,7 @@ export default function LoginPage() {
     // Get request
     /* http://localhost:5000/api/login */
     const API = new FetchWrapper(
-      "http://54.167.160.70:5000/api/login" // FOR HOSTING EC2
+      `${process.env.EC2_IP}:${process.env.DB_PORT}/api/login` // FOR HOSTING EC2
     );
     API.get("").then(data => {
       // Check each row for user's enter information
@@ -76,7 +76,7 @@ export default function LoginPage() {
 
     // Post request
     const API = new FetchWrapper(
-      "http://54.167.160.70:5000/api/create-account"
+      `${process.env.EC2_IP}:${process.env.DB_PORT}/api/create-account`
     );
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
     API.post("", create_query).then(data => {

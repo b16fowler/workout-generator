@@ -33,16 +33,19 @@ export default function GenerateWorkout() {
 
     const fetchExercises = async () => {
       try {
-        const response = await fetch("http://54.167.160.70:5000/api/generate", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user: user._name,
-            selectedTypes: selectedTypes,
-          }),
-        });
+        const response = await fetch(
+          `${process.env.EC2_IP}:${process.env.DB_PORT}/api/generate`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              user: user._name,
+              selectedTypes: selectedTypes,
+            }),
+          }
+        );
         const result = await response.json();
 
         const finalWorkout = cleanUpResult(result.exercises[0]);
@@ -65,7 +68,7 @@ export default function GenerateWorkout() {
 
     // Separate loop of fetch calls for user's exercise photos
     for (let i = 0; i < workout.length; i++) {
-      fetch("http://54.167.160.70:5000/api/photos", {
+      fetch(`${process.env.EC2_IP}:${process.env.DB_PORT}/api/photos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -41,7 +41,7 @@ export default function AddExercise() {
 
     // If user filled out all fields, post exercise in DB
     if (readyToFetch) {
-      fetch("http://54.167.160.70:5000/api/add", {
+      fetch(`${process.env.EC2_IP}:${process.env.DB_PORT}/api/add`, {
         method: "POST",
         body: formData,
       })
