@@ -4,9 +4,12 @@
  *
  * TODO:
  *
- * FIX SERVER AND APP TIMEOUT ERROR
  * Add exercise snackbar for missing fields
  * Fix login form defaulting enter to password visibility
+ * Standardize size of all exercise photos in workout
+ *
+ * Update comments for all components
+ * Add thorough server logs
  *
  * Change snackbar CSS
  * Center snackbar for longer alerts
