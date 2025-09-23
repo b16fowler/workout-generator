@@ -5,6 +5,8 @@
  * TODO:
  *
  * FIX SERVER AND APP TIMEOUT ERROR
+ * Add exercise snackbar for missing fields
+ * Fix login form defaulting enter to password visibility
  *
  * Change snackbar CSS
  * Center snackbar for longer alerts
