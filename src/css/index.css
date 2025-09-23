@@ -327,8 +327,8 @@ input {
 
 .exercise-image {
   border-radius: 0;
-  height: auto;
-  width: 45%;
+  width: 950px;
+  height: 550px;
 }
 
 .header-div {
