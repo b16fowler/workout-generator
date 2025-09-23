@@ -11,6 +11,96 @@ import { root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function LoginPage() {
+  // Called when user clicks "eye" button next to password
+  function handleShowPassword(e) {
+    e.preventDefault();
+
+    // Toggle type attribute between password and string
+    const passwordEle = document.querySelector("#password");
+    if (passwordEle.getAttribute("type") === "password") {
+      passwordEle.setAttribute("type", "string");
+    } else {
+      passwordEle.setAttribute("type", "password");
+    }
+  }
+
+  // Called when user clicks "Login" button
+  function handleLogin(event) {
+    event.preventDefault();
+
+    // Pull login info entered by user
+    const username_input = document.querySelector("#username").value;
+    const password_input = document.querySelector("#password").value;
+
+    // Get request
+    /* http://localhost:5000/api/login */
+    const API = new FetchWrapper(
+      "http://54.167.160.70:5000/api/login" // FOR HOSTING EC2
+    );
+    API.get("").then(data => {
+      // Check each row for user's enter information
+      data.forEach(entry => {
+        // username and password exist and are correct
+        if (
+          username_input === entry.username &&
+          password_input === entry.password
+        ) {
+          login(username_input);
+          return;
+        }
+      });
+      // Login information does not match
+      showSnackbar("Login information does not match records");
+    });
+  }
+
+  // Called when user clicks "Forgot password" button
+  function handleForgot() {
+    // TODO: Make this do something
+    showSnackbar("You hit the forgot password button");
+  }
+
+  function handleOpenCreateAccount() {
+    // Hide 'Yes, please!' button and show create account form
+    document.querySelector(".open-account-button").toggleAttribute("hidden");
+    document.querySelector(".create-account-form").toggleAttribute("hidden");
+  }
+
+  function handleCreateAccount() {
+    const new_username = document.querySelector(
+      ".create-account-username"
+    ).value;
+    const new_password = document.querySelector(
+      ".create-account-password"
+    ).value;
+
+    // Post request
+    const API = new FetchWrapper(
+      "http://54.167.160.70:5000/api/create-account"
+    );
+    const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
+    API.post("", create_query).then(data => {
+      if (data.success) {
+        login(new_username);
+      }
+      // Alert user that username is taken and clear form
+      else {
+        showSnackbar(data.message);
+        document.querySelector(".create-account-username").value = "";
+        document.querySelector(".create-account-password").value = "";
+      }
+    });
+  }
+
+  function login(username) {
+    user.name = username;
+    root.render(
+      <QueryClientProvider client={queryClient}>
+        <MainMenu />
+      </QueryClientProvider>
+    );
+  }
+
   return (
     <>
       <Header heading="Workout Generator Login" notLoggedIn={true} />
@@ -89,87 +179,3 @@ export default function LoginPage() {
 }
 
 export const queryClient = new QueryClient();
-
-// Called when user clicks "eye" button next to password
-function handleShowPassword(e) {
-  e.preventDefault();
-
-  // Toggle type attribute between password and string
-  const passwordEle = document.querySelector("#password");
-  if (passwordEle.getAttribute("type") === "password") {
-    passwordEle.setAttribute("type", "string");
-  } else {
-    passwordEle.setAttribute("type", "password");
-  }
-}
-
-// Called when user clicks "Login" button
-function handleLogin(event) {
-  event.preventDefault();
-
-  // Pull login info entered by user
-  const username_input = document.querySelector("#username").value;
-  const password_input = document.querySelector("#password").value;
-
-  // Get request
-  /* http://localhost:5000/api/login */
-  const API = new FetchWrapper(
-    "http://54.167.160.70:5000/api/login" // FOR HOSTING EC2
-  );
-  API.get("").then(data => {
-    // Check each row for user's enter information
-    data.forEach(entry => {
-      // username and password exist and are correct
-      if (
-        username_input === entry.username &&
-        password_input === entry.password
-      ) {
-        login(username_input);
-        return;
-      }
-    });
-    // Login information does not match
-    showSnackbar("Login information does not match records");
-  });
-}
-
-// Called when user clicks "Forgot password" button
-function handleForgot() {
-  // TODO: Make this do something
-  showSnackbar("You hit the forgot password button");
-}
-
-function handleOpenCreateAccount() {
-  // Hide 'Yes, please!' button and show create account form
-  document.querySelector(".open-account-button").toggleAttribute("hidden");
-  document.querySelector(".create-account-form").toggleAttribute("hidden");
-}
-
-function handleCreateAccount() {
-  const new_username = document.querySelector(".create-account-username").value;
-  const new_password = document.querySelector(".create-account-password").value;
-
-  // Post request
-  const API = new FetchWrapper("http://54.167.160.70:5000/api/create-account");
-  const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
-  API.post("", create_query).then(data => {
-    if (data.success) {
-      login(new_username);
-    }
-    // Alert user that username is taken and clear form
-    else {
-      showSnackbar(data.message);
-      document.querySelector(".create-account-username").value = "";
-      document.querySelector(".create-account-password").value = "";
-    }
-  });
-}
-
-function login(username) {
-  user.name = username;
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <MainMenu />
-    </QueryClientProvider>
-  );
-}
