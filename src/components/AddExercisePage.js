@@ -4,7 +4,6 @@
  * exercise to their pool.
  **************************************************************************/
 
-import { useEffect, useState } from "react";
 import { showSnackbar, user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
@@ -18,7 +17,7 @@ export default function AddExercise() {
     // Prevent page of reloading on submission
     e.preventDefault();
 
-    const readyToFetch = true;
+    let readyToFetch = true;
 
     // Add user's input to FormData for fetch call body
     const photoInput = document.querySelector("#exercise-pic");

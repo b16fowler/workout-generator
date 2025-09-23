@@ -1,7 +1,6 @@
 /**************************************************************************
  * index.js
  **************************************************************************
- *
  * TODO:
  *
  * Update comments for all components
@@ -13,7 +12,6 @@
  * Remove exercise from pool
  * Edit exercise already in pool
  * Save current/previous workout
- *
  **************************************************************************/
 
 import ReactDOM from "react-dom/client";
