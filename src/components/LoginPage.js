@@ -116,7 +116,10 @@ export default function LoginPage() {
         <div className="form-group">
           <label htmlFor="password">Password: </label>
           <input type="password" id="password" placeholder=""></input>
-          <button className="show-password" onClick={handleShowPassword}>
+          <button
+            type="button"
+            className="show-password"
+            onClick={handleShowPassword}>
             <img src="pw-icon.png" alt="buttonpng" border="0" />
           </button>
         </div>
