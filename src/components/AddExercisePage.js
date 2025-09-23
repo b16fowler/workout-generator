@@ -4,18 +4,23 @@
  * exercise to their pool.
  **************************************************************************/
 
+import { useEffect, useState } from "react";
 import { showSnackbar, user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
 import ReturnHome from "./ReturnHome.js";
 
 export default function AddExercise() {
+  const blankFields = ["Please select", "", "undefined", undefined];
+  const formData = new FormData();
+
   const handleSubmit = e => {
     // Prevent page of reloading on submission
     e.preventDefault();
 
+    const readyToFetch = true;
+
     // Add user's input to FormData for fetch call body
-    const formData = new FormData();
     const photoInput = document.querySelector("#exercise-pic");
     formData.append("user", user.name);
     formData.append("name", document.querySelector("#exercise-name").value);
@@ -24,22 +29,31 @@ export default function AddExercise() {
     formData.append("sets", document.querySelector("#exercise-sets").value);
     formData.append("image", photoInput.files[0]);
 
+    formData.forEach(field => {
+      if (blankFields.includes(field)) {
+        readyToFetch = false;
+        showSnackbar("All fields are mandatory, please try again.");
+      }
+    });
+
     // Reset form
     document.getElementById("add-exercise-form").reset();
 
-    // const url = `${process.env.EC2_IP}:${process.env.DB_PORT}`;
-    fetch("http://54.167.160.70:5000/api/add", {
-      method: "POST",
-      body: formData,
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        showSnackbar("New exercise logged successfully!");
+    // If user filled out all fields, post exercise in DB
+    if (readyToFetch) {
+      fetch("http://54.167.160.70:5000/api/add", {
+        method: "POST",
+        body: formData,
       })
-      .catch(err => {
-        console.error("Fetch failed:\n", err);
-      });
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          showSnackbar("New exercise logged successfully!");
+        })
+        .catch(err => {
+          console.error("Fetch failed:\n", err);
+        });
+    }
   };
 
   return (
