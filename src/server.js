@@ -10,7 +10,6 @@ import multer from "multer";
 
 // Set up server
 const app = express();
-const IP = "http://34.227.25.166";
 const PORT = 5000;
 app.use(express.json());
 app.use(cors());
@@ -143,5 +142,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`\nServer is running at ${IP}:${PORT}`);
+  console.log(`\nServer is running at ${process.env.EC2_IP}:${PORT}`);
 });

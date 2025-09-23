@@ -114,7 +114,7 @@ function handleLogin(event) {
   // Get request
   /* http://localhost:5000/api/login */
   const API = new FetchWrapper(
-    "http://34.227.25.166:5000/api/login" // FOR HOSTING EC2
+    "http://54.167.160.70:5000/api/login" // FOR HOSTING EC2
   );
   API.get("").then(data => {
     // Check each row for user's enter information
@@ -150,7 +150,7 @@ function handleCreateAccount() {
   const new_password = document.querySelector(".create-account-password").value;
 
   // Post request
-  const API = new FetchWrapper("http://34.227.25.166:5000/api/create-account");
+  const API = new FetchWrapper("http://54.167.160.70:5000/api/create-account");
   const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
   API.post("", create_query).then(data => {
     if (data.success) {

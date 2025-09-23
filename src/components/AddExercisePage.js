@@ -27,7 +27,8 @@ export default function AddExercise() {
     // Reset form
     document.getElementById("add-exercise-form").reset();
 
-    fetch("http://34.227.25.166:5000/api/add", {
+    // const url = `${process.env.EC2_IP}:${process.env.DB_PORT}`;
+    fetch("http://54.167.160.70:5000/api/add", {
       method: "POST",
       body: formData,
     })
