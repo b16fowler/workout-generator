@@ -21,7 +21,9 @@ import App from "./components/App.js";
 import React from "react";
 import "./css/index.css";
 
-const EC2_URL = "http://18.204.215.132:5000";
+// Current public IP for EC2 instance and DB port
+// IP changes with each EC2 restart
+const EC2_URL = "http://3.80.211.117:5000";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
