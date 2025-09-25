@@ -31,9 +31,9 @@ app.get("/", (req, res) => {
   res.send("Server is running...");
 });
 
-// app.listen(PORT, "0.0.0.0", () => {
-//   console.log(`\nServer is running at todo `);
-// });
+app.listen(PORT, "172.31.81.52", () => {
+  console.log(`\nServer is running on a private IP`);
+});
 
 app.post("/api/add", upload.single("image"), async (req, res) => {
   // buffer object for user's uploaded picture
