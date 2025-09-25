@@ -18,16 +18,31 @@ app.use(cors());
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Create connection for db
-const connection = await mysql.createConnection({
+// const connection = await mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASS,
+//   database: process.env.DB_NAME,
+//   port: 3306,
+// });
+
+const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  port: 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-// Query options
-const login_query = "SELECT * FROM logins;";
+app.get("/", (req, res) => {
+  res.send("Server is running...");
+});
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`\nServer is running at todo `);
+});
 
 app.post("/api/add", upload.single("image"), async (req, res) => {
   // buffer object for user's uploaded picture
@@ -38,7 +53,7 @@ app.post("/api/add", upload.single("image"), async (req, res) => {
   const values = [info.user, info.name, info.type, info.sets, info.reps, photo];
 
   try {
-    const [result] = await connection.execute(sql, values);
+    const [result] = await pool.execute(sql, values);
     console.log("[SUCCESS] Image inserted into DB", result);
     res.json({ message: "Photo uploaded successfully." });
   } catch (err) {
@@ -52,7 +67,7 @@ app.post("/api/add", upload.single("image"), async (req, res) => {
 app.get("/api/login", async (req, res) => {
   console.log("User attempting login...");
   try {
-    const result = await connection.query(login_query);
+    const result = await pool.query(login_query);
     res.json(result[0]);
   } catch (err) {
     console.log("Error found: \n" + err);
@@ -63,7 +78,7 @@ app.get("/api/login", async (req, res) => {
 app.post("/api/create-account", async (req, res) => {
   try {
     // Creates new entry in logins if username is unique
-    await connection.query(req.body.query);
+    await pool.query(req.body.query);
     res.json({
       success: true,
     });
@@ -84,7 +99,7 @@ app.post("/api/generate", async (req, res) => {
   const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE user = "${req.body.user}" AND type IN (${req.body.selectedTypes})`;
 
   try {
-    const result = await connection.query(create_table_query);
+    const result = await pool.query(create_table_query);
     res.json({
       success: true,
       exercises: result,
@@ -98,7 +113,7 @@ app.post("/api/generate", async (req, res) => {
 app.post("/api/photos", async (req, res) => {
   try {
     const picQuery = `SELECT pic FROM user_exercises WHERE user = "${req.body.user}" AND name = "${req.body.exerciseName}";`;
-    const response = await connection.query(picQuery);
+    const response = await pool.query(picQuery);
     const buffer = response[0][0].pic;
     const blob = new Blob([buffer], { type: "image/png" });
 
@@ -113,7 +128,7 @@ app.post("/api/photos", async (req, res) => {
 app.post("/api/create-table", async (req, res) => {
   const create_table_query = `SELECT * FROM user_exercises WHERE user = "${req.body.user}"`;
   try {
-    const result = await connection.query(create_table_query);
+    const result = await pool.query(create_table_query);
     res.json({
       success: true,
       exercises: result,
@@ -126,7 +141,7 @@ app.post("/api/create-table", async (req, res) => {
 // Handles post requests of users adding a new exercise
 app.post("/api/add", async (req, res) => {
   try {
-    await connection.query(req.body.query);
+    await pool.query(req.body.query);
     res.json({
       success: true,
       message: "New exercise added successfully",
@@ -135,12 +150,4 @@ app.post("/api/add", async (req, res) => {
     console.log("Error found:\n" + err);
     res.json({ success: false });
   }
-});
-
-app.get("/", (req, res) => {
-  res.send("Server is running...");
-});
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`\nServer is running at ${process.env.EC2_IP}:${PORT}`);
 });
