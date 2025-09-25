@@ -17,15 +17,6 @@ app.use(cors());
 // Middleware for photo uploads
 const upload = multer({ storage: multer.memoryStorage() });
 
-// Create connection for db
-// const connection = await mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASS,
-//   database: process.env.DB_NAME,
-//   port: 3306,
-// });
-
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -40,9 +31,9 @@ app.get("/", (req, res) => {
   res.send("Server is running...");
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`\nServer is running at todo `);
-});
+// app.listen(PORT, "0.0.0.0", () => {
+//   console.log(`\nServer is running at todo `);
+// });
 
 app.post("/api/add", upload.single("image"), async (req, res) => {
   // buffer object for user's uploaded picture
