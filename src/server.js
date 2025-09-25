@@ -65,7 +65,7 @@ app.post("/api/add", upload.single("image"), async (req, res) => {
 
 // Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
-  console.log("User attempting login...");
+  console.log(`User attempting login from ip: ${req.ip}`);
   const login_query = "SELECT * FROM logins;";
   try {
     const result = await pool.query(login_query);
