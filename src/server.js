@@ -27,17 +27,30 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-app.set("trust proxy", true);
-
 app.get("/", (req, res) => {
-  res.send("Server is running...");
+  res.send("Server is running\n");
 });
 
 app.listen(PORT, "172.31.81.52", () => {
-  console.log(`\nServer is running on a private IP`);
+  console.log(`\nServer is running on a private IP\n`);
+});
+
+// Handles get requests of users attempting to login
+app.get("/api/login", async (req, res) => {
+  console.log(`\nLOGIN ATTEMPT\n User attempting login from ip: ${req.ip}\n`);
+  const login_query = "SELECT * FROM logins;";
+  try {
+    const result = await pool.query(login_query);
+    res.json(result[0]);
+    console.log(`[SUCCESS] login query run successfully\n`);
+  } catch (err) {
+    console.log(`[ERROR] Error running login query\n` + err + "\n");
+  }
+  console.log("End of get handler\n");
 });
 
 app.post("/api/add", upload.single("image"), async (req, res) => {
+  console.log("\nUPLOAD IMAGE ATTEMPT\n");
   // buffer object for user's uploaded picture
   const photo = req.file.buffer;
   const info = req.body;
@@ -47,35 +60,22 @@ app.post("/api/add", upload.single("image"), async (req, res) => {
 
   try {
     const [result] = await pool.execute(sql, values);
-    console.log("[SUCCESS] Image inserted into DB", result);
-    res.json({ message: "Photo uploaded successfully." });
+    res.json({ message: "Photo uploaded successfully" });
+    console.log(`[SUCCESS] Image inserted into DB\n`);
   } catch (err) {
-    console.log("[ERROR] Error trying to run query", err);
-    console.error(err);
+    console.log(`[ERROR] Error trying to run insert query\n` + err + "\n");
   }
-  console.log("End of post handler...");
-});
-
-// Handles get requests of users attempting to login
-app.get("/api/login", async (req, res) => {
-  console.log(`User attempting login from ip: ${req.ip}`);
-  const login_query = "SELECT * FROM logins;";
-  try {
-    const result = await pool.query(login_query);
-    res.json(result[0]);
-  } catch (err) {
-    console.log("Error found: \n" + err);
-  }
+  console.log("End of post handler\n");
 });
 
 // Handles posts request of users attempting to create accounts
 app.post("/api/create-account", async (req, res) => {
+  console.log("\nCREATE ACCOUNT ATTEMPT\n");
   try {
     // Creates new entry in logins if username is unique
     await pool.query(req.body.query);
-    res.json({
-      success: true,
-    });
+    res.json({ success: true });
+    console.log(`[SUCCESS] login information inserted into DB\n`);
   } catch (err) {
     // username already exists
     if (err.code === "ER_DUP_ENTRY") {
@@ -83,28 +83,44 @@ app.post("/api/create-account", async (req, res) => {
         success: false,
         message: "An account with that username already exists",
       });
+      console.log(
+        `Attempted username "${req.body.user}" already in DB, prompting user to try again\n`
+      );
+    } else {
+      console.log(
+        `[ERROR] Error trying to run insert query for user ${req.body.user}\n` +
+          err +
+          "\n"
+      );
     }
-    console.log("Error found:\n" + err);
   }
+  console.log("End of post handler\n");
 });
 
 // Handles post requests of users generating a workout
 app.post("/api/generate", async (req, res) => {
+  console.log("\nGENERATE WORKOUT ATTEMPT (exercise info)\n");
   const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE user = "${req.body.user}" AND type IN (${req.body.selectedTypes})`;
-
   try {
     const result = await pool.query(create_table_query);
     res.json({
       success: true,
       exercises: result,
     });
+    console.log(
+      `[SUCCESS] Exercise rows for user ${req.body.user} pulled from DB\n`
+    );
   } catch (err) {
-    console.error("Error fetching data:\n", err);
+    console.log(
+      `[ERROR] Error fetching user ${req.body.user}'s data\n` + err + "\n"
+    );
   }
+  console.log("End of post handler\n");
 });
 
 // Handles post requests of users generating a workout (retrieves images)
 app.post("/api/photos", async (req, res) => {
+  console.log("\nGENERATE WORKOUT ATTEMPT (exercise image(s))\n");
   try {
     const picQuery = `SELECT pic FROM user_exercises WHERE user = "${req.body.user}" AND name = "${req.body.exerciseName}";`;
     const response = await pool.query(picQuery);
@@ -113,13 +129,20 @@ app.post("/api/photos", async (req, res) => {
 
     res.set("Content-Type", blob.type);
     res.send(buffer);
+    console.log(`[SUCCESS] Image for user ${req.body.user} pulled from DB\n`);
   } catch (err) {
-    console.error("Error fetching data:\n", err);
+    console.log(
+      `[ERROR] Error fetching user ${req.body.user}'s exercise image\n` +
+        err +
+        "\n"
+    );
   }
+  console.log("End of post handler\n");
 });
 
 // Handles post requests of users loading their exercise table
 app.post("/api/create-table", async (req, res) => {
+  console.log("\nLOAD EXERCISE TABLE ATTEMPT\n");
   const create_table_query = `SELECT * FROM user_exercises WHERE user = "${req.body.user}"`;
   try {
     const result = await pool.query(create_table_query);
@@ -127,21 +150,32 @@ app.post("/api/create-table", async (req, res) => {
       success: true,
       exercises: result,
     });
+    console.log(`[SUCCESS] User ${req.body.user}'s exercises pulled from DB`);
   } catch (err) {
-    console.error("Error fetching data:\n", err);
+    console.log(
+      `[ERROR] Error fetching  user ${req.body.user}'s exercise data\n` +
+        err +
+        "\n"
+    );
   }
+  console.log("End of post handler\n");
 });
 
 // Handles post requests of users adding a new exercise
 app.post("/api/add", async (req, res) => {
+  console.log("\nADD EXERCISE ATTEMPT\n");
   try {
     await pool.query(req.body.query);
     res.json({
       success: true,
       message: "New exercise added successfully",
     });
+    console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB`);
   } catch (err) {
-    console.log("Error found:\n" + err);
     res.json({ success: false });
+    console.log(
+      `[ERROR] Error posting user ${req.body.user}'s exercise\n` + err + "\n"
+    );
   }
+  console.log("End of post handler\n");
 });
