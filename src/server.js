@@ -27,6 +27,8 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
+app.set("trust proxy", true);
+
 app.get("/", (req, res) => {
   res.send("Server is running...");
 });
