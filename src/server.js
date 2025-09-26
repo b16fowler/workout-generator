@@ -78,7 +78,7 @@ app.post("/api/create-account", async (req, res) => {
   console.log("End of post handler\n");
 });
 
-app.post("api/check-account-type", async (req, res) => {
+app.post("/api/check-account-type", async (req, res) => {
   console.log("This is the /check-account endpoint");
   console.log(req.body);
   try {
