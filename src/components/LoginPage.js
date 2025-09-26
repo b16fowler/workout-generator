@@ -76,7 +76,7 @@ export default function LoginPage() {
 
     // Post request
     const API = new FetchWrapper(`${EC2_URL}/api/create-account`);
-    const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}");`;
+    const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
     API.post("", create_query).then(data => {
       if (data.success) {
         login(new_username);
@@ -92,6 +92,23 @@ export default function LoginPage() {
 
   function login(username) {
     user._name = username;
+
+    const fetchAccountType = async () => {
+      const response = await fetch(`${EC2_URL}/api/check-type`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: user._name,
+        }),
+      });
+      const result = await response.json();
+      console.log(result);
+    };
+
+    fetchAccountType();
+
     root.render(
       <QueryClientProvider client={queryClient}>
         <MainMenu />

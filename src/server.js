@@ -49,25 +49,6 @@ app.get("/api/login", async (req, res) => {
   console.log("End of get handler\n");
 });
 
-app.post("/api/add", upload.single("image"), async (req, res) => {
-  console.log("\nUPLOAD IMAGE ATTEMPT\n");
-  // buffer object for user's uploaded picture
-  const photo = req.file.buffer;
-  const info = req.body;
-
-  const sql = "INSERT INTO user_exercises VALUES (?, ?, ?, ?, ?, ?);";
-  const values = [info.user, info.name, info.type, info.sets, info.reps, photo];
-
-  try {
-    const [result] = await pool.execute(sql, values);
-    res.json({ message: "Photo uploaded successfully" });
-    console.log(`[SUCCESS] Image inserted into DB\n`);
-  } catch (err) {
-    console.log(`[ERROR] Error trying to run insert query\n` + err + "\n");
-  }
-  console.log("End of post handler\n");
-});
-
 // Handles posts request of users attempting to create accounts
 app.post("/api/create-account", async (req, res) => {
   console.log("\nCREATE ACCOUNT ATTEMPT\n");
@@ -93,6 +74,36 @@ app.post("/api/create-account", async (req, res) => {
           "\n"
       );
     }
+  }
+  console.log("End of post handler\n");
+});
+
+app.post("api/check-account", async (req, res) => {
+  console.log("This is the /check-account endpoint");
+  console.log(req.body);
+  try {
+    res.json({ result: "result" });
+  } catch (err) {
+    console.log("[ERROR] Error fetching account information\n" + err + "\n");
+  }
+  console.log("End of post handler\n");
+});
+
+app.post("/api/add", upload.single("image"), async (req, res) => {
+  console.log("\nUPLOAD IMAGE ATTEMPT\n");
+  // buffer object for user's uploaded picture
+  const photo = req.file.buffer;
+  const info = req.body;
+
+  const sql = "INSERT INTO user_exercises VALUES (?, ?, ?, ?, ?, ?);";
+  const values = [info.user, info.name, info.type, info.sets, info.reps, photo];
+
+  try {
+    const [result] = await pool.execute(sql, values);
+    res.json({ message: "Photo uploaded successfully" });
+    console.log(`[SUCCESS] Image inserted into DB\n`);
+  } catch (err) {
+    console.log(`[ERROR] Error trying to run insert query\n` + err + "\n");
   }
   console.log("End of post handler\n");
 });
