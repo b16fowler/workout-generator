@@ -91,7 +91,7 @@ export default function LoginPage() {
   }
 
   function login(username) {
-    user.name = username;
+    user._name = username;
     root.render(
       <QueryClientProvider client={queryClient}>
         <MainMenu />

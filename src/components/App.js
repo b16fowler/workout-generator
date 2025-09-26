@@ -9,10 +9,10 @@ import "../css/index.css";
 const user = {
   name: "",
   get name() {
-    return this.name;
+    return this._name;
   },
   set name(value) {
-    this.name = value;
+    this._name = value;
   },
 };
 
