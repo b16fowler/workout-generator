@@ -5,9 +5,9 @@
  *
  * Change AWS security rules to limit IP access
  * Loading component
+ * Create account types (admin, user, etc.)
  *
  * Update comments for all components
- * Add thorough server logs
  *
  * Change snackbar CSS
  * Center snackbar for longer alerts

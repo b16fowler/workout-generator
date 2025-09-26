@@ -4,7 +4,8 @@
 
 import { useState, useEffect } from "react";
 
-export default function LiveClock() {
+export default function Clock() {
+  // Displays live clock in bottom left corner of Header
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {

@@ -5,16 +5,29 @@
 import LoginPage from "./LoginPage.js";
 import "../css/index.css";
 
-// Empty string when not logged in, set to username after log in
+// Empty string at start, set to username after log in
 const user = {
-  _name: "",
+  name: "",
   get name() {
-    return this._name;
+    return this.name;
   },
   set name(value) {
-    this._name = value;
+    this.name = value;
   },
 };
+
+export function showSnackbar(message) {
+  /* showSnackbar function will display 'message' from top of screen for 3 seconds
+   * before disappearing. Used as a method of alerting users of 'successes' and
+   * 'failures' */
+  const sb = document.querySelector("#snackbar");
+  sb.textContent = message;
+  sb.className = "show";
+
+  setTimeout(function () {
+    sb.className = sb.className.replace("show", "");
+  }, 3000);
+}
 
 export default function App() {
   return (
@@ -25,16 +38,6 @@ export default function App() {
       <div id="snackbar"></div>
     </>
   );
-}
-
-export function showSnackbar(message) {
-  const sb = document.querySelector("#snackbar");
-  sb.textContent = message;
-  sb.className = "show";
-
-  setTimeout(function () {
-    sb.className = sb.className.replace("show", "");
-  }, 3000);
 }
 
 export { user };

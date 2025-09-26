@@ -40,7 +40,7 @@ export default function GenerateWorkout() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            user: user._name,
+            user: user.name,
             selectedTypes: selectedTypes,
           }),
         });
@@ -72,7 +72,7 @@ export default function GenerateWorkout() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: user._name,
+          user: user.name,
           exerciseName: workout[i].name,
         }),
       })

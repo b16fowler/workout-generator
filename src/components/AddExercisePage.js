@@ -1,7 +1,6 @@
 /**************************************************************************
  * AddExercisePage component
- * Contains a form that allows user to add a new
- * exercise to their pool.
+ * Contains a form that allows user to add a new exercise to their pool.
  **************************************************************************/
 
 import { EC2_URL } from "../index.js";
@@ -11,13 +10,24 @@ import Header from "./Header.js";
 import ReturnHome from "./ReturnHome.js";
 
 export default function AddExercise() {
+  /* Values in array blankFields are used to determine if the user left any
+   * fields in the form untouched */
   const blankFields = ["Please select", "", "undefined", undefined];
+
+  // formData used to capture users form input.  Used in post request
   const formData = new FormData();
 
   const handleSubmit = e => {
+    /* handleSubmit called when user submits add-exercise-form. Starts by
+     * pulling user submitted data from form, then checks if any fields
+     * were not filled out by user and resets the form. Finally, function
+     * submits post request to server */
+
     // Prevent page of reloading on submission
     e.preventDefault();
 
+    /* readyToFetch always starts 'true', becomes false if user left field(s)
+     * blank. Probably could be a useState(), but that was proving difficult */
     let readyToFetch = true;
 
     // Add user's input to FormData for fetch call body
@@ -29,6 +39,7 @@ export default function AddExercise() {
     formData.append("sets", document.querySelector("#exercise-sets").value);
     formData.append("image", photoInput.files[0]);
 
+    // Check each field. If any are in blankFields, prompt user to try again
     formData.forEach(field => {
       if (blankFields.includes(field)) {
         readyToFetch = false;

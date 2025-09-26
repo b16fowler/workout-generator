@@ -37,7 +37,7 @@ app.listen(PORT, "172.31.81.52", () => {
 
 // Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
-  console.log(`\nLOGIN ATTEMPT\n User attempting login from ip: ${req.ip}\n`);
+  console.log(`\nLOGIN ATTEMPT\nUser attempting login from ip: ${req.ip}\n`);
   const login_query = "SELECT * FROM logins;";
   try {
     const result = await pool.query(login_query);
