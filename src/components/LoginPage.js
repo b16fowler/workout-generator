@@ -104,10 +104,17 @@ export default function LoginPage() {
         }),
       });
       const result = await response.json();
-      user._type = result.account[0][0].type;
+      user.type = result.account[0][0].type;
     };
     try {
-      console.log(user);
+      console.log("user.type: ");
+      console.log(user.type);
+      console.log("user.name");
+      console.log(user.name);
+      console.log("\n");
+      console.log("user._name");
+      console.log(user._name);
+      console.log("user._type");
       console.log(user._type);
 
       fetchAccountType();
