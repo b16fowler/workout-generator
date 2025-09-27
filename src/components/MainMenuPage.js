@@ -9,8 +9,24 @@ import AddExercise from "./AddExercisePage.js";
 import ViewExercises from "./ViewExercisesPage.js";
 import { root } from "../index.js";
 import { user } from "./App.js";
+import { useState } from "react";
 
 export default function MainMenuPage() {
+  const [adminOn, setAdminOn] = useState(false);
+
+  const handleClick = component => {
+    root.render(component);
+  };
+
+  const handleAdminClick = () => {
+    console.log("You clicked an admin button");
+  };
+
+  const toggleAdmin = () => {
+    console.log(adminOn ? "You are an admin" : "You are a smelly non-admin");
+    setAdminOn(!adminOn);
+  };
+
   return (
     <>
       <Header heading="Workout Generator App" />
@@ -24,33 +40,46 @@ export default function MainMenuPage() {
       <div className="main-menu">
         <button
           className="main-menu-button"
-          onClick={() => handleClick(<GenerateWorkout />)}>
-          Generate Workout
+          onClick={
+            adminOn
+              ? () => handleAdminClick()
+              : () => handleClick(<GenerateWorkout />)
+          }>
+          {adminOn ? "See User List" : "Generate Workout"}
         </button>
         <button
           className="main-menu-button"
-          onClick={() => handleClick(<AddExercise />)}>
-          Add Exercise
+          onClick={
+            adminOn
+              ? () => handleAdminClick()
+              : () => handleClick(<AddExercise />)
+          }>
+          {adminOn ? "Add/Delete User(s)" : "Add Exercise"}
         </button>
         <button
           className="main-menu-button"
-          onClick={() => handleClick(<ViewExercises />)}>
-          View Exercises
+          onClick={
+            adminOn
+              ? () => handleAdminClick()
+              : () => handleClick(<ViewExercises />)
+          }>
+          {adminOn ? "Reset Password(s)" : "View Exercises"}
         </button>
       </div>
       {user.accountType === "admin" && (
-        <div className="admin-buttons">
-          <button>Admin</button>
-        </div>
+        <>
+          <br />
+          <br />
+          <br />
+          <div className="main-menu">
+            <button className="toggle-admin-button" onClick={toggleAdmin}>
+              Toggle Admin Interface
+            </button>
+          </div>
+        </>
       )}
       <div id="snackbar"></div>
       <Footer />
     </>
   );
-}
-
-function handleClick(component) {
-  root.render(component);
-
-  return;
 }
