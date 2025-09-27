@@ -78,27 +78,21 @@ app.post("/api/create-account", async (req, res) => {
   console.log("End of post handler\n");
 });
 
+// Handles post requests to check user's account type upon signing in
 app.post("/api/check-account-type", async (req, res) => {
   console.log("\nCHECK ACCOUNT TYPE ATTEMPT\n");
   const checkAccountQuery = `SELECT type FROM logins WHERE username = "${req.body.user}";`;
-  console.log("Query:\n");
-  console.log(checkAccountQuery);
-  console.log("Username:\n");
-  console.log(req.body.user);
-
   try {
     const result = await pool.query(checkAccountQuery);
-    console.log("result\n");
-    console.log(result);
     res.json({ account: result });
     console.log("[SUCCESS] Type of account fetched successfully\n");
   } catch (err) {
     console.log("[ERROR] Error fetching account information\n" + err + "\n");
-    res.json({ success: false });
   }
   console.log("End of post handler\n");
 });
 
+// Handles post requests of users generating a work (image)
 app.post("/api/add", upload.single("image"), async (req, res) => {
   console.log("\nUPLOAD IMAGE ATTEMPT\n");
   // buffer object for user's uploaded picture
@@ -118,7 +112,7 @@ app.post("/api/add", upload.single("image"), async (req, res) => {
   console.log("End of post handler\n");
 });
 
-// Handles post requests of users generating a workout
+// Handles post requests of users generating a workout (non-image)
 app.post("/api/generate", async (req, res) => {
   console.log("\nGENERATE WORKOUT ATTEMPT (exercise info)\n");
   const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE user = "${req.body.user}" AND type IN (${req.body.selectedTypes})`;
