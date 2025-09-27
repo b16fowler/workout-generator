@@ -104,7 +104,7 @@ export default function LoginPage() {
         }),
       });
       const result = await response.json();
-      console.log(result.account);
+      console.log(result.account[0][0].type);
     };
 
     fetchAccountType();
