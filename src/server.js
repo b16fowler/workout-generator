@@ -87,7 +87,7 @@ app.post("/api/check-account-type", async (req, res) => {
   console.log(req.body.user);
 
   try {
-    result = await pool.query(checkAccountQuery);
+    const result = await pool.query(checkAccountQuery);
     console.log("result\n");
     console.log(result);
     res.json({ account: result });
