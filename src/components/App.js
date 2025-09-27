@@ -7,19 +7,21 @@ import "../css/index.css";
 
 // Empty string at start, set to username after log in
 let user = {
-  name: "",
-  type: "user",
-  get name() {
-    return this._name;
+  _username: "",
+  _accountType: "",
+
+  get username() {
+    return this._username;
   },
-  set name(value) {
-    this._name = value;
+  set username(value) {
+    this._username = value;
   },
-  get type() {
-    return this._type;
+
+  get accountType() {
+    return this._accountType;
   },
-  set type(value) {
-    this._type = value;
+  set accountType(value) {
+    this._accountType = value;
   },
 };
 
