@@ -81,6 +81,11 @@ app.post("/api/create-account", async (req, res) => {
 app.post("/api/check-account-type", async (req, res) => {
   console.log("\nCHECK ACCOUNT TYPE ATTEMPT\n");
   const checkAccountQuery = `SELECT type FROM logins WHERE username = "${req.body.user}"`;
+  console.log("Query:\n");
+  console.log(checkAccountQuery);
+  console.log("Username:\n");
+  console.log(req.body.user);
+
   try {
     result = await pool.query(checkAccountQuery);
     console.log(result);
