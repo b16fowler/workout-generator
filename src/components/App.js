@@ -6,9 +6,9 @@ import LoginPage from "./LoginPage.js";
 import "../css/index.css";
 
 // Empty string at start, set to username after log in
-const user = {
+let user = {
   name: "",
-  type: "",
+  type: "user",
   get name() {
     return this._name;
   },
