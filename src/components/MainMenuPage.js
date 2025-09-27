@@ -8,6 +8,7 @@ import GenerateWorkout from "./GenerateWorkoutPage.js";
 import AddExercise from "./AddExercisePage.js";
 import ViewExercises from "./ViewExercisesPage.js";
 import { root } from "../index.js";
+import { user } from "./App.js";
 
 export default function MainMenuPage() {
   return (
@@ -37,6 +38,11 @@ export default function MainMenuPage() {
           View Exercises
         </button>
       </div>
+      {user.type === "admin" && (
+        <div className="admin-buttons">
+          <button>Admin</button>
+        </div>
+      )}
       <div id="snackbar"></div>
       <Footer />
     </>

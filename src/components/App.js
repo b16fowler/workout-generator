@@ -14,6 +14,12 @@ const user = {
   set name(value) {
     this._name = value;
   },
+  get type() {
+    return this._type;
+  },
+  set type(value) {
+    this._type = value;
+  },
 };
 
 export function showSnackbar(message) {

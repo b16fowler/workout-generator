@@ -104,16 +104,18 @@ export default function LoginPage() {
         }),
       });
       const result = await response.json();
-      console.log(result.account[0][0].type);
+      user._type = result.account[0][0].type;
     };
-
-    fetchAccountType();
-
-    root.render(
-      <QueryClientProvider client={queryClient}>
-        <MainMenu />
-      </QueryClientProvider>
-    );
+    try {
+      fetchAccountType();
+      root.render(
+        <QueryClientProvider client={queryClient}>
+          <MainMenu />
+        </QueryClientProvider>
+      );
+    } catch (err) {
+      console.log("[ERROR] Error in LoginPage component\n" + err + "\n");
+    }
   }
 
   return (
