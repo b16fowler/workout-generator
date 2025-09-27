@@ -38,7 +38,7 @@ export default function MainMenuPage() {
           View Exercises
         </button>
       </div>
-      {user._type === "admin" && (
+      {user.accountType === "admin" && (
         <div className="admin-buttons">
           <button>Admin</button>
         </div>

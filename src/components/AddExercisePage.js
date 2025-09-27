@@ -32,7 +32,7 @@ export default function AddExercise() {
 
     // Add user's input to FormData for fetch call body
     const photoInput = document.querySelector("#exercise-pic");
-    formData.append("user", user.name);
+    formData.append("user", user.username);
     formData.append("name", document.querySelector("#exercise-name").value);
     formData.append("type", document.querySelector("#exercise-type").value);
     formData.append("reps", document.querySelector("#exercise-reps").value);
