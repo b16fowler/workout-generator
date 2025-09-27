@@ -107,6 +107,9 @@ export default function LoginPage() {
       user._type = result.account[0][0].type;
     };
     try {
+      console.log(user);
+      console.log(user._type);
+
       fetchAccountType();
       root.render(
         <QueryClientProvider client={queryClient}>
