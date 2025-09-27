@@ -9,8 +9,21 @@ import Footer from "./Footer.js";
 import FetchWrapper from "../fetchWrapper.js";
 import { EC2_URL, root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect, useReducer, useState } from "react";
 
 export default function LoginPage() {
+  const [readyToRender, setReadyToRender] = useState(false);
+
+  useEffect(() => {
+    if (!readyToRender) return;
+
+    root.render(
+      <QueryClientProvider client={queryClient}>
+        <MainMenu />
+      </QueryClientProvider>
+    );
+  }, [readyToRender]);
+
   // Called when user clicks "eye" button next to password
   function handleShowPassword(e) {
     e.preventDefault();
@@ -39,11 +52,11 @@ export default function LoginPage() {
 
     API.get("").then(data => {
       // Check each row for user's enter information
-      data.forEach(entry => {
+      data.forEach(account => {
         // username and password exist and are correct
         if (
-          username_input === entry.username &&
-          password_input === entry.password
+          username_input === account.username &&
+          password_input === account.password
         ) {
           login(username_input);
           return;
@@ -91,7 +104,7 @@ export default function LoginPage() {
   }
 
   function login(username) {
-    user._name = username;
+    user.username = username;
 
     const fetchAccountType = async () => {
       const response = await fetch(`${EC2_URL}/api/check-account-type`, {
@@ -100,32 +113,17 @@ export default function LoginPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: user._name,
+          user: user.username,
         }),
       });
       const result = await response.json();
-      user.type = result.account[0][0].type;
-    };
-    try {
-      console.log("user.type: ");
-      console.log(user.type);
-      console.log("user.name");
-      console.log(user.name);
-      console.log("\n");
-      console.log("user._name");
-      console.log(user._name);
-      console.log("user._type");
-      console.log(user._type);
+      // Set user.accountType
+      user.accountType = result.account[0][0].type;
 
-      fetchAccountType();
-      root.render(
-        <QueryClientProvider client={queryClient}>
-          <MainMenu />
-        </QueryClientProvider>
-      );
-    } catch (err) {
-      console.log("[ERROR] Error in LoginPage component\n" + err + "\n");
-    }
+      // Ready to render MainMenu
+      setReadyToRender(true);
+    };
+    fetchAccountType();
   }
 
   return (
