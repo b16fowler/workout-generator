@@ -92,7 +92,6 @@ export default function LoginPage() {
 
   function login(username) {
     user._name = username;
-    console.log("Top of login function\n");
 
     const fetchAccountType = async () => {
       const response = await fetch(`${EC2_URL}/api/check-account-type`, {
@@ -105,7 +104,7 @@ export default function LoginPage() {
         }),
       });
       const result = await response.json();
-      console.log(result);
+      console.log(result.account);
     };
 
     fetchAccountType();

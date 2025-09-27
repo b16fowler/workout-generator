@@ -79,12 +79,16 @@ app.post("/api/create-account", async (req, res) => {
 });
 
 app.post("/api/check-account-type", async (req, res) => {
-  console.log("This is the /check-account endpoint");
-  console.log(req.body);
+  console.log("\nCHECK ACCOUNT TYPE ATTEMPT\n");
+  const checkAccountQuery = `SELECT type FROM logins WHERE username = "${req.body.user}"`;
   try {
-    res.json({ result: "result" });
+    result = await pool.query(checkAccountQuery);
+    console.log(result);
+    res.json({ account: result });
+    console.log("[SUCCESS] Type of account fetched successfully\n");
   } catch (err) {
     console.log("[ERROR] Error fetching account information\n" + err + "\n");
+    res.json({ success: false });
   }
   console.log("End of post handler\n");
 });
