@@ -122,6 +122,21 @@ h4 {
   cursor: pointer;
 }
 
+.toggle-admin-button {
+  font: bolder;
+  font-size: larger;
+  background-color: #f2ffcc;
+  margin: 2px 4px;
+  padding: 16px 12px;
+  border: none;
+  border-radius: 10px;
+}
+
+.toggle-admin-button:hover {
+  background-color: #ce4343;
+  cursor: pointer;
+}
+
 #generate-page {
   margin: auto;
   text-align: center;
