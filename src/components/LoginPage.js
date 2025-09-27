@@ -9,7 +9,7 @@ import Footer from "./Footer.js";
 import FetchWrapper from "../fetchWrapper.js";
 import { EC2_URL, root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
   const [readyToRender, setReadyToRender] = useState(false);
