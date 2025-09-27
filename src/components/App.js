@@ -8,6 +8,7 @@ import "../css/index.css";
 // Empty string at start, set to username after log in
 const user = {
   name: "",
+  type: "",
   get name() {
     return this._name;
   },
