@@ -129,10 +129,7 @@ export default function LoginPage() {
   return (
     <>
       <Header heading="Workout Generator Login" notLoggedIn={true} />
-      <br />
-      <br />
       <h2>Enter login information:</h2>
-      <br />
       <form className="login-form">
         <div className="form-group">
           <label htmlFor="username">Username: </label>
@@ -161,12 +158,6 @@ export default function LoginPage() {
           onClick={handleForgot}
         />
       </form>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <h3>New here? Make a free account!</h3>
       <button
         className="open-account-button"
@@ -177,7 +168,6 @@ export default function LoginPage() {
         Yes, please!
       </button>
       <form className="create-account-form" hidden={true}>
-        <br />
         <div className="form-group">
           <label htmlFor="create-account-username">Username: </label>
           <input

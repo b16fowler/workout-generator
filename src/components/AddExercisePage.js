@@ -70,8 +70,6 @@ export default function AddExercise() {
   return (
     <>
       <Header heading="Add New Exercise" />
-      <br />
-      <br />
       <form
         id="add-exercise-form"
         encType="multipart/form-data"
@@ -83,8 +81,6 @@ export default function AddExercise() {
           id="exercise-name"
           type="text"
           placeholder="Example: Push ups"></input>
-        <br />
-        <br />
         <label htmlFor="exercise-type">Select type of exercise: </label>
         <select id="exercise-type">
           <option>Please select</option>
@@ -93,8 +89,6 @@ export default function AddExercise() {
           <option>Legs</option>
           <option>Core</option>
         </select>
-        <br />
-        <br />
         <label htmlFor="exercise-reps">Enter number of reps per set: </label>
         <input
           id="exercise-reps"
@@ -102,8 +96,6 @@ export default function AddExercise() {
           min="1"
           max="50"
           placeholder="1-50"></input>
-        <br />
-        <br />
         <label htmlFor="exercise-sets">Enter number of sets in workout: </label>
         <input
           id="exercise-sets"
@@ -111,13 +103,8 @@ export default function AddExercise() {
           min="1"
           max="10"
           placeholder="1-10"></input>
-        <br />
-        <br />
         <label htmlFor="exercise-pic">Exercise photo: </label>
         <input id="exercise-pic" type="file" name="uploaded-photo" />
-        <br />
-        <br />
-        <br />
         <input className="button" type="submit" value="Add exercise" />
       </form>
       <ReturnHome />

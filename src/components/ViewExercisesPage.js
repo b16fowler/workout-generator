@@ -13,7 +13,6 @@ export default function ViewExercises() {
       <div>
         <Header heading="All Exercises" />
         <ReturnHome />
-        <br />
         <ExerciseTable />
       </div>
       <div id="snackbar"></div>

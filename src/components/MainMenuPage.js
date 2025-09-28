@@ -30,13 +30,6 @@ export default function MainMenuPage() {
   return (
     <>
       <Header heading="Workout Generator App" />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <div className="main-menu">
         <button
           className="main-menu-button"
@@ -68,9 +61,6 @@ export default function MainMenuPage() {
       </div>
       {user.accountType === "admin" && (
         <>
-          <br />
-          <br />
-          <br />
           <div className="main-menu">
             <button className="toggle-admin-button" onClick={toggleAdmin}>
               Toggle Admin Interface
