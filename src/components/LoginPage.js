@@ -75,7 +75,7 @@ export default function LoginPage() {
 
   function handleOpenCreateAccount() {
     // Hide 'Yes, please!' button and show create account form
-    document.querySelector(".open-account-button").toggleAttribute("hidden");
+    document.querySelector(".open-form-button").toggleAttribute("hidden");
     document.querySelector(".create-account-form").toggleAttribute("hidden");
   }
 
@@ -129,20 +129,27 @@ export default function LoginPage() {
   return (
     <>
       <Header heading="Workout Generator Login" notLoggedIn={true} />
-      <h2>Enter login information:</h2>
+      <h2 id="form-heading">Enter login information:</h2>
       <form className="login-form">
         <div className="form-group">
           <label htmlFor="username">Username: </label>
           <input type="string" id="username" placeholder="" autoFocus></input>
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password: </label>
+          <label className="form-group-label" htmlFor="password">
+            Password:{" "}
+          </label>
           <input type="password" id="password" placeholder=""></input>
           <button
             type="button"
             className="show-password"
             onClick={handleShowPassword}>
-            <img src="pw-icon.png" alt="buttonpng" border="0" />
+            <img
+              id="show-pw-img"
+              src="pw-icon.png"
+              alt="buttonpng"
+              border="0"
+            />
           </button>
         </div>
         <input
@@ -158,9 +165,9 @@ export default function LoginPage() {
           onClick={handleForgot}
         />
       </form>
-      <h3>New here? Make a free account!</h3>
+      <h3 id="form-heading">New here? Make a free account!</h3>
       <button
-        className="open-account-button"
+        className="open-form-button"
         value="Yes, please!"
         type="button"
         hidden={false}
