@@ -60,13 +60,9 @@ export default function MainMenuPage() {
         </button>
       </div>
       {user.accountType === "admin" && (
-        <>
-          <div className="main-menu">
-            <button className="toggle-admin-button" onClick={toggleAdmin}>
-              Toggle Admin Interface
-            </button>
-          </div>
-        </>
+        <button className="toggle-admin-button" onClick={toggleAdmin}>
+          Toggle Admin Options
+        </button>
       )}
       <div id="snackbar"></div>
       <Footer />
