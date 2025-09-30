@@ -89,6 +89,11 @@ body {
   margin-right: 10px;
 }
 
+.login-button, .open-form-button {
+  border-radius: 15px;
+  padding: 6px;
+}
+
 .login-button, .generate-workout-button, .return-button, .add-exercise-button {
   display: block;
   width: 12%;
