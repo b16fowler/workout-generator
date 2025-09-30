@@ -105,7 +105,12 @@ export default function AddExercise() {
           placeholder="1-10"></input>
         <label htmlFor="exercise-pic">Exercise photo: </label>
         <input id="exercise-pic" type="file" name="uploaded-photo" />
-        <input className="button" type="submit" value="Add exercise" />
+        <br />
+        <input
+          className="add-exercise-button"
+          type="submit"
+          value="Add exercise"
+        />
       </form>
       <ReturnHome />
       <Footer />
