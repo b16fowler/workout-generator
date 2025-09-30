@@ -138,8 +138,8 @@ export default function GenerateWorkout() {
       <Header heading="Generate New Workout" />
       <div id="generate-page">
         <h3>Select all target muscles to be included in workout</h3>
-        <h4>To select all types, select none</h4>
-        <form className="form" onSubmit={handleSubmit}>
+        <h4>To select all types, leave blank</h4>
+        <form className="generate-form" onSubmit={handleSubmit}>
           <input type="checkbox" id="arms" name="box" />
           <label htmlFor="arms">Arms </label>
           <input type="checkbox" id="back" name="box" />
@@ -148,13 +148,19 @@ export default function GenerateWorkout() {
           <label htmlFor="legs">Legs </label>
           <input type="checkbox" id="core" name="box" />
           <label htmlFor="core">Core </label>
+          <br />
+          <br />
           <label htmlFor="numExercises">Number of exercises in workout: </label>
           <input
             type="number"
             id="numExercises"
-            placeholder="Leave blank for all"></input>
+            placeholder="Leave blank for all"
+          />
+          <br />
+          <br />
+          <br />
           <input
-            className="button"
+            className="generate-workout-button"
             type="Submit"
             value="Generate workout"
             onChange={handleSubmit}
