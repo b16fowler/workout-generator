@@ -9,14 +9,16 @@
  **************************************************************************/
 
 import { root } from "../index.js";
-import App, { showSnackbar } from "./App.js";
+import App, { user, showSnackbar } from "./App.js";
 
 export default function LogOutButton({ notLoggedIn }) {
   return (
     <button
-      className="logOut"
+      className="logout-button"
       onClick={handleLogOut}
       hidden={notLoggedIn ? true : false}>
+      {user.username}
+      <br />
       Log out
     </button>
   );
