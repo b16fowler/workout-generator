@@ -1,192 +1,132 @@
+/**************************************************************************
+ *
+ * CSS/FLEXBOX NOTES
+ * 
+ * justify-content: Aligns items horizontally (flex-start, flex-end, center,
+ * space-between, space-around)
+ * align-items: Aligns items vertically (flex-start, flex-end, center, baseline,
+ * stretch)
+ * align-self: Aligns single item (flex-start, flex-end, center, baseline,
+ * stretch)
+ * flex-direction: Direction items are placed in the container (row, row-reverse,
+ * column, column-reverse). Reverse also switches start and end
+ * flex-wrap: 
+ *    nowrap: Every item is fit to a single line
+ *    wrap: Items wrap around to additional lines
+ *    wrap-reverse: Items wrap around to additional lines in reverse
+ * flex-flow: Combines flex-wrap and flex-direction
+ * 
+ * order: Reorganize items based on a positive/negative int value (default 0)
+ * 
+ * align-content: Set how multiple lines are spaced apart from each other
+ * (flex-start, flex-end, center, space-between, space-around, stretch)
+ *************************************************************************/
+
 body {
   background-color: #0097ca;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-.App {
-  text-align: center;
+/* START OF HEADER */
+.header-div {
+  background-color: #f2ffcc;
+  display: flex;
+  height: 70px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* TODO: This is not centered */
+.heading {
+  margin: auto;
+  font-size: 36pt;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logout-button {
+  font-size: x-large;
+  background-color: transparent;
+  border: 0;
+  padding-right: 1%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logout-button:hover {
+  cursor: pointer;
+  background-color: #54b8da;
+  transition: background-color 0.3s ease;
+}
+
+#clock {
+  font-size: x-large;
+}
+/* END OF HEADER */
+
+/* START OF LOGIN PAGE */
+.login-form .create-account-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
-.header {
-  background-color: #f2ffcc;
   text-align: center;
-  color: black;
-  font: bolder;
-  font-size: 48px;
-  margin: 0%;
-  padding: 0%;
 }
 
-.footer {
-  background-color: #282826;
-  color: whitesmoke;
-  position: absolute;
-  width: 100%;
-  bottom: 0%;
-  margin: auto;
-}
-
-.author-info {
-  text-align: right;
-  padding-right: 5px;
-}
-
-a {
-  color: #0097ca;
-}
-
-h1 {
-  margin: auto;
+#form-heading {
   text-align: center;
-  font-size: 38pt;
+  padding-top: 30px;
+  padding-bottom: 20px;
 }
 
-h2 {
-  margin: 10px;
-}
-
-h3 {
-  margin: 10px;
-}
-
-h4 {
-  margin: 15px;
-  text-align: center;
-  font-size: 20pt;
-}
-
-.main-menu {
+.form-group {
   display: flex;
-  justify-content: center;
-  margin: auto;
-  height: 100%;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.main-menu-button {
-  font: bolder;
-  font-size: larger;
-  background-color: #f2ffcc;
-  margin: 2px 4px;
-  padding: 16px 12px;
-  border: none;
-  border-radius: 10px;
+.form-group input {
+  padding: 7px;
 }
 
-.main-menu-button:hover {
-  background-color: #d6f281;
-  cursor: pointer;
-}
-
-.toggle-admin-button {
-  font: bolder;
-  font-size: larger;
-  background-color: #f2ffcc;
-  margin: 2px 4px;
-  padding: 16px 12px;
-  border: none;
-  border-radius: 10px;
-}
-
-.toggle-admin-button:hover {
-  background-color: #ce4343;
-  cursor: pointer;
-}
-
-#generate-page {
-  margin: auto;
-  text-align: center;
-}
-
-#add-exercise-form {
-  margin: auto;
-  text-align: center;
-}
-
-img {
-  position: relative;
-}
-
-.button {
-  background-color: #f2ffcc;
-  border: #f2ffcc;
-  color: black;
+.form-group label {
   font-size: x-large;
-  padding: 12px 24px;
-  border-radius: 24px;
+  text-align: right;
+  flex-basis: 45%;
+  margin-right: 10px;
 }
 
-.button:hover {
-  background-color: #d6f281;
-  cursor: pointer;
-}
-
-.button:disabled {
-  background-color: #f2ffcc;
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.login-button {
+.login-button, .generate-workout-button, .return-button, .add-exercise-button {
+  display: block;
+  width: 12%;
+  margin: 0 auto;
+  margin-top: 1%;
+  font-size: x-large;
   background-color: #f2ffcc;
   border: #f2ffcc;
-  color: black;
-  margin: 4px 2px;
-  padding: 4px 5px;
 }
 
-.login-button:hover {
-  background-color: #d6f281;
+.login-button:hover, .generate-workout-button:hover, .return-button:hover {
   cursor: pointer;
+  background-color: #d2ec82;
+  transition: background-color 0.3s ease;
+}
+
+.open-form-button {
+  background-color: #f2ffcc;
+  border: none;
+  font-size: large;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 25px;
+}
+
+.open-form-button:hover {
+  cursor: pointer;
+  background-color: #d2ec82;
+  transition: background-color 0.3s ease;
+}
+
+#password {
+  justify-content: flex-start;
 }
 
 .show-password {
-  border-radius: 50%;
   border: black;
+  border-radius: 50%;
 }
 
 .show-password:hover {
@@ -196,190 +136,147 @@ img {
 
 .show-password:active {
   background-color: #a1a1a0;
-  box-shadow: 0 5px #000000;
+  box-shadow: 0 5px black;
   transform: translateY(4px);
 }
 
-img {
+#show-pw-img {
   border-radius: 50%;
-  width: 20px;
+  width: 30px;
+  padding: 1px;
+}
+/* END OF LOGIN PAGE */
+
+/* START OF FOOTER */
+.footer {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: 70px;
+  background-color: #282826;
+  color: whitesmoke;
 }
 
-.open-account-button {
+.author-info {
+  text-align: right;
+  font-size: large;
+  padding-right: 1%;
+}
+
+a:link, a:visited {
+  color: #f2ffcc
+}
+/* END OF FOOTER */
+
+/* START OF MAIN MENU */
+.main-menu {
+  position: absolute;
+  top: 25%;
+  left: 35%;
+}
+
+.main-menu-button, .toggle-admin-button {
+  font: bolder;
+  font-size: x-large;
   background-color: #f2ffcc;
-  border: #f2ffcc;
-  color: black;
-  margin: 4px 2px;
-  padding: 4px 5px;
+  margin: 2px 4px;
+  padding: 16px 12px;
+  border: none;
+  border-radius: 10px;
 }
 
-.open-account-button:hover {
-  background-color: #d6f281;
+.toggle-admin-button {
+  position: absolute;
+  top: 38%;
+  left: 45%;
+}
+
+.main-menu-button:hover {
   cursor: pointer;
+  background-color: #d6f281;
+  transition: background-color 0.3s ease;
 }
 
-.create-account-form {
-  max-width: 400px;
-  margin: 0 auto;
+.toggle-admin-button:hover {
+  cursor: pointer;
+  background-color: #f77070;
+  transition: background-color 0.3s ease;
+}
+/* END OF MAIN MENU */
+
+/* START OF GENERATE WORKOUT */
+#generate-page {
+  padding: 75px;
+  margin: auto;
+  text-align: center;
+  font-size: x-large;
 }
 
-.login-form {
-  max-width: 400px;
-  margin: 0 auto;
+.generate-workout-button {
+  border-radius: 15px;
+  width: 13%;
+  padding: 6px;
 }
 
-.form-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.form-group label {
-  width: 175px;
-}
-
-.form-group input {
-  width: 175px;
+#numExercises {
   padding: 5px;
 }
+/* END OF GENERATE WORKOUT */
 
-label {
-  font-size: large;
-}
-
-input {
-  font-size: large;
-}
-
-.logOut {
-  color: black;
-  background-color: #f2ffcc;
-  font-size: large;
-  font-weight: bolder;
-  position: absolute;
-  top: 62%;
-  right: 0%;
-  border: none;
-}
-
-.logOut:hover {
-  cursor: pointer;
-}
-
-.next {
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  right: 5%;
-}
-
-.previous {
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  left: 5%;
-}
-
-.finish {
-  background-color: #5cd672;
-  position: absolute;
-  margin: 0;
-  top: 50%;
-  right: 5%;
-}
-
-.finish:hover {
-  background-color: #14b531;
-}
-
-.return-div {
-  position: relative;
-}
-
+/* START OF RETURN HOME */
 .return-button {
-  background-color: #f2ffcc;
-  border: #f2ffcc;
-  color: black;
-  font-size: large;
-  padding: 6px 12px;
-  border-radius: 24px;
-  margin: auto;
-  display: block;
+  border-radius: 15px;
+  padding: 6px;
+  width: 10%;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
+/* END OF RETURN HOME */
 
-.return-button:hover {
-  background-color: #d6f281;
-  cursor: pointer;
-}
-
-.start-button {
-  background-color: #f2ffcc;
-  border: #f2ffcc;
-  color: black;
-  font-size: xx-large;
-  padding: 6px 12px;
-  border-radius: 24px;
-  margin: auto;
-  display: block;
-}
-
-.start-button:hover {
-  background-color: #d6f281;
-  cursor: pointer;
-}
-
-.exercise-table {
-  border: thick solid #f2ffcc;
-  border-collapse: separate;
-  border-spacing: 150px;
-  place-items: center;
-}
-
-.exercise-div {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-.exercise-image {
-  border-radius: 0;
-  width: 950px;
-  height: 550px;
-}
-
-.header-div {
-  position: relative;
-}
-
-#clock {
-  font-size: large;
-  font-weight: bolder;
-  letter-spacing: 1px;
-  position: absolute;
-  left: 5px;
-  bottom: -18px;
-}
-
-#wotd-div {
-  margin: auto;
+/* START OF ADD EXERCISE PAGE */
+#add-exercise-form {
+  margin: 0 auto;
+  margin-top: 3%;
   text-align: center;
 }
 
-#word {
-  font-size: xx-large;
-  font-weight: 600;
-  color: #f2ffcc;
+#add-exercise-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: x-large;
 }
 
-#pos {
-  font-size: medium;
-  font-weight: 400;
-  color: black;
-}
-
-#def {
+#add-exercise-form input {
+  margin-bottom: 20px;
   font-size: large;
 }
 
+#add-exercise-form select {
+  margin-bottom: 20px;
+  font-size: large;
+}
+
+.add-exercise-button {
+  border-radius: 15px;
+  width: 11%;
+  padding: 6px;
+  font-size: small;
+}
+/* END OF ADD EXERCISE PAGE */
+
+/* START OF VIEW EXERCISE PAGE */
+.view-exercise-page {
+  flex-direction: column;
+  display: flex;
+}
+
+#return-button-table {
+  margin-top: 1%;
+  order: 2;
+}
+/* END OF VIEW EXERCISE PAGE */
+
+/* START OF SNACKBAR */
 #snackbar {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */
@@ -392,10 +289,9 @@ input {
   position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
   left: 50%; /* Center the snackbar */
-  top: 50px; /* 30px from the bottom */
+  top: 50px; /* 50px from the bottom */
 }
 
-/* Show the snackbar when clicking on a button (class added with JavaScript) */
 #snackbar.show {
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
@@ -404,7 +300,6 @@ input {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-/* Animations to fade the snackbar in and out */
 @-webkit-keyframes fadein {
   from {top: 0; opacity: 0;}
   to {top: 50px; opacity: 1;}
@@ -424,3 +319,5 @@ input {
   from {top: 50px; opacity: 1;}
   to {top: 0; opacity: 0;}
 }
+
+/* END OF SNACKBAR */
