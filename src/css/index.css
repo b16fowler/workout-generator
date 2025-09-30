@@ -33,6 +33,7 @@ body {
   background-color: #f2ffcc;
   display: flex;
   height: 70px;
+  padding-left: 5px;
 }
 
 /* TODO: This is not centered */
