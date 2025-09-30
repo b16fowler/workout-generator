@@ -15,7 +15,7 @@ export default function Header({ heading, notLoggedIn }) {
     <>
       <div className="header-div">
         <Clock />
-        <h3 className="header">{heading}</h3>
+        <h3 className="heading">{heading}</h3>
         <LogOutButton notLoggedIn={notLoggedIn} />
       </div>
     </>
