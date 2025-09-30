@@ -10,10 +10,16 @@ import ReturnHome from "./ReturnHome.js";
 export default function ViewExercises() {
   return (
     <>
-      <div>
-        <Header heading="All Exercises" />
-        <ReturnHome />
-        <ExerciseTable />
+      <div className="view-exercise-page">
+        <div>
+          <Header heading="All Exercises" />{" "}
+        </div>
+        <div id="return-button-table">
+          <ReturnHome />
+        </div>
+        <div className="exercise-table-div">
+          <ExerciseTable />
+        </div>
       </div>
       <div id="snackbar"></div>
       <Footer />
