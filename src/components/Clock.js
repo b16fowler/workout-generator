@@ -18,5 +18,9 @@ export default function Clock() {
 
   const formattedTime = time.toLocaleTimeString();
 
-  return <p id="clock">{formattedTime}</p>;
+  return (
+    <p id="clock">
+      <strong>{formattedTime}</strong>
+    </p>
+  );
 }
