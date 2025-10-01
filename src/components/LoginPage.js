@@ -55,7 +55,7 @@ export default function LoginPage() {
       data.forEach(account => {
         // username and password exist and are correct
         if (
-          username_input === account.username &&
+          username_input.toLowerCase() === account.username.toLowerCase() &&
           password_input === account.password
         ) {
           login(username_input);
@@ -87,7 +87,7 @@ export default function LoginPage() {
       ".create-account-password"
     ).value;
 
-    // Post request
+    // Post request to create new account
     const API = new FetchWrapper(`${EC2_URL}/api/create-account`);
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
     API.post("", create_query).then(data => {
