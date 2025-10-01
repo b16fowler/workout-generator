@@ -194,3 +194,26 @@ app.post("/api/add", async (req, res) => {
   }
   console.log("End of post handler\n");
 });
+
+// Handles post requests of admin searching for user to reset password
+app.post("/api/search", async (req, res) => {
+  console.log("\nSEARCH USER ATTEMPT\n");
+
+  const searchQuery = `SELECT username FROM logins WHERE username = "${req.body.user}"`;
+  try {
+    await pool.query(searchQuery);
+    // res.json({
+    //   success: true,
+    //   message: "New exercise added successfully",
+    // });
+    // console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB`);
+    return;
+  } catch (err) {
+    // res.json({ success: false });
+    // console.log(
+    //   `[ERROR] Error posting user ${req.body.user}'s exercise\n` + err + "\n"
+    // );
+    return;
+  }
+  console.log("End of post handler\n");
+});
