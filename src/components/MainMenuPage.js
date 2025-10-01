@@ -10,6 +10,7 @@ import ViewExercises from "./ViewExercisesPage.js";
 import { root } from "../index.js";
 import { user } from "./App.js";
 import { useState } from "react";
+import AdminResetPassword from "./AdminResetPassword.js";
 
 export default function MainMenuPage() {
   const [adminOn, setAdminOn] = useState(false);
@@ -18,12 +19,7 @@ export default function MainMenuPage() {
     root.render(component);
   };
 
-  const handleAdminClick = () => {
-    console.log("You clicked an admin button");
-  };
-
   const toggleAdmin = () => {
-    console.log(adminOn ? "You are an admin" : "You are a smelly non-admin");
     setAdminOn(!adminOn);
   };
 
@@ -35,28 +31,26 @@ export default function MainMenuPage() {
           className="main-menu-button"
           onClick={
             adminOn
-              ? () => handleAdminClick()
+              ? () => handleClick()
               : () => handleClick(<GenerateWorkout />)
           }>
-          {adminOn ? "See User List" : "Generate Workout"}
+          {adminOn ? "See/Edit Users" : "Generate Workout"}
         </button>
         <button
           className="main-menu-button"
           onClick={
-            adminOn
-              ? () => handleAdminClick()
-              : () => handleClick(<AddExercise />)
+            adminOn ? () => handleClick() : () => handleClick(<AddExercise />)
           }>
-          {adminOn ? "Add/Delete User(s)" : "Add Exercise"}
+          {adminOn ? "Add/Delete Users" : "Add Exercise"}
         </button>
         <button
           className="main-menu-button"
           onClick={
             adminOn
-              ? () => handleAdminClick()
+              ? () => handleClick(<AdminResetPassword />)
               : () => handleClick(<ViewExercises />)
           }>
-          {adminOn ? "Reset Password(s)" : "View Exercises"}
+          {adminOn ? "Reset Passwords" : "View Exercises"}
         </button>
       </div>
       {user.accountType === "admin" && (
