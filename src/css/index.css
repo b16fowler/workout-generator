@@ -90,7 +90,7 @@ body {
   margin-right: 10px;
 }
 
-.login-button, .open-form-button {
+.login-button {
   border-radius: 15px;
   padding: 6px;
 }
