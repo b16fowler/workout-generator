@@ -201,7 +201,10 @@ app.post("/api/search", async (req, res) => {
   console.log("\nSearching for user: " + req.body.user + "\n");
   const searchQuery = `SELECT username FROM logins WHERE username = "${req.body.user}"`;
   try {
-    await pool.query(searchQuery);
+    const response = await pool.query(searchQuery);
+
+    console.log(response);
+
     res.json({
       success: true,
     });
