@@ -198,22 +198,21 @@ app.post("/api/add", async (req, res) => {
 // Handles post requests of admin searching for user to reset password
 app.post("/api/search", async (req, res) => {
   console.log("\nSEARCH USER ATTEMPT\n");
-
+  console.log("\nSearching for user: " + req.body.user + "\n");
   const searchQuery = `SELECT username FROM logins WHERE username = "${req.body.user}"`;
   try {
     await pool.query(searchQuery);
-    // res.json({
-    //   success: true,
-    //   message: "New exercise added successfully",
-    // });
-    // console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB`);
-    return;
+    res.json({
+      success: true,
+    });
+    console.log(`[SUCCESS] User ${req.body.user} exists in database`);
   } catch (err) {
-    // res.json({ success: false });
-    // console.log(
-    //   `[ERROR] Error posting user ${req.body.user}'s exercise\n` + err + "\n"
-    // );
-    return;
+    res.json({ success: false });
+    console.log(
+      `[ERROR] Error searching for user ${req.body.user} in database\n` +
+        err +
+        "\n"
+    );
   }
   console.log("End of post handler\n");
 });
