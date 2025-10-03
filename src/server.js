@@ -203,7 +203,7 @@ app.post("/api/search", async (req, res) => {
   try {
     const response = await pool.query(searchQuery);
 
-    console.log(response);
+    console.log(response[0][0].username);
 
     res.json({
       success: true,
