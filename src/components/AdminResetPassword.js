@@ -43,7 +43,7 @@ export default function AdminResetPassword() {
     document.querySelector(".reset-pw-form").reset();
   };
 
-  const resetPw = user => {
+  const resetPw = usernameInput => {
     const resetFetch = () => {
       const response = fetch(`${EC2_URL}/api/reset`, {
         method: "POST",
@@ -51,7 +51,7 @@ export default function AdminResetPassword() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: user,
+          user: usernameInput,
         }),
       });
       console.log(response);
