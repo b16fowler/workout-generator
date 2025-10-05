@@ -221,7 +221,7 @@ app.post("/api/reset", async (req, res) => {
   console.log("\nRESET PASSWORD ATTEMPT\n");
   const resetQuery = `UPDATE logins SET password = "${req.user}" WHERE username = ${req.user}`;
   try {
-    pool.query(resetQuery);
+    await pool.query(resetQuery);
     res.json({ success: true });
     console.log(
       `[SUCCESS] User ${req.body.user}'s password has been reset to their username`
