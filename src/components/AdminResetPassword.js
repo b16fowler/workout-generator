@@ -6,33 +6,63 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ReturnHome from "./ReturnHome";
 import { EC2_URL } from "..";
+import { showSnackbar } from "./App";
 
 export default function AdminResetPassword() {
   const searchUser = e => {
     e.preventDefault();
 
     // Take user's input and run SELECT query for that user
-    const input = document.querySelector("#reset-pw-input").value;
-    console.log("Submitted value:\n" + input);
+    const usernameInput = document.querySelector("#reset-pw-input").value;
 
     const fetchUser = async () => {
-      try {
-        const response = await fetch(`${EC2_URL}/api/search`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user: input,
-          }),
-        });
-      } catch (err) {
-        console.log("[ERROR] Error fetching users:\n" + err);
+      const response = await fetch(`${EC2_URL}/api/search`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: usernameInput,
+        }),
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        // Confirm, then reset pw
+        const confirm = window.confirm(
+          `Reset password for user "` + usernameInput + `"?`
+        );
+        console.log("Confirm result: ");
+        console.log(confirm);
+
+        if (!confirm) {
+          return;
+        } else {
+          resetPw(usernameInput);
+        }
       }
+      showSnackbar(`User "` + usernameInput + `" was not found in database`);
     };
+    fetchUser();
 
     // Reset form
     document.querySelector(".reset-pw-form").reset();
+  };
+
+  const resetPw = user => {
+    const resetFetch = () => {
+      const response = fetch(`${EC2_URL}/api/reset`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: user,
+        }),
+      });
+      console.log(response);
+    };
+    resetFetch();
   };
 
   return (
