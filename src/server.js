@@ -31,8 +31,8 @@ app.get("/", (req, res) => {
   res.send("Server is running\n");
 });
 
-app.listen(PORT, "172.31.81.52", () => {
-  console.log(`\nServer is running on a private IP\n`);
+app.listen(PORT, () => {
+  console.log(`\nServer is running\n`);
 });
 
 // Handles get requests of users attempting to login
@@ -198,13 +198,9 @@ app.post("/api/add", async (req, res) => {
 // Handles post requests of admin searching for user to reset password
 app.post("/api/search", async (req, res) => {
   console.log("\nSEARCH USER ATTEMPT\n");
-  console.log("\nSearching for user: " + req.body.user + "\n");
   const searchQuery = `SELECT username FROM logins WHERE username = "${req.body.user}"`;
   try {
-    const response = await pool.query(searchQuery);
-
-    console.log(response[0][0].username);
-
+    await pool.query(searchQuery);
     res.json({
       success: true,
     });
@@ -216,6 +212,23 @@ app.post("/api/search", async (req, res) => {
         err +
         "\n"
     );
+  }
+  console.log("End of post handler\n");
+});
+
+// Handles post requests after admin confirms password reset of a user
+app.post("/api/reset", async (req, res) => {
+  console.log("\nRESET PASSWORD ATTEMPT\n");
+  const resetQuery = `UPDATE logins SET password = "${req.user}" WHERE username = ${req.user}`;
+  try {
+    pool.query(resetQuery);
+    res.json({ success: true });
+    console.log(
+      `[SUCCESS] User ${req.body.user}'s password has been reset to their username`
+    );
+  } catch (err) {
+    res.json({ success: false });
+    console.log(`[ERROR] Error resetting ${req.user}'s password` + err + "\n");
   }
   console.log("End of post handler\n");
 });
