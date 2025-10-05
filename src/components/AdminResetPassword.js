@@ -32,16 +32,10 @@ export default function AdminResetPassword() {
         const confirm = window.confirm(
           `Reset password for user "` + usernameInput + `"?`
         );
-        console.log("Confirm result: ");
-        console.log(confirm);
-
-        if (!confirm) {
-          return;
-        } else {
-          resetPw(usernameInput);
-        }
+        if (confirm) resetPw(usernameInput);
+      } else {
+        showSnackbar(`User "` + usernameInput + `" was not found in database`);
       }
-      showSnackbar(`User "` + usernameInput + `" was not found in database`);
     };
     fetchUser();
 

@@ -219,7 +219,7 @@ app.post("/api/search", async (req, res) => {
 // Handles post requests after admin confirms password reset of a user
 app.post("/api/reset", async (req, res) => {
   console.log("\nRESET PASSWORD ATTEMPT\n");
-  const resetQuery = `UPDATE logins SET password = "${req.user}" WHERE username = ${req.user}`;
+  const resetQuery = `UPDATE logins SET password = "${req.body.user}" WHERE username = ${req.body.user}`;
   try {
     await pool.query(resetQuery);
     res.json({ success: true });
