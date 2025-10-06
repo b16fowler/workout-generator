@@ -6,7 +6,10 @@ import { useState, useEffect } from "react";
 import { EC2_URL } from "..";
 import { Table } from "antd";
 
+//TODO: fetch more user information: account type, num exercises, etc.
 export default function UsersTable() {
+  // UsersTable fetches all usernames and displays them in an
+  // antd Table
   const [userList, setUserList] = useState([]);
   const [tableData, setTableData] = useState([]);
 
