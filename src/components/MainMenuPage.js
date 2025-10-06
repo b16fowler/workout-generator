@@ -11,6 +11,8 @@ import { root } from "../index.js";
 import { user } from "./App.js";
 import { useState } from "react";
 import AdminResetPassword from "./AdminResetPassword.js";
+import AdminAddDelete from "./AdminAddDelete.js";
+import AdminViewUsers from "./AdminViewUsers.js";
 
 export default function MainMenuPage() {
   const [adminOn, setAdminOn] = useState(false);
@@ -31,7 +33,7 @@ export default function MainMenuPage() {
           className="main-menu-button"
           onClick={
             adminOn
-              ? () => handleClick()
+              ? () => handleClick(<AdminViewUsers />)
               : () => handleClick(<GenerateWorkout />)
           }>
           {adminOn ? "See/Edit Users" : "Generate Workout"}
@@ -39,7 +41,9 @@ export default function MainMenuPage() {
         <button
           className="main-menu-button"
           onClick={
-            adminOn ? () => handleClick() : () => handleClick(<AddExercise />)
+            adminOn
+              ? () => handleClick(<AdminAddDelete />)
+              : () => handleClick(<AddExercise />)
           }>
           {adminOn ? "Add/Delete Users" : "Add Exercise"}
         </button>
