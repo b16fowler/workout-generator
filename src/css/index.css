@@ -61,7 +61,7 @@ body {
 /* END OF HEADER */
 
 /* START OF LOGIN PAGE */
-.login-form .create-account-form {
+.login-form, .create-account-form {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -281,6 +281,32 @@ a:link, a:visited {
   order: 2;
 }
 /* END OF VIEW EXERCISE PAGE */
+
+/*  */
+.reset-pw-form {
+  font-size: xx-large;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.reset-pw-form input {
+  font-size: x-large;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+#reset-pw-search {
+  border: none;
+  border-radius: 12px;
+  background-color: #f2ffcc;
+}
+
+#reset-pw-search:hover {
+  cursor: pointer;
+  background-color: #d6f281;
+}
+/*  */
 
 /* START OF SNACKBAR */
 #snackbar {
