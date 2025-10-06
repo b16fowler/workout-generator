@@ -66,7 +66,7 @@ export default function AdminResetPassword() {
 
   return (
     <>
-      <Header />
+      <Header heading="Reset Passwords" />
       <form className="reset-pw-form" onSubmit={searchUser}>
         <label>Search user's name to reset their password</label>
         <br />
