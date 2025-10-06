@@ -68,9 +68,15 @@ export default function AdminResetPassword() {
     <>
       <Header />
       <form className="reset-pw-form" onSubmit={searchUser}>
-        <label>Search user's name to reset their password:</label>
+        <label>Search user's name to reset their password</label>
+        <br />
         <input type="text" id="reset-pw-input"></input>
-        <input type="Submit" value="Search" onChange={searchUser} />
+        <input
+          type="Submit"
+          value="Search"
+          id="reset-pw-search"
+          onChange={searchUser}
+        />
       </form>
       <ReturnHome />
       <Footer />
