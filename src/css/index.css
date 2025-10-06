@@ -61,7 +61,7 @@ body {
 /* END OF HEADER */
 
 /* START OF LOGIN PAGE */
-.login-form, .create-account-form {
+.login-form .create-account-form {
   display: flex;
   flex-direction: column;
   text-align: center;
