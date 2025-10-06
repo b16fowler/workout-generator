@@ -238,8 +238,8 @@ app.get("/api/user-table", async (req, res) => {
   console.log("\nCREATE USER TABLE ATTEMPT\n");
   const userTableQuery = "SELECT username FROM logins;";
   try {
-    await pool.query(userTableQuery);
-    res.json({ success: true });
+    const userList = await pool.query(userTableQuery);
+    res.json({ userList: userList, success: true });
     console.log("[SUCCESS] userTableQuery run successfully\n");
   } catch (err) {
     res.json({ success: false });
