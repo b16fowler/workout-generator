@@ -25,6 +25,7 @@ export default function LogOutButton({ notLoggedIn }) {
 }
 
 function handleLogOut() {
+  //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN RESET PASSWORD COMPONENT
   showSnackbar("Logging out...");
 
   setTimeout(() => {

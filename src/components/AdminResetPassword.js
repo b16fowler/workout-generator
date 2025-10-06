@@ -9,6 +9,7 @@ import { EC2_URL } from "..";
 import { showSnackbar } from "./App";
 
 export default function AdminResetPassword() {
+  //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN RESET PASSWORD COMPONENT
   const searchUser = e => {
     e.preventDefault();
 
@@ -54,7 +55,11 @@ export default function AdminResetPassword() {
           user: usernameInput,
         }),
       });
-      console.log(response);
+
+      if (response.success)
+        showSnackbar(
+          `User ${usernameInput}'s password has been reset to their username`
+        );
     };
     resetFetch();
   };

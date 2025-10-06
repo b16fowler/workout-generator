@@ -223,9 +223,7 @@ app.post("/api/reset", async (req, res) => {
   try {
     await pool.query(resetQuery);
     res.json({ success: true });
-    console.log(
-      `[SUCCESS] User ${req.body.user}'s password has been reset to their username`
-    );
+    console.log(`[SUCCESS] User ${req.body.user}'s password has been reset`);
   } catch (err) {
     res.json({ success: false });
     console.log(
