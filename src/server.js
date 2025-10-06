@@ -239,6 +239,9 @@ app.get("/api/user-table", async (req, res) => {
   const userTableQuery = "SELECT username FROM logins;";
   try {
     const userList = await pool.query(userTableQuery);
+    console.log(userList[0]);
+    console.log(userList[0][0]);
+
     res.json({ userList: userList[0][0], success: true });
     console.log("[SUCCESS] userTableQuery run successfully\n");
   } catch (err) {
