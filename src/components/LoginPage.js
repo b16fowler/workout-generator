@@ -74,6 +74,7 @@ export default function LoginPage() {
   }
 
   function handleOpenCreateAccount() {
+    //TODO: FIX BUG CAUSING CREATE ACCOUNT FORM TO BE VISIBLE ON LOAD
     // Hide 'Yes, please!' button and show create account form
     document.querySelector(".open-form-button").toggleAttribute("hidden");
     document.querySelector(".create-account-form").toggleAttribute("hidden");
@@ -92,7 +93,7 @@ export default function LoginPage() {
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
     API.post("", create_query).then(data => {
       if (data.success) {
-        login(new_username);
+        login(new_username.toLowerCase());
       }
       // Alert user that username is taken and clear form
       else {
@@ -104,7 +105,7 @@ export default function LoginPage() {
   }
 
   function login(username) {
-    user.username = username;
+    user.username = username.toLowerCase();
 
     const fetchAccountType = async () => {
       const response = await fetch(`${EC2_URL}/api/check-account-type`, {
