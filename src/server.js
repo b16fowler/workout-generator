@@ -165,7 +165,7 @@ app.post("/api/create-table", async (req, res) => {
       success: true,
       exercises: result,
     });
-    console.log(`[SUCCESS] User ${req.body.user}'s exercises pulled from DB`);
+    console.log(`[SUCCESS] User ${req.body.user}'s exercises pulled from DB\n`);
   } catch (err) {
     console.log(
       `[ERROR] Error fetching  user ${req.body.user}'s exercise data\n` +
@@ -185,7 +185,7 @@ app.post("/api/add", async (req, res) => {
       success: true,
       message: "New exercise added successfully",
     });
-    console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB`);
+    console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
   } catch (err) {
     res.json({ success: false });
     console.log(
@@ -204,7 +204,7 @@ app.post("/api/search", async (req, res) => {
     res.json({
       success: true,
     });
-    console.log(`[SUCCESS] User ${req.body.user} exists in database`);
+    console.log(`[SUCCESS] User ${req.body.user} exists in database\n`);
   } catch (err) {
     res.json({ success: false });
     console.log(
@@ -223,12 +223,29 @@ app.post("/api/reset", async (req, res) => {
   try {
     await pool.query(resetQuery);
     res.json({ success: true });
-    console.log(`[SUCCESS] User ${req.body.user}'s password has been reset`);
+    console.log(`[SUCCESS] User ${req.body.user}'s password has been reset\n`);
   } catch (err) {
     res.json({ success: false });
     console.log(
-      `[ERROR] Error resetting ${req.body.user}'s password` + err + "\n"
+      `[ERROR] Error resetting ${req.body.user}'s password\n` + err + "\n"
     );
   }
   console.log("End of post handler\n");
+});
+
+// Handles get requests of admin viewing table of users
+app.get("/api/user-table", async (req, res) => {
+  console.log("\nCREATE USER TABLE ATTEMPT\n");
+  const userTableQuery = "SELECT username FROM logins;";
+  try {
+    await pool.query(userTableQuery);
+    res.json({ success: true });
+    console.log("[SUCCESS] userTableQuery run successfully\n");
+  } catch (err) {
+    res.json({ success: false });
+    console.log(
+      "[ERROR] Error in selecting users from database\n" + err + "\n"
+    );
+  }
+  console.log("End of get handler\n");
 });
