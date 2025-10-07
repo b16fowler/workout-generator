@@ -10,6 +10,8 @@ import { showSnackbar } from "./App";
 
 export default function AdminResetPassword() {
   //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN RESET PASSWORD COMPONENT
+
+  //TODO: PROMPT USER TO ENTER NEW PASSWORD AFTER BEING RESET
   const searchUser = e => {
     e.preventDefault();
 
