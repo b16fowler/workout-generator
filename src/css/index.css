@@ -105,7 +105,7 @@ body {
   border: #f2ffcc;
 }
 
-.login-button:hover, .generate-workout-button:hover, .return-button:hover {
+.login-button:hover, .generate-workout-button:hover, .return-button:hover, .add-exercise-button:hover {
   cursor: pointer;
   background-color: #d2ec82;
   transition: background-color 0.3s ease;
@@ -194,8 +194,8 @@ a:link, a:visited {
 .toggle-admin-button {
   position: absolute;
   top: 38%;
-  left: 45%;
-}
+  left: 43%;
+} 
 
 .main-menu-button:hover {
   cursor: pointer;
@@ -227,7 +227,67 @@ a:link, a:visited {
 #numExercises {
   padding: 5px;
 }
+
+.start-button {
+  display: block;
+  width: 15%;
+  margin: 0 auto;
+  margin-top: 10%;
+  font-size: xx-large;
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  border-radius: 8px;
+}
+
+.start-button:hover, .previous-button:hover, .next-button:hover, .finish-button:hover {
+  cursor: pointer;
+  background-color: #d2ec82;
+  transition: background-color 0.3s ease;
+}
+
+.exercise-image {
+  display: block;
+  width: 100%;
+}
+
+.exercise-div {
+  margin: 0 auto;
+  width: 50%;
+}
 /* END OF GENERATE WORKOUT */
+
+#exercise-title {
+  text-align: center;
+  font-size: 36pt;
+  margin-bottom: 5px;
+}
+
+#exercise-details {
+  text-align: center;
+  font-size: 20pt;
+  margin-top: 5px;
+}
+
+.previous-button, .next-button, .finish-button {
+  position: absolute;
+  width: 11%;
+  height: 5%;
+  margin: 0 auto;
+  margin-top: 1%;
+  font-size: x-large;
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  border-radius: 10px;
+  top: 39%;
+}
+
+.next-button, .finish-button {
+  right: 5%;
+}
+
+.previous-button {
+  left: 5%;
+}
 
 /* START OF RETURN HOME */
 .return-button {
@@ -283,26 +343,26 @@ a:link, a:visited {
 /* END OF VIEW EXERCISE PAGE */
 
 /*  */
-.reset-pw-form {
+.reset-pw-form, .delete-user-form {
   font-size: xx-large;
   text-align: center;
   margin-top: 100px;
   margin-bottom: 20px;
 }
 
-.reset-pw-form input {
+.reset-pw-form input, .delete-user-form input {
   font-size: x-large;
   margin-top: 20px;
   margin-left: 15px;
 }
 
-#reset-pw-search {
+#reset-pw-search, #delete-user-search {
   border: none;
   border-radius: 12px;
   background-color: #f2ffcc;
 }
 
-#reset-pw-search:hover {
+#reset-pw-search:hover, #delete-user-search:hover {
   cursor: pointer;
   background-color: #d6f281;
 }
