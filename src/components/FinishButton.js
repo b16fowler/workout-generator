@@ -12,7 +12,7 @@ export default function FinishButton({ index, length }) {
   return (
     <>
       <button
-        className="finish button"
+        className="finish-button"
         onClick={handleClick}
         hidden={index === length - 1 ? false : true}>
         Finish workout
