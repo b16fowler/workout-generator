@@ -14,7 +14,8 @@ export default function GenerateWorkout() {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
-  // useEffect fetches exercise names, sets, and reps from DB after user attempts to generate workout
+  // useEffect fetches exercise names, sets, and reps from DB after
+  // user attempts to generate workout
   useEffect(() => {
     if (!shouldFetch) return;
 
@@ -82,13 +83,13 @@ export default function GenerateWorkout() {
           const img = document.createElement("img");
           img.className = "exercise-image";
           img.src = URL.createObjectURL(blob);
-          img.id = i;
-          // Hide all to start
-          img.hidden = true;
 
           // Create div
           const div = document.createElement("div");
           div.className = "exercise-div";
+          div.id = i;
+          // Hide all to start
+          div.hidden = true;
 
           // Append
           div.appendChild(img);
