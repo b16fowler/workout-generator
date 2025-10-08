@@ -9,6 +9,8 @@ import { root } from "../index.js";
 import { showSnackbar } from "./App.js";
 
 export default function FinishButton({ index, length }) {
+  /* FinishButton remains hidden until user is on the final exercise
+   * of their workout */
   return (
     <>
       <button
@@ -17,7 +19,6 @@ export default function FinishButton({ index, length }) {
         hidden={index === length - 1 ? false : true}>
         Finish workout
       </button>
-      <div id="snackbar"></div>
     </>
   );
 
@@ -30,6 +31,7 @@ export default function FinishButton({ index, length }) {
         document.body.removeChild(document.querySelector(".exercise-div"));
       }
 
+      // Load MainMenu once workout is finished
       root.render(
         <QueryClientProvider client={queryClient}>
           <MainMenuPage />

@@ -62,7 +62,6 @@ export default function MainMenuPage() {
           Toggle Admin Options
         </button>
       )}
-      <div id="snackbar"></div>
       <Footer />
     </>
   );

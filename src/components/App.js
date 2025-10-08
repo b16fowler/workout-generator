@@ -10,6 +10,7 @@ let user = {
   _username: "",
   _accountType: "",
 
+  // getters and setters for user's info: username and account type
   get username() {
     return this._username;
   },
@@ -29,6 +30,8 @@ export function showSnackbar(message) {
   /* showSnackbar function will display 'message' from top of screen for 3 seconds
    * before disappearing. Used as a method of alerting users of 'successes' and
    * 'failures' */
+  console.log("Top of showSnackbar function");
+
   const sb = document.querySelector("#snackbar");
   sb.textContent = message;
   sb.className = "show";
@@ -44,7 +47,6 @@ export default function App() {
       <div className="App">
         <LoginPage />
       </div>
-      <div id="snackbar"></div>
     </>
   );
 }

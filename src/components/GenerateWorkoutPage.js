@@ -14,8 +14,8 @@ export default function GenerateWorkout() {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
-  // useEffect fetches exercise names, sets, and reps from DB after
-  // user attempts to generate workout
+  /* useEffect fetches exercise names, sets, and reps from DB after
+   * user attempts to generate workout */
   useEffect(() => {
     if (!shouldFetch) return;
 
@@ -33,6 +33,8 @@ export default function GenerateWorkout() {
       // Double quotes are here so text can be inserted directly in query
       selectedTypes = ['"arms"', '"back"', '"legs"', '"core"'];
 
+    /* Makes a post request to server containing username and selected
+     * muscle types */
     const fetchExercises = async () => {
       try {
         const response = await fetch(`${EC2_URL}/api/generate`, {
@@ -60,8 +62,8 @@ export default function GenerateWorkout() {
     fetchExercises();
   }, [shouldFetch]);
 
-  // This useEffect hook fetches the corresponding images for each exercise
-  // Triggered after the exercise name(s)/type(s) have been retrieved
+  /* This useEffect hook fetches the corresponding images for each exercise
+   * Triggered after the exercise name(s)/type(s) have been retrieved */
   useEffect(() => {
     if (!workout) return;
 
@@ -91,7 +93,7 @@ export default function GenerateWorkout() {
           // Hide all to start
           div.hidden = true;
 
-          // Append
+          // Append img to div
           div.appendChild(img);
           document.body.appendChild(div);
         });
@@ -170,7 +172,6 @@ export default function GenerateWorkout() {
       </div>
       {workout && <Workout workout={workout} />}
       {!workout && <ReturnHome />}
-      <div id="snackbar"></div>
       <Footer />
     </>
   );

@@ -114,7 +114,6 @@ export default function AddExercise() {
       </form>
       <ReturnHome />
       <Footer />
-      <div id="snackbar"></div>
     </>
   );
 }
