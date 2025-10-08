@@ -195,7 +195,7 @@ app.post("/api/add", async (req, res) => {
   console.log("End of post handler\n");
 });
 
-// Handles post requests of admin searching for user to reset password
+// Handles post requests of admin searching for user to reset password or delete account
 app.post("/api/search", async (req, res) => {
   console.log("\nSEARCH USER ATTEMPT\n");
   const searchQuery = `SELECT username FROM logins WHERE username = "${req.body.user}"`;
@@ -231,6 +231,22 @@ app.post("/api/reset", async (req, res) => {
     );
   }
   console.log("End of post handler\n");
+});
+
+app.post("/api/delete", async (req, res) => {
+  console.log("\nDELETE ACCOUNT ATTEMPT\n");
+  const deleteLogins = `DELETE FROM logins WHERE username = "${req.body.user}"`;
+  const deleteExercises = `DELETE FROM user_exercises WHERE username = "${req.body.user}"`;
+  try {
+    await pool.query(deleteLogins);
+    await pool.query(deleteExercises);
+    res.json({ success: true });
+    console.log("[SUCCESS] User's account deleted successfully\n");
+  } catch (err) {
+    res.json({ success: false });
+    console.log("[ERROR] Error deleting account\n" + err + "\n");
+  }
+  console.log("End of poster handler\n");
 });
 
 // Handles get requests of admin viewing table of users
