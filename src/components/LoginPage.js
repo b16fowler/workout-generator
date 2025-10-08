@@ -17,11 +17,16 @@ export default function LoginPage() {
   useEffect(() => {
     if (!readyToRender) return;
 
-    root.render(
-      <QueryClientProvider client={queryClient}>
-        <MainMenu />
-      </QueryClientProvider>
-    );
+    showSnackbar("Logging in!");
+
+    // Delay render 2 seconds for snackbar message
+    setTimeout(() => {
+      root.render(
+        <QueryClientProvider client={queryClient}>
+          <MainMenu />
+        </QueryClientProvider>
+      );
+    }, 2000);
   }, [readyToRender]);
 
   // Called when user clicks "eye" button next to password
@@ -198,7 +203,6 @@ export default function LoginPage() {
           onClick={handleCreateAccount}
         />
       </form>
-      <div id="snackbar">This is the original message</div>
       <Footer />
     </>
   );
