@@ -1,5 +1,8 @@
 /**************************************************************************
  * AdminResetPassword component
+ * Search form that allows admins to search for an existing user in the
+ * database and reset their password
+ * Currently always resets password to be their username
  **************************************************************************/
 
 import Header from "./Header";
@@ -18,6 +21,7 @@ export default function AdminResetPassword() {
     // Take user's input and run SELECT query for that user
     const usernameInput = document.querySelector("#reset-pw-input").value;
 
+    // fetches username using admin's form input
     const fetchUser = async () => {
       const response = await fetch(`${EC2_URL}/api/search`, {
         method: "POST",
@@ -37,6 +41,7 @@ export default function AdminResetPassword() {
         );
         if (confirm) resetPw(usernameInput);
       } else {
+        // Inform admin that username was not found in DB
         showSnackbar(`User "` + usernameInput + `" was not found in database`);
       }
     };
@@ -46,6 +51,8 @@ export default function AdminResetPassword() {
     document.querySelector(".reset-pw-form").reset();
   };
 
+  /* Called after fetchUser, fetch runs post request that resets the account's
+   * password to be their username */
   const resetPw = usernameInput => {
     const resetFetch = () => {
       const response = fetch(`${EC2_URL}/api/reset`, {
