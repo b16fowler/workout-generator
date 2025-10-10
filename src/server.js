@@ -202,7 +202,7 @@ app.post("/api/search", async (req, res) => {
   try {
     const searchResponse = await pool.query(searchQuery);
     console.log("searchQuery query response:\n");
-    console.log(searchResponse[0].username);
+    console.log(searchResponse[0][0].username);
     console.log("\n");
     res.json({
       success: true,
@@ -242,10 +242,7 @@ app.post("/api/delete", async (req, res) => {
   const deleteLogins = `DELETE FROM logins WHERE username = "${req.body.user}"`;
   const deleteExercises = `DELETE FROM user_exercises WHERE username = "${req.body.user}"`;
   try {
-    const deleteResponse = await pool.query(deleteLogins);
-    console.log("deleteLogins query response:\n");
-    console.log(deleteResponse);
-    console.log("\n");
+    await pool.query(deleteLogins);
     await pool.query(deleteExercises);
     res.json({ success: true });
     console.log("[SUCCESS] User's account deleted successfully\n");
