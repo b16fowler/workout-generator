@@ -30,8 +30,6 @@ export function showSnackbar(message) {
   /* showSnackbar function will display 'message' from top of screen for 3 seconds
    * before disappearing. Used as a method of alerting users of 'successes' and
    * 'failures' */
-  console.log("Top of showSnackbar function");
-
   const sb = document.querySelector("#snackbar");
   sb.textContent = message;
   sb.className = "show";

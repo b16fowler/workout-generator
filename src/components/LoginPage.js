@@ -19,14 +19,14 @@ export default function LoginPage() {
 
     showSnackbar("Logging in!");
 
-    // Delay render 2 seconds for snackbar message
+    // Delay render 1.5 seconds for snackbar message
     setTimeout(() => {
       root.render(
         <QueryClientProvider client={queryClient}>
           <MainMenu />
         </QueryClientProvider>
       );
-    }, 2000);
+    }, 750);
   }, [readyToRender]);
 
   // Called when user clicks "eye" button next to password
