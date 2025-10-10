@@ -45,8 +45,8 @@ export default function AdminDelete() {
   };
 
   const deleteUser = usernameInput => {
-    const deleteFetch = () => {
-      const reponse = fetch(`${EC2_URL}/api/delete`, {
+    const deleteFetch = async () => {
+      const response = await fetch(`${EC2_URL}/api/delete`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -55,13 +55,12 @@ export default function AdminDelete() {
           user: usernameInput,
         }),
       });
-      console.log(reponse);
+      const result = await response.json();
 
-      if (reponse.success)
-        showSnackbar(`User ${usernameInput}'s account has been deleted`);
+      if (result.success)
+        showSnackbar(`User "${usernameInput}" account has been deleted`);
     };
-
-    deleteFetch(usernameInput);
+    deleteFetch();
   };
 
   return (
