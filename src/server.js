@@ -158,7 +158,7 @@ app.post("/api/photos", async (req, res) => {
 // Handles post requests of users loading their exercise table
 app.post("/api/create-table", async (req, res) => {
   console.log("\nLOAD EXERCISE TABLE ATTEMPT\n");
-  const create_table_query = `SELECT * FROM user_exercises WHERE user = "${req.body.user}"`;
+  const create_table_query = `SELECT * FROM user_exercises WHERE "user" = "${req.body.user}"`;
   try {
     const result = await pool.query(create_table_query);
     res.json({
@@ -168,7 +168,7 @@ app.post("/api/create-table", async (req, res) => {
     console.log(`[SUCCESS] User ${req.body.user}'s exercises pulled from DB\n`);
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching  user ${req.body.user}'s exercise data\n` +
+      `[ERROR] Error fetching user ${req.body.user}'s exercise data\n` +
         err +
         "\n"
     );
