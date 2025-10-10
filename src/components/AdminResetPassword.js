@@ -67,7 +67,7 @@ export default function AdminResetPassword() {
 
       if (response.success)
         showSnackbar(
-          `User ${usernameInput}'s password has been reset to their username`
+          `User "${usernameInput}" password has been reset to their username`
         );
     };
     resetFetch();
