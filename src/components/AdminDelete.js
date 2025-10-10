@@ -13,12 +13,11 @@ export default function AdminDelete() {
 
   //TODO: COMBINE FUNCTIONALITY OF DELETE ACCOUNT + RESET PW
 
-  //TODO: PUSH SERVER CHANGES THEN TEST
+  //TODO: CHANGE SQL QUERIES SO RESPONSE IS CORRECT
   const searchUser = e => {
     e.preventDefault();
 
     const usernameInput = document.querySelector("#delete-user-input").value;
-    console.log(usernameInput);
 
     const fetchUser = async () => {
       const response = await fetch(`${EC2_URL}/api/search`, {
@@ -45,8 +44,24 @@ export default function AdminDelete() {
     fetchUser();
   };
 
-  const deleteUser = () => {
-    console.log("Confirmed");
+  const deleteUser = usernameInput => {
+    const deleteFetch = () => {
+      const reponse = fetch(`${EC2_URL}/api/delete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user: usernameInput,
+        }),
+      });
+      console.log(reponse);
+
+      if (reponse.success)
+        showSnackbar(`User ${usernameInput}'s account has been deleted`);
+    };
+
+    deleteFetch(usernameInput);
   };
 
   return (
