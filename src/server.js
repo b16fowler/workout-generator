@@ -273,7 +273,9 @@ app.get("/api/user-table", async (req, res) => {
 //
 const checkAdmin = user => {
   if (user === "admin") {
+    console.log(
+      "\nATTEMPTED CHANGE ON ADMIN ACCOUNT. RETURNING JSON MESSAGE\n"
+    );
     res.json({ message: "No edits are allowed to be made to this account" });
-    return;
   }
 };
