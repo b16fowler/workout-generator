@@ -233,12 +233,15 @@ app.post("/api/reset", async (req, res) => {
   console.log("End of post handler\n");
 });
 
+// Handles post requests after admin confirms to delete user's account
 app.post("/api/delete", async (req, res) => {
   console.log("\nDELETE ACCOUNT ATTEMPT\n");
   const deleteLogins = `DELETE FROM logins WHERE username = "${req.body.user}"`;
   const deleteExercises = `DELETE FROM user_exercises WHERE username = "${req.body.user}"`;
   try {
-    await pool.query(deleteLogins);
+    const deleteRes = await pool.query(deleteLogins);
+    console.log("deleteLogins query response:\n");
+    console.log(deleteRes);
     await pool.query(deleteExercises);
     res.json({ success: true });
     console.log("[SUCCESS] User's account deleted successfully\n");
