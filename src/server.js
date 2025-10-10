@@ -179,6 +179,7 @@ app.post("/api/create-table", async (req, res) => {
 // Handles post requests of users adding a new exercise
 app.post("/api/add", async (req, res) => {
   console.log("\nADD EXERCISE ATTEMPT\n");
+  checkAdmin(req.body.user);
   try {
     await pool.query(req.body.query);
     res.json({
@@ -201,9 +202,8 @@ app.post("/api/search", async (req, res) => {
   const searchQuery = `SELECT username FROM logins WHERE username = "${req.body.user}"`;
   try {
     const searchResponse = await pool.query(searchQuery);
-    console.log("searchQuery query response:\n");
-    console.log(searchResponse[0][0].username);
-    console.log("\n");
+    if (searchResponse[0][0].username)
+      console.log("searchResponse[0][0].username is not null");
     res.json({
       success: true,
     });
@@ -269,3 +269,11 @@ app.get("/api/user-table", async (req, res) => {
   }
   console.log("End of get handler\n");
 });
+
+//
+const checkAdmin = user => {
+  if (user === "admin") {
+    res.json({ message: "No edits are allowed to be made to this account" });
+    return;
+  }
+};
