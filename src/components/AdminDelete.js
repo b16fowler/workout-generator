@@ -9,11 +9,7 @@ import { EC2_URL } from "..";
 import { showSnackbar } from "./App";
 
 export default function AdminDelete() {
-  //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN ADD DELETE COMPONENT
-
   //TODO: COMBINE FUNCTIONALITY OF DELETE ACCOUNT + RESET PW
-
-  //TODO: CHANGE SQL QUERIES SO RESPONSE IS CORRECT
   const searchUser = e => {
     e.preventDefault();
 
@@ -41,7 +37,12 @@ export default function AdminDelete() {
         showSnackbar(`User "` + usernameInput + `" was not found in database`);
       }
     };
-    fetchUser();
+
+    /* Account with name 'admin' is designed as a sample account
+     * no edits/deletions are allowed */
+    if (usernameInput === "admin")
+      alert("This account is for testing only. You may not delete it :(");
+    else fetchUser();
   };
 
   const deleteUser = usernameInput => {

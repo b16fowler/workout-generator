@@ -45,7 +45,14 @@ export default function AdminResetPassword() {
         showSnackbar(`User "` + usernameInput + `" was not found in database`);
       }
     };
-    fetchUser();
+
+    /* Account with name 'admin' is designed as a sample account
+     * no edits/deletions are allowed */
+    if (usernameInput === "admin")
+      alert(
+        "This account is for testing only. You may not reset it's password :("
+      );
+    else fetchUser();
 
     // Reset form
     document.querySelector(".reset-pw-form").reset();

@@ -30,6 +30,15 @@ export default function AddExercise() {
      * blank. Probably could be a useState(), but that was proving difficult */
     let readyToFetch = true;
 
+    /* Account with name 'admin' is designed as a sample account
+     * no edits are allowed */
+    if (user.username === "admin") {
+      readyToFetch = false;
+      alert(
+        "This account is for testing only. No edits are allowed :(\nIf you'd like to add new exercises, try making a new account!"
+      );
+    }
+
     // Add user's input to FormData for fetch call body
     const photoInput = document.querySelector("#exercise-pic");
     formData.append("user", user.username);
