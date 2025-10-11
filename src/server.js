@@ -159,6 +159,9 @@ app.post("/api/create-table", async (req, res) => {
 // Handles post requests of users adding a new exercise
 app.post("/api/add", async (req, res) => {
   console.log("\nADD EXERCISE ATTEMPT\n");
+  console.log("req\n");
+  console.log(req.body);
+
   try {
     await pool.query(req.body.query);
     res.json({
