@@ -35,6 +35,11 @@ app.listen(PORT, () => {
   console.log(`\nServer is running\n`);
 });
 
+const isAdminMessage = () => {
+  console.log("\nATTEMPTED CHANGE ON ADMIN ACCOUNT. RETURNING JSON MESSAGE\n");
+  res.json({ message: "No edits are allowed to be made to this account" });
+};
+
 // Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
   console.log(`\nLOGIN ATTEMPT\nUser attempting login from ip: ${req.ip}\n`);
@@ -88,26 +93,6 @@ app.post("/api/check-account-type", async (req, res) => {
     console.log("[SUCCESS] Type of account fetched successfully\n");
   } catch (err) {
     console.log("[ERROR] Error fetching account information\n" + err + "\n");
-  }
-  console.log("End of post handler\n");
-});
-
-// Handles post requests of users generating a work (image)
-app.post("/api/add", upload.single("image"), async (req, res) => {
-  console.log("\nUPLOAD IMAGE ATTEMPT\n");
-  // buffer object for user's uploaded picture
-  const photo = req.file.buffer;
-  const info = req.body;
-
-  const sql = "INSERT INTO user_exercises VALUES (?, ?, ?, ?, ?, ?);";
-  const values = [info.user, info.name, info.type, info.sets, info.reps, photo];
-
-  try {
-    const [result] = await pool.execute(sql, values);
-    res.json({ message: "Photo uploaded successfully" });
-    console.log(`[SUCCESS] Image inserted into DB\n`);
-  } catch (err) {
-    console.log(`[ERROR] Error trying to run insert query\n` + err + "\n");
   }
   console.log("End of post handler\n");
 });
@@ -179,19 +164,43 @@ app.post("/api/create-table", async (req, res) => {
 // Handles post requests of users adding a new exercise
 app.post("/api/add", async (req, res) => {
   console.log("\nADD EXERCISE ATTEMPT\n");
-  checkAdmin(req.body.user);
   try {
-    await pool.query(req.body.query);
-    res.json({
-      success: true,
-      message: "New exercise added successfully",
-    });
-    console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
+    // Account "admin" is test account, no edits are allowed
+    if (req.body.user === "admin") {
+      isAdminMessage();
+    } else {
+      await pool.query(req.body.query);
+      res.json({
+        success: true,
+        message: "New exercise added successfully!",
+      });
+      console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
+    }
   } catch (err) {
     res.json({ success: false });
     console.log(
       `[ERROR] Error posting user ${req.body.user}'s exercise\n` + err + "\n"
     );
+  }
+  console.log("End of post handler\n");
+});
+
+// Handles post requests of users adding an exercise (image)
+app.post("/api/add", upload.single("image"), async (req, res) => {
+  console.log("\nUPLOAD IMAGE ATTEMPT\n");
+  // buffer object for user's uploaded picture
+  const photo = req.file.buffer;
+  const info = req.body;
+
+  const sql = "INSERT INTO user_exercises VALUES (?, ?, ?, ?, ?, ?);";
+  const values = [info.user, info.name, info.type, info.sets, info.reps, photo];
+
+  try {
+    const [result] = await pool.execute(sql, values);
+    res.json({ message: "Photo uploaded successfully" });
+    console.log(`[SUCCESS] Image inserted into DB\n`);
+  } catch (err) {
+    console.log(`[ERROR] Error trying to run insert query\n` + err + "\n");
   }
   console.log("End of post handler\n");
 });
@@ -269,13 +278,3 @@ app.get("/api/user-table", async (req, res) => {
   }
   console.log("End of get handler\n");
 });
-
-//
-const checkAdmin = user => {
-  if (user === "admin") {
-    console.log(
-      "\nATTEMPTED CHANGE ON ADMIN ACCOUNT. RETURNING JSON MESSAGE\n"
-    );
-    res.json({ message: "No edits are allowed to be made to this account" });
-  }
-};
