@@ -95,7 +95,7 @@ app.post("/api/check-account-type", async (req, res) => {
 // Handles post requests of users generating a workout (non-image)
 app.post("/api/generate", async (req, res) => {
   console.log("\nGENERATE WORKOUT ATTEMPT (exercise info)\n");
-  const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE user = "${req.body.user}" AND type IN (${req.body.selectedTypes})`;
+  const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE username = "${req.body.user}" AND type IN (${req.body.selectedTypes})`;
   try {
     const result = await pool.query(create_table_query);
     res.json({
@@ -106,6 +106,9 @@ app.post("/api/generate", async (req, res) => {
       `[SUCCESS] Exercise rows for user ${req.body.user} pulled from DB\n`
     );
   } catch (err) {
+    res.json({
+      success: false,
+    });
     console.log(
       `[ERROR] Error fetching user ${req.body.user}'s data\n` + err + "\n"
     );
@@ -117,7 +120,7 @@ app.post("/api/generate", async (req, res) => {
 app.post("/api/photos", async (req, res) => {
   console.log("\nGENERATE WORKOUT ATTEMPT (exercise image(s))\n");
   try {
-    const picQuery = `SELECT pic FROM user_exercises WHERE user = "${req.body.user}" AND name = "${req.body.exerciseName}";`;
+    const picQuery = `SELECT pic FROM user_exercises WHERE username = "${req.body.user}" AND name = "${req.body.exerciseName}";`;
     const response = await pool.query(picQuery);
     const buffer = response[0][0].pic;
     const blob = new Blob([buffer], { type: "image/png" });
@@ -138,7 +141,7 @@ app.post("/api/photos", async (req, res) => {
 // Handles post requests of users loading their exercise table
 app.post("/api/create-table", async (req, res) => {
   console.log("\nLOAD EXERCISE TABLE ATTEMPT\n");
-  const create_table_query = `SELECT * FROM user_exercises WHERE "user" = "${req.body.user}"`;
+  const create_table_query = `SELECT * FROM user_exercises WHERE username = "${req.body.user}"`;
   try {
     const result = await pool.query(create_table_query);
     res.json({
@@ -157,26 +160,26 @@ app.post("/api/create-table", async (req, res) => {
 });
 
 // Handles post requests of users adding a new exercise
-app.post("/api/add", async (req, res) => {
-  console.log("\nADD EXERCISE ATTEMPT\n");
-  console.log("req\n");
-  console.log(req.body);
+// app.post("/api/add", async (req, res) => {
+//   console.log("\nADD EXERCISE ATTEMPT\n");
+//   console.log("req\n");
+//   console.log(req);
 
-  try {
-    await pool.query(req.body.query);
-    res.json({
-      success: true,
-      message: "New exercise added successfully!",
-    });
-    console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
-  } catch (err) {
-    res.json({ success: false });
-    console.log(
-      `[ERROR] Error posting user ${req.body.user}'s exercise\n` + err + "\n"
-    );
-  }
-  console.log("End of post handler\n");
-});
+//   try {
+//     await pool.query(req.body.query);
+//     res.json({
+//       success: true,
+//       message: "New exercise added successfully!",
+//     });
+//     console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
+//   } catch (err) {
+//     res.json({ success: false });
+//     console.log(
+//       `[ERROR] Error posting user ${req.body.user}'s exercise\n` + err + "\n"
+//     );
+//   }
+//   console.log("End of post handler\n");
+// });
 
 // Handles post requests of users adding an exercise (image)
 app.post("/api/add", upload.single("image"), async (req, res) => {
@@ -189,7 +192,7 @@ app.post("/api/add", upload.single("image"), async (req, res) => {
   const values = [info.user, info.name, info.type, info.sets, info.reps, photo];
 
   try {
-    const [result] = await pool.execute(sql, values);
+    await pool.execute(sql, values);
     res.json({ message: "Photo uploaded successfully" });
     console.log(`[SUCCESS] Image inserted into DB\n`);
   } catch (err) {
