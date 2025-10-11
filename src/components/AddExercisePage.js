@@ -67,8 +67,7 @@ export default function AddExercise() {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
-          showSnackbar(data.message);
+          showSnackbar("New exercise successfully added!");
         })
         .catch(err => {
           console.error("Fetch failed:\n", err);
