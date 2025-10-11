@@ -164,6 +164,9 @@ app.post("/api/create-table", async (req, res) => {
 // Handles post requests of users adding a new exercise
 app.post("/api/add", async (req, res) => {
   console.log("\nADD EXERCISE ATTEMPT\n");
+  console.log("req.body:\n");
+  console.log(req.body);
+
   try {
     // Account "admin" is test account, no edits are allowed
     if (req.body.user === "admin") {
