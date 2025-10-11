@@ -245,14 +245,20 @@ a:link, a:visited {
   transition: background-color 0.3s ease;
 }
 
+.previous-button:disabled {
+  pointer-events: none;
+}
+
 .exercise-image {
   display: block;
-  width: 100%;
+  width: 900px;
+  height: 600px;
+  object-fit: cover;
 }
 
 .exercise-div {
   margin: 0 auto;
-  width: 50%;
+  width: 46%;
 }
 /* END OF GENERATE WORKOUT */
 
