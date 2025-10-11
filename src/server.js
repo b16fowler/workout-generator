@@ -35,11 +35,6 @@ app.listen(PORT, () => {
   console.log(`\nServer is running\n`);
 });
 
-const isAdminMessage = () => {
-  console.log("\nATTEMPTED CHANGE ON ADMIN ACCOUNT. RETURNING JSON MESSAGE\n");
-  res.json({ message: "No edits are allowed to be made to this account" });
-};
-
 // Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
   console.log(`\nLOGIN ATTEMPT\nUser attempting login from ip: ${req.ip}\n`);
@@ -164,21 +159,13 @@ app.post("/api/create-table", async (req, res) => {
 // Handles post requests of users adding a new exercise
 app.post("/api/add", async (req, res) => {
   console.log("\nADD EXERCISE ATTEMPT\n");
-  console.log("req.body:\n");
-  console.log(req.body);
-
   try {
-    // Account "admin" is test account, no edits are allowed
-    if (req.body.user === "admin") {
-      isAdminMessage();
-    } else {
-      await pool.query(req.body.query);
-      res.json({
-        success: true,
-        message: "New exercise added successfully!",
-      });
-      console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
-    }
+    await pool.query(req.body.query);
+    res.json({
+      success: true,
+      message: "New exercise added successfully!",
+    });
+    console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
   } catch (err) {
     res.json({ success: false });
     console.log(
