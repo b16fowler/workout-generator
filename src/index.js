@@ -4,7 +4,6 @@
  * MASTER TODO
  *
  * Change AWS security rules to limit IP access
- * Update comments for all components
  *
  * Remove FetchWrapper
  * Change snackbar CSS
@@ -14,8 +13,6 @@
  * Edit exercise already in pool
  * Save current/previous workout
  * Track user's data (# workouts completed, etc.)
- *
- * //TODO: README, FINISH CLASSES, WEBSITE, RESUME //
  *
  **************************************************************************/
 
