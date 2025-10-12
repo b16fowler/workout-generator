@@ -5,7 +5,6 @@
  * component is hidden when the user is not logged in. When clicked,
  * removes any divs that may have been on display if workout was generated,
  * then renders App component.
- *
  **************************************************************************/
 
 import { root } from "../index.js";
@@ -25,8 +24,7 @@ export default function LogOutButton({ notLoggedIn }) {
 }
 
 function handleLogOut() {
-  //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN RESET PASSWORD COMPONENT
-  showSnackbar("Logging out...");
+  showSnackbar("Logging you out...");
 
   setTimeout(() => {
     // Remove exercise-div, if user has generated workout
@@ -35,5 +33,5 @@ function handleLogOut() {
     }
 
     root.render(<App />);
-  }, 2000);
+  }, 1500);
 }

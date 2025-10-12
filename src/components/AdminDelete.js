@@ -1,5 +1,7 @@
 /**************************************************************************
- * AdminAddDelete component
+ * AdminDelete component
+ *
+ * Search form that will delete an account if confirmed by the admin
  **************************************************************************/
 
 import Header from "./Header";

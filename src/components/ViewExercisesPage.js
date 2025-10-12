@@ -1,5 +1,8 @@
 /**************************************************************************
  * ViewExercisesPage component
+ *
+ * Simple component meant to display the ExerciseTable component, along with
+ * the Header, Footer, and ReturnHome
  **************************************************************************/
 
 import ExerciseTable from "./ExerciseTable.js";

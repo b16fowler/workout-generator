@@ -1,5 +1,8 @@
 /**************************************************************************
  * NextButton component
+ *
+ * Button displayed when user is in a workout. Controls state variable 'index'
+ * on click
  **************************************************************************/
 
 export default function NextButton({ index, setIndex, length }) {

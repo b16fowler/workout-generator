@@ -1,5 +1,8 @@
 /**************************************************************************
  * ExerciseTable component
+ *
+ * This component returns an antd Table component showing the signed in
+ * user's exercises
  **************************************************************************/
 import { useEffect, useState } from "react";
 import { user } from "./App.js";

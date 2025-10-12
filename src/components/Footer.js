@@ -1,5 +1,6 @@
 /**************************************************************************
  * Footer component
+ *
  * Component displayed at the bottom of every page
  * contains author name and link to my website
  **************************************************************************/

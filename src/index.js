@@ -4,11 +4,9 @@
  * MASTER TODO
  *
  * Change AWS security rules to limit IP access
- * Loading component
- * Create account types (admin, user, etc.)
- *
  * Update comments for all components
  *
+ * Remove FetchWrapper
  * Change snackbar CSS
  * Center snackbar for longer alerts
  * Visual of exercise picture on ViewExercisesPage
@@ -16,6 +14,9 @@
  * Edit exercise already in pool
  * Save current/previous workout
  * Track user's data (# workouts completed, etc.)
+ *
+ * //TODO: README, FINISH CLASSES, WEBSITE, RESUME //
+ *
  **************************************************************************/
 
 import ReactDOM from "react-dom/client";
@@ -23,12 +24,11 @@ import App from "./components/App.js";
 import React from "react";
 import "./css/index.css";
 
-// Current public IP for EC2 instance and DB port
-// IP changes with each EC2 shutdown/startup
-
-//TODO: CHANGE BACK FOR HOSTING
-// const EC2_URL = "http://localhost:5000";
+/* Current public IP for EC2 instance and DB port
+ * IP changes with each EC2 shutdown */
 const EC2_URL = "http://3.80.211.117:5000";
+// For local testing
+// const EC2_URL = "http://localhost:5000";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

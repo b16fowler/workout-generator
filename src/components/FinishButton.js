@@ -1,5 +1,10 @@
 /**************************************************************************
  * FinishButton component
+ *
+ * Button component displayed only when user has generated a workout and
+ * is on the final exercise. On click, displays a snackbar letting the user
+ * know they're done, then removes all exercise-divs that were appended
+ * to the page, and returns user to the main menu
  **************************************************************************/
 
 import MainMenuPage from "./MainMenuPage.js";

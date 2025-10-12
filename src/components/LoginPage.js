@@ -1,5 +1,9 @@
 /**************************************************************************
  * LoginPage component
+ * This component shows two forms. The base login form compares username and
+ * password to values in the 'logins' table of the database. The hidden form
+ * allows user to make an account and a password. This second form confirms
+ * that all usernames are unique
  **************************************************************************/
 
 import { user, showSnackbar } from "./App.js";
@@ -50,6 +54,7 @@ export default function LoginPage() {
     const username_input = document.querySelector("#username").value;
     const password_input = document.querySelector("#password").value;
 
+    //TODO: REMOVE USE OF FETCHWRAPPER
     // Get request
     const API = new FetchWrapper(
       `${EC2_URL}/api/login` // FOR HOSTING EC2
@@ -74,12 +79,11 @@ export default function LoginPage() {
 
   // Called when user clicks "Forgot password" button
   function handleForgot() {
-    // TODO: Make this do something
+    //TODO: Make this do something
     showSnackbar("You hit the forgot password button");
   }
 
   function handleOpenCreateAccount() {
-    //TODO: FIX BUG CAUSING CREATE ACCOUNT FORM TO BE VISIBLE ON LOAD
     // Hide 'Yes, please!' button and show create account form
     document.querySelector(".open-form-button").toggleAttribute("hidden");
     document.querySelector(".create-account-form").toggleAttribute("hidden");
@@ -93,6 +97,7 @@ export default function LoginPage() {
       ".create-account-password"
     ).value;
 
+    //TODO: REMOVE USE OF FETCHWRAPPER
     // Post request to create new account
     const API = new FetchWrapper(`${EC2_URL}/api/create-account`);
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
@@ -110,6 +115,8 @@ export default function LoginPage() {
   }
 
   function login(username) {
+    /* login function sets 'user' variables username and account type
+     * then updates readyToRender so main menu can be loaded */
     user.username = username.toLowerCase();
 
     const fetchAccountType = async () => {

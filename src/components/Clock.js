@@ -1,11 +1,12 @@
 /**************************************************************************
  * Clock component
+ *
+ * Displays live clock in bottom left corner of Header
  **************************************************************************/
 
 import { useState, useEffect } from "react";
 
 export default function Clock() {
-  // Displays live clock in bottom left corner of Header
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {

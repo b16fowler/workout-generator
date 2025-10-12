@@ -1,5 +1,6 @@
 /**************************************************************************
  * AdminResetPassword component
+ *
  * Search form that allows admins to search for an existing user in the
  * database and reset their password
  * Currently always resets password to be their username

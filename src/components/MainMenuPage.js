@@ -1,5 +1,9 @@
 /**************************************************************************
  * MainMenuPage component
+ *
+ * Component that holds buttons to take the user to different features of
+ * the web app. If signed in account is an admin, toggleAdmin button is
+ * visible to change the buttons functionality to admin options
  **************************************************************************/
 import Footer from "./Footer.js";
 import "../css/index.css";
@@ -17,10 +21,12 @@ import AdminViewUsers from "./AdminViewUsers.js";
 export default function MainMenuPage() {
   const [adminOn, setAdminOn] = useState(false);
 
+  // Called to render new component
   const handleClick = component => {
     root.render(component);
   };
 
+  // Toggles button functions between user and admin
   const toggleAdmin = () => {
     setAdminOn(!adminOn);
   };

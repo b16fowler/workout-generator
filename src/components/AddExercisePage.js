@@ -1,5 +1,6 @@
 /**************************************************************************
  * AddExercisePage component
+ *
  * Contains a form that allows user to add a new exercise to their pool.
  **************************************************************************/
 

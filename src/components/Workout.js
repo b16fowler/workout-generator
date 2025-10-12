@@ -1,5 +1,11 @@
 /**************************************************************************
  * Workout component
+ *
+ * Component starts with everything hidden except the 'begin workout'
+ * button. After that is clicked, displays current exercise image, details
+ * (reps, sets, etc.), previous/next buttons. Exercise being displayed is
+ * controlled through a state variable that is changed on previous/next
+ * clicks
  **************************************************************************/
 
 import Exercise from "./Exercise.js";
