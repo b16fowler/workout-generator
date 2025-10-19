@@ -95,7 +95,10 @@ body {
   padding: 6px;
 }
 
-.login-button, .generate-workout-button, .return-button, .add-exercise-button {
+.login-button,
+.generate-workout-button,
+.return-button,
+.add-exercise-button {
   display: block;
   width: 12%;
   margin: 0 auto;
@@ -105,7 +108,10 @@ body {
   border: #f2ffcc;
 }
 
-.login-button:hover, .generate-workout-button:hover, .return-button:hover, .add-exercise-button:hover {
+.login-button:hover,
+.generate-workout-button:hover,
+.return-button:hover,
+.add-exercise-button:hover {
   cursor: pointer;
   background-color: #d2ec82;
   transition: background-color 0.3s ease;
@@ -169,33 +175,40 @@ body {
   padding-right: 1%;
 }
 
-a:link, a:visited {
-  color: #f2ffcc
+a:link,
+a:visited {
+  color: #f2ffcc;
 }
 /* END OF FOOTER */
 
 /* START OF MAIN MENU */
 .main-menu {
   position: absolute;
-  top: 25%;
-  left: 35%;
+  top: 22%;
+  left: 41%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.main-menu-button, .toggle-admin-button {
+.main-menu-button,
+.toggle-admin-button {
   font: bolder;
   font-size: x-large;
   background-color: #f2ffcc;
-  margin: 2px 4px;
+  margin: 15px;
+  /*margin: 2px 4px;*/
   padding: 16px 12px;
   border: none;
   border-radius: 10px;
 }
 
-.toggle-admin-button {
+/* .toggle-admin-button {
   position: absolute;
   top: 38%;
   left: 43%;
-} 
+} */
 
 .main-menu-button:hover {
   cursor: pointer;
@@ -239,7 +252,10 @@ a:link, a:visited {
   border-radius: 8px;
 }
 
-.start-button:hover, .previous-button:hover, .next-button:hover, .finish-button:hover {
+.start-button:hover,
+.previous-button:hover,
+.next-button:hover,
+.finish-button:hover {
   cursor: pointer;
   background-color: #d2ec82;
   transition: background-color 0.3s ease;
@@ -274,7 +290,9 @@ a:link, a:visited {
   margin-top: 5px;
 }
 
-.previous-button, .next-button, .finish-button {
+.previous-button,
+.next-button,
+.finish-button {
   position: absolute;
   width: 11%;
   height: 5%;
@@ -287,7 +305,8 @@ a:link, a:visited {
   top: 39%;
 }
 
-.next-button, .finish-button {
+.next-button,
+.finish-button {
   right: 5%;
 }
 
@@ -349,26 +368,30 @@ a:link, a:visited {
 /* END OF VIEW EXERCISE PAGE */
 
 /*  */
-.reset-pw-form, .delete-user-form {
+.reset-pw-form,
+.delete-user-form {
   font-size: xx-large;
   text-align: center;
   margin-top: 100px;
   margin-bottom: 20px;
 }
 
-.reset-pw-form input, .delete-user-form input {
+.reset-pw-form input,
+.delete-user-form input {
   font-size: x-large;
   margin-top: 20px;
   margin-left: 15px;
 }
 
-#reset-pw-search, #delete-user-search {
+#reset-pw-search,
+#delete-user-search {
   border: none;
   border-radius: 12px;
   background-color: #f2ffcc;
 }
 
-#reset-pw-search:hover, #delete-user-search:hover {
+#reset-pw-search:hover,
+#delete-user-search:hover {
   cursor: pointer;
   background-color: #d6f281;
 }
@@ -399,23 +422,47 @@ a:link, a:visited {
 }
 
 @-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 50px; opacity: 1;}
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 50px;
+    opacity: 1;
+  }
 }
 
 @keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 50px; opacity: 1;}
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to {
+    top: 50px;
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fadeout {
-  from {top: 50px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+  from {
+    top: 50px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
 }
 
 @keyframes fadeout {
-  from {top: 50px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+  from {
+    top: 50px;
+    opacity: 1;
+  }
+  to {
+    top: 0;
+    opacity: 0;
+  }
 }
 
 /* END OF SNACKBAR */
