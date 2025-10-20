@@ -28,7 +28,7 @@ const pool = mysql.createPool({
 });
 
 app.get("/", (req, res) => {
-  res.send("Server is running\n");
+  res.send(`Server is running\nget request from IP ${req.ip}`);
 });
 
 app.listen(PORT, () => {
