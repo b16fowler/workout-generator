@@ -32,16 +32,16 @@ app.get("/", (req, res) => {
   res.send(`Server is running\nget request from IP ${req.ip}`);
 });
 
-app.get("/ip-check", (req, res) => {
-  res.send({
-    ip: req.ip,
-    forwarded: req.headers["x-forwarded-for"],
-    remoteAddress: req.socket.remoteAddress,
-  });
-});
+// app.get("/ip-check", (req, res) => {
+//   res.send({
+//     ip: req.ip,
+//     forwarded: req.headers["x-forwarded-for"],
+//     remoteAddress: req.socket.remoteAddress,
+//   });
+// });
 
-app.listen(PORT, "127.0.0.1", () => {
-  console.log(`\nServer is running\n`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`\nBackend is listening on port ${PORT}\n`);
 });
 
 // Handles get requests of users attempting to login
