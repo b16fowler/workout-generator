@@ -56,25 +56,42 @@ export default function LoginPage() {
 
     //TODO: REMOVE USE OF FETCHWRAPPER
     // Get request
-    const API = new FetchWrapper(
-      `${EC2_URL}/api/login` // FOR HOSTING EC2
-    );
+    // const API = new FetchWrapper(
+    //   `${EC2_URL}/api/login` // FOR HOSTING EC2
+    // );
 
-    API.get("").then(data => {
-      // Check each row for user's enter information
-      data.forEach(account => {
-        // username and password exist and are correct
-        if (
-          username_input.toLowerCase() === account.username.toLowerCase() &&
-          password_input === account.password
-        ) {
-          login(username_input);
-          return;
-        }
+    // API.get("").then(data => {
+    //   // Check each row for user's enter information
+    //   data.forEach(account => {
+    //     // username and password exist and are correct
+    //     if (
+    //       username_input.toLowerCase() === account.username.toLowerCase() &&
+    //       password_input === account.password
+    //     ) {
+    //       login(username_input);
+    //       return;
+    //     }
+    //   });
+    //   // Login information does not match
+    //   showSnackbar("Login information does not match records");
+    // });
+
+    fetch(`/api.login`)
+      .then(response => response.json())
+      .then(data => {
+        // Check each row for user's enter information
+        data.forEach(account => {
+          if (
+            username_input.toLowerCase() === account.username.toLowerCase() &&
+            password_input === account.password
+          ) {
+            login(username_input);
+            return;
+          }
+          // Login information does not match
+          showSnackbar("Login information does not match records");
+        });
       });
-      // Login information does not match
-      showSnackbar("Login information does not match records");
-    });
   }
 
   // Called when user clicks "Forgot password" button
