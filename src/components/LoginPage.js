@@ -55,7 +55,7 @@ export default function LoginPage() {
     const password_input = document.querySelector("#password").value;
 
     //TODO: CHANGE VALIDATION LOGIC FOR LOGIN
-    fetch(`/api/login`)
+    fetch(`${EC2_URL}/api/login`)
       .then(response => response.json())
       .then(data => {
         // Check each row for user's enter information
