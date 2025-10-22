@@ -54,29 +54,8 @@ export default function LoginPage() {
     const username_input = document.querySelector("#username").value;
     const password_input = document.querySelector("#password").value;
 
-    //TODO: REMOVE USE OF FETCHWRAPPER
-    // Get request
-    // const API = new FetchWrapper(
-    //   `${EC2_URL}/api/login` // FOR HOSTING EC2
-    // );
-
-    // API.get("").then(data => {
-    //   // Check each row for user's enter information
-    //   data.forEach(account => {
-    //     // username and password exist and are correct
-    //     if (
-    //       username_input.toLowerCase() === account.username.toLowerCase() &&
-    //       password_input === account.password
-    //     ) {
-    //       login(username_input);
-    //       return;
-    //     }
-    //   });
-    //   // Login information does not match
-    //   showSnackbar("Login information does not match records");
-    // });
-
-    fetch(`/api.login`)
+    //TODO: CHANGE VALIDATION LOGIC FOR LOGIN
+    fetch(`/api/login`)
       .then(response => response.json())
       .then(data => {
         // Check each row for user's enter information
