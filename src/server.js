@@ -13,6 +13,7 @@ const app = express();
 const PORT = 5000;
 app.use(express.json());
 app.use(cors());
+app.set("trust proxy", true);
 
 // Middleware for photo uploads
 const upload = multer({ storage: multer.memoryStorage() });
@@ -38,6 +39,10 @@ app.listen(PORT, () => {
 // Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
   console.log(`\nLOGIN ATTEMPT\nUser attempting login from ip: ${req.ip}\n`);
+  const rawIP = req.ip || req.socket.remoteAddress;
+  console.log("rawIP:\n");
+  console.log(rawIP);
+
   const login_query = "SELECT * FROM logins;";
   try {
     const result = await pool.query(login_query);
@@ -158,28 +163,6 @@ app.post("/api/create-table", async (req, res) => {
   }
   console.log("End of post handler\n");
 });
-
-// Handles post requests of users adding a new exercise
-// app.post("/api/add", async (req, res) => {
-//   console.log("\nADD EXERCISE ATTEMPT\n");
-//   console.log("req\n");
-//   console.log(req);
-
-//   try {
-//     await pool.query(req.body.query);
-//     res.json({
-//       success: true,
-//       message: "New exercise added successfully!",
-//     });
-//     console.log(`[SUCCESS] User ${req.body.user}'s exercise added to DB\n`);
-//   } catch (err) {
-//     res.json({ success: false });
-//     console.log(
-//       `[ERROR] Error posting user ${req.body.user}'s exercise\n` + err + "\n"
-//     );
-//   }
-//   console.log("End of post handler\n");
-// });
 
 // Handles post requests of users adding an exercise (image)
 app.post("/api/add", upload.single("image"), async (req, res) => {
