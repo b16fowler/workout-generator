@@ -40,7 +40,7 @@ app.get("/ip-check", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, "127.0.0.1", () => {
   console.log(`\nServer is running\n`);
 });
 

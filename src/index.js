@@ -26,13 +26,13 @@ import "./css/index.css";
 
 /* Current public IP for EC2 instance and DB port
  * IP changes with each EC2 shutdown */
-const EC2_URL = "http://3.80.211.117:5000";
+// const EC2_URL = "http://3.80.211.117:5000";
 
 // INSTANCE PRIVATE IP
 // const EC2_URL = "http://172.31.81.52:5000";
 
 //////////// For local testing ///////////////
-// const EC2_URL = "http://localhost:5000"; //
+const EC2_URL = "http://localhost:5000"; //
 //////////////////////////////////////////////
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
