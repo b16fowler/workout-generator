@@ -32,6 +32,14 @@ app.get("/", (req, res) => {
   res.send(`Server is running\nget request from IP ${req.ip}`);
 });
 
+app.get("/ip-check", (req, res) => {
+  res.send({
+    ip: req.ip,
+    forwarded: req.headers["x-forwarded-for"],
+    remoteAddress: req.socket.remoteAddress,
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`\nServer is running\n`);
 });
