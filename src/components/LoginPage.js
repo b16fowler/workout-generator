@@ -113,7 +113,7 @@ export default function LoginPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ create_query }),
+      body: JSON.stringify({ query: create_query, user: new_username }),
     })
       .then(response => response.json())
       .then(data => {
