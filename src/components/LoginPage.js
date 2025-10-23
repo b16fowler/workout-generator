@@ -10,8 +10,7 @@ import { user, showSnackbar } from "./App.js";
 import MainMenu from "./MainMenuPage.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
-import FetchWrapper from "../fetchWrapper.js";
-import { EC2_URL, root } from "../index.js";
+import { root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
@@ -55,7 +54,7 @@ export default function LoginPage() {
     const password_input = document.querySelector("#password").value;
 
     //TODO: CHANGE VALIDATION LOGIC FOR LOGIN
-    fetch(`${EC2_URL}/api/login`)
+    fetch("/api/login")
       .then(response => response.json())
       .then(data => {
         // Check each row for user's enter information
@@ -95,19 +94,39 @@ export default function LoginPage() {
 
     //TODO: REMOVE USE OF FETCHWRAPPER
     // Post request to create new account
-    const API = new FetchWrapper(`${EC2_URL}/api/create-account`);
+    // const API = new FetchWrapper(`${EC2_URL}/api/create-account`);
+    // API.post("", create_query).then(data => {
+    //   if (data.success) {
+    //     login(new_username.toLowerCase());
+    //   }
+    //   // Alert user that username is taken and clear form
+    //   else {
+    //     showSnackbar(data.message);
+    //     document.querySelector(".create-account-username").value = "";
+    //     document.querySelector(".create-account-password").value = "";
+    //   }
+    // });
+
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
-    API.post("", create_query).then(data => {
-      if (data.success) {
-        login(new_username.toLowerCase());
-      }
-      // Alert user that username is taken and clear form
-      else {
-        showSnackbar(data.message);
-        document.querySelector(".create-account-username").value = "";
-        document.querySelector(".create-account-password").value = "";
-      }
-    });
+    fetch("/api/create-account", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ create_query }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          login(new_username.toLowerCase());
+        }
+        // Alert user that username is taken, clear form
+        else {
+          showSnackbar(data.message);
+          document.querySelector(".create-account-username").value = "";
+          document.querySelector(".create-account-password").value = "";
+        }
+      });
   }
 
   function login(username) {
@@ -116,7 +135,7 @@ export default function LoginPage() {
     user.username = username.toLowerCase();
 
     const fetchAccountType = async () => {
-      const response = await fetch(`${EC2_URL}/api/check-account-type`, {
+      const response = await fetch("/api/check-account-type", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

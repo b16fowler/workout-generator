@@ -7,7 +7,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import ReturnHome from "./ReturnHome";
-import { EC2_URL } from "..";
 import { showSnackbar } from "./App";
 
 export default function AdminDelete() {
@@ -18,7 +17,7 @@ export default function AdminDelete() {
     const usernameInput = document.querySelector("#delete-user-input").value;
 
     const fetchUser = async () => {
-      const response = await fetch(`${EC2_URL}/api/search`, {
+      const response = await fetch("/api/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +48,7 @@ export default function AdminDelete() {
 
   const deleteUser = usernameInput => {
     const deleteFetch = async () => {
-      const response = await fetch(`${EC2_URL}/api/delete`, {
+      const response = await fetch("/api/delete", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

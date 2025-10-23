@@ -8,7 +8,6 @@ import Header from "./Header.js";
 import Footer from "./Footer.js";
 import { showSnackbar, user } from "./App.js";
 import { useEffect, useState } from "react";
-import { EC2_URL } from "../index.js";
 
 export default function GenerateWorkout() {
   const [workout, setWorkout] = useState(null);
@@ -37,7 +36,7 @@ export default function GenerateWorkout() {
      * muscle types */
     const fetchExercises = async () => {
       try {
-        const response = await fetch(`${EC2_URL}/api/generate`, {
+        const response = await fetch("/api/generate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -69,7 +68,7 @@ export default function GenerateWorkout() {
 
     // Separate loop of fetch calls for user's exercise photos
     for (let i = 0; i < workout.length; i++) {
-      fetch(`${EC2_URL}/api/photos`, {
+      fetch("/api/photos", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
