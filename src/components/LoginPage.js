@@ -92,21 +92,6 @@ export default function LoginPage() {
       ".create-account-password"
     ).value;
 
-    //TODO: REMOVE USE OF FETCHWRAPPER
-    // Post request to create new account
-    // const API = new FetchWrapper(`${EC2_URL}/api/create-account`);
-    // API.post("", create_query).then(data => {
-    //   if (data.success) {
-    //     login(new_username.toLowerCase());
-    //   }
-    //   // Alert user that username is taken and clear form
-    //   else {
-    //     showSnackbar(data.message);
-    //     document.querySelector(".create-account-username").value = "";
-    //     document.querySelector(".create-account-password").value = "";
-    //   }
-    // });
-
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
     fetch("/api/create-account", {
       method: "POST",

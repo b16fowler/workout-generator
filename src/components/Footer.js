@@ -12,7 +12,7 @@ export default function Footer() {
         <p className="author-info">
           Brett Fowler
           <br />
-          <a href="https://b16fowler.github.io/">Website</a>
+          2025
         </p>
       </footer>
     </>
