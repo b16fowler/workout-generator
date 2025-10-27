@@ -4,7 +4,6 @@
  * MASTER TODO
  *
  * BUG FIX / CLARITY
- * Change AWS security rules to limit IP access
  * Remove FetchWrapper
  * Change snackbar CSS
  * Center snackbar for longer alerts
@@ -16,6 +15,7 @@
  * Save current/previous workout
  * Track user's data (# workouts completed, etc.)
  * Forgot password
+ *
  *
  **************************************************************************/
 
