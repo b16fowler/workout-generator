@@ -145,12 +145,12 @@ export default function LoginPage() {
       <h2 id="form-heading">Enter login information:</h2>
       <form className="login-form">
         <div className="form-group">
-          <label htmlFor="username">Username </label>
+          <label htmlFor="username">Username: </label>
           <input type="string" id="username" placeholder="" autoFocus></input>
         </div>
         <div className="form-group">
           <label className="form-group-label" htmlFor="password">
-            Password{" "}
+            Password:{" "}
           </label>
           <input type="password" id="password" placeholder=""></input>
           <button
