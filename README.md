@@ -20,7 +20,7 @@ Users can add exercises to their account with details like # of reps, # of sets,
 ### View exercises
 A user can view all of the exercises and their details they've added to their account in a table.
 ### Generate workout
-Finally, users can generate of workout to contain a certain 
+Finally, users can generate of workout to contain a certain.
 number of exercises, as well as specific muscle types that this workout should target.
 
 ## Admin Features
@@ -31,6 +31,7 @@ Admins can search for a user's account and delete it if it exists in the databas
 ### Reset Passwords
 User accounts can have their passwords reset by an admin.
 
-## Notes
-This project is functional, but still in progress. See a list of coming features/improvements in *index.js*
+## Notes/Limitations
+This project is functional, but still in progress. See a list of coming features/improvements in *index.js*.  
+Application is not formatted for mobile devices.
 
