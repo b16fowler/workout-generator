@@ -4,7 +4,7 @@
 
 import "dotenv/config";
 import mysql from "mysql2/promise";
-import express, { response } from "express";
+import express from "express";
 import cors from "cors";
 import multer from "multer";
 
@@ -31,14 +31,6 @@ const pool = mysql.createPool({
 app.get("/", (req, res) => {
   res.send(`Server is running\nget request from IP ${req.ip}`);
 });
-
-// app.get("/ip-check", (req, res) => {
-//   res.send({
-//     ip: req.ip,
-//     forwarded: req.headers["x-forwarded-for"],
-//     remoteAddress: req.socket.remoteAddress,
-//   });
-// });
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`\nBackend is listening on port ${PORT}\n`);
