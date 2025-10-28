@@ -13,6 +13,7 @@ import Footer from "./Footer.js";
 import { root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { accountCreated } from "../analytics.js";
 
 export default function LoginPage() {
   const [readyToRender, setReadyToRender] = useState(false);
@@ -55,10 +56,10 @@ export default function LoginPage() {
 
     //TODO: CHANGE VALIDATION LOGIC FOR LOGIN
     fetch("/api/login")
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Check each row for user's enter information
-        data.forEach(account => {
+        data.forEach((account) => {
           if (
             username_input.toLowerCase() === account.username.toLowerCase() &&
             password_input === account.password
@@ -100,9 +101,10 @@ export default function LoginPage() {
       },
       body: JSON.stringify({ query: create_query, user: new_username }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.success) {
+          accountCreated(new_username.toLowerCase());
           login(new_username.toLowerCase());
         }
         // Alert user that username is taken, clear form
@@ -156,7 +158,8 @@ export default function LoginPage() {
           <button
             type="button"
             className="show-password"
-            onClick={handleShowPassword}>
+            onClick={handleShowPassword}
+          >
             <img
               id="show-pw-img"
               src="pw-icon.png"
@@ -184,7 +187,8 @@ export default function LoginPage() {
         value="Yes, please!"
         type="button"
         hidden={false}
-        onClick={handleOpenCreateAccount}>
+        onClick={handleOpenCreateAccount}
+      >
         Yes, please!
       </button>
       <form className="create-account-form" hidden={true}>
