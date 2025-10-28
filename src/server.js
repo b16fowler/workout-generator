@@ -259,10 +259,9 @@ app.get("/api/user-table", async (req, res) => {
 });
 
 // Endpoint hit when new account is created
-app.post("api/analytics/account-created", async (req, res) => {
+app.post("/api/analytics/account-created", async (req, res) => {
   console.log("\nATTEMPTING TO ADD ROW IN ANALYTICS FOR NEW USER\n");
   console.log("Request body:\n");
   console.log(req.body);
-  //TODO: FIGURE OUT LOCAL TESTING
   console.log("\nEnd of post handler\n");
 });
