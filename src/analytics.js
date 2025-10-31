@@ -12,7 +12,7 @@ export function accountCreated(username) {
   let now = new Date();
   now = now.toLocaleString();
 
-  fetch("/api/analytics/account-created", {
+  fetch("/api/analytics-account-created", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
