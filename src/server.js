@@ -28,12 +28,14 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-// Debugging
-app.use((req, res, next) => {
-  console.log(`[Express] ${req.method} ${req.path}`);
-  next();
+app.get("/", (req, res) => {
+  res.send(`Server is running\nget request from IP ${req.ip}`);
 });
-//TODO: DISABLE NGINX
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`\nBackend is listening on port ${PORT}\n`);
+});
+
 // Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
   console.log(`\nLOGIN ATTEMPT\nUser attempting login from ip: ${req.ip}\n`);
@@ -264,22 +266,4 @@ app.post("/api/analytics-account-created", async (req, res) => {
   console.log("\nEnd of post handler\n");
 
   res.status(200).json({ message: "ok" });
-});
-
-app.post("/api/sanity-check", async (req, res) => {
-  console.log("Sanity checked");
-  res.json({ ok: true });
-});
-
-app.get("/", (req, res) => {
-  res.send(`Server is running\nget request from IP ${req.ip}`);
-});
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`\nBackend is listening on port ${PORT}\n`);
-});
-
-app.use((req, res, next) => {
-  console.log("Unhandled path: ", req.path);
-  next();
 });
