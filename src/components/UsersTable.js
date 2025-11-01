@@ -7,6 +7,7 @@
 
 import { useState, useEffect } from "react";
 import { Table } from "antd";
+import { EC2_URL } from "..";
 
 //TODO: fetch more user information: account type, num exercises, etc.
 export default function UsersTable() {
@@ -21,7 +22,7 @@ export default function UsersTable() {
 
   // Triggers on first component render, fetches usernames
   useEffect(() => {
-    fetch("/api/user-table")
+    fetch(`${EC2_URL}/api/user-table`)
       .then(response => response.json())
       .then(data => {
         setUserList(data.userList);

@@ -8,6 +8,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ReturnHome from "./ReturnHome";
 import { showSnackbar } from "./App";
+import { EC2_URL } from "..";
 
 export default function AdminDelete() {
   //TODO: COMBINE FUNCTIONALITY OF DELETE ACCOUNT + RESET PW
@@ -17,7 +18,7 @@ export default function AdminDelete() {
     const usernameInput = document.querySelector("#delete-user-input").value;
 
     const fetchUser = async () => {
-      const response = await fetch("/api/search", {
+      const response = await fetch(`${EC2_URL}/api/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +49,7 @@ export default function AdminDelete() {
 
   const deleteUser = usernameInput => {
     const deleteFetch = async () => {
-      const response = await fetch("/api/delete", {
+      const response = await fetch(`${EC2_URL}/api/delete`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

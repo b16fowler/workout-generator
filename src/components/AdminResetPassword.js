@@ -10,6 +10,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ReturnHome from "./ReturnHome";
 import { showSnackbar } from "./App";
+import { EC2_URL } from "..";
 
 export default function AdminResetPassword() {
   //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN RESET PASSWORD COMPONENT
@@ -23,7 +24,7 @@ export default function AdminResetPassword() {
 
     // fetches username using admin's form input
     const fetchUser = async () => {
-      const response = await fetch("/api/search", {
+      const response = await fetch(`${EC2_URL}/api/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +63,7 @@ export default function AdminResetPassword() {
    * password to be their username */
   const resetPw = usernameInput => {
     const resetFetch = () => {
-      const response = fetch("/api/reset", {
+      const response = fetch(`${EC2_URL}/api/reset`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
