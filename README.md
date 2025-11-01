@@ -9,7 +9,7 @@ This web application is designed to allow users to generate random workouts base
 Javascript, React, AWS EC2, AWS RDS, HTML, MySQL, Node Express
 
 ### Using the app
-Web app is hosted on an AWS EC2 instance. You can access it at: http://3.80.211.117 
+Web app is hosted on an AWS EC2 instance. You can access it at: http://3.80.211.117:3000 
   
 A preview account has been set up for testing the app and has several exercises preloaded: `Username: admin, Password: admin`  
 There are measures in place to stop edits of any kind to this account and it's exercises.
