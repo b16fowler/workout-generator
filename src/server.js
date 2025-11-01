@@ -259,11 +259,20 @@ app.get("/api/user-table", async (req, res) => {
 });
 
 // Endpoint hit when new account is created
-app.post("/api/analytics-account-created", async (req, res) => {
+app.post("/api/analytics/account-created", async (req, res) => {
   console.log("\nATTEMPTING TO ADD ROW IN ANALYTICS FOR NEW USER\n");
   console.log("Request body:\n");
   console.log(req.body);
   console.log("\nEnd of post handler\n");
-
-  res.status(200).json({ message: "ok" });
+  try {
+    console.log(
+      "[SUCCESS] date and time stamp of account creation inserted into DB"
+    );
+    res.status(200).json({ message: "ok" });
+  } catch (err) {
+    res.json({ success: false });
+    console.log(
+      "[ERROR] Error inserting date/time stamp into database\n" + err + "\n"
+    );
+  }
 });
