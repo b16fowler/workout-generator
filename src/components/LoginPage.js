@@ -94,7 +94,7 @@ export default function LoginPage() {
     ).value;
 
     const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
-    fetch("/api/create-account", {
+    fetch(`${EC2_URL}/api/create-account`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +104,7 @@ export default function LoginPage() {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          // accountCreated(new_username.toLowerCase());
+          accountCreated(new_username.toLowerCase());
           login(new_username.toLowerCase());
         }
         // Alert user that username is taken, clear form
