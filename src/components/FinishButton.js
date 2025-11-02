@@ -11,7 +11,8 @@ import MainMenuPage from "./MainMenuPage.js";
 import { queryClient } from "./LoginPage.js";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { root } from "../index.js";
-import { showSnackbar } from "./App.js";
+import { showSnackbar, user } from "./App.js";
+import { workoutFinished } from "../analytics.js";
 
 export default function FinishButton({ index, length }) {
   /* FinishButton remains hidden until user is on the final exercise
@@ -35,6 +36,9 @@ export default function FinishButton({ index, length }) {
       while (document.querySelector(".exercise-div")) {
         document.body.removeChild(document.querySelector(".exercise-div"));
       }
+
+      // Update analytics table
+      workoutFinished(user.username);
 
       // Load MainMenu once workout is finished
       root.render(
