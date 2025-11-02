@@ -14,6 +14,8 @@ export default function GenerateWorkout() {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
+  //TODO: FIX BUG WHEN USER GENERATES WORKOUT WITHOUT ADDING ANY TO POOL
+
   /* useEffect fetches exercise names, sets, and reps from DB after
    * user attempts to generate workout */
   useEffect(() => {
