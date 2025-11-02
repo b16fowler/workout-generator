@@ -8,8 +8,6 @@
 import { EC2_URL } from ".";
 
 export function accountCreated(username) {
-  console.log("Top of accountCreated function");
-
   // Create variable to hold current date/time
   let now = new Date();
   now = now.toLocaleString();
@@ -22,6 +20,26 @@ export function accountCreated(username) {
     body: JSON.stringify({ username: username, dateTime: now }),
   })
     .then(result => result.json())
+    .then(data => {
+      console.log(data);
+    });
+}
+
+export function accountLogin(username) {
+  console.log("Top of accountCreated function");
+
+  // Create variable to hold current date/time
+  let now = new Date();
+  now = now.toLocaleString();
+
+  fetch(`${EC2_URL}/api/analytics/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: username, dateTime: now }),
+  })
+    .then(response => response.json())
     .then(data => {
       console.log(data);
     });
