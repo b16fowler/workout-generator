@@ -285,7 +285,7 @@ app.post("/api/analytics/login", async (req, res) => {
   console.log(
     `\nATTEMPTING TO UPDATE LAST_LOGIN COLUMN FOR USER ${req.body.username}\n`
   );
-  const query = `UPDATE ANALYTICS SET last_login = "${req.body.dateTime}" WHERE username = "${req.body.username}"`;
+  const query = `UPDATE analytics SET last_login = "${req.body.dateTime}" WHERE username = "${req.body.username}"`;
   try {
     await pool.query(query);
     console.log(
