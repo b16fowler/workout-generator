@@ -260,8 +260,11 @@ app.get("/api/user-table", async (req, res) => {
 
 // Endpoint hit when new account is created
 app.post("/api/analytics/account-created", async (req, res) => {
-  console.log("\nATTEMPTING TO ADD ROW IN ANALYTICS FOR NEW USER\n");
-  const query = `INSERT INTO analytics (username, account_created_on, last_login) VALUES ("${req.body.username}", "${req.body.dateTime}", "${req.body.dateTime}")`;
+  console.log(
+    `\nATTEMPTING TO ADD ROW IN ANALYTICS FOR NEW USER: ${req.body.username}\n`
+  );
+  const num_workouts = 0; // Unsure if needed, but wanted same variable type
+  const query = `INSERT INTO analytics (username, account_created_on, last_login, num_workouts) VALUES ("${req.body.username}", "${req.body.dateTime}", "${req.body.dateTime}", "${num_workouts}")`;
   try {
     await pool.query(query);
     console.log(
@@ -270,8 +273,27 @@ app.post("/api/analytics/account-created", async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     console.log(
-      "[ERROR] Error inserting date/time stamp into database\n" + err + "\n"
+      "[ERROR] Error insert ing date/time stamp into database\n" + err + "\n"
     );
+    res.json({ success: false });
+  }
+  console.log("\nEnd of post handler\n");
+});
+
+// Endpoint hit when new account is created
+app.post("/api/analytics/login", async (req, res) => {
+  console.log(
+    `\nATTEMPTING TO UPDATE LAST_LOGIN COLUMN FOR USER ${req.body.username}\n`
+  );
+  const query = `UPDATE ANALYTICS SET last_login = "${req.body.dateTime}" WHERE username = "${req.body.username}"`;
+  try {
+    await pool.query(query);
+    console.log(
+      `[SUCCESS] date and time stamp of last login update for user: ${req.body.username}`
+    );
+    res.json({ success: true });
+  } catch (err) {
+    console.log("[ERROR] Error updating last_login in database\n" + err + "\n");
     res.json({ success: false });
   }
   console.log("\nEnd of post handler\n");
