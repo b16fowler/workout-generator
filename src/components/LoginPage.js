@@ -13,7 +13,7 @@ import Footer from "./Footer.js";
 import { EC2_URL, root } from "../index.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { accountCreated } from "../analytics.js";
+import { accountCreated, accountLogin } from "../analytics.js";
 
 export default function LoginPage() {
   const [readyToRender, setReadyToRender] = useState(false);
@@ -23,7 +23,10 @@ export default function LoginPage() {
 
     showSnackbar("Logging in!");
 
-    // Delay render 1.5 seconds for snackbar message
+    // Update analytics table
+    accountLogin(user.username);
+
+    // Delay render 0.75 seconds for snackbar message
     setTimeout(() => {
       root.render(
         <QueryClientProvider client={queryClient}>
