@@ -258,7 +258,7 @@ app.get("/api/user-table", async (req, res) => {
   console.log("End of get handler\n");
 });
 
-// Endpoint hit when new account is created
+// Handles post requests when new account is created
 app.post("/api/analytics/account-created", async (req, res) => {
   console.log(
     `\nATTEMPTING TO ADD ROW IN ANALYTICS FOR NEW USER: ${req.body.username}\n`
@@ -273,17 +273,17 @@ app.post("/api/analytics/account-created", async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     console.log(
-      "[ERROR] Error insert ing date/time stamp into database\n" + err + "\n"
+      "[ERROR] Error inserting date/time stamp into database\n" + err + "\n"
     );
     res.json({ success: false });
   }
   console.log("\nEnd of post handler\n");
 });
 
-// Endpoint hit when new account is created
+// Handles post requests when a user logs into account
 app.post("/api/analytics/login", async (req, res) => {
   console.log(
-    `\nATTEMPTING TO UPDATE LAST_LOGIN COLUMN FOR USER ${req.body.username}\n`
+    `\nATTEMPTING TO UPDATE last_login COLUMN FOR USER ${req.body.username}\n`
   );
   const query = `UPDATE analytics SET last_login = "${req.body.dateTime}" WHERE username = "${req.body.username}"`;
   try {
@@ -297,4 +297,26 @@ app.post("/api/analytics/login", async (req, res) => {
     res.json({ success: false });
   }
   console.log("\nEnd of post handler\n");
+});
+
+// Handles post requests when a user finishes a workout
+app.post("/api/analytics/workout-finished", async (req, res) => {
+  console.log(
+    `\nATTEMPTING TO UPDATE num_workouts AND last_workout FOR USER: ${req.body.username}\n`
+  );
+  const query = `UPDATE analytics SET num_workouts = num_workouts + 1, last_workout = "${req.body.dateTime}" WHERE username = "${req.body.username}"`;
+  try {
+    await pool.query(query);
+    console.log(
+      `[SUCCESS] num_workout and last_workout updated for user: ${req.body.username}`
+    );
+    res.json({ success: true });
+  } catch (err) {
+    console.log(
+      "[ERROR] Error updating num_workouts and last_workout in database\n" +
+        err +
+        "\n"
+    );
+    res.json({ success: false });
+  }
 });
