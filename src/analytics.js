@@ -6,6 +6,7 @@
  **************************************************************************/
 
 import { EC2_URL } from ".";
+import { user } from "./components/App";
 
 export function accountCreated(username) {
   // Create variable to hold current date/time
@@ -26,8 +27,6 @@ export function accountCreated(username) {
 }
 
 export function accountLogin(username) {
-  console.log("Top of accountCreated function");
-
   // Create variable to hold current date/time
   let now = new Date();
   now = now.toLocaleString();
@@ -43,4 +42,18 @@ export function accountLogin(username) {
     .then(data => {
       console.log(data);
     });
+}
+
+export function workoutFinished(username) {
+  // Create variable to hold current date/time
+  let now = new Date();
+  now = now.toLocaleString();
+
+  fetch(`${EC2_URL}/api/analytics/workout-finished`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: username, dateTime: now }),
+  });
 }
