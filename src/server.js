@@ -248,9 +248,6 @@ app.get("/api/account-table", async (req, res) => {
   const accountTableQuery = `SELECT * FROM analytics`;
   try {
     const accountData = await pool.query(accountTableQuery);
-    console.log("accountData:\n");
-    console.log(accountData);
-
     console.log("[SUCCESS] accountTableQuery run successfully\n");
     res.json({ accountData: accountData[0], success: true });
   } catch (err) {
