@@ -7,7 +7,7 @@
 
 import Header from "./Header";
 import Footer from "./Footer";
-import UsersTable from "./UsersTable";
+import UsersTable from "./AccountsTable";
 import ReturnHome from "./ReturnHome";
 
 export default function AdminViewUsers() {
