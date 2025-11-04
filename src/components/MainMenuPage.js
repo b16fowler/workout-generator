@@ -16,13 +16,13 @@ import { user } from "./App.js";
 import { useState } from "react";
 import AdminResetPassword from "./AdminResetPassword.js";
 import AdminDelete from "./AdminDelete.js";
-import AdminViewUsers from "./AdminViewUsers.js";
+import AdminViewAccounts from "./AdminViewAccounts.js";
 
 export default function MainMenuPage() {
   const [adminOn, setAdminOn] = useState(false);
 
   // Called to render new component
-  const handleClick = (component) => {
+  const handleClick = component => {
     root.render(component);
   };
 
@@ -41,8 +41,7 @@ export default function MainMenuPage() {
             adminOn
               ? () => handleClick(<AdminDelete />)
               : () => handleClick(<AddExercise />)
-          }
-        >
+          }>
           {adminOn ? "Delete Users" : "Add Exercise"}
         </button>
         <button
@@ -51,19 +50,17 @@ export default function MainMenuPage() {
             adminOn
               ? () => handleClick(<AdminResetPassword />)
               : () => handleClick(<ViewExercises />)
-          }
-        >
+          }>
           {adminOn ? "Reset Passwords" : "View Exercises"}
         </button>
         <button
           className="main-menu-button"
           onClick={
             adminOn
-              ? () => handleClick(<AdminViewUsers />)
+              ? () => handleClick(<AdminViewAccounts />)
               : () => handleClick(<GenerateWorkout />)
-          }
-        >
-          {adminOn ? "View Users" : "Generate Workout"}
+          }>
+          {adminOn ? "View Accounts" : "Generate Workout"}
         </button>
         {user.accountType === "admin" && (
           <button className="toggle-admin-button" onClick={toggleAdmin}>
