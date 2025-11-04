@@ -15,7 +15,7 @@
  * Save current/previous workout
  * Track user's data (# workouts completed, etc.)
  * Forgot password
- *
+ * Change fetch calls to axios
  *
  **************************************************************************/
 
