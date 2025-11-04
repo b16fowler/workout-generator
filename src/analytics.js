@@ -6,7 +6,6 @@
  **************************************************************************/
 
 import { EC2_URL } from ".";
-import { user } from "./components/App";
 
 export function accountCreated(username) {
   // Create variable to hold current date/time
@@ -40,7 +39,7 @@ export function accountLogin(username) {
   })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      return;
     });
 }
 
