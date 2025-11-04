@@ -251,8 +251,8 @@ app.get("/api/user-table", async (req, res) => {
     console.log("userData:\n");
     console.log(userData);
 
-    // console.log("[SUCCESS] userTableQuery run successfully\n");
-    // res.json({ userList: userList[0], success: true });
+    console.log("[SUCCESS] userTableQuery run successfully\n");
+    res.json({ userData: userData[0], success: true });
   } catch (err) {
     console.log(
       "[ERROR] Error in selecting users from database\n" + err + "\n"
