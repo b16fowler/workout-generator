@@ -242,14 +242,13 @@ app.post("/api/delete", async (req, res) => {
 });
 
 // Handles get requests of admin viewing table of users
-app.get("/api/account-table", async (req, res) => {
-  console.log("\nCREATE ACCOUNT TABLE ATTEMPT\n");
-  // const userTableQuery = "SELECT username FROM logins;";
-  const accountTableQuery = `SELECT * FROM analytics`;
+app.get("/api/accounts-table", async (req, res) => {
+  console.log("\nCREATE ACCOUNTS TABLE ATTEMPT\n");
+  const accountsTableQuery = `SELECT * FROM analytics`;
   try {
-    const accountData = await pool.query(accountTableQuery);
-    console.log("[SUCCESS] accountTableQuery run successfully\n");
-    res.json({ accountData: accountData[0], success: true });
+    const accountsData = await pool.query(accountsTableQuery);
+    console.log("[SUCCESS] accountsTableQuery run successfully\n");
+    res.json({ accountsData: accountsData[0], success: true });
   } catch (err) {
     console.log(
       "[ERROR] Error in selecting accounts from database\n" + err + "\n"
