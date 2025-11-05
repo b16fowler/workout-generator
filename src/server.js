@@ -39,10 +39,6 @@ app.listen(PORT, "0.0.0.0", () => {
 // Handles get requests of users attempting to login
 app.get("/api/login", async (req, res) => {
   console.log(`\nLOGIN ATTEMPT\nUser attempting login from ip: ${req.ip}\n`);
-  const rawIP = req.ip || req.socket.remoteAddress;
-  console.log("rawIP:\n");
-  console.log(rawIP);
-
   const login_query = "SELECT * FROM logins;";
   try {
     const result = await pool.query(login_query);
@@ -61,12 +57,14 @@ app.post("/api/create-account", async (req, res) => {
     // Creates new entry in logins if username is unique
     await pool.query(req.body.query);
     res.json({ success: true });
-    console.log(`[SUCCESS] login information inserted into DB\n`);
+    console.log(
+      `[SUCCESS] login information for user ${req.body.user} inserted into DB\n`
+    );
   } catch (err) {
     // username already exists
     if (err.code === "ER_DUP_ENTRY") {
       console.log(
-        `Attempted username "${req.body.user}" already in DB, prompting user to try again\n`
+        `Attempted username ${req.body.user} already in DB, prompting user to try again\n`
       );
       res.json({
         success: false,
@@ -74,7 +72,7 @@ app.post("/api/create-account", async (req, res) => {
       });
     } else {
       console.log(
-        `[ERROR] Error trying to run insert query for user ${req.body.user}\n` +
+        `[ERROR] Error trying to insert login information for ${req.body.user}\n` +
           err +
           "\n"
       );
@@ -89,10 +87,16 @@ app.post("/api/check-account-type", async (req, res) => {
   const checkAccountQuery = `SELECT type FROM logins WHERE username = "${req.body.user}";`;
   try {
     const result = await pool.query(checkAccountQuery);
-    console.log("[SUCCESS] Type of account fetched successfully\n");
+    console.log(
+      `[SUCCESS] Type of account for user ${req.body.user} fetched successfully\n`
+    );
     res.json({ account: result });
   } catch (err) {
-    console.log("[ERROR] Error fetching account information\n" + err + "\n");
+    console.log(
+      `[ERROR] Error fetching account information for user ${req.body.user}\n` +
+        err +
+        "\n"
+    );
   }
   console.log("End of post handler\n");
 });
@@ -176,10 +180,14 @@ app.post("/api/add", upload.single("image"), async (req, res) => {
 
   try {
     await pool.execute(sql, values);
-    console.log(`[SUCCESS] Image inserted into DB\n`);
+    console.log(`[SUCCESS] Image inserted into DB for user ${req.body.user}\n`);
     res.json({ message: "Photo uploaded successfully" });
   } catch (err) {
-    console.log(`[ERROR] Error trying to run insert query\n` + err + "\n");
+    console.log(
+      `[ERROR] Error trying to run insert query for user ${req.body.user}\n` +
+        err +
+        "\n"
+    );
   }
   console.log("End of post handler\n");
 });
@@ -232,7 +240,9 @@ app.post("/api/delete", async (req, res) => {
   try {
     await pool.query(deleteLogins);
     await pool.query(deleteExercises);
-    console.log("[SUCCESS] User's account deleted successfully\n");
+    console.log(
+      `[SUCCESS] User account ${req.body.user} deleted successfully\n`
+    );
     res.json({ success: true });
   } catch (err) {
     console.log("[ERROR] Error deleting account\n" + err + "\n");
@@ -261,14 +271,14 @@ app.get("/api/accounts-table", async (req, res) => {
 // Handles post requests when new account is created
 app.post("/api/analytics/account-created", async (req, res) => {
   console.log(
-    `\nATTEMPTING TO ADD ROW IN ANALYTICS FOR NEW USER: ${req.body.username}\n`
+    `\nATTEMPTING TO ADD ROW IN ANALYTICS FOR NEW USER: ${req.body.user}\n`
   );
   const num_workouts = 0; // Unsure if needed, but wanted same variable type
-  const query = `INSERT INTO analytics (username, account_created_on, last_login, num_workouts) VALUES ("${req.body.username}", "${req.body.dateTime}", "${req.body.dateTime}", "${num_workouts}")`;
+  const query = `INSERT INTO analytics (username, account_created_on, last_login, num_workouts) VALUES ("${req.body.user}", "${req.body.dateTime}", "${req.body.dateTime}", "${num_workouts}")`;
   try {
     await pool.query(query);
     console.log(
-      "[SUCCESS] date and time stamp of account creation inserted into DB"
+      `[SUCCESS] date and time stamp of account creation inserted into DB for user ${req.body.user}`
     );
     res.json({ success: true });
   } catch (err) {
@@ -283,17 +293,21 @@ app.post("/api/analytics/account-created", async (req, res) => {
 // Handles post requests when a user logs into account
 app.post("/api/analytics/login", async (req, res) => {
   console.log(
-    `\nATTEMPTING TO UPDATE last_login COLUMN FOR USER ${req.body.username}\n`
+    `\nATTEMPTING TO UPDATE last_login COLUMN FOR USER ${req.body.user}\n`
   );
-  const query = `UPDATE analytics SET last_login = "${req.body.dateTime}" WHERE username = "${req.body.username}"`;
+  const query = `UPDATE analytics SET last_login = "${req.body.dateTime}" WHERE username = "${req.body.user}"`;
   try {
     await pool.query(query);
     console.log(
-      `[SUCCESS] date and time stamp of last login update for user: ${req.body.username}`
+      `[SUCCESS] date and time stamp of last login update for user: ${req.body.user}`
     );
     res.json({ success: true });
   } catch (err) {
-    console.log("[ERROR] Error updating last_login in database\n" + err + "\n");
+    console.log(
+      `[ERROR] Error updating last_login in database for user ${req.body.user}\n` +
+        err +
+        "\n"
+    );
     res.json({ success: false });
   }
   console.log("\nEnd of post handler\n");
@@ -302,18 +316,18 @@ app.post("/api/analytics/login", async (req, res) => {
 // Handles post requests when a user finishes a workout
 app.post("/api/analytics/workout-finished", async (req, res) => {
   console.log(
-    `\nATTEMPTING TO UPDATE num_workouts AND last_workout FOR USER: ${req.body.username}\n`
+    `\nATTEMPTING TO UPDATE num_workouts AND last_workout FOR USER: ${req.body.user}\n`
   );
-  const query = `UPDATE analytics SET num_workouts = num_workouts + 1, last_workout = "${req.body.dateTime}" WHERE username = "${req.body.username}"`;
+  const query = `UPDATE analytics SET num_workouts = num_workouts + 1, last_workout = "${req.body.dateTime}" WHERE username = "${req.body.usern}"`;
   try {
     await pool.query(query);
     console.log(
-      `[SUCCESS] num_workout and last_workout updated for user: ${req.body.username}`
+      `[SUCCESS] num_workout and last_workout updated for user: ${req.body.user}`
     );
     res.json({ success: true });
   } catch (err) {
     console.log(
-      "[ERROR] Error updating num_workouts and last_workout in database\n" +
+      `[ERROR] Error updating num_workouts and last_workout in database for user ${req.body.user}\n` +
         err +
         "\n"
     );
