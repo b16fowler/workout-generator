@@ -17,10 +17,10 @@ export function accountCreated(username) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username: username, dateTime: now }),
+    body: JSON.stringify({ user: username, dateTime: now }),
   })
-    .then(result => result.json())
-    .then(data => {
+    .then((result) => result.json())
+    .then((data) => {
       console.log(data);
     });
 }
@@ -35,10 +35,10 @@ export function accountLogin(username) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username: username, dateTime: now }),
+    body: JSON.stringify({ user: username, dateTime: now }),
   })
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       return;
     });
 }
@@ -53,6 +53,6 @@ export function workoutFinished(username) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username: username, dateTime: now }),
+    body: JSON.stringify({ user: username, dateTime: now }),
   });
 }
