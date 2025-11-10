@@ -15,6 +15,22 @@
  * Forgot password
  * Change fetch calls to axios
  *
+ *
+ * **************************************************************************
+ * CHATGPT SUGGESTIONS
+ * Architecture
+ * Split server.js into multiple files
+ *
+ * Code Quality/Best Practices
+ * Eliminate queries written in frontend
+ * Replace "SELECT * ..." queries
+ * Use Winston or Pino (or something else) for backend error logging
+ * .env variable instead of PORT
+ *
+ * Security Improvements
+ * Use hashing for passwords
+ * CORS --> Restrict allowed origins to production domain
+ *
  **************************************************************************/
 
 import ReactDOM from "react-dom/client";
