@@ -252,6 +252,18 @@ a:visited {
   border-radius: 8px;
 }
 
+.save-workout-button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 15%;
+  padding: 1%;
+  font-size: xx-large;
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  border-radius: 8px;
+}
+
+.save-workout-button:hover,
 .start-button:hover,
 .previous-button:hover,
 .next-button:hover,
