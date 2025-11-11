@@ -13,6 +13,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { root } from "../index.js";
 import { showSnackbar, user } from "./App.js";
 import { workoutFinished } from "../analytics.js";
+import FinishedWorkout from "./FinishedWorkout.js";
 
 export default function FinishButton({ index, length }) {
   /* FinishButton remains hidden until user is on the final exercise
@@ -22,7 +23,8 @@ export default function FinishButton({ index, length }) {
       <button
         className="finish-button"
         onClick={handleClick}
-        hidden={index === length - 1 ? false : true}>
+        hidden={index === length - 1 ? false : true}
+      >
         Finish workout
       </button>
     </>
@@ -31,8 +33,8 @@ export default function FinishButton({ index, length }) {
   function handleClick() {
     showSnackbar("Workout completed!");
 
-    // Rerender MainMenuPage once snackbar is finished
     setTimeout(() => {
+      // Remove exercise-divs from page
       while (document.querySelector(".exercise-div")) {
         document.body.removeChild(document.querySelector(".exercise-div"));
       }
@@ -40,10 +42,10 @@ export default function FinishButton({ index, length }) {
       // Update analytics table
       workoutFinished(user.username);
 
-      // Load MainMenu once workout is finished
+      // Load FinishedWorkout once workout is finished
       root.render(
         <QueryClientProvider client={queryClient}>
-          <MainMenuPage />
+          <FinishedWorkout />
         </QueryClientProvider>
       );
     }, 2500);
