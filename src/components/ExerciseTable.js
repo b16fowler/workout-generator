@@ -12,10 +12,22 @@ import { EC2_URL } from "../index.js";
 
 // Columns for exercise table
 const columns = [
-  { title: "Name", dataIndex: "name", key: "name" },
-  { title: "Type", dataIndex: "type", key: "type" },
-  { title: "Reps", dataIndex: "reps", key: "reps" },
-  { title: "Sets", dataIndex: "sets", key: "sets" },
+  {
+    title: "Name",
+    dataIndex: "name",
+    sorter: (a, b) => a.type.localeCompare(b.type),
+  },
+  {
+    title: "Type",
+    dataIndex: "type",
+    sorter: (a, b) => a.type.localeCompare(b.type),
+  },
+  {
+    title: "Reps",
+    dataIndex: "reps",
+    sorter: (a, b) => a.reps - b.reps,
+  },
+  { title: "Sets", dataIndex: "sets", sorter: (a, b) => a.sets - b.sets },
 ];
 const exercises = [];
 
