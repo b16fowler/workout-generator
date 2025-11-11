@@ -6,6 +6,9 @@
  * BUG FIX / CLARITY
  * Change snackbar CSS
  * Center snackbar for longer alerts
+ * Remove "login information does not match records" on successful login
+ * Change fetch calls to axios
+ * Add multiple css files
  *
  * FEATURES TO IMPLEMENT
  * Visual of exercise picture on ViewExercisesPage
@@ -13,21 +16,18 @@
  * Edit exercise already in pool
  * Save current/previous workout
  * Forgot password
- * Change fetch calls to axios
  *
- *
- * **************************************************************************
+ **************************************************************************
  * CHATGPT SUGGESTIONS
- * Architecture
+ * *** Architecture ***
  * Split server.js into multiple files
  *
- * Code Quality/Best Practices
+ * *** Code Quality/Best Practices ***
  * Eliminate queries written in frontend
  * Replace "SELECT * ..." queries
  * Use Winston or Pino (or something else) for backend error logging
- * .env variable instead of PORT
  *
- * Security Improvements
+ * *** Security Improvements ***
  * Use hashing for passwords
  * CORS --> Restrict allowed origins to production domain
  *
