@@ -4,6 +4,8 @@
  * MASTER TODO
  *
  * BUG FIX / CLARITY
+ * Add frontend logic for ReloadWorkoutButton and LoadNewWorkoutButton
+ * Add backend logic for SaveWorkoutButton, ReloadWorkoutButton, and LoadNewWorkoutButton
  * Change snackbar CSS
  * Center snackbar for longer alerts
  * Remove "login information does not match records" on successful login
