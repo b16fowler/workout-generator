@@ -252,10 +252,12 @@ a:visited {
   border-radius: 8px;
 }
 
+.load-new-workout-button,
+.reload-workout-button,
 .save-workout-button {
   display: block;
   margin: 0 auto;
-  margin-top: 15%;
+  margin-top: 3%;
   padding: 1%;
   font-size: xx-large;
   background-color: #f2ffcc;
@@ -263,6 +265,12 @@ a:visited {
   border-radius: 8px;
 }
 
+.save-workout-button {
+  margin-top: 9%;
+}
+
+.load-new-workout-button:hover,
+.reload-workout-button:hover,
 .save-workout-button:hover,
 .start-button:hover,
 .previous-button:hover,
@@ -275,6 +283,10 @@ a:visited {
 
 .previous-button:disabled {
   pointer-events: none;
+}
+
+.reload-workout-button {
+  margin-bottom: 3%;
 }
 
 .exercise-image {
