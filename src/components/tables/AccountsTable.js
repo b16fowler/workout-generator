@@ -1,14 +1,14 @@
 /**************************************************************************
- * UsersTable component
+ * AccountsTable component
  *
  * This component currently fetches only the username of all accounts in the
  * 'logins' sql table and displays them in an antd table
  **************************************************************************/
 
-import { useState, useEffect } from "react";
-import { Table } from "antd";
 import axios from "axios";
-import { EC2_URL } from "..";
+import { Table } from "antd";
+import { EC2_URL } from "../..";
+import { useState, useEffect } from "react";
 
 export default function AccountsTable() {
   // UsersTable fetches all usernames and displays them

@@ -5,12 +5,12 @@
  * the Header, Footer, and ReturnHome
  **************************************************************************/
 
-import ExerciseTable from "./ExerciseTable.js";
-import Header from "./Header.js";
-import Footer from "./Footer.js";
-import ReturnHome from "./ReturnHomeButton.js";
+import Header from "../other/Header.js";
+import Footer from "../other/Footer.js";
+import ExerciseTable from "../tables/ExerciseTable.js";
+import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
-export default function ViewExercises() {
+export default function ViewExercisesPage() {
   return (
     <>
       <div className="view-exercise-page">
@@ -18,7 +18,7 @@ export default function ViewExercises() {
           <Header heading="All Exercises" />{" "}
         </div>
         <div id="return-button-table">
-          <ReturnHome />
+          <ReturnHomeButton />
         </div>
         <div className="exercise-table-div">
           <ExerciseTable />

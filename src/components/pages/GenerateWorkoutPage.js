@@ -2,15 +2,15 @@
  * GenerateWorkoutPage component
  **************************************************************************/
 
-import ReturnHome from "./ReturnHomeButton.js";
-import Workout from "./Workout.js";
-import Header from "./Header.js";
-import Footer from "./Footer.js";
-import { showSnackbar, user } from "./App.js";
+import { EC2_URL } from "../../index.js";
+import Header from "../other/Header.js";
+import Footer from "../other/Footer.js";
+import Workout from "../other/Workout.js";
 import { useEffect, useState } from "react";
-import { EC2_URL } from "../index.js";
+import { showSnackbar, user } from "../App.js";
+import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
-export default function GenerateWorkout() {
+export default function GenerateWorkoutPage() {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
@@ -173,7 +173,7 @@ export default function GenerateWorkout() {
         </form>
       </div>
       {workout && <Workout workout={workout} />}
-      {!workout && <ReturnHome />}
+      {!workout && <ReturnHomeButton />}
       <Footer />
     </>
   );

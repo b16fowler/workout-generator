@@ -5,24 +5,24 @@
  * the web app. If signed in account is an admin, toggleAdmin button is
  * visible to change the buttons functionality to admin options
  **************************************************************************/
-import Footer from "./Footer.js";
-import "../css/index.css";
-import Header from "./Header.js";
-import GenerateWorkout from "./GenerateWorkoutPage.js";
-import AddExercise from "./AddExercisePage.js";
-import ViewExercises from "./ViewExercisesPage.js";
-import { root } from "../index.js";
-import { user } from "./App.js";
+import "../../css/index.css";
 import { useState } from "react";
-import AdminResetPassword from "./AdminResetPassword.js";
-import AdminDelete from "./AdminDelete.js";
-import AdminViewAccounts from "./AdminViewAccounts.js";
+import { user } from "../App.js";
+import { root } from "../../index.js";
+import Footer from "../other/Footer.js";
+import Header from "../other/Header.js";
+import AddExercisePage from "./AddExercisePage.js";
+import AdminDelete from "../admin/AdminDelete.js";
+import ViewExercisesPage from "./ViewExercisesPage.js";
+import GenerateWorkoutPage from "./GenerateWorkoutPage.js";
+import AdminViewAccounts from "../admin/AdminViewAccounts.js";
+import AdminResetPassword from "../admin/AdminResetPassword.js";
 
 export default function MainMenuPage() {
   const [adminOn, setAdminOn] = useState(false);
 
   // Called to render new component
-  const handleClick = component => {
+  const handleClick = (component) => {
     root.render(component);
   };
 
@@ -40,8 +40,9 @@ export default function MainMenuPage() {
           onClick={
             adminOn
               ? () => handleClick(<AdminDelete />)
-              : () => handleClick(<AddExercise />)
-          }>
+              : () => handleClick(<AddExercisePage />)
+          }
+        >
           {adminOn ? "Delete Users" : "Add Exercise"}
         </button>
         <button
@@ -49,8 +50,9 @@ export default function MainMenuPage() {
           onClick={
             adminOn
               ? () => handleClick(<AdminResetPassword />)
-              : () => handleClick(<ViewExercises />)
-          }>
+              : () => handleClick(<ViewExercisesPage />)
+          }
+        >
           {adminOn ? "Reset Passwords" : "View Exercises"}
         </button>
         <button
@@ -58,8 +60,9 @@ export default function MainMenuPage() {
           onClick={
             adminOn
               ? () => handleClick(<AdminViewAccounts />)
-              : () => handleClick(<GenerateWorkout />)
-          }>
+              : () => handleClick(<GenerateWorkoutPage />)
+          }
+        >
           {adminOn ? "View Accounts" : "Generate Workout"}
         </button>
         {user.accountType === "admin" && (

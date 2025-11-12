@@ -4,13 +4,13 @@
  * Contains a form that allows user to add a new exercise to their pool.
  **************************************************************************/
 
-import { EC2_URL } from "../index.js";
-import { showSnackbar, user } from "./App.js";
-import Footer from "./Footer.js";
-import Header from "./Header.js";
-import ReturnHome from "./ReturnHomeButton.js";
+import { EC2_URL } from "../../index.js";
+import Footer from "../other/Footer.js";
+import Header from "../other/Header.js";
+import { showSnackbar, user } from "../App.js";
+import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
-export default function AddExercise() {
+export default function AddExercisePage() {
   /* Values in array blankFields are used to determine if the user left any
    * fields in the form untouched */
   const blankFields = ["Please select", "", "undefined", undefined];
@@ -125,7 +125,7 @@ export default function AddExercise() {
           value="Add exercise"
         />
       </form>
-      <ReturnHome />
+      <ReturnHomeButton />
       <Footer />
     </>
   );

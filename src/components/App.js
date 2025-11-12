@@ -2,7 +2,7 @@
  * App component
  **************************************************************************/
 
-import LoginPage from "./LoginPage.js";
+import LoginPage from "./pages/LoginPage.js";
 import "../css/index.css";
 
 // Empty string at start, set to username after log in

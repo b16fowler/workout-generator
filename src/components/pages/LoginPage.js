@@ -6,14 +6,14 @@
  * that all usernames are unique
  **************************************************************************/
 
-import { user, showSnackbar } from "./App.js";
-import MainMenu from "./MainMenuPage.js";
-import Header from "./Header.js";
-import Footer from "./Footer.js";
-import { EC2_URL, root } from "../index.js";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Header from "../other/Header.js";
+import Footer from "../other/Footer.js";
 import { useEffect, useState } from "react";
-import { accountCreated, accountLogin } from "../analytics.js";
+import MainMenuPage from "./MainMenuPage.js";
+import { EC2_URL, root } from "../../index.js";
+import { user, showSnackbar } from "../App.js";
+import { accountCreated, accountLogin } from "../../analytics.js";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function LoginPage() {
   const [readyToRender, setReadyToRender] = useState(false);
@@ -30,7 +30,7 @@ export default function LoginPage() {
     setTimeout(() => {
       root.render(
         <QueryClientProvider client={queryClient}>
-          <MainMenu />
+          <MainMenuPage />
         </QueryClientProvider>
       );
     }, 750);
@@ -59,10 +59,10 @@ export default function LoginPage() {
 
     //TODO: CHANGE VALIDATION LOGIC FOR LOGIN
     fetch(`${EC2_URL}/api/login`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Check each row for user's enter information
-        data.forEach(account => {
+        data.forEach((account) => {
           if (
             username_input.toLowerCase() === account.username.toLowerCase() &&
             password_input === account.password
@@ -104,8 +104,8 @@ export default function LoginPage() {
       },
       body: JSON.stringify({ query: create_query, user: new_username }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.success) {
           accountCreated(new_username.toLowerCase());
           login(new_username.toLowerCase());
@@ -161,7 +161,8 @@ export default function LoginPage() {
           <button
             type="button"
             className="show-password"
-            onClick={handleShowPassword}>
+            onClick={handleShowPassword}
+          >
             <img
               id="show-pw-img"
               src="pw-icon.png"
@@ -189,7 +190,8 @@ export default function LoginPage() {
         value="Yes, please!"
         type="button"
         hidden={false}
-        onClick={handleOpenCreateAccount}>
+        onClick={handleOpenCreateAccount}
+      >
         Yes, please!
       </button>
       <form className="create-account-form" hidden={true}>

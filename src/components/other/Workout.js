@@ -9,10 +9,10 @@
  **************************************************************************/
 
 import Exercise from "./Exercise.js";
-import FinishButton from "./FinishButton.js";
-import NextButton from "./NextButton.js";
-import PreviousButton from "./PreviousButton.js";
 import { useEffect, useState } from "react";
+import NextButton from "../buttons/NextButton.js";
+import FinishButton from "../buttons/FinishButton.js";
+import PreviousButton from "../buttons/PreviousButton.js";
 
 export default function Workout({ workout }) {
   // Tracks index of given exercise in generated workout

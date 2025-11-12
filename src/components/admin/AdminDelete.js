@@ -4,11 +4,11 @@
  * Search form that will delete an account if confirmed by the admin
  **************************************************************************/
 
-import Header from "./Header";
-import Footer from "./Footer";
-import ReturnHome from "./ReturnHomeButton";
-import { showSnackbar } from "./App";
-import { EC2_URL } from "..";
+import Header from "../other/Header";
+import Footer from "../other/Footer";
+import ReturnHomeButton from "../buttons/ReturnHomeButton";
+import { showSnackbar } from "../App";
+import { EC2_URL } from "../..";
 
 export default function AdminDelete() {
   //TODO: COMBINE FUNCTIONALITY OF DELETE ACCOUNT + RESET PW
@@ -80,7 +80,7 @@ export default function AdminDelete() {
           onChange={searchUser}
         />
       </form>
-      <ReturnHome />
+      <ReturnHomeButton />
       <Footer />
     </>
   );

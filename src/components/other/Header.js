@@ -7,7 +7,7 @@
  **************************************************************************/
 
 import Clock from "./Clock.js";
-import LogOutButton from "./LogOutButton.js";
+import LogOutButton from "../buttons/LogOutButton.js";
 
 export default function Header({ heading, notLoggedIn }) {
   return (

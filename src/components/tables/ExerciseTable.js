@@ -4,11 +4,11 @@
  * This component returns an antd Table component showing the signed in
  * user's exercises
  **************************************************************************/
-import { useEffect, useState } from "react";
-import { user } from "./App.js";
-import { Table } from "antd";
 import axios from "axios";
-import { EC2_URL } from "../index.js";
+import { Table } from "antd";
+import { user } from "../App.js";
+import { EC2_URL } from "../../index.js";
+import { useEffect, useState } from "react";
 
 // Columns for exercise table
 const columns = [

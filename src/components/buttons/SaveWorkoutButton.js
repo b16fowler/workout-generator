@@ -6,9 +6,9 @@
  * to another time
  **************************************************************************/
 
-import { EC2_URL } from "..";
-import user from "./App.js";
 import axios from "axios";
+import user from "../App.js";
+import { EC2_URL } from "../..";
 
 export default function SaveWorkoutButton({ workout }) {
   const handleSaveWorkout = () => {
