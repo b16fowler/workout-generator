@@ -8,7 +8,7 @@
 
 import Footer from "./Footer";
 import Header from "./Header";
-import ReturnHome from "./ReturnHome";
+import ReturnHome from "./ReturnHomeButton";
 import SaveWorkoutButton from "./SaveWorkoutButton";
 
 export default function FinishedWorkout() {

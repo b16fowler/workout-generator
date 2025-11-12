@@ -9,7 +9,7 @@ import MainMenuPage from "./MainMenuPage.js";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./LoginPage.js";
 
-export default function ReturnHome() {
+export default function ReturnHomeButton() {
   return (
     <>
       <br />

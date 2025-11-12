@@ -8,7 +8,7 @@ import { EC2_URL } from "../index.js";
 import { showSnackbar, user } from "./App.js";
 import Footer from "./Footer.js";
 import Header from "./Header.js";
-import ReturnHome from "./ReturnHome.js";
+import ReturnHome from "./ReturnHomeButton.js";
 
 export default function AddExercise() {
   /* Values in array blankFields are used to determine if the user left any
@@ -18,7 +18,7 @@ export default function AddExercise() {
   // formData used to capture users form input.  Used in post request
   const formData = new FormData();
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     /* handleSubmit called when user submits add-exercise-form. Starts by
      * pulling user submitted data from form, then checks if any fields
      * were not filled out by user and resets the form. Finally, function
@@ -50,7 +50,7 @@ export default function AddExercise() {
     formData.append("image", photoInput.files[0]);
 
     // Check each field. If any are in blankFields, prompt user to try again
-    formData.forEach(field => {
+    formData.forEach((field) => {
       if (blankFields.includes(field)) {
         readyToFetch = false;
         showSnackbar("All fields are mandatory, please try again.");
@@ -66,11 +66,11 @@ export default function AddExercise() {
         method: "POST",
         body: formData,
       })
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           showSnackbar("New exercise successfully added!");
         })
-        .catch(err => {
+        .catch((err) => {
           console.error("Fetch failed:\n", err);
         });
     }
@@ -84,12 +84,14 @@ export default function AddExercise() {
         encType="multipart/form-data"
         action="/api/add"
         method="post"
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="exercise-name">Enter name of exercise: </label>
         <input
           id="exercise-name"
           type="text"
-          placeholder="Example: Push ups"></input>
+          placeholder="Example: Push ups"
+        ></input>
         <label htmlFor="exercise-type">Select type of exercise: </label>
         <select id="exercise-type">
           <option>Please select</option>
@@ -104,14 +106,16 @@ export default function AddExercise() {
           input="number"
           min="1"
           max="50"
-          placeholder="1-50"></input>
+          placeholder="1-50"
+        ></input>
         <label htmlFor="exercise-sets">Enter number of sets in workout: </label>
         <input
           id="exercise-sets"
           input="number"
           min="1"
           max="10"
-          placeholder="1-10"></input>
+          placeholder="1-10"
+        ></input>
         <label htmlFor="exercise-pic">Exercise photo: </label>
         <input id="exercise-pic" type="file" name="uploaded-photo" />
         <br />

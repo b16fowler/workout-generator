@@ -8,7 +8,7 @@
 
 import Header from "./Header";
 import Footer from "./Footer";
-import ReturnHome from "./ReturnHome";
+import ReturnHome from "./ReturnHomeButton";
 import { showSnackbar } from "./App";
 import { EC2_URL } from "..";
 
@@ -16,7 +16,7 @@ export default function AdminResetPassword() {
   //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN RESET PASSWORD COMPONENT
 
   //TODO: PROMPT USER TO ENTER NEW PASSWORD AFTER BEING RESET
-  const searchUser = e => {
+  const searchUser = (e) => {
     e.preventDefault();
 
     // Take user's input and run SELECT query for that user
@@ -61,7 +61,7 @@ export default function AdminResetPassword() {
 
   /* Called after fetchUser, fetch runs post request that resets the account's
    * password to be their username */
-  const resetPw = usernameInput => {
+  const resetPw = (usernameInput) => {
     const resetFetch = () => {
       const response = fetch(`${EC2_URL}/api/reset`, {
         method: "POST",

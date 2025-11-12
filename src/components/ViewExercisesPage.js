@@ -8,7 +8,7 @@
 import ExerciseTable from "./ExerciseTable.js";
 import Header from "./Header.js";
 import Footer from "./Footer.js";
-import ReturnHome from "./ReturnHome.js";
+import ReturnHome from "./ReturnHomeButton.js";
 
 export default function ViewExercises() {
   return (

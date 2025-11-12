@@ -8,7 +8,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import UsersTable from "./AccountsTable";
-import ReturnHome from "./ReturnHome";
+import ReturnHome from "./ReturnHomeButton";
 
 export default function AdminViewAccounts() {
   return (

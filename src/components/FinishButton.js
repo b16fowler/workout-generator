@@ -7,7 +7,6 @@
  * to the page, and returns user to the main menu
  **************************************************************************/
 
-import MainMenuPage from "./MainMenuPage.js";
 import { queryClient } from "./LoginPage.js";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { root } from "../index.js";

@@ -6,13 +6,13 @@
 
 import Header from "./Header";
 import Footer from "./Footer";
-import ReturnHome from "./ReturnHome";
+import ReturnHome from "./ReturnHomeButton";
 import { showSnackbar } from "./App";
 import { EC2_URL } from "..";
 
 export default function AdminDelete() {
   //TODO: COMBINE FUNCTIONALITY OF DELETE ACCOUNT + RESET PW
-  const searchUser = e => {
+  const searchUser = (e) => {
     e.preventDefault();
 
     const usernameInput = document.querySelector("#delete-user-input").value;
@@ -47,7 +47,7 @@ export default function AdminDelete() {
     else fetchUser();
   };
 
-  const deleteUser = usernameInput => {
+  const deleteUser = (usernameInput) => {
     const deleteFetch = async () => {
       const response = await fetch(`${EC2_URL}/api/delete`, {
         method: "POST",
