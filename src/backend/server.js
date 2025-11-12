@@ -10,7 +10,7 @@ import multer from "multer";
 
 // Set up server
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.BACKEND_PORT;
 app.use(express.json());
 app.use(cors());
 app.set("trust proxy", true);
