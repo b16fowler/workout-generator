@@ -7,7 +7,7 @@
  * to the page, and returns user to the main menu
  **************************************************************************/
 
-import { root } from "../../index.js";
+import { root } from "../../../index.js";
 import { showSnackbar, user } from "../App.js";
 import { queryClient } from "../pages/LoginPage.js";
 import { workoutFinished } from "../../analytics.js";
@@ -47,6 +47,6 @@ export default function FinishButton({ index, length }) {
           <FinishedWorkoutPage />
         </QueryClientProvider>
       );
-    }, 2500);
+    }, 2000);
   }
 }

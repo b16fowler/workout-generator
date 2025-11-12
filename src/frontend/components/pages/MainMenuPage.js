@@ -8,9 +8,9 @@
 import "../../css/index.css";
 import { useState } from "react";
 import { user } from "../App.js";
-import { root } from "../../index.js";
 import Footer from "../other/Footer.js";
 import Header from "../other/Header.js";
+import { root } from "../../../index.js";
 import AddExercisePage from "./AddExercisePage.js";
 import AdminDelete from "../admin/AdminDelete.js";
 import ViewExercisesPage from "./ViewExercisesPage.js";

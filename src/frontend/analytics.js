@@ -5,7 +5,7 @@
  * This data is visually represented in the UsersTable component
  **************************************************************************/
 
-import { EC2_URL } from ".";
+import { EC2_URL } from "..";
 
 export function accountCreated(username) {
   // Create variable to hold current date/time

@@ -2,7 +2,7 @@
  * GenerateWorkoutPage component
  **************************************************************************/
 
-import { EC2_URL } from "../../index.js";
+import { EC2_URL } from "../../../index.js";
 import Header from "../other/Header.js";
 import Footer from "../other/Footer.js";
 import Workout from "../other/Workout.js";

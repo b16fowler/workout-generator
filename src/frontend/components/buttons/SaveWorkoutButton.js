@@ -8,7 +8,7 @@
 
 import axios from "axios";
 import user from "../App.js";
-import { EC2_URL } from "../..";
+import { EC2_URL } from "../../..";
 
 export default function SaveWorkoutButton({ workout }) {
   const handleSaveWorkout = () => {

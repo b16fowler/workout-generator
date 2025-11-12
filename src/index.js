@@ -36,13 +36,20 @@
  **************************************************************************/
 
 import ReactDOM from "react-dom/client";
-import App from "./components/App.js";
+import App from "./frontend/components/App.js";
 import React from "react";
 import "./css/index.css";
 
 /* Current public IP for EC2 instance and DB port
  * IP changes with each EC2 shutdown */
+
+////////////////// FOR DEPLOYMENT ///////////////////
 const EC2_URL = "http://3.80.211.117:5000";
+/////////////////////////////////////////////////////
+
+///////////////// FOR LOCAL TESTING /////////////////
+// const EC2_URL = "http://localhost:5000";
+/////////////////////////////////////////////////////
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

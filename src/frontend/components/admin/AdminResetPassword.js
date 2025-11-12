@@ -6,7 +6,7 @@
  * Currently always resets password to be their username
  **************************************************************************/
 
-import { EC2_URL } from "../..";
+import { EC2_URL } from "../../..";
 import Header from "../other/Header";
 import Footer from "../other/Footer";
 import { showSnackbar } from "../App";

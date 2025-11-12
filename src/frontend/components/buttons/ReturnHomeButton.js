@@ -4,7 +4,7 @@
  * Button component to return a user to the home page
  **************************************************************************/
 
-import { root } from "../../index.js";
+import { root } from "../../../index.js";
 import { queryClient } from "../pages/LoginPage.js";
 import MainMenuPage from "../pages/MainMenuPage.js";
 import { QueryClientProvider } from "@tanstack/react-query";

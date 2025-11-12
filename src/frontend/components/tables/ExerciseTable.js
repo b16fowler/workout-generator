@@ -7,7 +7,7 @@
 import axios from "axios";
 import { Table } from "antd";
 import { user } from "../App.js";
-import { EC2_URL } from "../../index.js";
+import { EC2_URL } from "../../../index.js";
 import { useEffect, useState } from "react";
 
 // Columns for exercise table

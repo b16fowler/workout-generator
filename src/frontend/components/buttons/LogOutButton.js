@@ -7,7 +7,7 @@
  * then renders App component.
  **************************************************************************/
 
-import { root } from "../../index.js";
+import { root } from "../../../index.js";
 import App, { user, showSnackbar } from "../App.js";
 
 export default function LogOutButton({ notLoggedIn }) {

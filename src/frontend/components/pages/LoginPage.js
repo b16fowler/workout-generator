@@ -10,8 +10,8 @@ import Header from "../other/Header.js";
 import Footer from "../other/Footer.js";
 import { useEffect, useState } from "react";
 import MainMenuPage from "./MainMenuPage.js";
-import { EC2_URL, root } from "../../index.js";
 import { user, showSnackbar } from "../App.js";
+import { EC2_URL, root } from "../../../index.js";
 import { accountCreated, accountLogin } from "../../analytics.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

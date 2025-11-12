@@ -4,7 +4,7 @@
  * Contains a form that allows user to add a new exercise to their pool.
  **************************************************************************/
 
-import { EC2_URL } from "../../index.js";
+import { EC2_URL } from "../../../index.js";
 import Footer from "../other/Footer.js";
 import Header from "../other/Header.js";
 import { showSnackbar, user } from "../App.js";
