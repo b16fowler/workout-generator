@@ -38,7 +38,7 @@
 import ReactDOM from "react-dom/client";
 import App from "./frontend/components/App.js";
 import React from "react";
-import "./css/index.css";
+import "./frontend/css/index.css";
 
 /* Current public IP for EC2 instance and DB port
  * IP changes with each EC2 shutdown */
