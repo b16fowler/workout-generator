@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post("/analytics/account-created", accountCreated);
 router.post("/analytics/login", accountLogin);
-router.post("/workout-finished", workoutFinished);
+router.post("/analytics/workout-finished", workoutFinished);
 
 export default router;

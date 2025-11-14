@@ -9,7 +9,7 @@ export const accountCreated = async (req, res) => {
   try {
     await pool.query(query);
     console.log(
-      `[SUCCESS] date and time stamp of account creation inserted into DB for user ${req.body.user}`
+      `[SUCCESS] date and time stamp of account creation inserted into DB for user ${req.body.user} at ${req.body.date}`
     );
     res.json({ success: true });
   } catch (err) {
@@ -29,7 +29,7 @@ export const accountLogin = async (req, res) => {
   try {
     await pool.query(query);
     console.log(
-      `[SUCCESS] date and time stamp of last login update for user: ${req.body.user}`
+      `[SUCCESS] date and time stamp of last login update for user: ${req.body.user} updated tp ${req.body.dateTime}`
     );
     res.json({ success: true });
   } catch (err) {
@@ -51,7 +51,7 @@ export const workoutFinished = async (req, res) => {
   try {
     await pool.query(query);
     console.log(
-      `[SUCCESS] num_workout and last_workout updated for user: ${req.body.user}`
+      `[SUCCESS] num_workouts updated for user: ${req.body.user}\n[SUCCESS] last_workout for user: ${req.body.user} updated to ${req.body.dateTime}`
     );
     res.json({ success: true });
   } catch (err) {

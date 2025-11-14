@@ -6,23 +6,25 @@
  **************************************************************************/
 
 import { EC2_URL } from "..";
+import axios from "axios";
 
 export function accountCreated(username) {
   // Create variable to hold current date/time
   let now = new Date();
   now = now.toLocaleString();
 
-  fetch(`${EC2_URL}/api/analytics/account-created`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ user: username, dateTime: now }),
-  })
-    .then((result) => result.json())
-    .then((data) => {
-      console.log(data);
-    });
+  const fetchData = async () => {
+    try {
+      axios.post(`${EC2_URL}/api/analytics/account-created`, {
+        user: username,
+        dateTime: now,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchData();
 }
 
 export function accountLogin(username) {
@@ -30,17 +32,18 @@ export function accountLogin(username) {
   let now = new Date();
   now = now.toLocaleString();
 
-  fetch(`${EC2_URL}/api/analytics/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ user: username, dateTime: now }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      return;
-    });
+  const fetchData = async () => {
+    try {
+      axios.post(`${EC2_URL}/api/analytics/login`, {
+        user: username,
+        dateTime: now,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchData();
 }
 
 export function workoutFinished(username) {
@@ -48,11 +51,16 @@ export function workoutFinished(username) {
   let now = new Date();
   now = now.toLocaleString();
 
-  fetch(`${EC2_URL}/api/analytics/workout-finished`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ user: username, dateTime: now }),
-  });
+  const fetchData = async () => {
+    try {
+      axios.post(`${EC2_URL}/api/analytics/workout-finished`, {
+        user: username,
+        dateTime: now,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  fetchData();
 }
