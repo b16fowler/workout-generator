@@ -11,6 +11,6 @@ const router = express.Router();
 router.post("/search", searchUser);
 router.post("/reset", resetPassword);
 router.post("/delete", deleteAccount);
-router.post("/account-table", accountsTable);
+router.get("/accounts-table", accountsTable);
 
 export default router;
