@@ -47,7 +47,7 @@ export const workoutFinished = async (req, res) => {
   console.log(
     `\nATTEMPTING TO UPDATE num_workouts AND last_workout FOR USER: ${req.body.user}\n`
   );
-  const query = `UPDATE analytics SET num_workouts = num_workouts + 1, last_workout = "${req.body.dateTime}" WHERE username = "${req.body.usern}"`;
+  const query = `UPDATE analytics SET num_workouts = num_workouts + 1, last_workout = "${req.body.dateTime}" WHERE username = "${req.body.user}"`;
   try {
     await pool.query(query);
     console.log(
