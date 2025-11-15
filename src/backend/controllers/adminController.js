@@ -42,9 +42,11 @@ export const deleteAccount = async (req, res) => {
   console.log("\nDELETE ACCOUNT ATTEMPT\n");
   const deleteLogins = `DELETE FROM logins WHERE username = "${req.body.user}"`;
   const deleteExercises = `DELETE FROM user_exercises WHERE username = "${req.body.user}"`;
+  const deleteAnalytics = `DELETE FROM analytics WHERE username = "${req.body.user}"`;
   try {
     await pool.query(deleteLogins);
     await pool.query(deleteExercises);
+    await pool.query(deleteAnalytics);
     console.log(
       `[SUCCESS] User account ${req.body.user} deleted successfully\n`
     );
