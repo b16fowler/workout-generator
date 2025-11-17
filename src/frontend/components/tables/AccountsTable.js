@@ -18,19 +18,32 @@ export default function AccountsTable() {
 
   // Table column names
   const columns = [
-    { title: "Username", dataIndex: "username", key: "username" },
+    {
+      title: "Username",
+      dataIndex: "username",
+      sorter: (a, b) => a.username.localeCompare(b.username),
+    },
     {
       title: "Account Created On",
       dataIndex: "account_created_on",
-      key: "account_created_on",
+      sorter: (a, b) =>
+        new Date(a.account_created_on) - new Date(b.account_created_on),
     },
-    { title: "Last Login", dataIndex: "last_login", key: "last_login" },
+    {
+      title: "Last Login",
+      dataIndex: "last_login",
+      sorter: (a, b) => new Date(a.last_login) - new Date(b.last_login),
+    },
     {
       title: "Number of Workouts",
       dataIndex: "num_workouts",
-      key: "num_workouts",
+      sorter: (a, b) => a.num_workouts - b.num_workouts,
     },
-    { title: "Last Workout", dataIndex: "last_workout", key: "last_workout" },
+    {
+      title: "Last Workout",
+      dataIndex: "last_workout",
+      sorter: (a, b) => new Date(a.last_workout) - new Date(b.last_workout),
+    },
   ];
 
   // Triggers on first component render, fetches usernames
