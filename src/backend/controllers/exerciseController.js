@@ -86,3 +86,19 @@ export const addExercise = async (req, res) => {
   }
   console.log("End of post handler\n");
 };
+
+export const saveWorkout = async (req, res) => {
+  console.log("\nSAVE WORKOUT ATTEMPT\n");
+  const saveQuery = ";";
+  try {
+    await pool.query(saveQuery);
+    console.log(`[SUCCESS] Workout saved for user ${req.body.user}\n`);
+    res.json({ success: true });
+  } catch (err) {
+    console.log(
+      `[ERROR] Error trying to save workout for user ${req.body.user}\n` +
+        err +
+        "\n"
+    );
+  }
+};
