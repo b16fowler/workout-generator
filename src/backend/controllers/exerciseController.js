@@ -70,16 +70,33 @@ export const addExercise = async (req, res) => {
   const photo = req.file.buffer;
   const info = req.body;
 
-  const sql = "INSERT INTO user_exercises VALUES (?, ?, ?, ?, ?, ?);";
-  const values = [info.user, info.name, info.type, info.sets, info.reps, photo];
+  // Determine how many exercises user currently has for ID
+  const id_query = `SELECT COUNT(*) FROM user_exercises WHERE username = "${info.username}";`;
+  let num_exercises = await pool.query(id_query);
+  num_exercises = num_exercises[0][0]["COUNT(*)"] + 1;
 
+  // Query + data being inserted into table
+  const sql = "INSERT INTO user_exercises VALUES (?, ?, ?, ?, ?, ?, ?);";
+  const values = [
+    info.username,
+    info.name,
+    info.type,
+    info.sets,
+    info.reps,
+    photo,
+    num_exercises,
+  ];
+
+  // Run query
   try {
     await pool.execute(sql, values);
-    console.log(`[SUCCESS] Image inserted into DB for user ${req.body.user}\n`);
-    res.json({ message: "Photo uploaded successfully" });
+    console.log(
+      `[SUCCESS] Image inserted into DB for user ${req.body.username}\n`
+    );
+    res.json({ message: "Exercise uploaded successfully" });
   } catch (err) {
     console.log(
-      `[ERROR] Error trying to run insert query for user ${req.body.user}\n` +
+      `[ERROR] Error trying to run insert query for user ${req.body.username}\n` +
         err +
         "\n"
     );
