@@ -15,7 +15,7 @@ export default function AddExercisePage() {
    * fields in the form untouched */
   const blankFields = ["Please select", "", "undefined", undefined];
 
-  // formData used to capture users form input.  Used in post request
+  // formData used to capture users form input.  Used in post request body
   const formData = new FormData();
 
   const handleSubmit = (e) => {
@@ -36,13 +36,13 @@ export default function AddExercisePage() {
     if (user.username === "admin") {
       readyToFetch = false;
       alert(
-        "This account is for testing only. No edits are allowed :(\nIf you'd like to add new exercises, try making a new account!"
+        "This account is for testing only. No edits are allowed\nIf you'd like to add new exercises, try making a new account!"
       );
     }
 
     // Add user's input to FormData for fetch call body
     const photoInput = document.querySelector("#exercise-pic");
-    formData.append("user", user.username);
+    formData.append("username", user.username);
     formData.append("name", document.querySelector("#exercise-name").value);
     formData.append("type", document.querySelector("#exercise-type").value);
     formData.append("reps", document.querySelector("#exercise-reps").value);
