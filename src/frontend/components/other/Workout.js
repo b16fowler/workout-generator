@@ -49,7 +49,9 @@ export default function Workout({ workout }) {
       {started && (
         <NextButton index={index} setIndex={setIndex} length={workout.length} />
       )}
-      {started && <FinishButton index={index} length={workout.length} />}
+      {started && (
+        <FinishButton index={index} length={workout.length} workout={workout} />
+      )}
     </>
   );
 }
