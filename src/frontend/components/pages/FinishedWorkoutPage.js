@@ -13,7 +13,7 @@ import SaveWorkoutButton from "../buttons/SaveWorkoutButton";
 import ReloadWorkoutButton from "../buttons/ReloadWorkoutButton";
 import LoadNewWorkoutButton from "../buttons/LoadNewWorkoutButton";
 
-export default function FinishedWorkoutPage() {
+export default function FinishedWorkoutPage({ workout }) {
   return (
     <>
       <Header heading="Workout completed!" />
