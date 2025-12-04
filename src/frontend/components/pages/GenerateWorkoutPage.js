@@ -45,13 +45,14 @@ export default function GenerateWorkoutPage() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            user: user.username,
+            username: user.username,
             selectedTypes: selectedTypes,
           }),
         });
         const result = await response.json();
 
         const finalWorkout = cleanUpResult(result.exercises[0]);
+
         setWorkout(finalWorkout);
       } catch (err) {
         console.error(err);
@@ -77,7 +78,7 @@ export default function GenerateWorkoutPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: user.username,
+          username: user.username,
           exerciseName: workout[i].name,
         }),
       })
