@@ -2,11 +2,11 @@ import pool from "../config/db.js";
 
 export const generate = async (req, res) => {
   console.log("\nGENERATE WORKOUT ATTEMPT (exercise info)\n");
-  const create_table_query = `SELECT name, type, sets, reps FROM user_exercises WHERE username = "${req.body.user}" AND type IN (${req.body.selectedTypes})`;
+  const create_table_query = `SELECT name, type, sets, reps, id FROM user_exercises WHERE username = "${req.body.username}" AND type IN (${req.body.selectedTypes})`;
   try {
     const result = await pool.query(create_table_query);
     console.log(
-      `[SUCCESS] Exercise rows for user ${req.body.user} pulled from DB\n`
+      `[SUCCESS] Exercise rows for user ${req.body.username} pulled from DB\n`
     );
     res.json({
       success: true,
@@ -14,7 +14,7 @@ export const generate = async (req, res) => {
     });
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching user ${req.body.user}'s data\n` + err + "\n"
+      `[ERROR] Error fetching user ${req.body.username}'s data\n` + err + "\n"
     );
     res.json({
       success: false,
@@ -26,17 +26,19 @@ export const generate = async (req, res) => {
 export const getExercisePhoto = async (req, res) => {
   console.log("\nGENERATE WORKOUT ATTEMPT (exercise image(s))\n");
   try {
-    const picQuery = `SELECT pic FROM user_exercises WHERE username = "${req.body.user}" AND name = "${req.body.exerciseName}";`;
+    const picQuery = `SELECT pic FROM user_exercises WHERE username = "${req.body.username}" AND name = "${req.body.exerciseName}";`;
     const response = await pool.query(picQuery);
     const buffer = response[0][0].pic;
     const blob = new Blob([buffer], { type: "image/png" });
 
-    console.log(`[SUCCESS] Image for user ${req.body.user} pulled from DB\n`);
+    console.log(
+      `[SUCCESS] Image for user ${req.body.username} pulled from DB\n`
+    );
     res.set("Content-Type", blob.type);
     res.send(buffer);
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching user ${req.body.user}'s exercise image\n` +
+      `[ERROR] Error fetching user ${req.body.username}'s exercise image\n` +
         err +
         "\n"
     );
