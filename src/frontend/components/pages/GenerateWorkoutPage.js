@@ -10,11 +10,29 @@ import { useEffect, useState } from "react";
 import { showSnackbar, user } from "../App.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
-export default function GenerateWorkoutPage() {
+export default function GenerateWorkoutPage(reloadedWorkout) {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
-  //TODO: FIX BUG WHEN USER GENERATES WORKOUT WITHOUT ADDING ANY TO POOL
+  // reloadedWorkout not empty, setWorkout to skip generate form
+  // INFINITE LOOP
+  // if (Object.keys(reloadedWorkout).length !== 0) {
+  //   setWorkout(reloadedWorkout);
+  // }
+
+  useEffect(() => {
+    console.log("new useEffect triggered...");
+
+    if (Object.keys(reloadedWorkout).length !== 0) {
+      console.log("reloadedWorkout is NOT empty");
+
+      setWorkout(reloadedWorkout);
+    }
+  }, []);
+
+  ///////////////////////////////////////////////////////////////////////
+  // TODO: FIX BUG WHEN USER GENERATES WORKOUT WITHOUT ADDING ANY TO POOL
+  ///////////////////////////////////////////////////////////////////////
 
   /* useEffect fetches exercise names, sets, and reps from DB after
    * user attempts to generate workout */
@@ -50,9 +68,7 @@ export default function GenerateWorkoutPage() {
           }),
         });
         const result = await response.json();
-
         const finalWorkout = cleanUpResult(result.exercises[0]);
-
         setWorkout(finalWorkout);
       } catch (err) {
         console.error(err);
@@ -70,6 +86,8 @@ export default function GenerateWorkoutPage() {
   useEffect(() => {
     if (!workout) return;
 
+    console.log("workout changed\n");
+
     // Separate loop of fetch calls for user's exercise photos
     for (let i = 0; i < workout.length; i++) {
       fetch(`${EC2_URL}/api/photos`, {
@@ -82,7 +100,9 @@ export default function GenerateWorkoutPage() {
           exerciseName: workout[i].name,
         }),
       })
-        .then((response) => response.blob())
+        .then((response) => {
+          response.blob();
+        })
         .then((blob) => {
           // Create img
           const img = document.createElement("img");
@@ -173,7 +193,7 @@ export default function GenerateWorkoutPage() {
           />
         </form>
       </div>
-      {workout && <Workout workout={workout} />}
+      {workout && <Workout workout={workout} setWorkout={setWorkout} />}
       {!workout && <ReturnHomeButton />}
       <Footer />
     </>

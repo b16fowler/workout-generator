@@ -5,14 +5,28 @@
  * Clicking button will refresh the workout user just finished
  **************************************************************************/
 
-const handleReloadWorkout = () => {
-  console.log("Reload workout button pressed");
-};
+import { root } from "../../../index.js";
+import { queryClient } from "../pages/LoginPage.js";
+import { QueryClientProvider } from "@tanstack/react-query";
+import GenerateWorkoutPage from "../pages/GenerateWorkoutPage";
 
-export default function ReloadWorkoutButton() {
+export default function ReloadWorkoutButton({ workout }) {
+  const handleReloadWorkout = (workout) => {
+    root.render(
+      <QueryClientProvider client={queryClient}>
+        <GenerateWorkoutPage reloadedWorkout={workout} />
+      </QueryClientProvider>
+    );
+  };
+
   return (
     <>
-      <button className="reload-workout-button" onClick={handleReloadWorkout}>
+      <button
+        className="reload-workout-button"
+        onClick={function () {
+          handleReloadWorkout(workout);
+        }}
+      >
         Reload workout
       </button>
     </>
