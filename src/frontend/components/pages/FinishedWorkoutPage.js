@@ -19,7 +19,7 @@ export default function FinishedWorkoutPage({ workout }) {
       <Header heading="Workout completed!" />
       <SaveWorkoutButton />
       <LoadNewWorkoutButton />
-      <ReloadWorkoutButton workout={workout} />
+      <ReloadWorkoutButton />
       <ReturnHomeButton />
       <Footer />
     </>

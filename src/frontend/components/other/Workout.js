@@ -14,7 +14,7 @@ import NextButton from "../buttons/NextButton.js";
 import FinishButton from "../buttons/FinishButton.js";
 import PreviousButton from "../buttons/PreviousButton.js";
 
-export default function Workout({ workout, setWorkout }) {
+export default function Workout({ workout }) {
   // Tracks index of given exercise in generated workout
   let [index, setIndex] = useState(-1);
   let [started, setStarted] = useState(false);
@@ -50,12 +50,7 @@ export default function Workout({ workout, setWorkout }) {
         <NextButton index={index} setIndex={setIndex} length={workout.length} />
       )}
       {started && (
-        <FinishButton
-          index={index}
-          length={workout.length}
-          workout={workout}
-          setWorkout={setWorkout}
-        />
+        <FinishButton index={index} length={workout.length} workout={workout} />
       )}
     </>
   );
