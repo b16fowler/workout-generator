@@ -14,7 +14,7 @@ import { workoutFinished } from "../../analytics.js";
 import { QueryClientProvider } from "@tanstack/react-query";
 import FinishedWorkoutPage from "../pages/FinishedWorkoutPage.js";
 
-export default function FinishButton({ index, length, workout }) {
+export default function FinishButton({ index, length }) {
   /* FinishButton remains hidden until user is on the final exercise
    * of their workout */
   return (
@@ -44,7 +44,7 @@ export default function FinishButton({ index, length, workout }) {
       // Load FinishedWorkout once workout is finished
       root.render(
         <QueryClientProvider client={queryClient}>
-          <FinishedWorkoutPage workout={workout} />
+          <FinishedWorkoutPage />
         </QueryClientProvider>
       );
     }, 2000);
