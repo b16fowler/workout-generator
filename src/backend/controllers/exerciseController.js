@@ -1,12 +1,12 @@
 import pool from "../config/db.js";
 
 export const generate = async (req, res) => {
-  console.log("\nGENERATE WORKOUT ATTEMPT (exercise info)\n");
+  console.log("GENERATE WORKOUT ATTEMPT (exercise info)");
   const create_table_query = `SELECT name, type, sets, reps, id FROM user_exercises WHERE username = "${req.body.username}" AND type IN (${req.body.selectedTypes})`;
   try {
     const result = await pool.query(create_table_query);
     console.log(
-      `[SUCCESS] Exercise rows for user ${req.body.username} pulled from DB\n`
+      `[SUCCESS] Exercise rows for user ${req.body.username} pulled from DB`
     );
     res.json({
       success: true,
@@ -14,7 +14,7 @@ export const generate = async (req, res) => {
     });
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching user ${req.body.username}'s data\n` + err + "\n"
+      `[ERROR] Error fetching user ${req.body.username}'s data\n` + err
     );
     res.json({
       success: false,
@@ -24,50 +24,44 @@ export const generate = async (req, res) => {
 };
 
 export const getExercisePhoto = async (req, res) => {
-  console.log("\nGENERATE WORKOUT ATTEMPT (exercise image(s))\n");
+  console.log("GENERATE WORKOUT ATTEMPT (exercise image(s))");
   try {
     const picQuery = `SELECT pic FROM user_exercises WHERE username = "${req.body.username}" AND name = "${req.body.exerciseName}";`;
     const response = await pool.query(picQuery);
     const buffer = response[0][0].pic;
     const blob = new Blob([buffer], { type: "image/png" });
 
-    console.log(
-      `[SUCCESS] Image for user ${req.body.username} pulled from DB\n`
-    );
+    console.log(`[SUCCESS] Image for user ${req.body.username} pulled from DB`);
     res.set("Content-Type", blob.type);
     res.send(buffer);
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching user ${req.body.username}'s exercise image\n` +
-        err +
-        "\n"
+      `[ERROR] Error fetching user ${req.body.username}'s exercise image` + err
     );
   }
   console.log("End of post handler\n");
 };
 
 export const getExerciseTable = async (req, res) => {
-  console.log("\nLOAD EXERCISE TABLE ATTEMPT\n");
+  console.log("LOAD EXERCISE TABLE ATTEMPT");
   const create_table_query = `SELECT * FROM user_exercises WHERE username = "${req.body.user}"`;
   try {
     const result = await pool.query(create_table_query);
-    console.log(`[SUCCESS] User ${req.body.user}'s exercises pulled from DB\n`);
+    console.log(`[SUCCESS] User ${req.body.user}'s exercises pulled from DB`);
     res.json({
       success: true,
       exercises: result,
     });
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching user ${req.body.user}'s exercise data\n` +
-        err +
-        "\n"
+      `[ERROR] Error fetching user ${req.body.user}'s exercise data\n` + err
     );
   }
   console.log("End of post handler\n");
 };
 
 export const addExercise = async (req, res) => {
-  console.log("\nUPLOAD IMAGE ATTEMPT\n");
+  console.log("UPLOAD IMAGE ATTEMPT");
   // buffer object for user's uploaded picture
   const photo = req.file.buffer;
   const info = req.body;
@@ -93,31 +87,28 @@ export const addExercise = async (req, res) => {
   try {
     await pool.execute(sql, values);
     console.log(
-      `[SUCCESS] Image inserted into DB for user ${req.body.username}\n`
+      `[SUCCESS] Image inserted into DB for user ${req.body.username}`
     );
     res.json({ message: "Exercise uploaded successfully" });
   } catch (err) {
     console.log(
       `[ERROR] Error trying to run insert query for user ${req.body.username}\n` +
-        err +
-        "\n"
+        err
     );
   }
   console.log("End of post handler\n");
 };
 
 export const saveWorkout = async (req, res) => {
-  console.log("\nSAVE WORKOUT ATTEMPT\n");
+  console.log("SAVE WORKOUT ATTEMPT");
   const saveQuery = ";";
   try {
     await pool.query(saveQuery);
-    console.log(`[SUCCESS] Workout saved for user ${req.body.user}\n`);
+    console.log(`[SUCCESS] Workout saved for user ${req.body.user}`);
     res.json({ success: true });
   } catch (err) {
     console.log(
-      `[ERROR] Error trying to save workout for user ${req.body.user}\n` +
-        err +
-        "\n"
+      `[ERROR] Error trying to save workout for user ${req.body.user}` + err
     );
   }
 };
