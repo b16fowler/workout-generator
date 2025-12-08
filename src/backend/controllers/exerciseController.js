@@ -101,14 +101,29 @@ export const addExercise = async (req, res) => {
 
 export const saveWorkout = async (req, res) => {
   console.log("SAVE WORKOUT ATTEMPT");
-  const saveQuery = ";";
+
+  // Find number of favorited workouts user has for new id
+  const id_query = `SELECT COUNT(*) FROM favorites WHERE username = "${req.body.username}";`;
+  let num_favorites = await pool.query(id_query);
+  // No need to increment since id starts at 0
+  num_favorites = num_favorites[0][0]["COUNT(*)"];
+
+  // Loop through all exercises in workout to save ids in workout_id
+  let workout_id = "";
+  req.body.workout.forEach((exercise) => {
+    // Concatenate exercise id and workout_id
+    workout_id = workout_id + exercise["id"];
+  });
+
+  const saveQuery = `INSERT INTO favorites VALUES ("${req.body.username}", "${num_favorites}", "${workout_id}");`;
   try {
     await pool.query(saveQuery);
-    console.log(`[SUCCESS] Workout saved for user ${req.body.user}`);
-    res.json({ success: true });
+    console.log(`[SUCCESS] Workout saved for user ${req.body.username}`);
+    res.json({ success: true, message: "Workout saved successfully!" });
   } catch (err) {
     console.log(
-      `[ERROR] Error trying to save workout for user ${req.body.user}` + err
+      `[ERROR] Error trying to save workout for user ${req.body.username}` + err
     );
   }
+  console.log("End of post handler\n");
 };
