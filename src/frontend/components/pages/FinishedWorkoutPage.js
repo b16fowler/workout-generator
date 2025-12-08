@@ -17,7 +17,7 @@ export default function FinishedWorkoutPage({ workout }) {
   return (
     <>
       <Header heading="Workout completed!" />
-      <SaveWorkoutButton />
+      <SaveWorkoutButton workout={workout} />
       <LoadNewWorkoutButton />
       <ReloadWorkoutButton />
       <ReturnHomeButton />
