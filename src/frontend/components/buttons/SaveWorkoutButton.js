@@ -7,21 +7,18 @@
  **************************************************************************/
 
 import axios from "axios";
-import user from "../App.js";
+import { showSnackbar, user } from "../App.js";
 import { EC2_URL } from "../../..";
 
 export default function SaveWorkoutButton({ workout }) {
   const handleSaveWorkout = () => {
-    console.log("Save workout button clicked");
-
     const fetchData = async () => {
       try {
         const response = await axios.post(`${EC2_URL}/api/save-workout`, {
-          user: user.username,
+          username: user.username,
           workout: workout,
         });
-
-        console.log(response);
+        showSnackbar(response.data.message);
       } catch (err) {
         console.log(err);
       }
