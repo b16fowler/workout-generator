@@ -111,7 +111,7 @@ export const saveWorkout = async (req, res) => {
   // Loop through all exercises in workout to save ids in workout_id
   let workout_id = "";
   req.body.workout.forEach((exercise) => {
-    // Concatenate exercise id and workout_id
+    // Concatenate exercise id and workout_id to make string of numbers
     workout_id = workout_id + exercise["id"];
   });
 

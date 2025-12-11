@@ -55,16 +55,21 @@ export default function MainMenuPage() {
         >
           {adminOn ? "Reset Passwords" : "View Exercises"}
         </button>
-        <button
-          className="main-menu-button"
-          onClick={
-            adminOn
-              ? () => handleClick(<AdminViewAccounts />)
-              : () => handleClick(<GenerateWorkoutPage />)
-          }
-        >
-          {adminOn ? "View Accounts" : "Generate Workout"}
-        </button>
+        <div className="split-button-div">
+          <div className="single-button">
+            <button
+              onClick={
+                adminOn
+                  ? () => handleClick(<AdminViewAccounts />)
+                  : () => handleClick(<GenerateWorkoutPage />)
+              }
+            ></button>
+          </div>
+          <div>
+            <button className="split-button"></button>
+            {adminOn ? "View Accounts" : "Generate Workout"}
+          </div>
+        </div>
         {user.accountType === "admin" && (
           <button className="toggle-admin-button" onClick={toggleAdmin}>
             Toggle Admin Options
