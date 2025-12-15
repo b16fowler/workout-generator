@@ -192,7 +192,6 @@ a:visited {
   flex-direction: column;
 }
 
-.single-button,
 .main-menu-button,
 .toggle-admin-button {
   font: bolder;
@@ -203,21 +202,6 @@ a:visited {
   padding: 16px 12px;
   border: none;
   border-radius: 10px;
-}
-
-.split-button {
-  opacity: 0;
-  transform: translateY(100%);
-}
-
-.split-button-div:hover .single-button {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-
-.split-button-div:hover .split-button {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .main-menu-button:hover {

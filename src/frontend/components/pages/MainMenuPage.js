@@ -22,7 +22,7 @@ export default function MainMenuPage() {
   const [adminOn, setAdminOn] = useState(false);
 
   // Called to render new component
-  const handleClick = (component) => {
+  const handleClick = component => {
     root.render(component);
   };
 
@@ -41,8 +41,7 @@ export default function MainMenuPage() {
             adminOn
               ? () => handleClick(<AdminDelete />)
               : () => handleClick(<AddExercisePage />)
-          }
-        >
+          }>
           {adminOn ? "Delete Users" : "Add Exercise"}
         </button>
         <button
@@ -51,25 +50,18 @@ export default function MainMenuPage() {
             adminOn
               ? () => handleClick(<AdminResetPassword />)
               : () => handleClick(<ViewExercisesPage />)
-          }
-        >
+          }>
           {adminOn ? "Reset Passwords" : "View Exercises"}
         </button>
-        <div className="split-button-div">
-          <div className="single-button">
-            <button
-              onClick={
-                adminOn
-                  ? () => handleClick(<AdminViewAccounts />)
-                  : () => handleClick(<GenerateWorkoutPage />)
-              }
-            ></button>
-          </div>
-          <div>
-            <button className="split-button"></button>
-            {adminOn ? "View Accounts" : "Generate Workout"}
-          </div>
-        </div>
+        <button
+          className="main-menu-button"
+          onClick={
+            adminOn
+              ? () => handleClick(<AdminViewAccounts />)
+              : () => handleClick(<GenerateWorkoutPage />)
+          }>
+          {adminOn ? "View Accounts" : "Generate Workout"}
+        </button>
         {user.accountType === "admin" && (
           <button className="toggle-admin-button" onClick={toggleAdmin}>
             Toggle Admin Options
