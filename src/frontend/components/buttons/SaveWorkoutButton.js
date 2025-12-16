@@ -28,7 +28,7 @@ export default function SaveWorkoutButton({ workout }) {
       }
     };
 
-    // fetchData();
+    fetchData();
   };
 
   return (
