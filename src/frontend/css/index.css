@@ -183,37 +183,78 @@ a:visited {
 
 /* START OF MAIN MENU */
 .main-menu {
-  position: absolute;
-  top: 22%;
-  left: 41%;
-  height: 400px;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
+.top-main-menu-button,
 .main-menu-button,
 .toggle-admin-button {
-  font: bolder;
-  font-size: x-large;
   background-color: #f2ffcc;
-  margin: 15px;
-  /*margin: 2px 4px;*/
-  padding: 16px 12px;
   border: none;
   border-radius: 10px;
+  font: bolder;
+  font-size: x-large;
+  padding: 16px 12px;
+  margin: 15px;
+  width: 15%;
 }
 
+.top-main-menu-button {
+  margin-top: 10%;
+}
+
+.split-button-cancel:hover,
+.split-button:hover,
+.toggle-admin-button:hover,
+.top-main-menu-button:hover,
 .main-menu-button:hover {
-  cursor: pointer;
   background-color: #d6f281;
+  cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.split-button-cancel:hover {
+  background-color: #f01818;
 }
 
 .toggle-admin-button:hover {
-  cursor: pointer;
-  background-color: #f77070;
-  transition: background-color 0.3s ease;
+  background-color: #2edb0b;
+}
+
+.split-button-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.split-button {
+  background-color: #f2ffcc;
+  border: none;
+  font: bolder;
+  font-size: x-large;
+  padding: 16px 12px;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.split-button-cancel {
+  background-color: #f2ffcc;
+  border: none;
+  border-radius: 10px;
+  font-size: large;
+  height: min-content;
+}
+
+.sub-button {
+  font: bolder;
+  font-size: x-large;
+  background-color: #f2ffcc;
+  border: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 /* END OF MAIN MENU */
 
