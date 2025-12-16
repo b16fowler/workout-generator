@@ -106,13 +106,13 @@ export const saveWorkout = async (req, res) => {
   const id_query = `SELECT COUNT(*) FROM favorites WHERE username = "${req.body.username}";`;
   let num_favorites = await pool.query(id_query);
   // No need to increment since id starts at 0
-  exercise_id = num_favorites[0][0]["COUNT(*)"];
+  const exercise_id = num_favorites[0][0]["COUNT(*)"];
 
   // Loop through all exercises in workout to save ids in workout_string
   let workout_string = "";
   req.body.workout.forEach(exercise => {
     // Concatenate exercise id and workout_string to make string of numbers separated by spaces
-    workout_string = workout_string + exercise["id"] + "";
+    workout_string = workout_string + exercise["id"] + " ";
   });
 
   const saveQuery = `INSERT INTO favorites VALUES ("${req.body.username}", "${exercise_id}", "${req.body.workoutName}", "${workout_string}");`;
