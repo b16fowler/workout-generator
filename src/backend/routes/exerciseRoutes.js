@@ -1,19 +1,21 @@
 import express from "express";
 import upload from "../middleware/upload.js";
 import {
-  generate,
+  generateWorkout,
   getExercisePhoto,
   getExerciseTable,
   addExercise,
   saveWorkout,
+  loadWorkouts,
 } from "../controllers/exerciseController.js";
 
 const router = express.Router();
 
-router.post("/generate", generate);
+router.post("/generateWorkout", generateWorkout);
 router.post("/photos", getExercisePhoto);
 router.post("/create-table", getExerciseTable);
 router.post("/add", upload.single("image"), addExercise);
 router.post("/save-workout", saveWorkout);
+router.post("/load-workouts", loadWorkouts);
 
 export default router;
