@@ -1,6 +1,6 @@
 import pool from "../config/db.js";
 
-export const generate = async (req, res) => {
+export const generateWorkout = async (req, res) => {
   console.log("GENERATE WORKOUT ATTEMPT (exercise info)");
   const create_table_query = `SELECT name, type, sets, reps, id FROM user_exercises WHERE username = "${req.body.username}" AND type IN (${req.body.selectedTypes})`;
   try {
@@ -44,17 +44,19 @@ export const getExercisePhoto = async (req, res) => {
 
 export const getExerciseTable = async (req, res) => {
   console.log("LOAD EXERCISE TABLE ATTEMPT");
-  const create_table_query = `SELECT * FROM user_exercises WHERE username = "${req.body.user}"`;
+  const create_table_query = `SELECT * FROM user_exercises WHERE username = "${req.body.username}"`;
   try {
     const result = await pool.query(create_table_query);
-    console.log(`[SUCCESS] User ${req.body.user}'s exercises pulled from DB`);
+    console.log(
+      `[SUCCESS] User ${req.body.username}'s exercises pulled from DB`
+    );
     res.json({
       success: true,
       exercises: result,
     });
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching user ${req.body.user}'s exercise data\n` + err
+      `[ERROR] Error fetching user ${req.body.username}'s exercise data\n` + err
     );
   }
   console.log("End of post handler\n");
@@ -123,6 +125,24 @@ export const saveWorkout = async (req, res) => {
   } catch (err) {
     console.log(
       `[ERROR] Error trying to save workout for user ${req.body.username}` + err
+    );
+  }
+  console.log("End of post handler\n");
+};
+
+export const loadWorkouts = async (req, res) => {
+  console.log("LOAD SAVED WORKOUTS ATTEMPT");
+  const loadQuery = `SELECT name, workout FROM favorites WHERE username = "${req.body.username}";`;
+  try {
+    const workouts = await pool.query(loadQuery);
+    console.log(workouts[0]);
+
+    console.log(`[SUCCESS] Workouts fetched for user ${req.body.username}`);
+
+    res.send({ success: true, workouts: workouts });
+  } catch (err) {
+    console.log(
+      `[ERROR] Error loading saved workouts for ${req.body.username}` + err
     );
   }
   console.log("End of post handler\n");
