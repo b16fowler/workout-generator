@@ -29,7 +29,7 @@ export const accountLogin = async (req, res) => {
   try {
     await pool.query(query);
     console.log(
-      `[SUCCESS] date and time stamp of last login update for user: ${req.body.user} updated tp ${req.body.dateTime}`
+      `[SUCCESS] date and time stamp of last login update for user: ${req.body.user} updated to ${req.body.dateTime}`
     );
     res.json({ success: true });
   } catch (err) {
