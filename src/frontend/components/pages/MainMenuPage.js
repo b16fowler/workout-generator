@@ -17,6 +17,7 @@ import AdminDelete from "../admin/AdminDelete.js";
 import ViewExercisesPage from "./ViewExercisesPage.js";
 import AdminViewAccounts from "../admin/AdminViewAccounts.js";
 import AdminResetPassword from "../admin/AdminResetPassword.js";
+import LoadWorkoutPage from "./LoadWorkoutPage.js";
 
 export default function MainMenuPage() {
   const [adminOn, setAdminOn] = useState(false);
@@ -46,7 +47,7 @@ export default function MainMenuPage() {
   };
 
   const handleLoadWorkout = () => {
-    console.log("handleNewWorkout button clicked");
+    root.render(<LoadWorkoutPage />);
   };
 
   return (
