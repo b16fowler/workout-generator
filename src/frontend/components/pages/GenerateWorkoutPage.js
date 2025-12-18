@@ -26,7 +26,7 @@ export default function GenerateWorkoutPage() {
 
     // Keep array of selected types for SQL query
     let selectedTypes = [];
-    formValues.forEach((type) => {
+    formValues.forEach(type => {
       if (type.checked) selectedTypes.push("'" + type.id + "'");
     });
 
@@ -39,7 +39,7 @@ export default function GenerateWorkoutPage() {
      * muscle types */
     const fetchExercises = async () => {
       try {
-        const response = await fetch(`${EC2_URL}/api/generate`, {
+        const response = await fetch(`${EC2_URL}/api/generateWorkout`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -82,8 +82,8 @@ export default function GenerateWorkoutPage() {
           exerciseName: workout[i].name,
         }),
       })
-        .then((response) => response.blob())
-        .then((blob) => {
+        .then(response => response.blob())
+        .then(blob => {
           // Create img
           const img = document.createElement("img");
           img.className = "exercise-image";
@@ -103,7 +103,7 @@ export default function GenerateWorkoutPage() {
     }
   }, [workout]);
 
-  const cleanUpResult = (fetchedData) => {
+  const cleanUpResult = fetchedData => {
     /* cleanUpResult will take all of the fetched exercises from user's account.
        It starts by checking that user has enough logged exercises to make a 
        workout of that size. Then the order of exercises is randomized and 
@@ -134,7 +134,7 @@ export default function GenerateWorkoutPage() {
     return fetchedData.slice(0, numExercises);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     setShouldFetch(true);
   };
