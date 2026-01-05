@@ -130,7 +130,7 @@ export const saveWorkout = async (req, res) => {
   console.log("End of post handler\n");
 };
 
-export const loadWorkouts = async (req, res) => {
+export const workoutNames = async (req, res) => {
   console.log("LOAD SAVED WORKOUTS ATTEMPT");
   const loadQuery = `SELECT name, workout FROM favorites WHERE username = "${req.body.username}";`;
   try {
@@ -144,6 +144,26 @@ export const loadWorkouts = async (req, res) => {
     console.log(
       `[ERROR] Error loading saved workouts for ${req.body.username}` + err
     );
+  }
+  console.log("End of post handler\n");
+};
+
+export const loadPreview = async (req, res) => {
+  console.log("LOAD WORKOUT PREVIEW ATTEMPT");
+  const previewQuery = `SELECT name, type, sets, reps FROM user_exercises WHERE username = "${req.body.username}" AND id = ${req.body.id};`;
+  try {
+    const exerciseInfo = await pool.query(previewQuery);
+    console.log(
+      `[SUCCESS] Workout preview fetched for user ${req.body.username} id: ${req.body.id}`
+    );
+    res.send({ success: true, preview: exerciseInfo[0][0] });
+  } catch (err) {
+    console.log(
+      `[ERROR] Error loading preview for ${(req, body.username)} id: ${
+        req.body.id
+      }` + err
+    );
+    res.send({ success: false });
   }
   console.log("End of post handler\n");
 };
