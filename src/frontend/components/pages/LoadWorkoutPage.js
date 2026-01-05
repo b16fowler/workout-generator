@@ -8,26 +8,34 @@ import { EC2_URL } from "../../..";
 import Footer from "../other/Footer";
 import Header from "../other/Header";
 import { useEffect, useState } from "react";
+import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
 export default function LoadWorkoutPage() {
   const [workouts, setWorkouts] = useState(null);
-  const [workoutPreview, setWorkoutPreview] = useState(null);
+  const [exercisePreview, setExercisePreview] = useState(null);
+  const [workoutPreview, setWorkoutPreview] = useState([]);
 
   // Call method to fetch user's workouts on component mount
   useEffect(() => {
-    fetchWorkouts();
+    fetchWorkoutNames();
   }, []);
+
+  useEffect(() => {
+    setWorkoutPreview([...workoutPreview, exercisePreview]);
+  }, [exercisePreview]);
 
   useEffect(() => {
     if (!workoutPreview) return;
 
-    console.log(workoutPreview);
+    workoutPreview.forEach(workout => {
+      console.log(workout);
+    });
   }, [workoutPreview]);
 
   // Fetch all saved workouts
-  const fetchWorkouts = async () => {
+  const fetchWorkoutNames = async () => {
     try {
-      const response = await axios.post(`${EC2_URL}/api/load-workouts`, {
+      const response = await axios.post(`${EC2_URL}/api/workout-names`, {
         username: user.username,
       });
       setWorkouts(response.data.workouts[0]);
@@ -41,12 +49,33 @@ export default function LoadWorkoutPage() {
   };
 
   const handleSelectChange = workoutName => {
+    setWorkoutPreview("");
     // Find information of workout currently selected
     const workoutDetails = workouts.find(
       workout => workout.name === workoutName
     );
+    // Split workout IDs into array
+    const workoutArray = workoutDetails.workout.split(" ");
 
-    setWorkoutPreview(workoutDetails.workout);
+    const fetchExercisePreview = async id => {
+      try {
+        const response = await axios.post(`${EC2_URL}/api/load-preview`, {
+          username: user.username,
+          id: id,
+        });
+        // console.log(response.data.preview.name);
+        setExercisePreview(response.data.preview.name);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    workoutArray.forEach(id => {
+      // Ignore empty string at the end of workoutArray
+      if (id === "") return;
+
+      fetchExercisePreview(id);
+    });
   };
 
   return (
@@ -70,9 +99,8 @@ export default function LoadWorkoutPage() {
       <button type="submit" onClick={handleSelectClick}>
         Select workout
       </button>
-      {workoutPreview && (
-        <div className="workout-preview">{workoutPreview}</div>
-      )}
+      {workoutPreview && workoutPreview.map(workout => <div>{workout}</div>)}
+      <ReturnHomeButton />
       <Footer />
     </>
   );
