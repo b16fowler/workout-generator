@@ -8,12 +8,14 @@ import { EC2_URL } from "../../..";
 import Footer from "../other/Footer";
 import Header from "../other/Header";
 import { useEffect, useState } from "react";
+import WorkoutPrevTable from "../tables/WorkoutPrevTable.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
 export default function LoadWorkoutPage() {
   const [workouts, setWorkouts] = useState(null);
   const [exercisePreview, setExercisePreview] = useState(null);
   const [workoutPreview, setWorkoutPreview] = useState([]);
+  const [doneFetching, setDoneFetching] = useState(false);
 
   // Call method to fetch user's workouts on component mount
   useEffect(() => {
@@ -23,14 +25,6 @@ export default function LoadWorkoutPage() {
   useEffect(() => {
     setWorkoutPreview([...workoutPreview, exercisePreview]);
   }, [exercisePreview]);
-
-  useEffect(() => {
-    if (!workoutPreview) return;
-
-    workoutPreview.forEach(workout => {
-      console.log(workout);
-    });
-  }, [workoutPreview]);
 
   // Fetch all saved workouts
   const fetchWorkoutNames = async () => {
@@ -64,7 +58,7 @@ export default function LoadWorkoutPage() {
           id: id,
         });
         // console.log(response.data.preview.name);
-        setExercisePreview(response.data.preview.name);
+        setExercisePreview(response.data.preview);
       } catch (err) {
         console.log(err);
       }
@@ -76,6 +70,8 @@ export default function LoadWorkoutPage() {
 
       fetchExercisePreview(id);
     });
+
+    setDoneFetching(true);
   };
 
   return (
@@ -99,7 +95,7 @@ export default function LoadWorkoutPage() {
       <button type="submit" onClick={handleSelectClick}>
         Select workout
       </button>
-      {workoutPreview && workoutPreview.map(workout => <div>{workout}</div>)}
+      {doneFetching && <WorkoutPrevTable workoutPreview={workoutPreview} />}
       <ReturnHomeButton />
       <Footer />
     </>
