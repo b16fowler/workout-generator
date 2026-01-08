@@ -150,7 +150,7 @@ export const workoutOptions = async (req, res) => {
 
 export const loadPreview = async (req, res) => {
   console.log("LOAD WORKOUT PREVIEW ATTEMPT");
-  const previewQuery = `SELECT name, type, sets, reps FROM user_exercises WHERE username = "${req.body.username}" AND id = ${req.body.id};`;
+  const previewQuery = `SELECT name, type, sets, reps, id FROM user_exercises WHERE username = "${req.body.username}" AND id = ${req.body.id};`;
   try {
     const exerciseInfo = await pool.query(previewQuery);
     console.log(
