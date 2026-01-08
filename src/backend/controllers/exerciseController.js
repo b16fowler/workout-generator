@@ -130,7 +130,7 @@ export const saveWorkout = async (req, res) => {
   console.log("End of post handler\n");
 };
 
-export const workoutNames = async (req, res) => {
+export const workoutOptions = async (req, res) => {
   console.log("LOAD SAVED WORKOUTS ATTEMPT");
   const loadQuery = `SELECT name, workout FROM favorites WHERE username = "${req.body.username}";`;
   try {
@@ -139,7 +139,7 @@ export const workoutNames = async (req, res) => {
 
     console.log(`[SUCCESS] Workouts fetched for user ${req.body.username}`);
 
-    res.send({ success: true, workouts: workouts });
+    res.send({ success: true, workoutOptions: workouts });
   } catch (err) {
     console.log(
       `[ERROR] Error loading saved workouts for ${req.body.username}` + err

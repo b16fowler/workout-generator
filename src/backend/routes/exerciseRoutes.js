@@ -6,7 +6,7 @@ import {
   getExerciseTable,
   addExercise,
   saveWorkout,
-  workoutNames,
+  workoutOptions,
   loadPreview,
 } from "../controllers/exerciseController.js";
 
@@ -17,7 +17,7 @@ router.post("/photos", getExercisePhoto);
 router.post("/create-table", getExerciseTable);
 router.post("/add", upload.single("image"), addExercise);
 router.post("/save-workout", saveWorkout);
-router.post("/workout-names", workoutNames);
+router.post("/workout-options", workoutOptions);
 router.post("/load-preview", loadPreview);
 
 export default router;

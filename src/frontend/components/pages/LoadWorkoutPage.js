@@ -12,14 +12,14 @@ import WorkoutPrevTable from "../tables/WorkoutPrevTable.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
 export default function LoadWorkoutPage() {
-  const [workouts, setWorkouts] = useState(null);
+  const [workoutOptions, setWorkoutOptions] = useState(null);
   const [exercisePreview, setExercisePreview] = useState(null);
   const [workoutPreview, setWorkoutPreview] = useState([]);
   const [doneFetching, setDoneFetching] = useState(false);
 
   // Call method to fetch user's workouts on component mount
   useEffect(() => {
-    fetchWorkoutNames();
+    fetchWorkoutOptions();
   }, []);
 
   useEffect(() => {
@@ -27,12 +27,12 @@ export default function LoadWorkoutPage() {
   }, [exercisePreview]);
 
   // Fetch all saved workouts
-  const fetchWorkoutNames = async () => {
+  const fetchWorkoutOptions = async () => {
     try {
-      const response = await axios.post(`${EC2_URL}/api/workout-names`, {
+      const response = await axios.post(`${EC2_URL}/api/workout-options`, {
         username: user.username,
       });
-      setWorkouts(response.data.workouts[0]);
+      setWorkoutOptions(response.data.workoutOptions[0]);
     } catch (err) {
       console.log(err);
     }
@@ -45,9 +45,13 @@ export default function LoadWorkoutPage() {
   const handleSelectChange = workoutName => {
     setWorkoutPreview("");
     // Find information of workout currently selected
-    const workoutDetails = workouts.find(
+    const workoutDetails = workoutOptions.find(
       workout => workout.name === workoutName
     );
+
+    // Prevent error if user returns to default dropdown option
+    if (!workoutDetails) return;
+
     // Split workout IDs into array
     const workoutArray = workoutDetails.workout.split(" ");
 
@@ -86,8 +90,8 @@ export default function LoadWorkoutPage() {
         }>
         <option value="test">Test</option>
         <ul>
-          {workouts &&
-            workouts.map(workout => (
+          {workoutOptions &&
+            workoutOptions.map(workout => (
               <option value={workout.name}>{workout.name}</option>
             ))}
         </ul>
