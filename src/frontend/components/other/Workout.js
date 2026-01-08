@@ -22,7 +22,7 @@ export default function Workout({ workout }) {
   // useEffect displays first exercise image after begin button is clicked
   useEffect(() => {
     if (!started) return;
-    document.getElementById(0).toggleAttribute("hidden");
+    document.getElementById(0)?.toggleAttribute("hidden");
   }, [started]);
 
   // Called when begin-button is clicked, sets index to 0
