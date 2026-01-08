@@ -2,9 +2,7 @@
  * WorkoutPrevTable component
  **************************************************************************/
 
-import axios from "axios";
 import { Table } from "antd";
-import { EC2_URL } from "../../..";
 import { useState, useEffect } from "react";
 
 export default function WorkoutPrevTable({ workoutPreview }) {
