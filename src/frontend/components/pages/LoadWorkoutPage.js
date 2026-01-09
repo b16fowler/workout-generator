@@ -40,7 +40,44 @@ export default function LoadWorkoutPage() {
     }
   };
 
+  //TODO FIX BUG CAUSING NOT ALL EXERCISES TO LOAD CONSISTENTLY
+
+  //TODO THIS IS COPIED FROM GENERATEWORKOUTPAGE, MAKE METHOD FOR REUSE
   const handleSelectClick = () => {
+    try {
+      // Use workoutPreview id's to fetch exercise images
+      workoutPreview.forEach(async (wk, i) => {
+        const response = await axios.post(
+          `${EC2_URL}/api/photos`,
+          {
+            username: user.username,
+            exerciseName: wk.name,
+          },
+          {
+            responseType: "blob",
+          }
+        );
+
+        const blob = response.data;
+
+        // Create img
+        const img = document.createElement("img");
+        img.className = "exercise-image";
+        img.src = URL.createObjectURL(blob);
+
+        // Create div
+        const div = document.createElement("div");
+        div.className = "exercise-div";
+        div.id = i;
+        // Hide all to start
+        div.hidden = true;
+
+        // Append img to div
+        div.appendChild(img);
+        document.body.appendChild(div);
+      });
+    } catch (err) {}
+
     setLoadWorkout(true);
   };
 
@@ -107,7 +144,6 @@ export default function LoadWorkoutPage() {
         <WorkoutPrevTable workoutPreview={workoutPreview} />
       )}
       {loadWorkout && <Workout workout={workoutPreview} />}
-      <ReturnHomeButton />
       <Footer />
     </>
   );
