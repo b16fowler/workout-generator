@@ -7,8 +7,11 @@
  **************************************************************************/
 
 import axios from "axios";
+import { root } from "../../..";
+import React from "react";
 import { showSnackbar, user } from "../App.js";
 import { EC2_URL } from "../../..";
+import MainMenuPage from "../pages/MainMenuPage.js";
 
 export default function SaveWorkoutButton({ workout }) {
   //TODO: RESET TO MAIN MENU AFTER USER SAVES WORKOUT
@@ -24,6 +27,14 @@ export default function SaveWorkoutButton({ workout }) {
           workout: workout,
         });
         showSnackbar(response.data.message);
+
+        setTimeout(() => {
+          root.render(
+            <React.StrictMode>
+              <MainMenuPage />
+            </React.StrictMode>
+          );
+        }, 1250);
       } catch (err) {
         console.log(err);
       }
