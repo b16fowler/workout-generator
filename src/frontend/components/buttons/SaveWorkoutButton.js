@@ -14,7 +14,6 @@ import { EC2_URL } from "../../..";
 import MainMenuPage from "../pages/MainMenuPage.js";
 
 export default function SaveWorkoutButton({ workout }) {
-  //TODO: RESET TO MAIN MENU AFTER USER SAVES WORKOUT
   const handleSaveWorkout = e => {
     e.preventDefault();
 
