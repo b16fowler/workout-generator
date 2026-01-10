@@ -1,17 +1,41 @@
+import { message } from "antd";
 import pool from "../config/db.js";
 
 export const login = async (req, res) => {
-  console.log(`LOGIN ATTEMPT\nUser attempting login from ip: ${req.ip}`);
-  const login_query = "SELECT * FROM logins;";
+  console.log(`LOGIN ATTEMPT\n`);
+  const login_query = `SELECT * FROM logins WHERE username = "${req.body.username}" AND password = "${req.body.password}";`;
   try {
-    const result = await pool.query(login_query);
+    const [result] = await pool.query(login_query);
     console.log(`[SUCCESS] login query run successfully`);
-    res.json(result[0]);
+    if (result.length) {
+      console.log(
+        `[SUCCESS] username "${req.body.username}" and password "${req.body.password}" match login`
+      );
+
+      res.send({
+        success: true,
+        login: true,
+        message: "Authentication successful. Logging in",
+      });
+    } else {
+      console.log(
+        `[FAILURE] username "${req.body.username}" and password "${req.body.password}" DO NOT match login`
+      );
+      res.send({
+        success: true,
+        login: false,
+        message: "Username or password incorrect. Please try again",
+      });
+    }
   } catch (err) {
     console.log(`[ERROR] Error running login query\n` + err);
-    res.json({ success: false });
+    res.send({
+      success: false,
+      login: false,
+      message: "An error has occurred. Please try again",
+    });
   }
-  console.log("End of get handler\n");
+  console.log("End of post handler\n");
 };
 
 export const createAccount = async (req, res) => {
