@@ -93,27 +93,48 @@ export default function LoginPage() {
       ".create-account-password"
     ).value;
 
-    const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
-    fetch(`${EC2_URL}/api/create-account`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query: create_query, user: new_username }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
+    // const create_query = `INSERT INTO logins VALUES ("${new_username}", "${new_password}", "user");`;
+    // fetch(`${EC2_URL}/api/create-account`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ query: create_query, user: new_username }),
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data.success) {
+    //       accountCreated(new_username.toLowerCase());
+    //       login(new_username.toLowerCase());
+    //     }
+    //     // Alert user that username is taken, clear form
+    //     else {
+    //       showSnackbar(data.message);
+    //       document.querySelector(".create-account-username").value = "";
+    //       document.querySelector(".create-account-password").value = "";
+    //     }
+    //   });
+
+    const fetchCreateAccount = async () => {
+      try {
+        const response = await axios.post(`${EC2_URL}/api/create-account`, {
+          username: new_username,
+          password: new_password,
+        });
+        if (response.data.account_created) {
           accountCreated(new_username.toLowerCase());
           login(new_username.toLowerCase());
-        }
-        // Alert user that username is taken, clear form
-        else {
-          showSnackbar(data.message);
+        } else {
+          showSnackbar(response.data.message);
           document.querySelector(".create-account-username").value = "";
           document.querySelector(".create-account-password").value = "";
         }
-      });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchCreateAccount();
   }
 
   function login(username) {
