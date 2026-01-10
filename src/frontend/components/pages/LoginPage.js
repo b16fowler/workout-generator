@@ -6,6 +6,7 @@
  * that all usernames are unique
  **************************************************************************/
 
+import axios from "axios";
 import Header from "../other/Header.js";
 import Footer from "../other/Footer.js";
 import { useEffect, useState } from "react";
@@ -21,19 +22,19 @@ export default function LoginPage() {
   useEffect(() => {
     if (!readyToRender) return;
 
-    showSnackbar("Logging in!");
+    showSnackbar("Authentication successful. Logging in");
 
     // Update analytics table
     accountLogin(user.username);
 
-    // Delay render 0.75 seconds for snackbar message
+    // Delay render for snackbar message
     setTimeout(() => {
       root.render(
         <QueryClientProvider client={queryClient}>
           <MainMenuPage />
         </QueryClientProvider>
       );
-    }, 750);
+    }, 900);
   }, [readyToRender]);
 
   // Called when user clicks "eye" button next to password
@@ -56,24 +57,20 @@ export default function LoginPage() {
     // Pull login info entered by user
     const username_input = document.querySelector("#username").value;
     const password_input = document.querySelector("#password").value;
-
-    //TODO: CHANGE VALIDATION LOGIC FOR LOGIN
-    fetch(`${EC2_URL}/api/login`)
-      .then((response) => response.json())
-      .then((data) => {
-        // Check each row for user's enter information
-        data.forEach((account) => {
-          if (
-            username_input.toLowerCase() === account.username.toLowerCase() &&
-            password_input === account.password
-          ) {
-            login(username_input);
-            return;
-          }
-          // Login information does not match
-          showSnackbar("Login information does not match records");
+    const fetchLogin = async () => {
+      try {
+        const response = await axios.post(`${EC2_URL}/api/login`, {
+          username: username_input,
+          password: password_input,
         });
-      });
+        if (response.data.login) login(username_input);
+        else showSnackbar(response.data.message);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchLogin();
   }
 
   // Called when user clicks "Forgot password" button
@@ -104,8 +101,8 @@ export default function LoginPage() {
       },
       body: JSON.stringify({ query: create_query, user: new_username }),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then(response => response.json())
+      .then(data => {
         if (data.success) {
           accountCreated(new_username.toLowerCase());
           login(new_username.toLowerCase());
@@ -161,8 +158,7 @@ export default function LoginPage() {
           <button
             type="button"
             className="show-password"
-            onClick={handleShowPassword}
-          >
+            onClick={handleShowPassword}>
             <img
               id="show-pw-img"
               src="pw-icon.png"
@@ -190,8 +186,7 @@ export default function LoginPage() {
         value="Yes, please!"
         type="button"
         hidden={false}
-        onClick={handleOpenCreateAccount}
-      >
+        onClick={handleOpenCreateAccount}>
         Yes, please!
       </button>
       <form className="create-account-form" hidden={true}>
