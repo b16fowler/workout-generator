@@ -10,6 +10,8 @@ import {
   loadPreview,
 } from "../controllers/exerciseController.js";
 
+//TODO: STANDARDIZE SERVER RESPONSE MESSAGES
+
 const router = express.Router();
 
 router.post("/generateWorkout", generateWorkout);
