@@ -43,6 +43,7 @@ export default function LoadWorkoutPage() {
   //TODO FIX BUG CAUSING NOT ALL EXERCISES TO LOAD CONSISTENTLY
 
   //TODO THIS IS COPIED FROM GENERATEWORKOUTPAGE, MAKE METHOD FOR REUSE
+  //TODO METHOD FILE?
   const handleSelectClick = () => {
     try {
       // Use workoutPreview id's to fetch exercise images
@@ -144,6 +145,7 @@ export default function LoadWorkoutPage() {
         <WorkoutPrevTable workoutPreview={workoutPreview} />
       )}
       {loadWorkout && <Workout workout={workoutPreview} />}
+      {!loadWorkout && <ReturnHomeButton />}
       <Footer />
     </>
   );
