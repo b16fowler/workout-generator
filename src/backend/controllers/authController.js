@@ -40,30 +40,42 @@ export const login = async (req, res) => {
 
 export const createAccount = async (req, res) => {
   console.log("CREATE ACCOUNT ATTEMPT");
+  const query = `INSERT INTO logins VALUES ("${req.body.username}", "${req.body.password}", "user");`;
   try {
     // Creates new entry in logins if username is unique
-    await pool.query(req.body.query);
-    res.json({ success: true });
+    await pool.query(query);
+    res.send({
+      success: true,
+      account_created: true,
+      message: "Account created successfully! Logging you in now",
+    });
     console.log(
-      `[SUCCESS] login information for user ${req.body.user} inserted into DB`
+      `[SUCCESS] login information for user "${req.body.username}" inserted into DB`
     );
   } catch (err) {
     // username already exists
     if (err.code === "ER_DUP_ENTRY") {
       console.log(
-        `Attempted username ${req.body.user} already in DB, prompting user to try again`
+        `[FAILURE] Attempted username "${req.body.username}" already in DB, prompting user to try again`
       );
       res.json({
         success: false,
+        account_created: false,
         message: "An account with that username already exists",
       });
     } else {
       console.log(
-        `[ERROR] Error trying to insert login information for ${req.body.user}\n` +
+        `[ERROR] Error trying to insert login information for "${req.body.user}"\n` +
           err
       );
+      res.send({
+        success: false,
+        account_created: false,
+        message: "An unexpected error occurred. Please try again",
+      });
     }
   }
+  console.log("End of post handler\n");
 };
 
 export const checkAccountType = async (req, res) => {
