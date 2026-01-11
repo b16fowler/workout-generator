@@ -120,23 +120,17 @@ export default function LoginPage() {
      * then updates readyToRender so main menu can be loaded */
     user.username = username.toLowerCase();
 
+    // Get account type from database
     const fetchAccountType = async () => {
-      const response = await fetch(`${EC2_URL}/api/check-account-type`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: user.username,
-        }),
+      const response = await axios.post(`${EC2_URL}/api/check-account-type`, {
+        username: user.username,
       });
-      const result = await response.json();
-      // Set user.accountType
-      user.accountType = result.account[0][0].type;
+      user.accountType = response.data.account[0][0].type;
 
       // Ready to render MainMenu
       setReadyToRender(true);
     };
+
     fetchAccountType();
   }
 
