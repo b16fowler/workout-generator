@@ -58,14 +58,14 @@ export const createAccount = async (req, res) => {
       console.log(
         `[FAILURE] Attempted username "${req.body.username}" already in DB, prompting user to try again`
       );
-      res.json({
+      res.send({
         success: false,
         account_created: false,
         message: "An account with that username already exists",
       });
     } else {
       console.log(
-        `[ERROR] Error trying to insert login information for "${req.body.user}"\n` +
+        `[ERROR] Error trying to insert login information for "${req.body.username}"\n` +
           err
       );
       res.send({
@@ -80,18 +80,19 @@ export const createAccount = async (req, res) => {
 
 export const checkAccountType = async (req, res) => {
   console.log("CHECK ACCOUNT TYPE ATTEMPT");
-  const checkAccountQuery = `SELECT type FROM logins WHERE username = "${req.body.user}";`;
+  const checkAccountQuery = `SELECT type FROM logins WHERE username = "${req.body.username}";`;
   try {
-    const result = await pool.query(checkAccountQuery);
+    const account = await pool.query(checkAccountQuery);
     console.log(
-      `[SUCCESS] Type of account for user ${req.body.user} fetched successfully`
+      `[SUCCESS] Type of account for user "${req.body.username}" fetched successfully`
     );
-    res.json({ account: result });
+    res.send({ success: true, account: account });
   } catch (err) {
     console.log(
-      `[ERROR] Error fetching account information for user ${req.body.user}\n` +
+      `[ERROR] Error fetching account information for user "${req.body.username}"\n` +
         err
     );
+    res.send({ success: false });
   }
   console.log("End of post handler\n");
 };
