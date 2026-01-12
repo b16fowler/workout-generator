@@ -5,11 +5,11 @@
  * Clicking button will refresh the workout user just finished
  **************************************************************************/
 
-const handleReloadWorkout = () => {
-  console.log("Reload workout button pressed");
-};
+export default function ReloadWorkoutButton({ reload, setReload }) {
+  const handleReloadWorkout = () => {
+    setReload(true);
+  };
 
-export default function ReloadWorkoutButton() {
   return (
     <>
       <button className="reload-workout-button" onClick={handleReloadWorkout}>
