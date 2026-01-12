@@ -1,4 +1,3 @@
-import { message } from "antd";
 import pool from "../config/db.js";
 
 export const login = async (req, res) => {
