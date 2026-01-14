@@ -2,22 +2,24 @@
  * LoadWorkoutPage component
  **************************************************************************/
 
+import { queryClient } from "./LoginPage.js";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { root } from "../../..";
 import axios from "axios";
 import { user } from "../App.js";
 import { EC2_URL } from "../../..";
 import Footer from "../other/Footer";
 import Header from "../other/Header";
-import Workout from "../other/WorkoutPage.js";
+import WorkoutPage from "../other/WorkoutPage.js";
 import { useEffect, useState } from "react";
 import WorkoutPrevTable from "../tables/WorkoutPrevTable.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
 export default function LoadWorkoutPage() {
+  const [doneFetching, setDoneFetching] = useState(false);
+  const [workoutPreview, setWorkoutPreview] = useState([]);
   const [workoutOptions, setWorkoutOptions] = useState(null);
   const [exercisePreview, setExercisePreview] = useState(null);
-  const [workoutPreview, setWorkoutPreview] = useState([]);
-  const [doneFetching, setDoneFetching] = useState(false);
-  const [loadWorkout, setLoadWorkout] = useState(false);
 
   // Call method to fetch user's workouts on component mount
   useEffect(() => {
@@ -79,7 +81,12 @@ export default function LoadWorkoutPage() {
       });
     } catch (err) {}
 
-    setLoadWorkout(true);
+    // Render WorkoutPage component
+    root.render(
+      <QueryClientProvider client={queryClient}>
+        <WorkoutPage workout={workoutPreview} />
+      </QueryClientProvider>
+    );
   };
 
   const handleSelectChange = workoutName => {
@@ -119,33 +126,26 @@ export default function LoadWorkoutPage() {
   return (
     <>
       <Header heading="Load Saved Workout" />
-      {!loadWorkout && <label for="load-workout">Choose workout: </label>}
-      {!loadWorkout && (
-        <select
-          id="load-workout"
-          name="load-workout"
-          onChange={() =>
-            handleSelectChange(document.querySelector("#load-workout").value)
-          }>
-          <option value="test">Test</option>
-          <ul>
-            {workoutOptions &&
-              workoutOptions.map(workout => (
-                <option value={workout.name}>{workout.name}</option>
-              ))}
-          </ul>
-        </select>
-      )}
-      {!loadWorkout && (
-        <button type="submit" onClick={handleSelectClick}>
-          Select workout
-        </button>
-      )}
-      {doneFetching && !loadWorkout && (
-        <WorkoutPrevTable workoutPreview={workoutPreview} />
-      )}
-      {loadWorkout && <Workout workout={workoutPreview} />}
-      {!loadWorkout && <ReturnHomeButton />}
+      <label for="load-workout">Choose workout: </label>
+      <select
+        id="load-workout"
+        name="load-workout"
+        onChange={() =>
+          handleSelectChange(document.querySelector("#load-workout").value)
+        }>
+        <option value="test">Test</option>
+        <ul>
+          {workoutOptions &&
+            workoutOptions.map(workout => (
+              <option value={workout.name}>{workout.name}</option>
+            ))}
+        </ul>
+      </select>
+      <button type="submit" onClick={handleSelectClick}>
+        Select workout
+      </button>
+      {doneFetching && <WorkoutPrevTable workoutPreview={workoutPreview} />}
+      <ReturnHomeButton />
       <Footer />
     </>
   );
