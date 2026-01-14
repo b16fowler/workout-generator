@@ -17,6 +17,11 @@ export default function SaveWorkoutButton({ workout }) {
   const handleSaveWorkout = e => {
     e.preventDefault();
 
+    // Remove hidden images left from workout
+    while (document.querySelector(".exercise-div")) {
+      document.body.removeChild(document.querySelector(".exercise-div"));
+    }
+
     const workoutName = document.querySelector("#save-workout-input").value;
     const fetchData = async () => {
       try {

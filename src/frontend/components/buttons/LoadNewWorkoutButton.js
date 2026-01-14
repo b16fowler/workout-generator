@@ -12,6 +12,11 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import GenerateWorkoutPage from "../pages/GenerateWorkoutPage";
 
 const handleLoadNewWorkout = () => {
+  // Remove hidden images left from workout
+  while (document.querySelector(".exercise-div")) {
+    document.body.removeChild(document.querySelector(".exercise-div"));
+  }
+
   // Rerender GenerareWorkoutPage component on click
   root.render(
     <QueryClientProvider client={queryClient}>
@@ -25,8 +30,7 @@ export default function ReloadWorkoutButton() {
     <>
       <button
         className="load-new-workout-button"
-        onClick={handleLoadNewWorkout}
-      >
+        onClick={handleLoadNewWorkout}>
         Load new workout
       </button>
     </>

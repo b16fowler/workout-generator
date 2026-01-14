@@ -25,8 +25,8 @@ export default function ReturnHomeButton() {
 
 function handleClick() {
   // Remove exercise-div, if user is still in a workout
-  while (document.querySelector(".exercise-pic")) {
-    document.body.removeChild(document.querySelector(".exercise-pic"));
+  while (document.querySelector(".exercise-div")) {
+    document.body.removeChild(document.querySelector(".exercise-div"));
   }
 
   // Render MainMenuPage component
