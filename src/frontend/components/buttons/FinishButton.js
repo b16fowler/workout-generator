@@ -22,8 +22,7 @@ export default function FinishButton({ index, length, workout }) {
       <button
         className="finish-button"
         onClick={handleClick}
-        hidden={index === length - 1 ? false : true}
-      >
+        hidden={index === length - 1 ? false : true}>
         Finish workout
       </button>
     </>
@@ -33,10 +32,11 @@ export default function FinishButton({ index, length, workout }) {
     showSnackbar("Workout completed!");
 
     setTimeout(() => {
-      // Remove exercise-divs from page
-      while (document.querySelector(".exercise-div")) {
-        document.body.removeChild(document.querySelector(".exercise-div"));
-      }
+      // Hide exercise images, removed later unless user reloads workout
+      const exerciseDivs = document.querySelectorAll(".exercise-div");
+      exerciseDivs.forEach(div => {
+        div.toggleAttribute("hidden", true);
+      });
 
       // Update analytics table
       workoutFinished(user.username);
