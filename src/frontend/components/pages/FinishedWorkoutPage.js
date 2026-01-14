@@ -13,7 +13,7 @@ import ReturnHomeButton from "../buttons/ReturnHomeButton";
 import SaveWorkoutButton from "../buttons/SaveWorkoutButton";
 import ReloadWorkoutButton from "../buttons/ReloadWorkoutButton";
 import LoadNewWorkoutButton from "../buttons/LoadNewWorkoutButton";
-import Workout from "../other/Workout";
+import Workout from "../other/WorkoutPage";
 
 export default function FinishedWorkoutPage({ workout }) {
   const [reload, setReload] = useState(false);
