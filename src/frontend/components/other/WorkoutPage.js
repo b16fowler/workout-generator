@@ -8,13 +8,13 @@
  * clicks
  **************************************************************************/
 
+import Footer from "./Footer.js";
+import Header from "./Header.js";
 import Exercise from "./Exercise.js";
 import { useEffect, useState } from "react";
 import NextButton from "../buttons/NextButton.js";
 import FinishButton from "../buttons/FinishButton.js";
 import PreviousButton from "../buttons/PreviousButton.js";
-import Header from "./Header.js";
-import Footer from "./Footer.js";
 
 export default function WorkoutPage({ workout }) {
   // Tracks index of given exercise in generated workout
