@@ -2,13 +2,16 @@
  * GenerateWorkoutPage component
  **************************************************************************/
 
+import { queryClient } from "./LoginPage.js";
+import { root } from "../../../index.js";
 import { EC2_URL } from "../../../index.js";
 import Header from "../other/Header.js";
 import Footer from "../other/Footer.js";
-import Workout from "../other/Workout.js";
+import WorkoutPage from "../other/WorkoutPage.js";
 import { useEffect, useState } from "react";
 import { showSnackbar, user } from "../App.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
+import { QueryClientProvider } from "@tanstack/react-query";
 
 export default function GenerateWorkoutPage() {
   const [workout, setWorkout] = useState(null);
@@ -101,6 +104,13 @@ export default function GenerateWorkoutPage() {
           document.body.appendChild(div);
         });
     }
+
+    // Render WorkoutPage component
+    root.render(
+      <QueryClientProvider client={queryClient}>
+        <WorkoutPage workout={workout} />
+      </QueryClientProvider>
+    );
   }, [workout]);
 
   const cleanUpResult = fetchedData => {
@@ -173,8 +183,7 @@ export default function GenerateWorkoutPage() {
           />
         </form>
       </div>
-      {workout && <Workout workout={workout} />}
-      {!workout && <ReturnHomeButton />}
+      <ReturnHomeButton />
       <Footer />
     </>
   );
