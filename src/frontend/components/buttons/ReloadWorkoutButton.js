@@ -6,7 +6,7 @@
  **************************************************************************/
 
 import { root } from "../../..";
-import WorkoutPage from "../other/WorkoutPage";
+import WorkoutPage from "../pages/WorkoutPage";
 import { queryClient } from "../pages/LoginPage";
 import { QueryClientProvider } from "@tanstack/react-query";
 

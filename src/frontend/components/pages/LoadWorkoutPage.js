@@ -10,7 +10,7 @@ import { user } from "../App.js";
 import { EC2_URL } from "../../..";
 import Footer from "../other/Footer";
 import Header from "../other/Header";
-import WorkoutPage from "../other/WorkoutPage.js";
+import WorkoutPage from "./WorkoutPage.js";
 import { useEffect, useState } from "react";
 import WorkoutPrevTable from "../tables/WorkoutPrevTable.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
