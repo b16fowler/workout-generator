@@ -7,7 +7,7 @@ import { root } from "../../../index.js";
 import { EC2_URL } from "../../../index.js";
 import Header from "../other/Header.js";
 import Footer from "../other/Footer.js";
-import WorkoutPage from "../other/WorkoutPage.js";
+import WorkoutPage from "./WorkoutPage.js";
 import { useEffect, useState } from "react";
 import { showSnackbar, user } from "../App.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
@@ -53,14 +53,12 @@ export default function GenerateWorkoutPage() {
           }),
         });
         const result = await response.json();
-
         const finalWorkout = cleanUpResult(result.exercises[0]);
 
         setWorkout(finalWorkout);
       } catch (err) {
         console.error(err);
       } finally {
-        document.getElementById("generate-page").hidden = true;
         setShouldFetch(false);
       }
     };
@@ -105,12 +103,17 @@ export default function GenerateWorkoutPage() {
         });
     }
 
-    // Render WorkoutPage component
-    root.render(
-      <QueryClientProvider client={queryClient}>
-        <WorkoutPage workout={workout} />
-      </QueryClientProvider>
-    );
+    console.log(workout);
+    if (workout.length === 0) {
+      showSnackbar("You haven't added any exercises yet");
+    } else {
+      // Render WorkoutPage component
+      root.render(
+        <QueryClientProvider client={queryClient}>
+          <WorkoutPage workout={workout} />
+        </QueryClientProvider>
+      );
+    }
   }, [workout]);
 
   const cleanUpResult = fetchedData => {
