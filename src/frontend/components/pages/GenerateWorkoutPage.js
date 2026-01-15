@@ -2,13 +2,14 @@
  * GenerateWorkoutPage component
  **************************************************************************/
 
-import { queryClient } from "./LoginPage.js";
-import { root } from "../../../index.js";
-import { EC2_URL } from "../../../index.js";
-import Header from "../other/Header.js";
+import axios from "axios";
 import Footer from "../other/Footer.js";
+import Header from "../other/Header.js";
+import { root } from "../../../index.js";
 import WorkoutPage from "./WorkoutPage.js";
+import { EC2_URL } from "../../../index.js";
 import { useEffect, useState } from "react";
+import { queryClient } from "./LoginPage.js";
 import { showSnackbar, user } from "../App.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -17,8 +18,7 @@ export default function GenerateWorkoutPage() {
   const [workout, setWorkout] = useState(null);
   const [shouldFetch, setShouldFetch] = useState(false);
 
-  //TODO: FIX BUG WHEN USER GENERATES WORKOUT WITHOUT ADDING ANY TO POOL
-
+  //TODO: REFACTOR
   /* useEffect fetches exercise names, sets, and reps from DB after
    * user attempts to generate workout */
   useEffect(() => {
@@ -42,24 +42,16 @@ export default function GenerateWorkoutPage() {
      * muscle types */
     const fetchExercises = async () => {
       try {
-        const response = await fetch(`${EC2_URL}/api/generateWorkout`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: user.username,
-            selectedTypes: selectedTypes,
-          }),
+        const response = await axios.post(`${EC2_URL}/api/generateWorkout`, {
+          username: user.username,
+          selectedTypes: selectedTypes,
         });
-        const result = await response.json();
-        const finalWorkout = cleanUpResult(result.exercises[0]);
-
+        const finalWorkout = cleanUpResult(response.data.exercises[0]);
         setWorkout(finalWorkout);
       } catch (err) {
-        console.error(err);
+        console.log(err);
       } finally {
-        setShouldFetch(false);
+        setShouldFetch(true);
       }
     };
 
@@ -71,39 +63,34 @@ export default function GenerateWorkoutPage() {
   useEffect(() => {
     if (!workout) return;
 
-    // Separate loop of fetch calls for user's exercise photos
-    for (let i = 0; i < workout.length; i++) {
-      fetch(`${EC2_URL}/api/photos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+    workout.forEach(async (exer, i) => {
+      const response = await axios.post(
+        `${EC2_URL}/api/photos`,
+        {
           username: user.username,
-          exerciseName: workout[i].name,
-        }),
-      })
-        .then(response => response.blob())
-        .then(blob => {
-          // Create img
-          const img = document.createElement("img");
-          img.className = "exercise-image";
-          img.src = URL.createObjectURL(blob);
+          exerciseName: exer.name,
+        },
+        { responseType: "blob" }
+      );
+      const blob = response.data;
 
-          // Create div
-          const div = document.createElement("div");
-          div.className = "exercise-div";
-          div.id = i;
-          // Hide all to start
-          div.hidden = true;
+      // Create img
+      const img = document.createElement("img");
+      img.className = "exercise-image";
+      img.src = URL.createObjectURL(blob);
+      // Create div
+      const div = document.createElement("div");
+      div.className = "exercise-div";
+      div.id = i;
+      // Hide all to start
+      div.hidden = true;
+      // Append img to div
+      div.appendChild(img);
+      document.body.appendChild(div);
+    });
 
-          // Append img to div
-          div.appendChild(img);
-          document.body.appendChild(div);
-        });
-    }
-
-    console.log(workout);
+    // Stop user from generating workout if none in pool
+    //TODO: try catch
     if (workout.length === 0) {
       showSnackbar("You haven't added any exercises yet");
     } else {
