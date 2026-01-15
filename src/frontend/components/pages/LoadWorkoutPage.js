@@ -49,12 +49,12 @@ export default function LoadWorkoutPage() {
   const handleSelectClick = () => {
     try {
       // Use workoutPreview id's to fetch exercise images
-      workoutPreview.forEach(async (wk, i) => {
+      workoutPreview.forEach(async (exer, i) => {
         const response = await axios.post(
           `${EC2_URL}/api/photos`,
           {
             username: user.username,
-            exerciseName: wk.name,
+            exerciseName: exer.name,
           },
           {
             responseType: "blob",
