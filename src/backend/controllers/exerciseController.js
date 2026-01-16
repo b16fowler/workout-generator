@@ -112,7 +112,7 @@ export const saveWorkout = async (req, res) => {
 
   // Loop through all exercises in workout to save ids in workout_string
   let workout_string = "";
-  req.body.workout.forEach(exercise => {
+  req.body.workout.forEach((exercise) => {
     // Concatenate exercise id and workout_string to make string of numbers separated by spaces
     workout_string = workout_string + exercise["id"] + " ";
   });
@@ -159,9 +159,8 @@ export const loadPreview = async (req, res) => {
     res.send({ success: true, preview: exerciseInfo[0][0] });
   } catch (err) {
     console.log(
-      `[ERROR] Error loading preview for ${(req, body.username)} id: ${
-        req.body.id
-      }` + err
+      `[ERROR] Error loading preview for ${req.body.username} id: ${req.body.id}` +
+        err
     );
     res.send({ success: false });
   }
