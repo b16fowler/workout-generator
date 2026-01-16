@@ -95,11 +95,6 @@ export default function LoadWorkoutPage() {
     // Reset workoutPreview to clear table
     setWorkoutPreview("");
 
-    // Enable submit button if user has changed select from default
-    if (document.querySelector("#load-workout").value !== "default") {
-      document.querySelector("#load-workout-btn").disabled = false;
-    }
-
     // Find information of workout currently selected
     const workoutDetails = workoutOptions.find(
       (workout) => workout.name === workoutName
@@ -158,7 +153,11 @@ export default function LoadWorkoutPage() {
           id="load-workout-btn"
           type="submit"
           onClick={handleSelectClick}
-          disabled
+          disabled={
+            document.querySelector("#load-workout")?.value === "default"
+              ? true
+              : false
+          }
         >
           Load workout
         </button>
