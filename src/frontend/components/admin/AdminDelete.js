@@ -24,7 +24,7 @@ export default function AdminDelete() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: usernameInput,
+          username: usernameInput,
         }),
       });
       const result = await response.json();
@@ -55,7 +55,7 @@ export default function AdminDelete() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user: usernameInput,
+          username: usernameInput,
         }),
       });
       const result = await response.json();
