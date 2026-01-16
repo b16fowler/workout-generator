@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import WorkoutPrevTable from "../tables/WorkoutPrevTable.js";
 import ReturnHomeButton from "../buttons/ReturnHomeButton.js";
 
+//TODO: Add automatic pages for longer workouts?
+
 export default function LoadWorkoutPage() {
   const [doneFetching, setDoneFetching] = useState(false);
   const [workoutPreview, setWorkoutPreview] = useState([]);
@@ -89,11 +91,18 @@ export default function LoadWorkoutPage() {
     );
   };
 
-  const handleSelectChange = workoutName => {
+  const handleSelectChange = (workoutName) => {
+    // Reset workoutPreview to clear table
     setWorkoutPreview("");
+
+    // Enable submit button if user has changed select from default
+    if (document.querySelector("#load-workout").value !== "default") {
+      document.querySelector("#load-workout-btn").disabled = false;
+    }
+
     // Find information of workout currently selected
     const workoutDetails = workoutOptions.find(
-      workout => workout.name === workoutName
+      (workout) => workout.name === workoutName
     );
 
     // Prevent error if user returns to default dropdown option
@@ -101,7 +110,7 @@ export default function LoadWorkoutPage() {
 
     // Split workout IDs into array
     const workoutArray = workoutDetails.workout.split(" ");
-    const fetchExercisePreview = async id => {
+    const fetchExercisePreview = async (id) => {
       try {
         const response = await axios.post(`${EC2_URL}/api/load-preview`, {
           username: user.username,
@@ -114,7 +123,7 @@ export default function LoadWorkoutPage() {
       }
     };
 
-    workoutArray.forEach(id => {
+    workoutArray.forEach((id) => {
       // Ignore empty string at the end of workoutArray
       if (id === "") return;
       fetchExercisePreview(id);
@@ -126,24 +135,34 @@ export default function LoadWorkoutPage() {
   return (
     <>
       <Header heading="Load Saved Workout" />
-      <label for="load-workout">Choose workout: </label>
-      <select
-        id="load-workout"
-        name="load-workout"
-        onChange={() =>
-          handleSelectChange(document.querySelector("#load-workout").value)
-        }>
-        <option value="test">Test</option>
-        <ul>
-          {workoutOptions &&
-            workoutOptions.map(workout => (
-              <option value={workout.name}>{workout.name}</option>
-            ))}
-        </ul>
-      </select>
-      <button type="submit" onClick={handleSelectClick}>
-        Select workout
-      </button>
+      <div className="load-workout-form">
+        <label id="load-workout-label" for="load-workout">
+          Choose workout:
+        </label>
+        <select
+          id="load-workout"
+          name="load-workout"
+          onChange={() =>
+            handleSelectChange(document.querySelector("#load-workout").value)
+          }
+        >
+          <option value="default"> --- Select workout --- </option>
+          <ul>
+            {workoutOptions &&
+              workoutOptions.map((workout) => (
+                <option value={workout.name}>{workout.name}</option>
+              ))}
+          </ul>
+        </select>
+        <button
+          id="load-workout-btn"
+          type="submit"
+          onClick={handleSelectClick}
+          disabled
+        >
+          Load workout
+        </button>
+      </div>
       {doneFetching && <WorkoutPrevTable workoutPreview={workoutPreview} />}
       <ReturnHomeButton />
       <Footer />
