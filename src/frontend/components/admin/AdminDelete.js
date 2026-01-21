@@ -4,32 +4,26 @@
  * Search form that will delete an account if confirmed by the admin
  **************************************************************************/
 
+import axios from "axios";
+import { EC2_URL } from "../../..";
 import Header from "../other/Header";
 import Footer from "../other/Footer";
-import ReturnHomeButton from "../buttons/ReturnHomeButton";
 import { showSnackbar } from "../App";
-import { EC2_URL } from "../../..";
+import ReturnHomeButton from "../buttons/ReturnHomeButton";
 
+//TODO: COMBINE FUNCTIONALITY OF DELETE ACCOUNT + RESET PW
 export default function AdminDelete() {
-  //TODO: COMBINE FUNCTIONALITY OF DELETE ACCOUNT + RESET PW
-  const searchUser = (e) => {
+  const searchUser = e => {
     e.preventDefault();
 
     const usernameInput = document.querySelector("#delete-user-input").value;
 
     const fetchUser = async () => {
-      const response = await fetch(`${EC2_URL}/api/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: usernameInput,
-        }),
+      const response = await axios.post(`${EC2_URL}/api/search`, {
+        username: usernameInput,
       });
-      const result = await response.json();
 
-      if (result.success) {
+      if (response.data.success) {
         // Confirm, then delete account
         const confirm = window.confirm(
           `Delete account "` + usernameInput + `"?`
@@ -47,20 +41,13 @@ export default function AdminDelete() {
     else fetchUser();
   };
 
-  const deleteUser = (usernameInput) => {
+  const deleteUser = usernameInput => {
     const deleteFetch = async () => {
-      const response = await fetch(`${EC2_URL}/api/delete`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: usernameInput,
-        }),
+      const response = await axios.post(`${EC2_URL}/api/delete`, {
+        username: usernameInput,
       });
-      const result = await response.json();
 
-      if (result.success)
+      if (response.data.success)
         showSnackbar(`User "${usernameInput}" account has been deleted`);
     };
     deleteFetch();
