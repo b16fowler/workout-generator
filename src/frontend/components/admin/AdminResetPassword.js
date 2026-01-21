@@ -6,6 +6,7 @@
  * Currently always resets password to be their username
  **************************************************************************/
 
+import axios from "axios";
 import { EC2_URL } from "../../..";
 import Header from "../other/Header";
 import Footer from "../other/Footer";
@@ -16,7 +17,7 @@ export default function AdminResetPassword() {
   //TODO: FIX ERROR WHEN ATTEMPTING LOGOUT FROM ADMIN RESET PASSWORD COMPONENT
 
   //TODO: PROMPT USER TO ENTER NEW PASSWORD AFTER BEING RESET
-  const searchUser = (e) => {
+  const searchUser = e => {
     e.preventDefault();
 
     // Take user's input and run SELECT query for that user
@@ -24,18 +25,11 @@ export default function AdminResetPassword() {
 
     // fetches username using admin's form input
     const fetchUser = async () => {
-      const response = await fetch(`${EC2_URL}/api/search`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: usernameInput,
-        }),
+      const response = await axios.post(`${EC2_URL}/api/search`, {
+        username: usernameInput,
       });
-      const result = await response.json();
 
-      if (result.success) {
+      if (response.data.success) {
         // Confirm, then reset pw
         const confirm = window.confirm(
           `Reset password for user "` + usernameInput + `"?`
@@ -61,22 +55,17 @@ export default function AdminResetPassword() {
 
   /* Called after fetchUser, fetch runs post request that resets the account's
    * password to be their username */
-  const resetPw = (usernameInput) => {
-    const resetFetch = () => {
-      const response = fetch(`${EC2_URL}/api/reset`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user: usernameInput,
-        }),
+  const resetPw = usernameInput => {
+    const resetFetch = async () => {
+      const response = await axios.post(`${EC2_URL}/api/reset`, {
+        username: usernameInput,
       });
 
-      if (response.success)
+      if (response.data.success) {
         showSnackbar(
           `User "${usernameInput}" password has been reset to their username`
         );
+      }
     };
     resetFetch();
   };
