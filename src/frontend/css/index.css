@@ -108,6 +108,7 @@ body {
   border: #f2ffcc;
 }
 
+#load-workout-btn:hover,
 .login-button:hover,
 .generate-workout-button:hover,
 .return-button:hover,
@@ -115,6 +116,31 @@ body {
   cursor: pointer;
   background-color: #d2ec82;
   transition: background-color 0.3s ease;
+}
+
+.load-workout-form {
+  display: flex;
+  justify-content: center;
+  margin: 1%;
+  font-size: xx-large;
+}
+
+#load-workout-btn {
+  margin-left: 2%;
+  background-color: #f2ffcc;
+  border: #f2ffcc;
+  border-radius: 10px;
+  margin-left: 2%;
+  font-weight: bolder;
+}
+
+#load-workout-btn:disabled:hover {
+  cursor: default;
+  background-color: #f2ffcc;
+}
+
+#load-workout-label {
+  margin-right: 1%;
 }
 
 .open-form-button {
